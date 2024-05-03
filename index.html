@@ -7,12 +7,22 @@
     <base href="/">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" type="image/x-icon" href="favicon.png">
-    <style>   </style>
+<style>
+::backdrop {
+  background: rgba(0,0,0,0.7);
+  opacity: 0.75;
+}
+</style>
 
   </head>
   <body id="Body">
    <h3> Resulting Table: </h3>
    <div id="container"></div>
+
+<dialog>
+  <p class="close" onclick="document.querySelector('dialog').close();">X</p>
+  <p id="popup-content">This modal dialog has a groovy backdrop!</p>
+</dialog>
 
    <hr>
     <script>
@@ -24,20 +34,23 @@
 			for (cell of document.querySelectorAll('td')) {
 				let col = cell.cellIndex-2;
 				if (col>0 && col<12 && cell.parentElement.rowIndex>5) {
-					let element = document.createElement("a");
-					element.setAttribute("href", `${cell.parentElement.cells[1].innerText}-${col}.html`);
-					element.innerHTML = cell.innerText;
-
-					element.addEventListener("click", (event) => {
+//					cell.setAttribute('id',  `${cell.parentElement.cells[1].innerText}-${cell.cellIndex-2}.html`);
+//					alert(this.getAttribute('id'));
+					cell.addEventListener("click", (event) => {
 						event.preventDefault();
-						window.open(event.target.href, '_blank',"width=1035,height=576").focus();}
-					)
-					cell.innerHTML = '';
-					cell.appendChild(element);
+
+						fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/406-1.html') //
+						.then(response => response.text())
+						.then((data) => { document.getElementById('popup-content').innerHTML = data; })
+						.catch(error => console.error('Error fetching file:', error));
+
+						document.querySelector("dialog").showModal();
+					})
 				}
 			}
 		})
 	});
     </script>
+
   </body>
 </html>
