@@ -17,11 +17,26 @@
    <hr>
     <script>
 	window.addEventListener("load", (event) => {
-	  console.log("page is fully loaded");
-	fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/proto.html')
-	.then(response => response.text())
-	.then((data) => {container.innerHTML= data})
+		fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/proto.html')
+		.then(response => response.text())
+		.then((data) => {
+			for (const cell of data.querySelectorAll('td')) {
+				let col = cell.cellIndex-2;
+				if (col>0 && col<12 && cell.parentElement.rowIndex>5) {
+					let element = document.createElement("a");
+					element.setAttribute("href", `${cell.parentElement.cells[1].innerText}-${col}.html`);
+					element.innerHTML = cell.innerText;
 
+					element.addEventListener("click", (event) => {
+						event.preventDefault();
+						window.open(event.target.href, '_blank',"width=1035,height=576").focus();}
+					)
+					cell.innerHTML = '';
+					cell.appendChild(element);
+				}
+			}
+			container.innerHTML= data;
+		})
 	});
     </script>
   </body>
