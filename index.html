@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" data-critters-container>
+  <head>
+    <meta content="text/html; charset=windows-1251" http-equiv="content-type">
+    <meta charset="utf-8s">
+    <title></title>
+    <base href="/">
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <style>   </style>
+
+  </head>
+  <body id="Body">
+   <h3> Resulting Table: </h3>
+   <div id="container"></div>
+
+   <hr>
+    <script>
+	window.addEventListener("load", (event) => {
+	  console.log("page is fully loaded");
+	fetch('https://')
+	.then(response => response.text())
+	.then((data) => {container.innerHTML= data})
+
+	});
+    </script>
+  </body>
+</html>
