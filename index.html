@@ -20,7 +20,8 @@
 		fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/proto.html')
 		.then(response => response.text())
 		.then((data) => {
-/*			for (const cell of data.querySelectorAll('td')) {
+			container.innerHTML= data;
+			for (cell of document.querySelectorAll('td')) {
 				let col = cell.cellIndex-2;
 				if (col>0 && col<12 && cell.parentElement.rowIndex>5) {
 					let element = document.createElement("a");
@@ -35,8 +36,6 @@
 					cell.appendChild(element);
 				}
 			}
-*/
-			container.innerHTML= data;
 		})
 	});
     </script>
