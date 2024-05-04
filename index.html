@@ -20,12 +20,24 @@
    <div id="container"></div>
 
 <dialog>
-  <p class="close" onclick="document.querySelector('dialog').close();">X</p>
+  <p class="close" onclick="closedialog();">X</p>
   <p id="popup-content">This modal dialog has a groovy backdrop!</p>
 </dialog>
 
    <hr>
     <script>
+	const modal = document.querySelector('dialog');
+	function closedialog() {
+		modal.close();
+	};
+
+	function windowOnClick(event) {
+		if (event.target === modal) {
+			closedialog();
+		}
+	}
+	window.addEventListener("click", windowOnClick); 
+
 	window.addEventListener("load", (event) => {
 		fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/proto.html')
 		.then(response => response.text())
@@ -33,23 +45,23 @@
 			container.innerHTML= data;
 			for (cell of document.querySelectorAll('td')) {
 				let col = cell.cellIndex-2;
-				if (col>0 && col<12 && cell.parentElement.rowIndex>4) {
-//					cell.setAttribute('id',  `${cell.parentElement.cells[1].innerText}-${cell.cellIndex-2}.html`);
-//					alert(this.getAttribute('id'));
-					cell.addEventListener("click", (event) => {
-						event.preventDefault();
-
-						fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/402-3.html') //
-						.then(response => response.text())
-						.then((data) => { document.getElementById('popup-content').innerHTML = data; })
-						.catch(error => console.error('Error fetching file:', error));
-
-						document.querySelector("dialog").showModal();
-					})
+				if ( col>0 && col<12 && cell.parentElement.rowIndex>5 ) {
+					cell.addEventListener("click", f);
+					cell.setAttribute('id',  `${cell.parentElement.cells[2].innerText.substring(0,3)}-${cell.cellIndex-2}.html`);
 				}
 			}
 		})
 	});
+function f () {
+	event.preventDefault();
+	fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/'+this.getAttribute('id'))
+		.then(response => response.text())
+		.then((data) => {
+			document.getElementById('popup-content').innerHTML = data;
+		})
+		.catch(error => console.error('Error fetching file:', error));
+	modal.showModal();
+}
     </script>
 
   </body>
