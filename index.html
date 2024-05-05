@@ -28,9 +28,9 @@
     <script>
 	const modal = document.querySelector('dialog');
 	function closedialog() {
+		document.getElementById('popup-content').innerHTML = '';
 		modal.close();
 	};
-
 	function windowOnClick(event) {
 		if (event.target === modal) {
 			closedialog();
@@ -47,6 +47,7 @@
 				lnk.addEventListener("click", f);
 		})
 	});
+
 function f () {
 	event.preventDefault();
 	let url = new URL(this+'.html', 'https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/');
@@ -54,9 +55,9 @@ function f () {
 		.then(response => response.text())
 		.then((data) => {
 			document.getElementById('popup-content').innerHTML = data;
+			modal.showModal();
 		})
 		.catch(error => console.error('Error fetching file:', error));
-	modal.showModal();
 }
     </script>
 
