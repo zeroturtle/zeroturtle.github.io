@@ -3,8 +3,8 @@
   <head>
     <meta content="text/html; charset=windows-1251" http-equiv="content-type">
     <meta charset="utf-8s">
-    <title></title>
-    <base href="/">
+    <title>OPTIMUS Results</title>
+    <base href="https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" type="image/x-icon" href="favicon.png">
 <style>
@@ -26,6 +26,7 @@
 
    <hr>
     <script>
+	const baseURL = new URL(document.baseURI); //(document.querySelector('base') || {}).href;
 	const modal = document.querySelector('dialog');
 	function closedialog() {
 		document.getElementById('popup-content').innerHTML = '';
@@ -39,18 +40,18 @@
 	window.addEventListener("click", windowOnClick); 
 
 	window.addEventListener("load", (event) => {
-		fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/proto.html')
+		fetch('proto.html', baseURL)
 		.then(response => response.text())
 		.then((data) => {
 			container.innerHTML= data;
 			for (lnk of document.getElementsByTagName('a'))
-				lnk.addEventListener("click", f);
+				lnk.addEventListener("click", detail);
 		})
 	});
 
-function f () {
+function detail() {
 	event.preventDefault();
-	let url = new URL(this+'.html', 'https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/');
+	let url = new URL(this+'.html', baseURL);
 	fetch(url)
 		.then(response => response.text())
 		.then((data) => {
