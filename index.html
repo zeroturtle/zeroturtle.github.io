@@ -26,7 +26,7 @@
    <hr>
    <div id="container"></div>
     <script>
-	const baseURL = new URL(document.baseURI); //(document.querySelector('base') || {}).href;
+//	const baseURL = new URL(document.baseURI); //(document.querySelector('base') || {}).href;
 	const modal = document.querySelector('dialog');
 	function closedialog() {
 		document.getElementById('popup-content').innerHTML = '';
@@ -40,7 +40,7 @@
 	window.addEventListener("click", windowOnClick); 
 
 	window.addEventListener("load", (event) => {
-		fetch('proto.html', baseURL)
+		fetch('proto.html', document.baseURL)
 		.then(response => response.text())
 		.then((data) => {
 			container.innerHTML= data;
@@ -50,7 +50,7 @@
 	});
 function detail() {
 	event.preventDefault();
-	let url = new URL(this+'.html', baseURL);
+	let url = new URL(this+'.html', document.baseURL);
 	fetch(url)
 		.then(response => response.text())
 		.then((data) => {
