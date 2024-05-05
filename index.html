@@ -43,7 +43,7 @@
 		.then(response => response.text())
 		.then((data) => {
 			container.innerHTML= data;
-			for (lnk of document.querySelectorAll('a')) {
+			for (lnk of document.getElementsByTagName('a')) {
 				lnk.addEventListener("click", f);
 			}
 /*			for (cell of document.querySelectorAll('td')) {
@@ -59,7 +59,8 @@
 function f () {
 	event.preventDefault();
 //	fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/'+this.getAttribute('id'))
-	fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/'+this.getAttribute("src")+'.html')
+	let url = new URL(this+'.html', 'https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/');
+	fetch(url)
 		.then(response => response.text())
 		.then((data) => {
 			document.getElementById('popup-content').innerHTML = data;
@@ -68,6 +69,21 @@ function f () {
 	modal.showModal();
 }
     </script>
+
+
+<script>
+// на onclick сохранить параметры ссылки в Ѕƒ
+var links = document.getElementsByTagName('a');
+for (var i = 0; i < links.length; i++) {
+  links[i].addEventListener("click", function() {
+	let url = new URL(this); 
+// длительность (врем€ нахождени€ на странице) текущей сессии в ms 
+	let len = new Date().getTime() - window.performance.timing.domContentLoadedEventEnd;
+	window.location.href='https://skydive.dp.ua/saveHit.php?url=' + url + '&len=' + len;
+alert(len);
+  });
+}
+</script>
 
   </body>
 </html>
