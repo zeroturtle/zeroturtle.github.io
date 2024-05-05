@@ -55,7 +55,7 @@
 function f () {
 	event.preventDefault();
 //	fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/'+this.getAttribute('id'))
-	fetch(this.innerHTML+'.html')
+	fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/'+this.innerHTML+'.html')
 		.then(response => response.text())
 		.then((data) => {
 			document.getElementById('popup-content').innerHTML = data;
