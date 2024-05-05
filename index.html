@@ -43,19 +43,23 @@
 		.then(response => response.text())
 		.then((data) => {
 			container.innerHTML= data;
-			for (cell of document.querySelectorAll('td')) {
+			for (lnk of document.querySelectorAll('a')) {
+				lnk.addEventListener("click", f);
+			}
+/*			for (cell of document.querySelectorAll('td')) {
 				let col = cell.cellIndex-2;
 				if ( col>0 && col<12 && cell.parentElement.rowIndex>5 ) {
 					cell.addEventListener("click", f);
-//					cell.setAttribute('id',  `${cell.parentElement.cells[2].innerText.substring(0,3)}-${cell.cellIndex-2}.html`);
+					cell.setAttribute('id',  `${cell.parentElement.cells[2].innerText.substring(0,3)}-${cell.cellIndex-2}.html`);
 				}
 			}
+*/
 		})
 	});
 function f () {
 	event.preventDefault();
 //	fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/'+this.getAttribute('id'))
-	fetch('https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/'+this.innerHTML+'.html')
+	fetch(this.getAttribute("src")+'.html')
 		.then(response => response.text())
 		.then((data) => {
 			document.getElementById('popup-content').innerHTML = data;
