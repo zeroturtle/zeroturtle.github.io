@@ -50,13 +50,16 @@
 		.then(response => response.text())
 		.then((data) => {
 			container.innerHTML= data   //выводим протокол
-			// каждой ссылке добавляем вызов показать detail
+			// каждой ссылке добавляем вызов  detail
 			for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
-				if (lnk.href.includes('jpg')) {
-					lnk.addEventListener("click", displayTeamDetails);
+				if (lnk.href.endsWith('jpg')) {
+					lnk.addEventListener("click", displayTeamDetails)
+				}
+				else if (lnk.href.endsWith('mp4')) {
+					lnk.addEventListener("click", displayVideo)
 				}
 				else { 
-					lnk.addEventListener("click", displayRoundDetails);
+					lnk.addEventListener("click", displayRoundDetails)
 				}
 		})
 	})
@@ -65,9 +68,16 @@ function r() {
 	frame.style.height=(frame.contentDocument.body.scrollHeight+45) +'px'
 	frame.style.width = (frame.contentDocument.body.scrollWidth+15) +'px'
 }
+// показать видео
+function displayVideo() {
+	event.preventDefault()
+	window.open(this,"_blank")
+}
 // показать команду
 function displayTeamDetails() {
 	event.preventDefault()
+//	frame.src = new URL('Photo/'+(this.pathname.split('/').slice(-1))[0], baseURL)
+//	modal.showModal()
 	window.open(new URL('Photo/'+(this.pathname.split('/').slice(-1))[0], baseURL), "Team Photo", "width=500,height=400")
 }
 // показать записку
