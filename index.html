@@ -31,7 +31,7 @@
     <script>
 	// чтоб закрыть dialog
 	const modal = document.querySelector('dialog')
-	var frame = modal.getElementsByTagName('iframe')[0]
+	const frame = modal.querySelector('iframe')
 	const baseURL = document.getElementsByTagName('base')[0].href
 	function closedialog() {
 		frame.srcdoc = '';
@@ -55,9 +55,6 @@
 				if (lnk.href.endsWith('jpg')) {
 					lnk.addEventListener("click", displayTeamDetails)
 				}
-				else if (lnk.href.endsWith('mp4')) {
-					lnk.addEventListener("click", displayVideo)
-				}
 				else { 
 					lnk.addEventListener("click", displayRoundDetails)
 				}
@@ -65,22 +62,17 @@
 	})
 // установить размер dialog по содержимому
 function r() {
-	frame.style.height=(frame.contentDocument.body.scrollHeight+45) +'px'
-	frame.style.width = (frame.contentDocument.body.scrollWidth+15) +'px'
-}
-// показать видео
-function displayVideo() {
-	event.preventDefault()
-	window.open(this,"_blank")
+	frame.style.height=`${frame.contentDocument.body.scrollHeight+45}px`
+	frame.style.width=`${frame.contentDocument.body.scrollWidth}px`
 }
 // показать команду
 function displayTeamDetails() {
 	event.preventDefault()
 //	frame.src = new URL('Photo/'+(this.pathname.split('/').slice(-1))[0], baseURL)
 //	modal.showModal()
-	window.open(new URL('Photo/'+(this.pathname.split('/').slice(-1))[0], baseURL), "Team Photo", "width=500,height=400")
+	window.open(new URL('Photo/'+(this.pathname.split('/').slice(-1))[0], baseURL), "_blank")//"Team Photo", "width=500,height=400")
 }
-// показать записку
+// показать detail
 function displayRoundDetails() {
 	event.preventDefault()
 	// загружаем судейскую записку
@@ -88,7 +80,10 @@ function displayRoundDetails() {
 	fetch(url)
 		.then(response => response.text())
 		.then((data) => {
-			frame.srcdoc = data  //выводи detail
+			frame.contentDocument.open()
+			frame.contentDocument.write(data)
+			frame.contentDocument.close()
+			for (l of frame.contentDocument.querySelectorAll('a')) l.setAttribute('target','_blank')
 			modal.showModal()
 		})
 		.catch(error => console.error('Error fetching file:', error))
