@@ -22,7 +22,7 @@
 <dialog>
   <div onclick="closedialog();" style="cursor: pointer;">X</div>
   <div id="popup-content">
-    <iframe src="about:blank" onload="r();" style="max-width:400px;min-width:100px;min-height:100px;border:none;"></iframe>
+    <iframe src="about:blank" onload="r();" style="max-width:400px;min-width:100px;min-height:100px;border:none;" sandbox></iframe>
   </div>
 </dialog>
 
@@ -50,7 +50,7 @@
 		.then(response => response.text())
 		.then((data) => {
 			container.innerHTML= data   //выводим протокол
-			// каждой ссылке добавляем вызов  detail
+			// для каждой ссылке не "0" добавляем вызов detail
 			for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
 				if (lnk.href.endsWith('jpg')) {
 					lnk.addEventListener("click", displayTeamDetails)
@@ -58,6 +58,19 @@
 				else { 
 					lnk.addEventListener("click", displayRoundDetails)
 				}
+			// заменим названия стран на флаги
+			for(t of document.querySelectorAll('td')) 
+				if (t.ParentElement.colIndex == 2) {
+					td.innerHTML = `<img src="./flags/${td.innerText.lowerCase()}.svg" alt="${td.innerText}" width="4em" height="3em" />`
+				}
+/* intime 
+//css
+.flag-250, .flag-fifa-fra, .flag-fr, .flag-fra, .flag-ioc-fra {
+  background-image: url(./flags/fra.svg);
+}
+//html
+//<span class="flag flag-1x flag-ioc-fra" data-toggle="popover" data-content="FRA" data-original-title="" title="">&nbsp;</span>
+*/
 		})
 	})
 // установить размер dialog по содержимому
