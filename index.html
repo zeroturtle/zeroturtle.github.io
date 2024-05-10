@@ -66,16 +66,16 @@
 					let img = document.createElement("img");
 					img.setAttribute("src", `./flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
 					img.setAttribute("alt", `${cell.innerText}`)
-					img.style.width = '40px'
-					cell.innerHTML = '';
+					img.style = 'width="40px";'
 					cell.appendChild(img);
+					cell.innerHTML = '';
 				}
 			}
 		})
 	})
 // установить размер dialog по содержимому
 function r() {
-	frame.style.height=`${frame.contentDocument.body.scrollHeight+145}px`
+	frame.style.height=`${frame.contentDocument.body.scrollHeight+45}px`
 	frame.style.width=`${frame.contentDocument.body.scrollWidth}px`
 }
 // показать команду
@@ -91,19 +91,20 @@ function displayRoundDetails() {
 	// загружаем судейскую записку
 	let url = new URL(this+'.html', baseURL)
 	fetch(url)
-		.then(response => response.text())
-		.then((data) => {
-			frame.srcdoc = data
-//			frame.contentDocument.open()
-//			frame.contentDocument.write(data)
-//			frame.contentDocument.close()
-//			for (l of frame.contentDocument.querySelectorAll('a')) l.setAttribute('target','_blank')
+		.then(response => response.text()) // прочитать тело ответа как текст
+		.then((html) => {
+			frame.srcdoc = html
+/*
+			// Convert the HTML string into a document object
+			var doc = new DOMParser().parseFromString(html, "text/html");
+			for(a of doc.querySelectorAll('a'))
+				a.setAttribute('target','_blank')
+			frame.srcdoc = doc.documentElement.innerHTML
+*/
 			modal.showModal()
 		})
 		.catch(error => console.error('Error fetching file:', error))
 }
-
-
     </script>
 
 
