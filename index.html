@@ -99,10 +99,10 @@ function displayRoundDetails() {
 	fetch(url)
 		.then(response => response.text())
 		.then((data) => {
-			frame.srcdoc = data
-//			frame.contentDocument.open()
-//			frame.contentDocument.write(data)
-//			frame.contentDocument.close()
+//			frame.srcdoc = data
+			frame.contentDocument.open()
+			frame.contentDocument.write(data)
+			frame.contentDocument.close()
 //			for (l of frame.contentDocument.querySelectorAll('a')) l.setAttribute('target','_blank')
 			modal.showModal()
 		})
