@@ -65,7 +65,6 @@
 				if (cell.cellIndex == 1 ) { //&& cell.parentElement.rowIndex > 1
 					let img = document.createElement("img");
 					if (code3.indexOf(cell.innerText) > 0) {
-						alert(code2[code3.indexOf(cell.innerText)])
 						img.setAttribute("src", `./flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
 						img.setAttribute("alt", `${cell.innerText}`)
 						img.style.width = "40px"
@@ -116,6 +115,7 @@ function displayRoundDetails() {
 
 
     </script>
+
 
   </body>
 </html>
