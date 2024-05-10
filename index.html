@@ -59,11 +59,16 @@
 					lnk.addEventListener("click", displayRoundDetails)
 				}
 			// заменим названия стран на флаги
-/*			for(t of document.querySelectorAll('td')) 
-				if (t.ParentElement.colIndex == 2) {
-					td.innerHTML = `<img src="./flags/${td.innerText.lowerCase()}.svg" alt="${td.innerText}" width="4em" height="3em" />`
+			for (const cell of document.querySelectorAll('td')) {
+				if (cell.cellIndex == 1) {
+					let img = document.createElement("img");
+					img.setAttribute("src", `./flags/${cell.innerText.slice(0,2).toLowerCase()}.svg`)
+					img.setAttribute("alt", `${cell.innerText}`)
+					img.style.width = "40px"
+					cell.innerHTML = '';
+					cell.appendChild(img);
 				}
-*/
+			}
 /* intime 
 //css
 .flag-250, .flag-fifa-fra, .flag-fr, .flag-fra, .flag-ioc-fra {
@@ -76,7 +81,7 @@
 	})
 // установить размер dialog по содержимому
 function r() {
-	frame.style.height=`${frame.contentDocument.body.scrollHeight+45}px`
+	frame.style.height=`${frame.contentDocument.body.scrollHeight+145}px`
 	frame.style.width=`${frame.contentDocument.body.scrollWidth}px`
 }
 // показать команду
