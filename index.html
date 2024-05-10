@@ -62,25 +62,15 @@
 				}
 			// заменим названия стран на флаги
 			for (const cell of document.querySelectorAll('td')) {
-				if (cell.cellIndex == 1 ) { //&& cell.parentElement.rowIndex > 1
+				if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
 					let img = document.createElement("img");
-					if (code3.indexOf(cell.innerText) > 0) {
-						img.setAttribute("src", `./flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
-						img.setAttribute("alt", `${cell.innerText}`)
-						img.style.width = "40px"
-						cell.innerHTML = '';
-						cell.appendChild(img);
-					}
+					img.setAttribute("src", `./flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
+					img.setAttribute("alt", `${cell.innerText}`)
+					img.style.width = '40px'
+					cell.innerHTML = '';
+					cell.appendChild(img);
 				}
 			}
-/* intime 
-//css
-.flag-250, .flag-fifa-fra, .flag-fr, .flag-fra, .flag-ioc-fra {
-  background-image: url(./flags/fra.svg);
-}
-//html
-//<span class="flag flag-1x flag-ioc-fra" data-toggle="popover" data-content="FRA" data-original-title="" title="">&nbsp;</span>
-*/
 		})
 	})
 // установить размер dialog по содержимому
