@@ -99,7 +99,14 @@ function displayRoundDetails() {
 			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html");
 //			for(a of doc.querySelectorAll('a')) a.setAttribute('target','_blank')  //!! doesn't work inside frame
-			doc.head.insertAdjacentHTML('beforeend', `<link type="text/css" rel="stylesheet" href="detail.css">`);
+
+			let frameStyle = document.createElement("link")
+			frameStyle.href = "detail.css"
+			frameStyle.rel = "stylesheet"
+			frameStyle.type = "text/css"
+			doc.head.appendChild(frameStyle) 
+
+//			doc.head.insertAdjacentHTML('beforeend', `<link type="text/css" rel="stylesheet" href="detail.css">`);
 			frame.srcdoc = doc.documentElement.outerHTML
 //			frame.srcdoc = html
 			modal.showModal()
