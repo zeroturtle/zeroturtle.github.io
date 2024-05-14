@@ -100,11 +100,11 @@ function displayRoundDetails() {
 			var doc = new DOMParser().parseFromString(html, "text/html");
 //			for(a of doc.querySelectorAll('a')) a.setAttribute('target','_blank')  //!! doesn't work inside frame
 
-			let frameStyle = document.createElement("link")
-			frameStyle.href = "detail.css"
-			frameStyle.rel = "stylesheet"
-			frameStyle.type = "text/css"
-			doc.head.appendChild(frameStyle) 
+			let frameCSS = document.createElement("link")
+			frameCSS.href = "https://zeroturtle.github.io/detail.css"
+			frameCSS.rel = "stylesheet"
+			frameCSS.type = "text/css"
+			doc.head.appendChild(frameCSS)
 
 //			doc.head.insertAdjacentHTML('beforeend', `<link type="text/css" rel="stylesheet" href="detail.css">`);
 			frame.srcdoc = doc.documentElement.outerHTML
