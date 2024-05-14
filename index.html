@@ -73,34 +73,35 @@
 			}
 		})
 	})
-// óñòàíîâèòü ðàçìåð dialog ïî ñîäåðæèìîìó
+// autosize frame
 function r() {
 	frame.style.height=`${frame.contentDocument.body.scrollHeight+45}px`
 	frame.style.width=`${frame.contentDocument.body.scrollWidth}px`
 }
-// ïîêàçàòü êîìàíäó
+//Team Photo
 function displayTeamDetails() {
 	event.preventDefault()
-//	frame.src = new URL('Photo/'+(this.pathname.split('/').slice(-1))[0], baseURL)
+
+//	var u = new URL('Photo/'+(this.pathname.split('/').slice(-1))[0], baseURL)
+//	frame.src = u
 //	modal.showModal()
-	window.open(new URL('Photo/'+(this.pathname.split('/').slice(-1))[0], baseURL), "_blank")//"Team Photo", "width=500,height=400")
+//	window.open(u, "_blank") 
+
+	window.open(new URL(this, baseURL), "_blank")
 }
-// ïîêàçàòü detail
+// round detail
 function displayRoundDetails() {
 	event.preventDefault()
-	// çàãðóæàåì ñóäåéñêóþ çàïèñêó
-	let url = new URL(this+'.html', baseURL)
-	fetch(url)
+	// çàãðóæàåì ñóäåéñêóþ çàïèñêó	
+	fetch( new URL(this+'.html', baseURL) )
 		.then(response => response.text())
 		.then((html) => {
-			frame.srcdoc = html
-/*
-			// Convert the HTML string into a document object
+/*			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html");
 			for(a of doc.querySelectorAll('a'))
 				a.setAttribute('target','_blank')
 			frame.srcdoc = doc.documentElement.innerHTML
-*/
+*/			frame.srcdoc = html
 			modal.showModal()
 		})
 		.catch(error => console.error('Error fetching file:', error))
