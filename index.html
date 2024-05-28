@@ -83,7 +83,8 @@ function r() {
 function displayTeamDetails() {
 	event.preventDefault()
 
-	frame.src = new URL(this, baseURL)
+//	frame.src = new URL(this, baseURL)
+	frame.src = new URL(this)
 	modal.showModal()
 
 //	var u = new URL('Photo/'+(this.pathname.split('/').slice(-1))[0], baseURL)
