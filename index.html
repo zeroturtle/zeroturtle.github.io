@@ -37,7 +37,6 @@ td { min-width: 50px; }
 	// ÷òîá çàêðûòü dialog
 	const modal = document.querySelector('dialog')
 	const frame = modal.querySelector('iframe')
-	const baseURL = document.getElementsByTagName('base')[0].href
 	function closedialog() {
 		frame.src="about:blank"
 		modal.close()
@@ -79,11 +78,8 @@ td { min-width: 50px; }
 //Team Photo
 function displayTeamDetails() {
 	event.preventDefault()
-
-//	frame.src = new URL(this, baseURL)
 	frame.src = new URL((this.pathname.split('/').slice(-1))[0], 'https://zeroturtle.github.io/')
 	modal.showModal()
-
 //	window.open(new URL(this, baseURL), "_blank")
 }
 // round detail
