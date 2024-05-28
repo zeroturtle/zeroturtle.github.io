@@ -23,7 +23,7 @@ td { min-width: 50px; }
 <dialog>
   <div onclick="closedialog();" style="cursor: pointer;">X</div>
   <div id="popup-content">
-    <iframe src="about:blank" onload="r();" style="max-width:400px;min-width:100px;min-height:100px;border:none;overflow:hidden;" sandbox></iframe>
+    <iframe src="about:blank" onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));' style="max-width:400px;min-width:100px;min-height:100px;border:none;overflow:hidden;"></iframe>
   </div>
 </dialog>
 
@@ -39,7 +39,7 @@ td { min-width: 50px; }
 	const frame = modal.querySelector('iframe')
 	const baseURL = document.getElementsByTagName('base')[0].href
 	function closedialog() {
-		frame.srcdoc = '';
+		frame.src="about:blank"
 		modal.close()
 	}
 	function windowOnClick(event) {
@@ -76,17 +76,12 @@ td { min-width: 50px; }
 			}
 		})
 	})
-// autosize frame
-function r() {
-	frame.style.height=`${frame.contentDocument.body.scrollHeight+45}px`
-	frame.style.width=`${frame.contentDocument.body.scrollWidth}px`
-}
 //Team Photo
 function displayTeamDetails() {
 	event.preventDefault()
 
 //	frame.src = new URL(this, baseURL)
-	frame.src = new URL((this.pathname.split('/').slice(-1))[0], 'https://zeroturtle.github.io/Photo/')
+	frame.src = new URL((this.pathname.split('/').slice(-1))[0], 'https://zeroturtle.github.io/')
 	modal.showModal()
 
 //	window.open(new URL(this, baseURL), "_blank")
