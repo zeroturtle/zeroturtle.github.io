@@ -38,7 +38,8 @@ td { min-width: 50px; }
 	const modal = document.querySelector('dialog')
 	const frame = modal.querySelector('iframe')
 	function closedialog() {
-		frame.src="about:blank"
+//		frame.src="about:blank"
+		frame.srcdoc = ""
 		modal.close()
 	}
 	function windowOnClick(event) {
@@ -62,7 +63,7 @@ td { min-width: 50px; }
 				else { 
 					lnk.addEventListener("click", displayRoundDetails)
 				}
-			// convert country name to flag
+			// convert country name to flag SVG-image
 			for (const cell of document.querySelectorAll('td')) {
 				if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
 					let img = document.createElement("img");
@@ -75,13 +76,21 @@ td { min-width: 50px; }
 			}
 		})
 	})
+
 //Team Photo
 function displayTeamDetails() {
 	event.preventDefault()
-	frame.src = new URL((this.pathname.split('/').slice(-1))[0], 'https://zeroturtle.github.io/')
+	var doc = document.implementation.createHTMLDocument('Team Photo')
+	let img = document.createElement("img");
+	img.setAttribute("src", 'https://zeroturtle.github.io/'+(this.pathname.split('/').slice(-1))[0])
+	img.setAttribute("alt", (this.pathname.split('/').slice(-1))[0])
+//	img.style.height = 'auto'
+	doc.body.appendChild(img)
+
+	frame.srcdoc = doc.documentElement.outerHTML
 	modal.showModal()
-//	window.open(new URL(this, baseURL), "_blank")
 }
+
 // round detail
 function displayRoundDetails() {
 	event.preventDefault()
@@ -92,7 +101,7 @@ function displayRoundDetails() {
 //			frame.srcdoc = html
 
 			// Convert the HTML string into a document object
-			var doc = new DOMParser().parseFromString(html, "text/html");
+			var doc = new DOMParser().parseFromString(html, "text/html")
 //			for(a of doc.querySelectorAll('a')) a.setAttribute('target','_blank')  //!! link doesn't work inside frame :(
 
 			let frameCSS = document.createElement("link")
@@ -100,8 +109,8 @@ function displayRoundDetails() {
 			frameCSS.rel = "stylesheet"
 			frameCSS.type = "text/css"
 			doc.head.appendChild(frameCSS)
-
 //			doc.head.insertAdjacentHTML('beforeend', `<link type="text/css" rel="stylesheet" href="detail.css">`);
+
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
