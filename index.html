@@ -98,18 +98,10 @@ function displayRoundDetails() {
 	fetch( new URL(this+'.html', document.baseURL) )
 		.then(response => response.text())
 		.then((html) => {
-//			frame.srcdoc = html
-
 			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html")
+			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="https://zeroturtle.github.io/detail.css">');
 //			for(a of doc.querySelectorAll('a')) a.setAttribute('target','_blank')  //!! link doesn't work inside frame :(
-
-			let frameCSS = document.createElement("link")
-			frameCSS.href = "https://zeroturtle.github.io/detail.css"
-			frameCSS.rel = "stylesheet"
-			frameCSS.type = "text/css"
-			doc.head.appendChild(frameCSS)
-//			doc.head.insertAdjacentHTML('beforeend', `<link type="text/css" rel="stylesheet" href="detail.css">`);
 
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
