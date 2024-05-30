@@ -3,8 +3,8 @@
   <head>
     <meta content="text/html; charset=windows-1251" http-equiv="content-type">
     <meta charset="utf-8s">
+    <base href="https://zeroturtle.github.io/">
     <title>OPTIMUS Results Page</title>
-    <base href="https://raw.githubusercontent.com/zeroturtle/zeroturtle.github.io/main/">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" type="image/x-icon" href="favicon.png">
 <style>
@@ -49,9 +49,14 @@ td { min-width: 50px; }
 	}
 	window.addEventListener("click", windowOnClick); 
 
+	// get last-modified of proto.html
+	fetch("proto.html", {method: "HEAD"})
+		.then (r => document.querySelector('h3').insertAdjacentText('afterend', 'Last-Modified: '+ r.headers.get('Last-Modified')))
+		.catch(e => console.error(e))
+
 	// çàãðóæàåì ïðîòîêîë
 	window.addEventListener("load", (event) => {
-		fetch('proto.html', document.baseURL )
+		fetch('proto.html')
 		.then(response => response.text())
 		.then((data) => {
 			container.innerHTML= data   //âûâîäèì ïðîòîêîë
@@ -87,7 +92,7 @@ function displayTeamDetails() {
 //	img.style.height = '100vh'
 	doc.body.append(img)
 	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
-//	doc.body.insertAdjacentHTML('beforeend','Team Members:')
+	doc.body.insertAdjacentHTML('beforeend','Team Members:')
 
 	frame.srcdoc = doc.documentElement.outerHTML
 	modal.showModal()
@@ -97,12 +102,12 @@ function displayTeamDetails() {
 function displayRoundDetails() {
 	event.preventDefault()
 	// çàãðóæàåì ñóäåéñêóþ çàïèñêó	
-	fetch( new URL(this+'.html', document.baseURL) )
+	fetch( new URL(this+'.html') )
 		.then(response => response.text())
 		.then((html) => {
 			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html")
-			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="https://zeroturtle.github.io/detail.css">');
+			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="detail.css">');
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 
