@@ -23,7 +23,7 @@ td { min-width: 50px; }
 <dialog>
   <div onclick="closedialog();" style="cursor: pointer;">X</div>
   <div id="popup-content">
-    <iframe src="about:blank" onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));' style="max-width:400px;min-width:100px;min-height:100px;border:none;overflow:hidden;"></iframe>
+    <iframe src="about:blank" onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));' style="max-width:80vw;min-width:100px;min-height:100px;border:none;overflow:hidden;"></iframe>
   </div>
 </dialog>
 
@@ -71,7 +71,7 @@ td { min-width: 50px; }
 					img.setAttribute("alt", `${cell.innerText}`)
 					img.style.width = "40px";
 					cell.innerHTML = '';
-					cell.appendChild(img);
+					cell.append(img);
 				}
 			}
 		})
@@ -82,10 +82,12 @@ function displayTeamDetails() {
 	event.preventDefault()
 	var doc = document.implementation.createHTMLDocument('Team Photo')
 	let img = document.createElement("img");
-	img.setAttribute("src", 'https://zeroturtle.github.io/'+(this.pathname.split('/').slice(-1))[0])
+	img.setAttribute("src", (this.pathname.split('/').slice(-1))[0])
 	img.setAttribute("alt", (this.pathname.split('/').slice(-1))[0])
-//	img.style.height = 'auto'
-	doc.body.appendChild(img)
+//	img.style.height = '100vh'
+	doc.body.append(img)
+	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
+	doc.body.insertAdjacentHTML('beforeend','Team Members:')
 
 	frame.srcdoc = doc.documentElement.outerHTML
 	modal.showModal()
@@ -101,8 +103,8 @@ function displayRoundDetails() {
 			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html")
 			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="https://zeroturtle.github.io/detail.css">');
-//			for(a of doc.querySelectorAll('a')) a.setAttribute('target','_blank')  //!! link doesn't work inside frame :(
-
+			for(a of doc.querySelectorAll('a'))
+				a.setAttribute('target','parent') //<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
