@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-critters-container>
   <head>
-    <meta content="text/html; charset=windows-1251" http-equiv="content-type">
-    <meta charset="utf-8s">
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <base href="https://zeroturtle.github.io/">
     <title>OPTIMUS Results Page</title>
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -13,11 +12,156 @@ td { min-width: 50px; }
   background: rgba(0,0,0,0.7);
   opacity: 0.75;
 }
-
 </style>
 
-  </head>
+<style>
+ /* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+} 
+</style>
+<script>
+function openCity(evt, cityName) {
+  // Declare all variables
+  var i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+} 
+</script>
+</head>
+
   <body id="Body">
+
+<div style="background-image: url(OPTIMUS3.jpg)">
+<H1 style="font-size: 52px;color: #ff9000;line-height: 52px;text-align: center;">Чемпіонат України 2024</H1>
+<h2 style="font-size: 40px;color: #ffffff;line-height: 40px;text-align: center;">парашутна групова акробатика<br>
+    вправа "четвірка"</h2>
+</div>
+<div style="width: 50%; float:left;text-align: center;">
+   <h3>Пятница 22 августа <br>
+	- <br>
+	Пятница 24 августа
+   </h3>
+   <h3>LOCATION:
+	<h4>аэроклуб "Skydive Warszawa"<br>
+	Республика Польща,<br>
+	Аэропорт Хрцинно, 05-190 Насельск</h4>
+   </h3>                 	
+</div>
+<div style="float:left;text-align: center;">
+<h3>Заліки:</h3>
+<h4 style="box-sizing: border-box; padding: 20px; background-color: #277bf9; color: #ffffff;">Відкритий</h4>
+<h4 style="box-sizing: border-box; padding: 20px; background-color: #277bf9; color: #ffffff;">Україна</h4>
+<p><button>Реєстрація</button></p>
+</div>
+
+
+ <!-- Tab links -->
+<div class="tab" style="width: 100%;">
+  <button class="tablinks" onclick="openCity(event, 'London')">General details</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">About the drop zone</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Food and Overight stay</button>
+  <button class="tablinks" onclick="openCity(event, 'Dnepr')">Jump Prices</button>
+</div>
+
+<!-- Tab content -->
+<div id="London" class="tabcontent">
+  <p>
+<ul>
+<li>FAI competition rules</li>
+<li>Professional “live” judging & scoring</li>
+<li>Great atmosphere</li>
+<li>Jumps from 10,500 ft</li>
+<li>CESSNA OY-RUL, SKYVAN</li>
+<li>Great food</li>
+<li>Amazing people</li>
+<li>Onsite campground</li>
+<li>Campfire</li>
+</ul>
+</p>
+</div>
+
+
+<div id="Paris" class="tabcontent">
+  <p>Дропзона знаходиться в аэропорту Хрцинно в місті 05-190 Насельск, Республика Польща.</p>
+  <p>Додаткова інформація про ДЗ за посиланням <a href="https://skydive.waw.pl/">https://skydive.waw.pl/</a></p>
+  <p>Та за телефоном +48 604 176 930</p>
+</div> 
+
+<div id="Tokyo" class="tabcontent">
+  <p>
+<h3>Food</h3>
+<ul>
+<li>Breakfast, Lunch & Dinner available at the Dropzone.</li>
+<li>Breakfast (Saturday & Sunday) – € tbd</li>
+<li>Lunch (Saturday & Sunday) – € tbd</li>
+<li>Dinner (Saturday) – € tbd</li>
+</ul>
+
+<h3>Overnight stay</h3>
+<ul>
+<li>Ви можете розміститись у аеродромному хостелі, з туалетом та душем.</li>
+<li>Або забронювати місце у готелі у Варшаві<br>
+    <a href="https://www.hotel.pl">Найкращий готель</a><br>
+</li>
+</ul> 
+</p>
+</div>
+
+<div id="Dnepr" class="tabcontent">
+  <p>Заявочний взнос: €150</p>
+  <p>Командні стрибки (10): €1,250</p>
+  <p>Кожний учасник сплачує за стрибки самостійно</p>
+  <p>* Ціна стрибків може змінитись при різкому збільшенні ціни палива</p>
+</div> 
+
+
+<hr>
    <h3> Resulting Table: </h3>
 
 <dialog>
@@ -27,7 +171,6 @@ td { min-width: 50px; }
   </div>
 </dialog>
 
-   <hr>
    <div id="container"></div>
 
 
@@ -51,7 +194,7 @@ td { min-width: 50px; }
 
 	// get last-modified of proto.html
 	fetch("proto.html", {method: "HEAD"})
-		.then (r => document.querySelector('h3').insertAdjacentText('afterend', 'Last-Modified: '+ r.headers.get('Last-Modified')))
+		.then (r => document.getElementById('container').after('Last-Modified: '+ r.headers.get('Last-Modified')))
 		.catch(e => console.error(e))
 
 	// çàãðóæàåì ïðîòîêîë
@@ -118,6 +261,5 @@ function displayRoundDetails() {
 }
     </script>
 
-
-  </body>
+</body>
 </html>
