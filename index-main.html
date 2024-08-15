@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" data-critters-container>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>OPTIMUS Results Page</title>
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+<style>
+body, html {
+  font-family:"Arial";
+  margin:0px; /*обнуляем поля и отступы, чтобы браузеры вели себя адекватно*/
+  padding:0px;
+  #text-align:center; /*центрируем специально для IE */
+}
+#buttons li {
+  float: left;
+  list-style: none;
+  text-align: center;
+  background-color: #0066FF;
+  min-width: 100px;
+  line-height: 50px;
+  border-right: 1px solid white;
+  box-sizing: border-box; flex: 1 1 auto; 
+}
+#buttons li a {
+  text-decoration: none;
+  color: #AAFF00;
+  display: block;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0px 1px 1px 0px;
+  font-size: 12px;
+}
+#buttons li a:hover {
+  text-decoration: none;
+  color: #000000;
+  background-color: #33B5E5;
+}
+#f {
+  display:inline-block; margin: 0 auto; display: flex; justify-content:safe center; flax-wrap:nowrap; text-align: center;
+}
+table {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+}
+    tr {
+      height:100px;
+      border-bottom: 1px solid transparent;
+      border-top: 1px solid transparent;
+    }
+
+    tr:hover td {
+      border: 1px solid #0000FF;
+      border-style: solid none;
+    }
+    tr:hover td:first-child {
+      border-left-style: solid;
+    }
+    tr:hover td:last-child {
+      border-right-style: solid;
+    }
+    td {
+      text-align: left;
+      vertical-align: center;
+      padding-left: 200px;
+      padding: 1em;
+      font-size: 16px;
+      text-transform: uppercase;
+    }
+    td img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+#footer{
+  float: left;
+  color: white;
+  background-color: #44FF22;  
+  font-size:12px;
+  width:100%;
+}
+</style>
+<script>
+  function addRowHandlers() {
+    var rows = document.getElementById("EventsList").rows;
+    for (i = 0; i < rows.length; i++) {
+        rows[i].onclick = function(){ return function(){
+               window.open(new URL(this.getAttribute('id')+'/index.html', window.location.href));
+        };}(rows[i]);
+    }
+  }
+  window.addEventListener("load", addRowHandlers);
+</script>
+
+</head>
+
+  <body id="Body">
+     <!-- page header -->
+    <div style="background-image: url('Title.jpg'); background-size: contain;">
+      <div style="width: 100%; display: table; padding: 0px;border-spacing: 0px;">
+        <div style="display: table-cell;vertical-align: middle;"><a href="#"><img src="OPTIMUS3.jpg" alt="OPTIMUS LOGO" height="200"></a></div> 
+        <div style="display: table-cell;vertical-align: middle;"><a href="#" style="color: white;  font-size: 22px;text-decoration: none;">ABOUT</a></div> 
+        <div style="display: table-cell;vertical-align: middle;"><a href="#" style="color: white;  font-size: 22px;text-decoration: none;">LICENCE</a></div>
+      </div>
+    </div>
+
+    <div id="f">
+      <ul id="buttons">
+        <li><a href="FS">Formation Skydiving </a></li>
+        <li><a href="AE">Artistic Events </a></li>
+        <li><a href="SF">Speed Formation </a></li>
+        <li><a href="CF">Canopy Formation </a></li>
+        <li><a href="IFS">Indoor Formation Skydiving </a></li>
+        <li><a href="ISF">Indoor Solo Freestyle </a></li>
+        <li><a href="ISS">Indoor Solo Speed </a></li>
+        <li><a href="DY">Dynamic Flying </a></li>
+        <li><a href="WS">Wingsuit Flying Perfomance </a></li>
+        <li><a href="CP">Canopy Piloting </a></li>
+        <li><a href="SS">Speed Skydiving</a></li>
+      </ul>
+    </div>
+
+
+    <div id="f"> <!-- years filter -->
+      <ul id="buttons">
+        <li><a href="#">2024</a></li>
+        <li><a href="#">2023</a></li>
+        <li><a href="#">2022</a></li>
+        <li><a href="#">2021</a></li>
+      </ul>
+    </div>
+
+    <div> <!-- events list -->
+      <table id="EventsList">
+        <tr id="33"><td width="100"><img src="AB-FS2-2016.jpg" alt="Event_Name"></td><td>2024 Чемпионат Украины FS4<br>19 авг 2024 - 25 авг 2024<br>Польша</td></tr>
+        <tr id="22"><td width="100"><img src="OPTIMUS_small.jpg" alt=""></td><td>Главные змагання 2021 року<br>2021<br>Днепропетровск</td></tr>
+        <tr id="1"><td width="100"><img src="FS.gif" alt=""></td><td>Великий Кубок FS 2020<br>10 авг 2020 - 13 авг 2020<br>Майское</td></tr>
+      </table>
+    </div>
+
+    <div id="clear"></div>
+
+    <div id="footer">
+      <center>
+        Автор не несет ответственности за использование материалов из сайта. Любые притензии не принимаются.
+	<br>
+      &copy  2008-2022  <a href="contacts.html#feedback">Команда Optimus</a>
+     </center>
+    </div>
+
+  </body>
+</html>
