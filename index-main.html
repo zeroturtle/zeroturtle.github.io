@@ -2,7 +2,7 @@
 <html lang="en" data-critters-container>
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
-    <title>OPTIMUS Results Page</title>
+    <title>Official OPTIMUS Site</title>
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" type="image/x-icon" href="favicon.png">
 <style>
@@ -41,6 +41,7 @@ body, html {
 #f {
   display:inline-block; margin: 0 auto; display: flex; justify-content:safe center; flax-wrap:nowrap; text-align: center;
 }
+
 table {
   border-collapse: collapse;
   margin-left: auto;
@@ -86,6 +87,155 @@ tr:nth-child(odd) {
   width:100%;
 }
 </style>
+
+    <style>
+        .main {
+            display: none;
+            flex-direction: row;
+            #font-size: 30px;
+            color: green;
+            padding: 5px;
+            width: 400px;
+        }
+        .main div {
+            display: inline-block;
+            margin: 10px 20px;
+            width: 50px;
+        }
+    </style>
+<!--
+списибо товарищу с http://shpargalkablog.ru/2014/01/feedback-form.html
+за прекрасный скрипт формы обратной связи.
+-->
+<style>
+#licence-form {
+  max-width: 400px;
+  padding: 2%;
+  border-radius: 3px;
+  background: #f1f1f1;
+}
+#licence-form [required] {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 2px 0 2% 0;
+  padding: 2%;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 3px;
+  box-shadow: 0 1px 2px -1px rgba(0,0,0,.2) inset, 0 0 transparent;
+}
+#licence-form [required]:hover {
+  border-color: #7eb4ea;
+  box-shadow: 0 1px 2px -1px rgba(0,0,0,.2) inset, 0 0 transparent;
+}
+#licence-form [required]:focus {
+  outline: none;
+  border-color: #7eb4ea;
+  box-shadow: 0 1px 2px -1px rgba(0,0,0,.2) inset, 0 0 4px rgba(35,146,243,.5);
+  transition: .2s linear;
+}
+#licence-form [type="submit"] {
+  padding: 2%;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.2) inset;
+  background: #669acc;
+  color: #fff;
+}
+#licence-form [type="submit"]:hover {
+  background: #5c90c2;
+}
+#licence-form [type="submit"]:focus {
+  box-shadow: 0 1px 1px #fff, inset 0 1px 2px rgba(0,0,0,.8), inset 0 -1px 0 rgba(0,0,0,.05);
+}
+</style>
+
+<style>
+/* Кнопка */
+.btn-modal {
+  fcolor: #fff;
+  cursor: pointer;
+  line-height: 3rem;
+  padding: 1rem 3rem;
+  color: #fff;
+  text-decoration: none;
+  background-color: #83bec5;
+  transition: all 0.3s ease-out;
+}
+.btn-modal:hover {
+  background-color: #527c82;
+}
+
+/* Затемнение фона */
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  height: 100%;
+  opacity: 0;
+  text-align: center;
+  padding: 0!important;
+}
+.modal-overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Модаальное окно */
+.open-window {
+  margin: 70px auto;
+  padding: 1em;
+  background: #fff;
+  border-radius: 5px;
+  position: relative;
+  transition: all 5s easeout;
+display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+.open-window h2 {
+  margin: 1em 0;
+  color: #333;
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Кнопка закрыть */
+.open-window .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.open-window .close:hover {
+  color: #83bec5;
+}
+.open-window .modal-content-body {
+  overflow: auto;
+}
+.modal-content-body p{
+  text-align: justify;
+}
+::-webkit-scrollbar-track {
+  background-color: #111;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #2b2e33;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: transparent;
+}
+</style>
+
+
 <script>
   function addRowHandlers() {
     var rows = document.getElementById("EventsList").rows;
@@ -102,11 +252,11 @@ tr:nth-child(odd) {
 
   <body id="Body">
      <!-- page header -->
-    <div style="background-image: url('Title.jpg'); background-size: contain;">
+    <div style="background: linear-gradient(#b35900 55%, white);">
       <div style="width: 100%; display: table; padding: 0px;border-spacing: 0px;">
-        <div style="display: table-cell;vertical-align: middle;"><a href="#"><img src="OPTIMUS3.jpg" alt="OPTIMUS LOGO" height="200"></a></div> 
-        <div style="display: table-cell;vertical-align: middle;"><a href="#" style="color: white;  font-size: 22px;text-decoration: none;">ABOUT</a></div> 
-        <div style="display: table-cell;vertical-align: middle;"><a href="#" style="color: white;  font-size: 22px;text-decoration: none;">LICENCE</a></div>
+        <div style="display: table-cell;vertical-align: middle;"><a href="#"><img src="OPTIMUS3.jpg" alt="OPTIMUS LOGO" height="120"></a></div> 
+        <div style="display: table-cell;vertical-align: middle;"><a class="btn-modal" href="#">ABOUT</a></div> 
+        <div style="display: table-cell;vertical-align: middle;"><a class="btn-modal" href="#open-window-content">LICENCE</a></div>
       </div>
     </div>
 
@@ -136,15 +286,128 @@ tr:nth-child(odd) {
       </ul>
     </div>
 
+
     <div> <!-- events list -->
       <table id="EventsList">
-        <tr id="33"><td width="100"><img src="AB-FS2-2016.jpg" alt="Event_Name"></td><td>2024 Чемпионат Украины FS4<br>19 авг 2024 - 25 авг 2024<br>Польша</td></tr>
-        <tr id="22"><td width="100"><img src="OPTIMUS_small.jpg" alt=""></td><td>Главные змагання 2021 року<br>2021<br>Днепропетровск</td></tr>
-        <tr id="1"><td width="100"><img src="FS.gif" alt=""></td><td>Великий Кубок FS 2020<br>10 авг 2020 - 13 авг 2020<br>Майское</td></tr>
+        <tbody>
+          <tr id="33"><td width="100"><img src="AB-FS2-2016.jpg" alt="Event_Name"></td><td>2024 Чемпионат Украины FS4<br>19 авг 2024 - 25 авг 2024<br>Польша</td></tr>
+          <tr id="22"><td width="100"><img src="OPTIMUS_small.jpg" alt=""></td><td>Главные змагання 2021 року<br>2021<br>Днепропетровск</td></tr>
+          <tr id="1"><td width="100"><img src="FS.gif" alt=""></td><td>Великий Кубок FS 2020<br>10 авг 2020 - 13 авг 2020<br>Майское</td></tr>
+        </tbody>
       </table>
     </div>
 
-    <div id="clear"></div>
+<script>
+// get data
+  function () {
+	const bodySection = document.querySelectorAll("tbody")[0];
+	var row = bodySection.insertRow(-1);
+	row.id = 1;
+
+	var newCell = row.insertCell(0);
+	let img = new Image();
+	img.src = 'LOGO';
+	img.alt="Event_Name";
+	newCell.appendChild(img);
+
+	newCell = row.insertCell(-1);
+	var newText = document.createTextNode('Event_Name, DateFrom - DateTo, Place');
+	newCell.appendChild(newText);
+
+  }
+</script>
+
+<div class="modal-overlay" id="open-window-content">
+  <div class="open-window">
+    <h2>Создание лицензии</h2><a class="close" href="#">×</a>
+    <!-- Содержимое модального окна -->
+    <div class="modal-content-body">
+
+  <form id="licence-form" method="POST" action="">
+	<input type="text" name="nameFF" required placeholder="Имя/Название организации владельца лицензии" x-autocompletetype="name">
+	<input type="email" name="contactFF" required placeholder="Адрес электронной почты" x-autocompletetype="email">
+<fieldset>
+  <legend>Select a Licence pack:</legend>
+
+  <div>
+    <input type="radio" id="outdoor" name="pack" value="outdoor" checked onclick="document.getElementById('dcp').style.display = 'none';" />
+    <label for="outdoor">Outdoor</label>
+  </div>
+
+  <div>
+    <input type="radio" id="indoor" name="pack" value="indoor" onclick="document.getElementById('dcp').style.display = 'none';" />
+    <label for="indoor">Indoor</label>
+  </div>
+
+  <div>
+    <input type="radio" id="generic" name="pack" value="generic" onclick="document.getElementById('dcp').style.display = 'none';" />
+    <label for="generic">Generic</label>
+  </div>
+
+  <div>
+    <input type="radio" id="custom" name="pack" value="custom" onclick="document.getElementById('dcp').style.display = 'inline';" />
+    <label for="custom">Custom</label>
+
+<div id="dcp" class="main">
+  <legend>Choose disciplines you need:</legend>
+
+  <div>
+    <input type="checkbox" id="fs" name="fs" checked />
+    <label for="fs">FS</label>
+  </div>
+
+  <div>
+    <input type="checkbox" id="ae" name="ae" />
+    <label for="ae">AE</label>
+  </div>
+
+  <div>
+    <input type="checkbox" id="sf" name="sf" />
+    <label for="sf">SF</label>
+  </div>
+
+  <div>
+    <input type="checkbox" id="cf" name="cf" />
+    <label for="cf">CF</label>
+  </div>
+
+  <div>
+    <input type="checkbox" id="ifs" name="ifs" />
+    <label for="ifs">IFS</label>
+  </div>
+
+  <div>
+    <input type="checkbox" id="isf" name="isf" />
+    <label for="isf">ISF</label>
+  </div>
+
+  <div>
+    <input type="checkbox" id="dy" name="dy" />
+    <label for="dy">DY</label>
+  </div>
+
+  <div>
+    <input type="checkbox" id="ws" name="ws" />
+    <label for="ws">WS</label>
+  </div>
+
+  <div>
+    <input type="checkbox" id="cp" name="cp" />
+    <label for="cp">CP</label>
+  </div>
+
+</div>
+</div>
+
+</fieldset>
+        <span style="white-space: nowrap; font-size: smaller;">(!) Активирована подписка на рассылку.</span><br>
+	<input type="submit" value="Заказать">
+  </form>
+    </div>
+  </div>
+</div>
+
+
 
     <div id="footer">
       <center>
