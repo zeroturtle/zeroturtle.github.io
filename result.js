@@ -54,7 +54,7 @@ function displayTeamDetails() {
 	event.preventDefault()
 	var doc = document.implementation.createHTMLDocument('Team Photo')
 	let img = document.createElement("img");
-	img.setAttribute("src", (this.pathname.split('/').slice(-1))[0])
+	img.setAttribute("src", 'Photo/'+(this.pathname.split('/').slice(-1))[0])
 	img.setAttribute("alt", (this.pathname.split('/').slice(-1))[0])
 //	img.style.height = '100vh'
 	doc.body.append(img)
