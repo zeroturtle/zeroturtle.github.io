@@ -29,12 +29,13 @@
 			container.innerHTML= data   //âûâîäèì ïðîòîêîë
 			// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 			for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
-				if (lnk.href.toUpperCase().endsWith('JPG')) {
+				if (lnk.href.toLowerCase().endsWith('jpg')) {
 					lnk.addEventListener("click", displayTeamDetails)
 				}
 				else { 
 					lnk.addEventListener("click", displayRoundDetails)
 				}
+
 			// convert country name to flag SVG-image
 			for (const cell of document.querySelectorAll('td')) {
 				if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
@@ -56,7 +57,8 @@ function displayTeamDetails() {
 	let img = document.createElement("img");
 	img.setAttribute("src", 'Photo/'+(this.pathname.split('/').slice(-1))[0])
 	img.setAttribute("alt", (this.pathname.split('/').slice(-1))[0])
-//	img.style.height = '100vh'
+	img.style.maxHeight = '100%'
+	img.style.maxWidth = '100%'
 	doc.body.append(img)
 	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
 	doc.body.insertAdjacentHTML('beforeend','Team Members:')
