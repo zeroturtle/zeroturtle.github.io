@@ -29,7 +29,7 @@
 			container.innerHTML= data   //âûâîäèì ïðîòîêîë
 			// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 			for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
-				if (lnk.href.endsWith('jpg')) {
+				if (lnk.href.toUpperCase().endsWith('jpg')) {
 					lnk.addEventListener("click", displayTeamDetails)
 				}
 				else { 
