@@ -14,13 +14,14 @@ window.addEventListener("load", (event) => {
 		close.addEventListener("click", closedialog)
 		close.innerHTML = "X"
 		dialog.appendChild(close)
-		const popup = document.createElement('div')
-		popup.id = "popup-content";
 		var iframe = document.createElement('iframe');
 		iframe.src="about:blank"
 		iframe.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
 		iframe.onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));'
+		const popup = document.createElement('div')
+		popup.id = "popup-content";
 		popup.appendChild(iframe)
+		container.appendChild(popup)
 		container.before(dialog)
 
 		container.innerHTML= data   //âûâîäèì ïðîòîêîë
