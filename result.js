@@ -28,10 +28,16 @@ window.addEventListener("load", (event) => {
 			}
 			const dialog = document.createElement("dialog")
 			const close = document.createElement('div')
-			close.addEventListener("click", closedialog())
+			close.addEventListener("click", closedialog)
 			close.innerHTML = "X"
 			dialog.appendChild(close)
-			dialog.append('<div id="popup-content"> <iframe src="about:blank" style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe></div>')
+			const popup = document.createElement('div')
+			popup.id = "popup-content";
+			var iframe = document.createElement('iframe');
+			iframe.src="about:blank"
+			popup.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
+			popup.append(iframe)
+			container.before(dialog)
 /*
 document.querySelector('ifame').addEventListener('load', (e) => {
 		frame.style.height = modal.querySelector('iframe').contentDocument.body.scrollHeight+45+"px";
@@ -39,7 +45,6 @@ document.querySelector('ifame').addEventListener('load', (e) => {
 		console.log(e);
 	});
 */
-			container.before(dialog)
 		}
 	})
 })
@@ -53,9 +58,9 @@ function displayTeamDetails() {
 	img.setAttribute("alt", (this.pathname.split('/').slice(-1))[0])
 	img.style.maxHeight = '100%'
 	img.style.maxWidth = '100%'
+	doc.body.append(`<h2>${this.innerHTML}<h2>`) //team name
 	doc.body.append(img)
-	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
-	doc.body.insertAdjacentHTML('beforeend','Team Members:')
+	doc.body.('Team Members:')
 
 	let D = document.querySelector('dialog')
 	D.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
