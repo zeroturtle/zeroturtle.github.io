@@ -26,20 +26,20 @@ window.addEventListener("load", (event) => {
 				cell.innerHTML = '';
 				cell.append(img);
 			}
-		const dialog = document.createElement("dialog")
-		const close = document.createElement('div')
-		close.addEventListener("click",function() { this.closest("iframe").srcdoc = ""; this.closest("dialog").close(); })
-		close.innerHTML = "X"
-		dialog.appendChild(close)
-		dialog.append('<div id="popup-content"> <iframe src="about:blank" style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe></div>')
+			const dialog = document.createElement("dialog")
+			const close = document.createElement('div')
+			close.addEventListener("click",function() { this.closest("iframe").srcdoc = ''; this.closest("dialog").close(); })
+			close.innerHTML = "X"
+			dialog.appendChild(close)
+			dialog.append('<div id="popup-content"> <iframe src="about:blank" style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe></div>')
 /*
-document.querySelector('dialog').addEventListener('load', (e) => {
+document.querySelector('ifame').addEventListener('load', (e) => {
 		frame.style.height = modal.querySelector('iframe').contentDocument.body.scrollHeight+45+"px";
 		frame.style.width = modal.querySelector('iframe').contentDocument.body.scrollWidth+45+"px";
 		console.log(e);
 	});
 */
-		container.before(dialog)
+			container.before(dialog)
 		}
 	})
 })
