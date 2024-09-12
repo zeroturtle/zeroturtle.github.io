@@ -34,15 +34,14 @@
 		.then((data) => {
 			const container = document.createElement('div')
 			document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
-			container.insertAdjacentHTML('beforebegin', '<p>Привет</p>');
-/*
+			container.insertAdjacentHTML('beforebegin', '
   <dialog>
     <div onclick="closedialog();" style="cursor: pointer;">X</div>
     <div id="popup-content">
-      <iframe src="about:blank" onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));' style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe>
+      <iframe src="about:blank" style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe>
     </div>
   </dialog>
-*/
+');
 			container.innerHTML= data   //âûâîäèì ïðîòîêîë
 			// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 			for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
