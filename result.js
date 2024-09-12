@@ -88,9 +88,10 @@ function closedialog() {
 	this.closest("iframe").srcdoc = ''; 
 	this.closest("dialog").close();
 }
-window.addEventListener("click", (event) => {
+function windowOnClick(event) {
 	if (event.target === document.querySelector('dialog')) {
 		closedialog()
 	}
-})
+}
+window.addEventListener("click", windowOnClick); 
 document.querySelector('body').insertAdjacentText('beforeend', 'Powered by OPTIMUS Prometheus')
