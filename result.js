@@ -8,7 +8,6 @@ window.addEventListener("load", (event) => {
 		document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
 
 		var dialog = document.createElement("dialog")
-		dialog.id = 'dialog'
 		const close = document.createElement('div')
 		close.addEventListener("click", closedialog)
 		close.innerHTML = "X"
