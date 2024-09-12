@@ -5,6 +5,7 @@ window.addEventListener("load", (event) => {
 	.then(response => response.text())
 	.then((data) => {
 		const container = document.createElement('div')
+		container.id = 'container'
 		document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
 		container.innerHTML= data   //âûâîäèì ïðîòîêîë
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
