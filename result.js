@@ -77,8 +77,9 @@ function displayRoundDetails() {
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 
 			iframe.addEventListener('load', (e) => {
-				iframe.style.height = doc.documentElement.outerHTML.scrollHeight+45+"px";
-				iframe.style.width = doc.documentElement.outerHTML.scrollWidth+45+"px";
+				let a = document.querySelector('dialog')
+				a.style.height = doc.documentElement.outerHTML.scrollHeight+45+"px";
+				a.style.width = doc.documentElement.outerHTML.scrollWidth+45+"px";
 				console.log(e);
 			});
 			dialog.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
