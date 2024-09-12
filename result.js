@@ -74,7 +74,7 @@ function displayRoundDetails() {
 	//		iframe.src="about:blank"
 			iframe.srcdoc = doc.documentElement.outerHTML
 			iframe.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
-			ifame.addEventListener('load', (e) => {
+			iframe.addEventListener('load', (e) => {
 				iframe.style.height = doc.documentElement.outerHTML.scrollHeight+45+"px";
 				iframe.style.width = doc.documentElement.outerHTML.scrollWidth+45+"px";
 				console.log(e);
