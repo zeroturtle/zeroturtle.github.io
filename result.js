@@ -7,7 +7,7 @@ window.addEventListener("load", (event) => {
 		const container = document.createElement('div')
 		document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
 
-		const modal = document.createElement('dialog')
+		var modal = document.createElement('dialog')
 		modal.insertAdjacentHTML("beforeend", '<div onclick="closedialog();" style="cursor: pointer;">X</div>')
 		modal.insertAdjacentHTML("beforeend",'<div id="popup-content"> <iframe src="about:blank" style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe></div>')
 		container.insertAdjacentHTML('beforebegin', modal)
@@ -48,7 +48,7 @@ function displayTeamDetails() {
 	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
 	doc.body.insertAdjacentHTML('beforeend','Team Members:')
 
-	//let modal = document.querySelector('dialog')
+	var modal = document.querySelector('dialog')
 	modal.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
 	modal.showModal()
 }
@@ -66,7 +66,7 @@ function displayRoundDetails() {
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 
-			//const modal = document.querySelector('dialog')
+			var modal = document.querySelector('dialog')
 			modal.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
