@@ -7,6 +7,20 @@ window.addEventListener("load", (event) => {
 		const container = document.createElement('div')
 		container.id = 'container'
 		document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
+
+		var dialog = document.createElement("dialog")
+		const close = document.createElement('div')
+		close.addEventListener("click", closedialog)
+		close.innerHTML = "X"
+		dialog.appendChild(close)
+		const popup = document.createElement('div')
+		popup.id = "popup-content";
+		var iframe = document.createElement('iframe');
+		iframe.src="about:blank"
+		iframe.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
+		popup.appendChild(iframe)
+		container.before(dialog)
+
 		container.innerHTML= data   //âûâîäèì ïðîòîêîë
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
@@ -62,25 +76,12 @@ function displayRoundDetails() {
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 
-			const dialog = document.createElement("dialog")
-			const close = document.createElement('div')
-			close.addEventListener("click", closedialog)
-			close.innerHTML = "X"
-			dialog.appendChild(close)
-			const popup = document.createElement('div')
-			popup.id = "popup-content";
-
-			var iframe = document.createElement('iframe');
-	//		iframe.src="about:blank"
-			iframe.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
 			iframe.addEventListener('load', (e) => {
 				iframe.style.height = doc.documentElement.outerHTML.scrollHeight+45+"px";
 				iframe.style.width = doc.documentElement.outerHTML.scrollWidth+45+"px";
 				console.log(e);
 			});
-			popup.appendChild(iframe)
-			iframe.srcdoc = doc.documentElement.outerHTML
-			container.before(dialog)
+			dialog.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
 			dialog.showModal()
 		})
 		.catch(error => console.error('Error fetching file:', error))
