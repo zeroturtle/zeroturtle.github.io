@@ -55,9 +55,9 @@ function displayTeamDetails() {
 	img.setAttribute("alt", (this.pathname.split('/').slice(-1))[0])
 	img.style.maxHeight = '100%'
 	img.style.maxWidth = '100%'
-	doc.body.appendChild(`<h2>${this.innerHTML}<h2>`) //team name
 	doc.body.appendChild(img)
-	doc.body.appendChild('Team Members:')
+	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
+	doc.body.insertAdjacentHTML('beforeend','Team Members:')
 
 	let D = document.querySelector('dialog')
 	D.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
@@ -84,8 +84,9 @@ function displayRoundDetails() {
 				console.log(e);
 			});                                                                                  */
 
-			dialog.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
-			dialog.showModal()
+			let D = document.querySelector('dialog')
+			D.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
+			D.showModal()
 		})
 		.catch(error => console.error('Error fetching file:', error))
 }
