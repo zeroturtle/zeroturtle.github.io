@@ -61,7 +61,7 @@ function displayTeamDetails() {
 	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
 	doc.body.insertAdjacentHTML('beforeend','Team Members:')
 
-	let D = document.getElementByID('dialog')
+	let D = document.getElementById('dialog')
 	D.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
 	D.showModal()
 }
@@ -86,7 +86,7 @@ function displayRoundDetails() {
 				console.log(e);
 			});                                                                                  */
 
-			let D = document.getElementByID('dialog')
+			let D = document.getElementById('dialog')
 			D.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
 			D.showModal()
 		})
