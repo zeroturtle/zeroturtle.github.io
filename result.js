@@ -7,7 +7,7 @@
 	modal.addEventListener('open', (e) => {
 		frame.style.height = frame.contentDocument.body.scrollHeight+45+"px";
 		frame.style.width = frame.contentDocument.body.scrollWidth+45+"px";
-		//console.log(e);
+		console.log(e);
 	});
 	function closedialog() {
 //		frame.src="about:blank"
