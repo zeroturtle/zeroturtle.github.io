@@ -5,7 +5,6 @@ window.addEventListener("load", (event) => {
 	.then(response => response.text())
 	.then((data) => {
 		const container = document.createElement('div')
-		container.id = 'container'
 		document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
 
 		var dialog = document.createElement("dialog")
@@ -14,14 +13,14 @@ window.addEventListener("load", (event) => {
 		close.addEventListener("click", closedialog)
 		close.innerHTML = "X"
 		dialog.appendChild(close)
-		var iframe = document.createElement('iframe');
+		const iframe = document.createElement('iframe')
 		iframe.src="about:blank"
 		iframe.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
 		iframe.onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));'
 		const popup = document.createElement('div')
 		popup.id = "popup-content";
 		popup.appendChild(iframe)
-		container.appendChild(popup)
+		dialog.appendChild(popup)
 		container.before(dialog)
 
 		container.innerHTML= data   //âûâîäèì ïðîòîêîë
