@@ -88,7 +88,7 @@ function closedialog() {
 	this.closest("iframe").srcdoc = ''; 
 	this.closest("dialog").close();
 }
-window.addEventListener("click", (event) {
+window.addEventListener("click", (event) => {
 	if (event.target === document.querySelector('dialog')) {
 		closedialog()
 	}
