@@ -26,18 +26,19 @@ window.addEventListener("load", (event) => {
 				cell.innerHTML = '';
 				cell.append(img);
 			}
-			const dialog = document.createElement("dialog")
-			const close = document.createElement('div')
-			close.addEventListener("click", closedialog)
-			close.innerHTML = "X"
-			dialog.appendChild(close)
-			const popup = document.createElement('div')
-			popup.id = "popup-content";
-			var iframe = document.createElement('iframe');
-			iframe.src="about:blank"
-			popup.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
-			popup.append(iframe)
-			container.before(dialog)
+
+		const dialog = document.createElement("dialog")
+		const close = document.createElement('div')
+		close.addEventListener("click", closedialog)
+		close.innerHTML = "X"
+		dialog.appendChild(close)
+		const popup = document.createElement('div')
+		popup.id = "popup-content";
+		var iframe = document.createElement('iframe');
+		iframe.src="about:blank"
+		popup.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
+		popup.appendChild(iframe)
+		container.before(dialog)
 /*
 document.querySelector('ifame').addEventListener('load', (e) => {
 		frame.style.height = modal.querySelector('iframe').contentDocument.body.scrollHeight+45+"px";
@@ -58,9 +59,9 @@ function displayTeamDetails() {
 	img.setAttribute("alt", (this.pathname.split('/').slice(-1))[0])
 	img.style.maxHeight = '100%'
 	img.style.maxWidth = '100%'
-	doc.body.append(`<h2>${this.innerHTML}<h2>`) //team name
-	doc.body.append(img)
-	doc.body.('Team Members:')
+	doc.body.appendChild(`<h2>${this.innerHTML}<h2>`) //team name
+	doc.body.appendChild(img)
+	doc.body.appendChild('Team Members:')
 
 	let D = document.querySelector('dialog')
 	D.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
