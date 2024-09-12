@@ -9,6 +9,7 @@ window.addEventListener("load", (event) => {
 		document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
 
 		var dialog = document.createElement("dialog")
+		dialog.id = 'dialog'
 		const close = document.createElement('div')
 		close.addEventListener("click", closedialog)
 		close.innerHTML = "X"
@@ -59,7 +60,7 @@ function displayTeamDetails() {
 	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
 	doc.body.insertAdjacentHTML('beforeend','Team Members:')
 
-	let D = document.querySelector('dialog')
+	let D = document.getElementsByID('dialog')
 	D.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
 	D.showModal()
 }
@@ -84,7 +85,7 @@ function displayRoundDetails() {
 				console.log(e);
 			});                                                                                  */
 
-			let D = document.querySelector('dialog')
+			let D = document.getElementsByID('dialog')
 			D.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
 			D.showModal()
 		})
