@@ -18,6 +18,7 @@ window.addEventListener("load", (event) => {
 		var iframe = document.createElement('iframe');
 		iframe.src="about:blank"
 		iframe.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
+		iframe.onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));'
 		popup.appendChild(iframe)
 		container.before(dialog)
 
@@ -76,12 +77,13 @@ function displayRoundDetails() {
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 
-			iframe.addEventListener('load', (e) => {
+/*			iframe.addEventListener('load', (e) => {
 				let a = document.querySelector('dialog')
 				a.style.height = doc.documentElement.outerHTML.scrollHeight+45+"px";
 				a.style.width = doc.documentElement.outerHTML.scrollWidth+45+"px";
 				console.log(e);
-			});
+			});                                                                                  */
+
 			dialog.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
 			dialog.showModal()
 		})
