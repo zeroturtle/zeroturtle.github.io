@@ -26,8 +26,8 @@
 		fetch('proto.html')
 		.then(response => response.text())
 		.then((data) => {
-			const container =  document.createElement('div')
-			optimus.insertAdjacentElement("beforebegin", container)
+			const container = document.createElement('div')
+			document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
 			container.innerHTML= data   //âûâîäèì ïðîòîêîë
 			// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 			for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
