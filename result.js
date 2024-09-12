@@ -69,21 +69,19 @@ function displayRoundDetails() {
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 
-		const dialog = document.createElement("dialog")
-		const close = document.createElement('div')
-		close.addEventListener("click", closedialog)
-		close.innerHTML = "X"
-		dialog.appendChild(close)
-		const popup = document.createElement('div')
-		popup.id = "popup-content";
-		var iframe = document.createElement('iframe');
-		iframe.src="about:blank"
-		popup.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
-		popup.appendChild(iframe)
-		container.before(dialog)
-
-//			let D = document.querySelector('dialog')
-			dialog.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
+			const dialog = document.createElement("dialog")
+			const close = document.createElement('div')
+			close.addEventListener("click", closedialog)
+			close.innerHTML = "X"
+			dialog.appendChild(close)
+			const popup = document.createElement('div')
+			popup.id = "popup-content";
+			var iframe = document.createElement('iframe');
+	//		iframe.src="about:blank"
+			iframe.srcdoc = doc.documentElement.outerHTML
+			popup.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
+			popup.appendChild(iframe)
+			container.before(dialog)
 			dialog.showModal()
 		})
 		.catch(error => console.error('Error fetching file:', error))
