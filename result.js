@@ -27,7 +27,7 @@
 		.then(response => response.text())
 		.then((data) => {
 			const container =  document.createElement('div')
-			optimus.before(container)
+			optimus.insertAdjacentElement(beforebegin, container)
 			container.innerHTML= data   //âûâîäèì ïðîòîêîë
 			// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 			for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
