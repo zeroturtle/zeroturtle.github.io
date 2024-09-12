@@ -7,10 +7,10 @@ window.addEventListener("load", (event) => {
 		const container = document.createElement('div')
 		document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
 
-		var modal = document.createElement('dialog')
-		modal.insertAdjacentHTML("beforeend", '<div onclick="closedialog();" style="cursor: pointer;">X</div>')
-		modal.insertAdjacentHTML("beforeend",'<div id="popup-content"> <iframe src="about:blank" style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe></div>')
-		container.insertAdjacentHTML('beforebegin', modal)
+		const modal = document.createElement('dialog')
+		modal.append('<div onclick="closedialog();" style="cursor: pointer;">X</div>')
+		modal.append('<div id="popup-content"> <iframe src="about:blank" style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe></div>')
+		container.before(modal)
 		container.innerHTML= data   //âûâîäèì ïðîòîêîë
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
@@ -48,9 +48,9 @@ function displayTeamDetails() {
 	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
 	doc.body.insertAdjacentHTML('beforeend','Team Members:')
 
-	var modal = document.querySelector('dialog')
-	modal.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
-	modal.showModal()
+	let D = document.querySelector('dialog')
+	D.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
+	D.showModal()
 }
 
 // round detail
@@ -66,9 +66,9 @@ function displayRoundDetails() {
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 
-			var modal = document.querySelector('dialog')
-			modal.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
-			modal.showModal()
+			let D = document.querySelector('dialog')
+			D.querySelector('iframe').srcdoc = doc.documentElement.outerHTML
+			D.showModal()
 		})
 		.catch(error => console.error('Error fetching file:', error))
 }
@@ -82,17 +82,14 @@ document.querySelector('dialog').addEventListener('load', (e) => {
 		console.log(e);
 	});
 */
-
 function closedialog() {
-//	frame.src="about:blank"
 	frame.srcdoc = ""
 	document.querySelector('dialog').close()
 }
-function windowOnClick(event) {
+window.addEventListener("click", (event) {
 	if (event.target === document.querySelector('dialog')) {
 		closedialog()
 	}
-}
+})
 
-window.addEventListener("click", windowOnClick)
 document.querySelector('body').insertAdjacentText('beforeend', 'Powered by OPTIMUS Prometheus')
