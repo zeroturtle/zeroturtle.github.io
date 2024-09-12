@@ -27,13 +27,6 @@ window.addEventListener("load", (event) => {
 				cell.innerHTML = '';
 				cell.append(img);
 			}
-/*
-document.querySelector('ifame').addEventListener('load', (e) => {
-		frame.style.height = modal.querySelector('iframe').contentDocument.body.scrollHeight+45+"px";
-		frame.style.width = modal.querySelector('iframe').contentDocument.body.scrollWidth+45+"px";
-		console.log(e);
-	});
-*/
 		}
 	})
 })
@@ -76,13 +69,17 @@ function displayRoundDetails() {
 			dialog.appendChild(close)
 			const popup = document.createElement('div')
 			popup.id = "popup-content";
+
 			var iframe = document.createElement('iframe');
 	//		iframe.src="about:blank"
 			iframe.srcdoc = doc.documentElement.outerHTML
-			iframe.style.height = iframe.contentDocument.body.scrollHeight+45+"px";
-			iframe.style.width = iframe.contentDocument.body.scrollWidth+45+"px";
+			iframe.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
+			ifame.addEventListener('load', (e) => {
+				iframe.style.height = doc.documentElement.outerHTML.scrollHeight+45+"px";
+				iframe.style.width = doc.documentElement.outerHTML.scrollWidth+45+"px";
+				console.log(e);
+			});
 
-			popup.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
 			popup.appendChild(iframe)
 			container.before(dialog)
 			dialog.showModal()
