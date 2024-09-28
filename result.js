@@ -22,8 +22,14 @@ window.addEventListener("load", (event) => {
 		popup.appendChild(iframe)
 		dialog.appendChild(popup)
 		container.before(dialog)
+		iframe.addEventListener('load', (e) => {
+			let a = document.querySelector('dialog')
+			a.style.height = doc.documentElement.outerHTML.scrollHeight+45+"px";
+			a.style.width = doc.documentElement.outerHTML.scrollWidth+45+"px";
+			console.log(e);
+		});                                                                                  
 */
-		container.innerHTML= data   //âûâîäèì ïðîòîêîë
+		results.innerHTML= data   //âûâîäèì ïðîòîêîë
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
 			if (lnk.href.toLowerCase().endsWith('jpg')) {
@@ -76,14 +82,6 @@ function displayRoundDetails() {
 			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="detail.css">');
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
-
-/*			iframe.addEventListener('load', (e) => {
-				let a = document.querySelector('dialog')
-				a.style.height = doc.documentElement.outerHTML.scrollHeight+45+"px";
-				a.style.width = doc.documentElement.outerHTML.scrollWidth+45+"px";
-				console.log(e);
-			});                                                                                  */
-
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
@@ -105,4 +103,4 @@ function windowOnClick(event) {
 	}
 }
 window.addEventListener("click", windowOnClick); 
-document.querySelector('body').insertAdjacentText('beforeend', 'Powered by OPTIMUS Prometheus')
+document.querySelector('results').insertAdjacentText('beforeend', 'Powered by OPTIMUS Prometheus')
