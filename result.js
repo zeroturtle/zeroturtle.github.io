@@ -103,4 +103,4 @@ function windowOnClick(event) {
 	}
 }
 window.addEventListener("click", windowOnClick); 
-document.querySelector('results').insertAdjacentText('beforeend', 'Powered by OPTIMUS Prometheus')
+document.getElementById('results').insertAdjacentText('beforeend', 'Powered by OPTIMUS Prometheus')
