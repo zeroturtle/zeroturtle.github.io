@@ -7,79 +7,8 @@
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" type="image/x-icon" href="favicon.png">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-<style>
-td { min-width: 50px; }
-::backdrop {
-  background: rgba(0,0,0,0.7);
-  opacity: 0.75;
-}
-</style>
-
-<style>
- /* Style the tab */
-.tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #0080ff;
-}
-
-/* Style the buttons that are used to open the tab content */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  color: white;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
-  color: black;
-}
-
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
-} 
-</style>
-<script>
-function openCity(evt, cityName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-} 
-</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 
   <body lang="en" id="Body">
@@ -90,13 +19,46 @@ function openCity(evt, cityName) {
 <h2 style="font-size: 40px;color: #ffffff;line-height: 40px;text-align: center;">парашутна групова акробатика<br>
     вправа "четвірка"</h2>
 </div>
-<div style="width: 50%; float:left;text-align: center;">
-   <h3>22 - 24 серпня, 2024</h3>
-   <h3>LOCATION:</h3>
-	<h4>аэроклуб "Skydive Warszawa"<br>
-	Республика Польща,<br>
-	Аэропорт Хрцинно, 05-190 Насельск</h4>
 
+  <!-- Event detail -->
+  <div class="container-fluid h-100">
+    <div class="row h-100" style="align-items: center;">
+      <div class="col-1 col-sm-2 col-md-3 d-none d-sm-inline" style="text-align:center">
+        <img src="/imageprocess/70/0/100_1074/100_1074_Logo1.png" class="img-fluid p-1 d-none d-sm-inline" style="max-height:70px; max-width: 70px">
+        <img src="/imageprocess/70/0/100_1074/100_1074_Logo2.png" class="img-fluid p-1 d-none d-md-inline" style="max-height:70px; max-width: 70px">
+      </div>
+      <div class="col-10 col-sm-8 col-md-8">
+        <div class="row text-uppercase">
+          <div class="col-12 h2">
+            Чемпіонат України 2024<br>з парашутного спорту 
+          </div>
+          <div class="col-12 h4">
+            групова акробатика, вправа "четвірка"
+          </div>
+          <div class="col-12 h6">
+            22 серпня 2024 - 24 серпня 2024
+          </div>
+          <div class="col-12 h6">
+	аэроклуб "Skydive Warszawa",<br>
+	Аэропорт Хрцинно, 05-190 Насельск,<br>
+	Республика Польща
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="d-grid gap-3">
+
+<div class="text-center p-2 bg-light border">
+<h3>Заліки:</h3>
+<button type="button" class="btn btn-primary" disabled>Реєстрація Україна</button>
+<button type="button" class="btn btn-secondary" disabled>Гості</button>
+</div>
+
+<div class="container text-center p-2 bg-light border">
+  <div class="row row-cols-auto">
+    <div class="col">
 <h3>SCHEDULE</h3>
 <table border="1" width="100%">
 <tr><td>19 автуста</td><td>Official Arrival Day, Practice Period</td><td>All Day</td></tr>
@@ -106,32 +68,39 @@ function openCity(evt, cityName) {
 <tr><td>23 автуста</td><td>FS Competition</td><td>All Day</td></tr>
 <tr><td>24 автуста</td><td>Awards and Closing Ceremony</td><td>12:00</td></tr>
 </table>
-</div>
-<div style="float:left;text-align: center;">
-<h3>Заліки:</h3>
-<h4 style="box-sizing: border-box; padding: 20px; background-color: #277bf9; color: #ffffff;">Україна</h4>
-<p><button disabled>Реєстрація</button></p>
-
+    </div>
+    <div class="col">
 <h3>Where to Watch</h3>
-
 <p>Scores, pictures, videos, and livestream begin 22 августа, 2024</p>
 <p><a href="https://www.facebook.com/groups/1394748194535559" target="_blank">Facebook Event Page</a></p>
 <p><a href="https://www.youtube.com/@UkrainianSkydivingChampion-h8c" target="_blank">YouTube channel</a></p>
+    </div>
+  </div>
 </div>
 
+</div>
 
  <!-- Tab links -->
-<div class="tab" style="width: 100%;">
-  <button class="tablinks" onclick="openCity(event, 'London')">General details</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">About the drop zone</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Food and Overight stay</button>
-  <button class="tablinks" onclick="openCity(event, 'Dnepr')">Jump Prices</button>
-  <button class="tablinks" onclick="openCity(event, 'Bulletin1')">Bulletin #1</button>
-</div>
-
-<!-- Tab content -->
-<div id="London" class="tabcontent">
-  <p>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link show active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="general-tab-pane" aria-selected="true">General details</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="about-tab-pane" aria-selected="false">About the drop zone</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="food-tab-pane" aria-selected="false">Food and Overight stay</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="price-tab-pane" aria-selected="false">Jump Prices</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="bulletin-tab-pane" aria-selected="false">Bulletin #1</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="general-tab" tabindex="0">
+<p>
 <ul>
 <li>FAI competition rules</li>
 <li>Professional “live” judging & scoring</li>
@@ -145,15 +114,12 @@ function openCity(evt, cityName) {
 </ul>
 </p>
 </div>
-
-
-<div id="Paris" class="tabcontent">
+  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="about-tab" tabindex="0">
   <p>Дропзона знаходиться в аэропорту Хрцинно в місті 05-190 Насельск, Республика Польща.</p>
   <p>Додаткова інформація про ДЗ за посиланням <a href="https://skydive.waw.pl/">https://skydive.waw.pl/</a></p>
   <p>Та за телефоном +48 604 176 930</p>
-</div> 
-
-<div id="Tokyo" class="tabcontent">
+</div>
+  <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="food-tab" tabindex="0">
   <p>
 <h3>Food</h3>
 <ul>
@@ -172,41 +138,24 @@ function openCity(evt, cityName) {
 </ul> 
 </p>
 </div>
-
-<div id="Dnepr" class="tabcontent">
+  <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="price-tab" tabindex="0">
   <p>Заявочний взнос: €150</p>
   <p>Командні стрибки (10): €1,250</p>
   <p>Кожний учасник сплачує за стрибки самостійно</p>
   <p>* Ціна стрибків може змінитись при різкому збільшенні ціни палива</p>
-</div> 
-<div id="Bulletin1" class="tabcontent">
+</div>
+  <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="bulletin-tab" tabindex="0">
 <ul>
 <li>OPTIMUS будет использоваться в качестве electronic scoring systems </li>
 <li>Все участники обязаны иметь страховку действительную на ДЗ</li>
 <li>Все запасные парашюты должны быть переложены не раньше 180 дней период переукладки</li>
 </ul>
-</div> 
+</div>
+</div>
+
+
 <hr>
 
-  <!-- Event detail -->
-  <div class="container-fluid h-100">
-    <div class="row h-100" style="align-items: center;">
-      <div class="col-1 col-sm-2 col-md-3 d-none d-sm-inline" style="text-align:center">
-        <img src="/imageprocess/70/0/100_1074/100_1074_Logo1.png" class="img-fluid p-1 d-none d-sm-inline" style="max-height:70px; max-width: 70px">
-        <img src="/imageprocess/70/0/100_1074/100_1074_Logo2.png" class="img-fluid p-1 d-none d-md-inline" style="max-height:70px; max-width: 70px">
-      </div>
-      <div class="col-10 col-sm-8 col-md-8">
-        <div class="row text-uppercase">
-          <div class="col-12 h2">
-            2024 USPA Open National Championships
-          </div>
-          <div class="col-12 ">
-            08 Sep 2024 - 26 Sep 2024,  Skydive Chicago
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="h5"> Таблица результатов: </div>
   <dialog>
     <div onclick="closedialog();" style="cursor: pointer;">X</div>
