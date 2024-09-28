@@ -45,7 +45,7 @@ window.addEventListener("load", (event) => {
 				let img = document.createElement("img");
 				img.setAttribute("src", `../flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
 				img.setAttribute("alt", `${cell.innerText}`)
-				img.style.width = "40px";
+				img.style.width = "38px";
 				cell.innerHTML = '';
 				cell.append(img);
 			}
