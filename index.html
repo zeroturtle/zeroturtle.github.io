@@ -91,15 +91,15 @@
     <div class="table-responsive">
       <table id="EventsList" class="table table-striped table-hover text-uppercase">
         <tbody>
-          <tr id="33">
-            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="33/Logo1.jpg" alt="Logo1"></td>
-            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="33/Logo2.jpg" alt="Logo2"></td>
+          <tr id="1">
+            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="1/Logo1.jpg" alt="Logo1"></td>
+            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="1/Logo2.jpg" alt="Logo2"></td>
             <td>
-              <span class="fw-bold"> Чемпионат Украины FS4</span>
+              <span class="fw-bold">Чемпіонат України 2024</span>
               <br>
-              <span>19 авг 2024 - 25 авг 2024</span>
+              <span>10 авг 2020 - 13 авг 2020</span>
               <br>
-              <span>Польша</span>
+              <span>аэродром Хрцинно, Насельск, Польща</span>
             </td>
           </tr>
           <tr id="22">
@@ -113,17 +113,19 @@
               <span>Днепропетровск</span>
             </td>
           </tr>
-          <tr id="1">
-            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="1/Logo1.jpg" alt="Logo1"></td>
-            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="1/Logo2.jpg" alt="Logo2"></td>
+          <!-- Competition Template -->
+          <tr id="${Event_ID}">
+            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="33/Logo1.jpg" alt="Logo1"></td>
+            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="33/Logo2.jpg" alt="Logo2"></td>
             <td>
-              <span class="fw-bold">Чемпіонат України 2024</span>
+              <span class="fw-bold">${Event_Name}</span>
               <br>
-              <span>10 авг 2020 - 13 авг 2020</span>
+              <span>${Event_DateFrom} - ${Event_DateTo}</span>
               <br>
-              <span>аэродром Хрцинно, Насельск, Польща</span>
+              <span>${Event_Place}</span>
             </td>
           </tr>
+
         </tbody>
       </table>
     </div>
@@ -164,11 +166,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="licenceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="licenceModal" tabindex="-1" aria-labelledby="licenceModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Subscription constructor</h1>
+        <h1 class="modal-title fs-5" id="licenceModalLabel">Subscription constructor</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -202,7 +204,7 @@
 </ul>
 
 <div class="tab-content" id="myTabContent">
-
+  <!-- Outdoor pack -->
   <div id="outdoor" class="tab-pane fade show active" tabindex="0">
 <legend>Predefined disciplines:</legend>
 <div class="form-check form-check-inline">
@@ -223,6 +225,7 @@
 </div>
   </div>
 
+  <!-- Indoor pack -->
   <div id="indoor" class="tab-pane fade" tabindex="0">
 <legend>Predefined disciplines:</legend>
 <div class="form-check form-check-inline">
@@ -243,6 +246,7 @@
 </div>
   </div>
 
+  <!-- Generic pack -->
   <div id="generic" class="tab-pane fade" tabindex="0">
 <legend>Predefined disciplines:</legend>
 <div class="form-check form-check-inline">
@@ -259,6 +263,7 @@
 </div>
   </div>
 
+  <!-- Custom pack -->
   <div id="custom" class="tab-pane fade" tabindex="0">
 <legend>Choose disciplines you need:</legend>
 <div class="form-check form-check-inline">
@@ -304,12 +309,14 @@
   </div>
 </div>
 
-
-<div class="d-grid gap-2 d-md-block">
-    <button type="submit" class="btn btn-success">Order Licence</button>
-    <button type="reset" class="btn btn-secondary">Clear</button>
-</div>
-
+    <div class="my-3 text-center">
+     Read <a href="#policyModal" data-bs-toggle="modal">Subscription policy</a>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="reset" class="btn btn-secondary">Clear</button>
+      <button type="submit" class="btn btn-success">Order Licence</button>
+    </div>
   </fieldset>
 </form>
       </div>
@@ -318,11 +325,11 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">About OPTIMUS</h1>
+        <h1 class="modal-title fs-5" id="aboutModalLabel">About OPTIMUS</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -338,7 +345,7 @@
             <li>Web publishing event's results with zero-administration approach;</li>
             <li>No installation, No specialised equipment is required;</li>
             <li>Free for individual applying</li>
-            <li>Concurently price see <a href="#subscibe">subscription policy</a></li>
+            <li>Concurently price see <a href="#policyModal" data-bs-toggle="modal">Subscription policy</a></li>
           </ul>
         </div>
       </div>
@@ -348,6 +355,27 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="policyModal" aria-hidden="true" aria-labelledby="policyModalLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="policyModalLabel">Subscription policy</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This modal shows an OPTIMUS subscription policy.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-primary" data-bs-target="#aboutModal" data-bs-toggle="modal">About OPTIMUS</button>
+        <button class="btn btn-success" data-bs-target="#licenceModal" data-bs-toggle="modal">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   <div style="background-image: url(Title.jpg); background-size: 20% 100%;height: 100px">
     <div class="row">
