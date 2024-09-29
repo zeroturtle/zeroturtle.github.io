@@ -89,12 +89,12 @@
 	WHERE Visible=true AND (EXTRACT (YEAR FROM DateFrom)) = :YEAR OR Type_ID = :TYPE ORDER BY DateFrom desc 
 -->
     <div class="table-responsive">
-      <table id="EventsList" class="table table-striped table-hover text-uppercase">
+      <table id="EventsList" class="table table-striped table-hover text-uppercase w-100">
         <tbody>
           <tr id="1">
-            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="1/Logo1.jpg" alt="Logo1"></td>
-            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="1/Logo2.jpg" alt="Logo2"></td>
-            <td>
+            <td class="w-auto align-top"><img class="img-fluid" src="1/Logo1.jpg" alt="Logo1" style="max-height: 70px; max-width: 70px;"></td>
+            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="1/Logo2.jpg" alt="Logo2" style="max-height: 70px; max-width: 70px;"></td>
+            <td class="w-75">
               <span class="fw-bold">Чемпіонат України 2024</span>
               <br>
               <span>10 авг 2020 - 13 авг 2020</span>
@@ -103,9 +103,9 @@
             </td>
           </tr>
           <tr id="22">
-            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="22/Logo1.jpg" alt="Logo1"></td>
-            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="22/Logo2.jpg" alt="Logo2"></td>
-            <td>
+            <td class="w-auto align-top"><img class="img-fluid" src="22/Logo1.jpg" alt="Logo1" style="max-height: 70px; max-width: 70px;"></td>
+            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="22/Logo2.jpg" alt="Logo2" style="max-height: 70px; max-width: 70px;"></td>
+            <td class="w-75">
               <span class="fw-bold">Главные змагання 2021 року</span>
               <br>
               <span>2021</span>
@@ -115,9 +115,9 @@
           </tr>
           <!-- Competition Template -->
           <tr id="${Event_ID}">
-            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="33/Logo1.jpg" alt="Logo1"></td>
-            <td class="align-top" style="width:100px"><img class="img-thumbnail" src="33/Logo2.jpg" alt="Logo2"></td>
-            <td>
+            <td class="w-auto align-top"><img class="img-fluid" src="33/Logo1.jpg" alt="Logo1" style="max-height: 70px; max-width: 70px;"></td>
+            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="33/Logo2.jpg" alt="Logo2" style="max-height: 70px; max-width: 70px;"></td>
+            <td class="w-75">
               <span class="fw-bold">${Event_Name}</span>
               <br>
               <span>${Event_DateFrom} - ${Event_DateTo}</span>
