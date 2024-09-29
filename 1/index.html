@@ -14,7 +14,7 @@
 <body lang="en" id="Body">
   <div class="container">
 
-    <div style="background-image: url(Title.jpg);background-size: contain;">
+    <div class="sticky-top" style="background-image: url(Title.jpg);background-size: contain;">
       <H1 style="font-size: 52px;color: #ff9000;line-height: 52px;text-align: center;">Чемпіонат України 2024</H1>
       <h2 style="font-size: 40px;color: #ffffff;line-height: 40px;text-align: center;">парашутна групова акробатика<br>
         вправа "четвірка"</h2>
@@ -23,9 +23,9 @@
   <!-- Event detail -->
   <div class="container-fluid h-100">
     <div class="row h-100" style="align-items: center;">
-      <div class="col-1 col-sm-2 col-md-3 d-none d-sm-inline" style="text-align:center">
-        <img src="Logo1.jpg" onerror="this.onerror=null;this.src='../OPTIMUS3.svg'" class="img-fluid p-1 d-none d-sm-inline" style="max-width: 100px">
-        <img src="Logo2.jpg" onerror="this.onerror=null;this.src='../OPTIMUS3.svg'" class="img-fluid p-1 d-none d-md-inline" style="max-width: 100px">
+      <div class="col-1 col-sm-2 col-md-3 d-none d-sm-inline">
+        <img src="Logo1.jpg" class="img-fluid p-1 d-none d-sm-inline" onerror="this.onerror=null;this.src='../OPTIMUS3.svg'" style="max-height:100px; max-width: 100px">
+        <img src="Logo2.jpg" class="img-fluid p-1 d-none d-md-inline" onerror="this.onerror=null;this.src='../OPTIMUS3.svg'" style="max-height:100px; max-width: 100px">
       </div>
       <div class="col-10 col-sm-8 col-md-8">
         <div class="row text-uppercase">
@@ -186,14 +186,14 @@
 
 <hr>
 
-  <div class="h5"> Таблица результатов: </div>
+  <div class="my-3 h5"> Таблица результатов: </div>
   <dialog>
     <div onclick="closedialog();" style="cursor: pointer;">X</div>
     <div id="popup-content">
       <iframe src="about:blank" onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));' style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe>
     </div>
   </dialog>
-   <div id="results"> <script src="result.js"></script></div> 
+   <div id="results" class="table-responsive p-0"> <script src="result.js"></script></div> 
 
 </div>  <!-- container -->
 
