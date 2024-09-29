@@ -133,30 +133,11 @@
   <!-- events list -->
 
 <script>
-// get data
-  function () {
-	const bodySection = document.getElementById("EventsList")[0];
-	var row = bodySection.insertRow(-1);
-	row.id = 1;
-
-	var newCell = row.insertCell(0);
-	let img = new Image();
-	img.src = 'LOGO';
-	img.alt="Event_Name";
-	newCell.appendChild(img);
-
-	newCell = row.insertCell(-1);
-	var newText = document.createTextNode('Event_Name, DateFrom - DateTo, Place');
-	newCell.appendChild(newText);
-
-  }
-</script>
-<script>
   function addRowHandlers() {
     var rows = document.getElementById("EventsList").rows;
     for (i = 0; i < rows.length; i++) {
         rows[i].onclick = function(){ return function(){
-               window.open(new URL(this.getAttribute('id')+'/index.html', window.location.href));
+               window.open(new URL(this.getAttribute('id')+'/index.html', '_self')); //window.location.href
         };}(rows[i]);
     }
   }
