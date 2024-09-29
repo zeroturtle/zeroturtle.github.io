@@ -243,5 +243,25 @@ P {margin: 0;}
 <td/><td colspan="26" class="s14">Создано 29.09.2024 10:56:29   Стр. 1 из 1</td>
 </tr>
 </table>
+
+<style>
+  .my-td-cell {
+	padding-bottom: 5px;
+	padding-left: 3px;
+	padding-right: 3px;
+	margin-bottom: 0;
+	padding-top: 6px;
+	min-width: 20px;	
+  }
+  td:nth-child(3) { 
+	white-space: nowrap !important;
+  }
+</style>
+<script>
+	var a = document.getElementsByTagName('td');
+	for (i=0; i<a.length; i++) {
+		a[i].classList.add('my-td-cell');
+	}
+</script>
 </body></html>
 
