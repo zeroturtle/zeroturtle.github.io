@@ -43,9 +43,9 @@ window.addEventListener("load", (event) => {
 		for (const cell of document.querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
 				let img = document.createElement("img");
-				img.setAttribute("src", `../flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
+				img.setAttribute("src", `./flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
 				img.setAttribute("alt", `${cell.innerText}`)
-				img.style.width = "36px";
+				img.style.width = "40px";
 				cell.innerHTML = '';
 				cell.append(img);
 			}
