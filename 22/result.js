@@ -29,9 +29,6 @@ window.addEventListener("load", (event) => {
 			console.log(e);
 		});                                                                                  
 */
-		var doc = new DOMParser().parseFromString(data, "text/html")
-		doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="proto.css">');
-
 		results.innerHTML= data   //âûâîäèì ïðîòîêîë
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
