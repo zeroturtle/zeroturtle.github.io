@@ -125,10 +125,11 @@
               <span>${Event_Place}</span>
             </td>
           </tr>
-
+          <!-- Template end -->
         </tbody>
       </table>
     </div>
+
   </div>
   <!-- events list -->
 
@@ -137,7 +138,7 @@
     var rows = document.getElementById("EventsList").rows;
     for (i = 0; i < rows.length; i++) {
         rows[i].onclick = function(){ return function(){
-               window.open(new URL(this.getAttribute('id')+'/index.html', '_self')); //window.location.href
+               window.open(new URL(this.getAttribute('id')+'/index.html', window.location.href));
         };}(rows[i]);
     }
   }
