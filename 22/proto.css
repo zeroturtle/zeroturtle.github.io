@@ -1,0 +1,50 @@
+table {
+  width: 100%;
+}
+td {
+  text-align: Center; vertical-align: Middle; font-style: normal;
+}
+td {
+  padding: 6px 5px 5px 5px;
+  min-width: 20px;	
+  font-family: Arial;
+  font-size: 13px;
+}
+/* thead */
+tr:nth-child(1) td {
+  display: none;
+}
+tr:nth-child(-n+4) td {
+/*
+--bs-primary: #0d6efd;
+--bs-secondary: #6c757d;
+--bs-success: #198754;
+--bs-info: #0dcaf0;
+--bs-warning: #ffc107;
+--bs-danger: #dc3545;
+--bs-light: #f8f9fa;
+--bs-dark: #212529;
+*/
+  background-color: #fd7e14 !important;
+  color: #FFFFFF;
+  border-left-color:#FFFFFF; border-left-style: solid; border-left-width: 1px;
+  border-bottom-color:#FFFFFF; border-bottom-style: solid; border-bottom-width: 1px;
+}
+/* tbody */
+tr:nth-of-type(-n+8) { 
+  font-weight: bold; 
+}
+tr:nth-child(n+4) td { 
+  border-bottom-color:#C0C0C0; border-bottom-style: solid; border-bottom-width: 1px;
+}
+tr:nth-child(n+4) td:nth-child(3) { /* FIO column */
+  white-space: nowrap !important;
+  text-align: Left; vertical-align: Middle;
+}
+/* footer*/
+tr:nth-last-child(-n+2) td {
+  border-bottom-style: none;
+}
+tr:nth-last-child(1) td {
+ text-align: Right; vertical-align: Middle;
+}
