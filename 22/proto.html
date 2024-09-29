@@ -258,10 +258,12 @@ P {margin: 0;}
   }
 </style>
 <script>
-	var a = document.getElementsByTagName('td');
-	for (i=0; i<a.length; i++) {
-		a[i].classList.add('my-td-cell');
-	}
+  window.addEventListener("load", (event) => {
+    var a = document.getElementsByTagName('td');
+    for (i=0; i<a.length; i++) {
+      a[i].classList.add('my-td-cell');
+    }
+  })
 </script>
 </body></html>
 
