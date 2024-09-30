@@ -3,7 +3,7 @@
 window.addEventListener("load", (event) => {
 	fetch('proto.html')
 	.then(response => response.text())
-	.then((data) => {
+	.then((html) => {
 /*
 		const container = document.createElement('div')
 		document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
@@ -29,9 +29,11 @@ window.addEventListener("load", (event) => {
 			console.log(e);
 		});                                                                                  
 */
-		results.innerHTML= data   //âûâîäèì ïðîòîêîë
+		var doc = new DOMParser().parseFromString(html, "text/html")
+		doc.insertAdjacentHTML('afterend', '<link type="text/css" rel="stylesheet" href="proto.css">');
+		results.innerHTML= doc.querySelector(table)   //âûâîäèì ïðîòîêîë
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
-		for (lnk of [].filter.call(document.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
+		for (lnk of [].filter.call(doc.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
 			if (lnk.href.toLowerCase().endsWith('jpg')) {
 				lnk.addEventListener("click", displayTeamDetails)
 			}
@@ -40,9 +42,9 @@ window.addEventListener("load", (event) => {
 			}
 
 		// convert country name to flag SVG-image
-		for (const cell of document.querySelectorAll('td')) {
+		for (const cell of doc.querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
-				let img = document.createElement("img");
+				let img = doc.createElement("img");
 				img.setAttribute("src", `../flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
 				img.setAttribute("alt", `${cell.innerText}`)
 				img.style.width = "36px";

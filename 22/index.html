@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <base href="https://zeroturtle.github.io/22/">
-    <base href="{$BASE_URL}">
+    <base href="${$BASE_URL}">
     <title>${COMPETITION_NAME}</title>
   </head>
 
@@ -16,7 +16,7 @@
   <div class="container">
 
     <div class="sticky-top" style="background-image: url(Title.jpg);background-size: contain;">
-      <H1 style="font-size: 52px;color: #ff9000;line-height: 52px;text-align: center;white-space: nowrap;">${COMPETITION_NAME}</H1>
+      <H1 style="font-size: 52px;color: #fd7e14;line-height: 52px;text-align: center;white-space: nowrap;">${COMPETITION_NAME}</H1>
       <h2 style="font-size: 40px;color: #ffffff;line-height: 40px;text-align: center;white-space: nowrap;">${DESCRIPTION}</h2>
     </div>
 
@@ -49,6 +49,7 @@
 
     <blockquote class="blockquote">
       <p>Это шаблон страницы для результатов. Нужно заменить переменные ${...} нужными значениями.</p>
+      <p>ВАЖНО! Обязательно установить в head значение ${BASE_URL}</p>
     </blockquote>
 
 <hr>
