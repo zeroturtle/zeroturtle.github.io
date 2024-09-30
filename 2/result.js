@@ -1,5 +1,4 @@
-﻿//new URL(baseURL+this+'.html')
-const baseURL = window.location.href;
+﻿
 // çàãðóæàåì ïðîòîêîë
 window.addEventListener("load", (event) => {
 	fetch(new URL(baseURL+'proto.html'))
