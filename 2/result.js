@@ -5,7 +5,7 @@ window.addEventListener("load", (event) => {
 	.then((html) => {
 		var doc = new DOMParser().parseFromString(html, "text/html")
 		var resultTable = doc.querySelectorAll('table')
-		var Rank = 1;
+		var Rank = 0;
 		resultTable[Rank].setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(resultTable[Rank].getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  

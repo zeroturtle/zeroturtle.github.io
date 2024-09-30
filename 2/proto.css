@@ -14,7 +14,7 @@ td {
 tr:nth-child(1) td {
   display: none;
 }
-tr:nth-child(-n+3) td {
+tr:nth-child(-n+4) td {
 /*
 Bootstrap theme colors
 --bs-primary: #0d6efd;
@@ -47,10 +47,10 @@ blue:   #0d6efd;
 tr:nth-of-type(-n+8) { 
   font-weight: bold; 
 }
-tr:nth-child(n+3) td { 
+tr:nth-child(n+4) td { 
   border-bottom-color:#C0C0C0; border-bottom-style: solid; border-bottom-width: 1px;
 }
-tr:nth-child(n+3) td:nth-child(3) { /* FIO column */
+tr:nth-child(n+4) td:nth-child(3) { /* FIO column */
   white-space: nowrap !important;
   text-align: Left; vertical-align: Middle;
 }
