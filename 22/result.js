@@ -4,36 +4,11 @@ window.addEventListener("load", (event) => {
 	fetch('proto.html')
 	.then(response => response.text())
 	.then((html) => {
-/*
-		const container = document.createElement('div')
-		document.getElementById('optimus').insertAdjacentElement("beforebegin", container)
-
-		var dialog = document.createElement("dialog")
-		const close = document.createElement('div')
-		close.addEventListener("click", closedialog)
-		close.innerHTML = "X"
-		dialog.appendChild(close)
-		const iframe = document.createElement('iframe')
-		iframe.src="about:blank"
-		iframe.style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"
-		iframe.onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));'
-		const popup = document.createElement('div')
-		popup.id = "popup-content";
-		popup.appendChild(iframe)
-		dialog.appendChild(popup)
-		container.before(dialog)
-		iframe.addEventListener('load', (e) => {
-			let a = document.querySelector('dialog')
-			a.style.height = doc.documentElement.outerHTML.scrollHeight+45+"px";
-			a.style.width = doc.documentElement.outerHTML.scrollWidth+45+"px";
-			console.log(e);
-		});                                                                                  
-*/
 		var doc = new DOMParser().parseFromString(html, "text/html")
-		results.append(doc.querySelector('table'))
-		results.insertAdjacentHTML('afterend', '<link type="text/css" rel="stylesheet" href="proto.css">');
+		var resultTable = doc.querySelector('table')
+		resultTable.setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
-		for (lnk of [].filter.call(doc.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
+		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
 			if (lnk.href.toLowerCase().endsWith('jpg')) {
 				lnk.addEventListener("click", displayTeamDetails)
 			}
@@ -42,7 +17,7 @@ window.addEventListener("load", (event) => {
 			}
 
 		// convert country name to flag SVG-image
-		for (const cell of doc.querySelectorAll('td')) {
+		for (const cell of resultTable.querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
 				let img = doc.createElement("img");
 				img.setAttribute("src", `../flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
@@ -52,6 +27,8 @@ window.addEventListener("load", (event) => {
 				cell.append(img);
 			}
 		}
+		results.append(resultTable)
+		results.insertAdjacentHTML('beforebegin', '<link type="text/css" rel="stylesheet" href="proto.css">');
 	})
 })
 
