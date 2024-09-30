@@ -4,10 +4,11 @@ window.addEventListener("load", (event) => {
 	.then(response => response.text())
 	.then((html) => {
 		var doc = new DOMParser().parseFromString(html, "text/html")
-		var resultTable = doc.querySelector('table')
-		resultTable.setAttribute('id','resultTable')
+		var resultTable = doc.querySelectorAll('table')
+		var Rank = 1;
+		resultTable[Rank].setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
-		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
+		for (lnk of [].filter.call(resultTable[Rank].getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
 			if (lnk.href.toLowerCase().endsWith('jpg')) {
 				lnk.addEventListener("click", displayTeamDetails)
 			}
@@ -16,7 +17,7 @@ window.addEventListener("load", (event) => {
 			}
 
 		// convert country name to flag SVG-image
-		for (const cell of resultTable.querySelectorAll('td')) {
+		for (const cell of resultTable[Rank].querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
 				let img = doc.createElement("img");
 				img.setAttribute("src", `../flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
@@ -26,7 +27,7 @@ window.addEventListener("load", (event) => {
 				cell.append(img);
 			}
 		}
-		results.append(resultTable)
+		results.append(resultTable[Rank])
 		results.insertAdjacentHTML('beforebegin', '<link type="text/css" rel="stylesheet" href='+`${baseURL}proto.css>`);
 	})
 })
