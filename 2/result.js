@@ -28,7 +28,7 @@ window.addEventListener("load", (event) => {
 			}
 		}
 		results.append(resultTable)
-		results.insertAdjacentHTML('beforebegin', '<link type="text/css" rel="stylesheet" href=${baseURL}+"proto.css">');
+		results.insertAdjacentHTML('beforebegin', '<link type="text/css" rel="stylesheet" href=baseURL+"proto.css">');
 	})
 })
 
