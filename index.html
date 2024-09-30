@@ -91,7 +91,7 @@
     <div class="table-responsive">
       <table id="EventsList" class="table table-striped table-hover text-uppercase w-100">
         <tbody>
-          <tr id="1" style="cursor: pointer;">
+          <tr id="1">
             <td class="w-auto align-top"><img class="img-fluid" src="1/Logo1.jpg" alt="Logo1" style="max-height: 70px; max-width: 70px;"></td>
             <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="1/Logo2.jpg" alt="Logo2" style="max-height: 70px; max-width: 70px;"></td>
             <td class="w-75">
@@ -102,19 +102,19 @@
               <span>аэродром Хрцинно, Насельск, Польща</span>
             </td>
           </tr>
-          <tr id="22" style="cursor: pointer;">
+          <tr id="22">
             <td class="w-auto align-top"><img class="img-fluid" src="22/Logo1.jpg" alt="Logo1" style="max-height: 70px; max-width: 70px;"></td>
             <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="22/Logo2.jpg" alt="Logo2" style="max-height: 70px; max-width: 70px;"></td>
             <td class="w-75">
-              <span class="fw-bold">Главные змагання 2021 року</span>
+              <span class="fw-bold">SM WS Performance</span>
               <br>
-              <span>2021</span>
+              <span>16 Jul 2022 - 17 Jul 2022</span>
               <br>
-              <span>Днепропетровск</span>
+              <span>Vårgårda FKCG</span>
             </td>
           </tr>
           <!-- Competition Template -->
-          <tr id="${Event_ID}" style="cursor: pointer;">
+          <tr id="${Event_ID}">
             <td class="w-auto align-top"><img class="img-fluid" src="33/Logo1.jpg" alt="Logo1" style="max-height: 70px; max-width: 70px;"></td>
             <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="33/Logo2.jpg" alt="Logo2" style="max-height: 70px; max-width: 70px;"></td>
             <td class="w-75">
@@ -140,6 +140,7 @@
         rows[i].onclick = function(){ return function(){
                window.open(new URL(this.getAttribute('id')+'/index.html', window.location.href));
         };}(rows[i]);
+        rows[i].style.cursor='pointer'; //покажем кликабельность
     }
   }
   window.addEventListener("load", addRowHandlers);
