@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" data-critters-container>
+<html lang="en">
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="icon" type="image/x-icon" href="favicon.png">
-    <title>${COMPETITION_NAME}</title>
+    <title>Example page</title>
   </head>
 
 <body>
+  <h1>Example page</h1>
+  <h3>It shows how to embed results page into any page.</h3>
 
-<hr>
+    <blockquote class="blockquote">
+      <p>Это пример встраивания результатов в страницу.</p>
+      <p>Устанавливается значение baseURL и путь для скрипта</p>
+    </blockquote>
+
   <dialog>
     <div onclick="closedialog();" style="cursor: pointer;">X</div>
     <div id="popup-content">
       <iframe src="about:blank" onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));' style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe>
     </div>
   </dialog>
+  <script>const baseURL = 'https://zeroturtle.github.io/2/';</script> 
   <div id="results" class="table-responsive p-0 my-3 h5"> Таблица результатов: <script src="https://zeroturtle.github.io/2/result.js"></script></div> 
 
 </body>
