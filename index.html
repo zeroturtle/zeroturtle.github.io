@@ -52,14 +52,7 @@
         <a class="nav-link" id="WS" href="#">
           <img src="24_icon_WF.png" width="30" height="24" class="d-inline-block align-text-top">Wingsuit Flying Perfomance
         </a>
-<!--
-          <a class="nav-link disabled" aria-disabled="true" id="FD" href="#">Speed Formation</a>
-          <a class="nav-link disabled" aria-disabled="true" id="SF" href="#">Indoor Solo Freestyle</a>
-          <a class="nav-link disabled" aria-disabled="true" id="SS" href="#">Indoor Solo Speed</a>
-          <a class="nav-link disabled" aria-disabled="true" id="DY" href="#">Dynamic Flying</a>
-          <a class="nav-link disabled" aria-disabled="true" id="SP" href="#">Speed Skydiving</a>
-          <a class="nav-link disabled" aria-disabled="true" id="CP" href="#">Canopy Piloting</a>
--->
+        <a class="nav-link" id="SF" href="#">Speed Formation</a>
       </div>
     </div>
   </div>
@@ -82,12 +75,6 @@
       </li>
     </ul>
 
-<!--
-	TYPE = getCookie('TYPE');
-	YEAR = getCookie('YEAR');
-	SELECT Name, Place, TOSTRING(DateFrom, 'dd-MON-YYYY')+' - '+ TOSTRING(DateTo, 'dd-MON-YYYY'), Type_ID FROM Events 
-	WHERE Visible=true AND (EXTRACT (YEAR FROM DateFrom)) = :YEAR OR Type_ID = :TYPE ORDER BY DateFrom desc 
--->
     <div class="table-responsive">
       <table id="EventsList" class="table table-striped table-hover text-uppercase w-100">
         <tbody>
@@ -170,87 +157,12 @@
       <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
     </div>
 
-    <legend>Select a Licence pack:</legend>
-<ul id="LicTab" class="nav nav-tabs text-uppercase" role="tablist">
-  <li class="nav-item" role="presentation">
-    <a class="nav-link text-uppercase active" data-bs-toggle="tab" href="#outdoor" aria-selected="true">Outdoor</a>
-  </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link disabled" data-bs-toggle="tab" href="#indoor" aria-selected="false">Indoor</a>
-  </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link disabled" data-bs-toggle="tab" href="#generic" aria-selected="false">Generic</a>
-  </li>
-  <li class="nav-item" role="presentation">
-    <a class="nav-link disabled" data-bs-toggle="tab" href="#custom" aria-selected="false">Custom</a>
-  </li>
-</ul>
 
 <div class="tab-content" id="myTabContent">
   <!-- Outdoor pack -->
-  <div id="outdoor" class="tab-pane fade show active" tabindex="0">
-<legend>Predefined disciplines:</legend>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="FS" checked disabled>
-  <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="AE" checked disabled>
-  <label class="form-check-label" for="inlineCheckbox2">Artistic Events</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="SFS" checked disabled>
-  <label class="form-check-label" for="inlineCheckbox3">Speed Formation</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="CF" checked disabled>
-  <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
-</div>
-  </div>
-
-  <!-- Indoor pack -->
-  <div id="indoor" class="tab-pane fade" tabindex="0">
-<legend>Predefined disciplines:</legend>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="IFS" checked disabled>
-  <label class="form-check-label" for="inlineCheckbox1">Indoor Formation Skydiving</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="ISF" checked disabled>
-  <label class="form-check-label" for="inlineCheckbox5">Indoor Solo Freestyle</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="ISS" checked disabled>
-  <label class="form-check-label" for="inlineCheckbox6">Indoor Solo Speed</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="DY" checked disabled>
-  <label class="form-check-label" for="inlineCheckbox7">Dynamic Flying</label>
-</div>
-  </div>
-
-  <!-- Generic pack -->
-  <div id="generic" class="tab-pane fade" tabindex="0">
-<legend>Predefined disciplines:</legend>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="WSP" checked disabled>
-  <label class="form-check-label" for="inlineCheckbox8">Wingsuit Flying Perfomance</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="CP" disabled>
-  <label class="form-check-label" for="inlineCheckbox9">Canopy Piloting</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="SP" disabled>
-  <label class="form-check-label" for="inlineCheckbox10">Speed Skydiving</label>
-</div>
-  </div>
-
-  <!-- Custom pack -->
-  <div id="custom" class="tab-pane fade" tabindex="0">
 <legend>Choose disciplines you need:</legend>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="FS">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="FS" checked>
   <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
 </div>
 <div class="form-check form-check-inline">
@@ -266,30 +178,9 @@
   <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
 </div>
 <div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="ISF" disabled>
-  <label class="form-check-label" for="inlineCheckbox5">Indoor Solo Freestyle</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="ISS" disabled>
-  <label class="form-check-label" for="inlineCheckbox6">Indoor Solo Speed</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="DY" disabled>
-  <label class="form-check-label" for="inlineCheckbox7">Dynamic Flying</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="WSP" disabled>
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="WSP">
   <label class="form-check-label" for="inlineCheckbox8">Wingsuit Flying Perfomance</label>
 </div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="CP" disabled>
-  <label class="form-check-label" for="inlineCheckbox9">Canopy Piloting</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="SP" disabled>
-  <label class="form-check-label" for="inlineCheckbox10">Speed Skydiving</label>
-</div>
-  </div>
 </div>
 
     <div class="my-3 text-center">
