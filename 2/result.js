@@ -1,6 +1,4 @@
-﻿const baseURL = 'https://zeroturtle.github.io/2/';
-
-// çàãðóæàåì ïðîòîêîë
+﻿// çàãðóæàåì ïðîòîêîë
 window.addEventListener("load", (event) => {
 	fetch(new URL(baseURL+'proto.html'))
 	.then(response => response.text())
