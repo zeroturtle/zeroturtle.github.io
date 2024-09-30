@@ -30,7 +30,7 @@ window.addEventListener("load", (event) => {
 		});                                                                                  
 */
 		var doc = new DOMParser().parseFromString(html, "text/html")
-		doc.insertAdjacentHTML('afterend', '<link type="text/css" rel="stylesheet" href="proto.css">');
+		doc.querySelector(table).insertAdjacentHTML('afterend', '<link type="text/css" rel="stylesheet" href="proto.css">');
 		results.innerHTML= doc.querySelector(table)   //âûâîäèì ïðîòîêîë
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(doc.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
