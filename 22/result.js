@@ -30,8 +30,8 @@ window.addEventListener("load", (event) => {
 		});                                                                                  
 */
 		var doc = new DOMParser().parseFromString(html, "text/html")
-		doc.querySelector('table').insertAdjacentHTML('afterend', '<link type="text/css" rel="stylesheet" href="proto.css">');
-		results.innerHTML= doc.querySelector('table')   //âûâîäèì ïðîòîêîë
+		results.append(doc.querySelector('table'))
+		results.insertAdjacentHTML('afterend', '<link type="text/css" rel="stylesheet" href="proto.css">');
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(doc.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
 			if (lnk.href.toLowerCase().endsWith('jpg')) {
