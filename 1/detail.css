@@ -8,7 +8,7 @@ tr:nth-child(1) {
 	border-width: 0px; 
 }
 tr:nth-child(2) { 
-	font-weight: bold; color: blue;
+	font-weight: bold; color: white; background-color:grey;
 }
 tr td:first-child { 
 	text-align: left; font-weight: bold;
