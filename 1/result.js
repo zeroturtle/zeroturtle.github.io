@@ -43,7 +43,6 @@ function displayTeamDetails() {
 	img.style.maxWidth = '100%'
 	doc.body.appendChild(img)
 	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
-	doc.body.insertAdjacentHTML('beforeend','Team Members:')
 
 	frame.srcdoc = doc.documentElement.outerHTML
 	modal.showModal()
@@ -58,7 +57,8 @@ function displayRoundDetails() {
 		.then((html) => {
 			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html")
-			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="detail.css">');
+			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="detail.css">')
+			doc.body.insertAdjacentHTML('afterbegin', '<h1>Round Details</h1>')
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 			frame.srcdoc = doc.documentElement.outerHTML
