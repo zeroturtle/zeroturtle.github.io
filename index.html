@@ -169,7 +169,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="licenceModal" tabindex="-1" aria-labelledby="licenceModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="licenceModalLabel">Subscription constructor</h1>
@@ -180,8 +180,16 @@
 <form>
   <fieldset>
     <div class="mb-3">
-      <label for="exampleInputName" class="form-label">Name</label>
-      <input type="text" class="form-control" id="exampleInputName" required placeholder="Имя/Название организации владельца лицензии" >
+      <label for="exampleFirstName" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="exampleFirstName" required placeholder="Имя" >
+    </div>
+    <div class="mb-3">
+      <label for="exampleLastName" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="exampleLastName" required placeholder="Фамилия" >
+    </div>
+    <div class="mb-3">
+      <label for="exampleCompany" class="form-label">Company</label>
+      <input type="text" class="form-control" id="exampleCompany" required placeholder="Название организации владельца лицензии" >
     </div>
     <div class="mb-3">
       <label for="exampleFormControlInput1" class="form-label">Email address</label>
