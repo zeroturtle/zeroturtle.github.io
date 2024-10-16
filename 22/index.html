@@ -15,10 +15,8 @@
 <body id="Body">
   <div class="container">
 
-  <div class="sticky-top" style="background-image: url(Title.jpg);background-size: contain;"></div>
-
   <!-- Event detail -->
-  <div class="container-fluid h-100">
+  <div class="container-fluid h-100 sticky-top" style="background-image: url(Title.jpg);background-size: contain;">
     <div class="row h-100 align-items-center">
       <div class="col-1 col-sm-2 col-md-3 d-none d-sm-inline">
         <img src="Logo1.jpg" class="img-fluid p-1 d-none d-sm-inline" onerror="this.onerror=null;this.src='../images/OPTIMUS3.svg'" style="max-height:100px; max-width: 100px">
@@ -33,7 +31,7 @@
             <div id="DESCRIPTION">${DESCRIPTION}</div>
           </div>
           <div class="col-12 h6">
-            <div id="DATE_FROM">${DATE_FROM}</div> - <div id="DATE_TO">${DATE_TO}</div>
+            <div id="DATE_FROM" class="d-none d-md-inline">${DATE_FROM}</div> - <div id="DATE_TO" class="d-none d-md-inline">${DATE_TO}</div>
           </div>
           <div class="col-12 h6">
              <div id="PLACE">${PLACE}</div>
