@@ -22,9 +22,6 @@ tr:nth-child(-n+4) {
 tr:nth-child(6) { 
 	font-weight: bold; padding: 2px; color: white; background-color:grey;
 }
-tr:nth-last-child(-n+2) {
-	border: 0px;
-}
 td {
 	text-align: center; min-width: 13px;
 }
@@ -35,3 +32,12 @@ tr:nth-last-child(3) td {
 .totalrow td {
 	font-weight: bold; font-size: 1.2em; color: #0d6efd;
 }
+.totalrow {
+	border-bottom: 1px solid black;
+}
+/*крайние две строки без границ*/
+/*
+tr:nth-last-child(-n+2) {
+	border: 0px;
+}
+*/
