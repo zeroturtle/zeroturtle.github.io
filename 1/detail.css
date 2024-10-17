@@ -11,7 +11,7 @@ tr:nth-child(2) {
 	font-weight: bold; 
 }
 tr:nth-child(2) td { 
-	font-size: 2em; color: white; background-color:#C0C0C0;
+	font-size: 2em; color: white; background-color:#0d6efd;
 }
 tr td:first-child { 
 	text-align: left; font-weight: bold;
@@ -33,5 +33,5 @@ tr:nth-last-child(3) td {
 	font-weight: bold; font-size: 1.2em; color: #6610f2;
 }*/
 .totalrow td {
-	font-weight: bold; font-size: 1.2em; color: #C0C0C0;
+	font-weight: bold; font-size: 1.2em; color: #0d6efd;
 }
