@@ -16,8 +16,11 @@ tr:nth-child(2) td {
 tr td:first-child { 
 	text-align: left; font-weight: bold;
 }
-tr:nth-child(-n+4) {
+.noborder { 
 	border: 0px;
+}
+.bordered {
+	border-bottom: 1px solid black;
 }
 tr:nth-child(6) { 
 	font-weight: bold; padding: 2px; color: white; background-color:grey;
@@ -25,19 +28,7 @@ tr:nth-child(6) {
 td {
 	text-align: center; min-width: 13px;
 }
-/* треться строка снизу 
-tr:nth-last-child(3) td {
-	font-weight: bold; font-size: 1.2em; color: #6610f2;
-}*/
 .totalrow td {
-	font-weight: bold; font-size: 1.2em; color: #0d6efd;
+	font-weight: bold; font-size: 1.2em; color: #0d6efd; border-bottom: 1px solid black;
 }
-.totalrow {
-	border-bottom: 1px solid black;
-}
-/*крайние две строки без границ*/
-/*
-tr:nth-last-child(-n+2) {
-	border: 0px;
-}
-*/
+
