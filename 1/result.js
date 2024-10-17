@@ -1,14 +1,14 @@
-﻿// çàãðóæàåì ïðîòîêîë
+﻿
+// çàãðóæàåì ïðîòîêîë
 window.addEventListener("load", (event) => {
 	fetch('proto.html')
 	.then(response => response.text())
 	.then((html) => {
 		var doc = new DOMParser().parseFromString(html, "text/html")
-		var resultTable = doc.querySelectorAll('table')
-		var Rank = 0; // use first table, redefine in by cookie()
-		resultTable[Rank].setAttribute('id','resultTable')
+		var resultTable = doc.querySelector('table')
+		resultTable.setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
-		for (lnk of [].filter.call(resultTable[Rank].getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
+		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
 			if (lnk.href.toLowerCase().endsWith('jpg')) {
 				lnk.addEventListener("click", displayTeamDetails)
 			}
@@ -17,7 +17,7 @@ window.addEventListener("load", (event) => {
 			}
 
 		// convert country name to flag SVG-image
-		for (const cell of resultTable[Rank].querySelectorAll('td')) {
+		for (const cell of resultTable.querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
 				let img = doc.createElement("img");
 				img.setAttribute("src", `../flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
@@ -27,7 +27,7 @@ window.addEventListener("load", (event) => {
 				cell.append(img);
 			}
 		}
-		results.append(resultTable[Rank])
+		results.append(resultTable)
 		results.insertAdjacentHTML('beforebegin', '<link type="text/css" rel="stylesheet" href="proto.css">');
 	})
 })
@@ -43,6 +43,7 @@ function displayTeamDetails() {
 	img.style.maxWidth = '100%'
 	doc.body.appendChild(img)
 	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
+	doc.body.insertAdjacentHTML('beforeend','Team Members:')
 
 	frame.srcdoc = doc.documentElement.outerHTML
 	modal.showModal()
@@ -52,13 +53,13 @@ function displayTeamDetails() {
 function displayRoundDetails() {
 	event.preventDefault()
 	// çàãðóæàåì ñóäåéñêóþ çàïèñêó	
-	fetch(this+'.html')
+	fetch( new URL(this+'.html') )
 		.then(response => response.text())
 		.then((html) => {
 			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html")
 			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="detail.css">')
-			doc.body.insertAdjacentHTML('afterbegin', '<h1>Round Details</h1>')
+			doc.head.insertAdjacentHTML('beforeend', '<script src="detail.js"></script>')
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 			frame.srcdoc = doc.documentElement.outerHTML
