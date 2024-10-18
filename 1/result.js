@@ -61,7 +61,7 @@ function displayTeamDetails() {
 			img.setAttribute("alt", '')
 			img.style.maxHeight = '100%'
 			img.style.maxWidth = '100%'
-			rows[4].cells[0].appendChild(img)			// tr4 - place
+			rows[3].cells[0].appendChild(img)			// tr4 - place
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
