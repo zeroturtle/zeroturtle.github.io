@@ -50,7 +50,7 @@ function displayTeamDetails() {
 	event.preventDefault()
 	var doc = document.implementation.createHTMLDocument('Team Photo')
 	// найти картинку по записи в 
-	fetch( new URL('Photo/team_'+this+'.html') )
+	fetch( new URL('Photo/'+this) )
 		.then(response => response.text())
 		.then((html) => {
 			// Convert the HTML string into a document object
