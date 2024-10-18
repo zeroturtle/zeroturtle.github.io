@@ -8,7 +8,7 @@ window.addEventListener("load", (event) => {
 		var resultTable = doc.querySelector('table')
 		resultTable.setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
-		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').pop())[0] !=0)) { 
+		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0)) { 
 			let f = lnk.href.toLowerCase()
 			if (f.endsWith('_team')) {
 				lnk.addEventListener("click", displayTeamDetails)
