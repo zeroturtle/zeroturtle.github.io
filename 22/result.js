@@ -9,9 +9,9 @@ window.addEventListener("load", (event) => {
 		resultTable.setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0)) { 
-			//lnk.parentElement.cells[1]
 			let extension = lnk.href.toLowerCase()
-			if (extension.endsWith('jpg')) {
+			//lnk.parentElement.cells[1]
+			if (extension.startsWith('team_')) {
 				//если ссылка в третьей колонке - это ссылка на фото команды
 				lnk.addEventListener("click", displayTeamDetails)
 			}
