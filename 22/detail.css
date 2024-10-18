@@ -1,5 +1,5 @@
 table, th, td {
-	border-collapse: collapse; padding: 2px; font-family: Arial; font-size: 13px;
+	border-collapse: collapse; font-family: Arial; font-size: 13px;
 }
 tr {
 	border-bottom: 1px solid black;
@@ -8,17 +8,27 @@ tr:nth-child(1) {
 	border-width: 0px; 
 }
 tr:nth-child(2) { 
-	font-weight: bold; color: blue;
+	font-weight: bold; 
+}
+tr:nth-child(2) td { 
+	font-size: 2em; color: white; background-color:#0d6efd;
 }
 tr td:first-child { 
 	text-align: left; font-weight: bold;
 }
-tr:nth-last-child(-n+2) {
+.noborder { 
 	border: 0px;
 }
-tr:nth-last-child(3) {
-	font-weight: bold; 
+.bordered {
+	border-bottom: 1px solid black;
+}
+tr:nth-child(6) { 
+	font-weight: bold; padding: 2px; color: white; background-color:grey;
 }
 td {
 	text-align: center; min-width: 13px;
 }
+.totalrow td {
+	font-weight: bold; font-size: 1.2em; color: #0d6efd; border-bottom: 1px solid black;
+}
+
