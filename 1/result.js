@@ -53,11 +53,11 @@ function displayTeamDetails() {
 		.then((html) => {
 			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html")
-			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="team.css">')
+			//doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="team.css">')
 			const table = doc.querySelector('table')
 			const rows = table.querySelectorAll("tr")
 			let img = document.createElement("img");
-			img.setAttribute("src", 'Photo/'+rows[3].cells[0].innerHTML) // tr3 = filename
+			img.setAttribute("src", 'Photo/'+rows[2].cells[0].innerHTML) // tr3 = filename
 			img.setAttribute("alt", '')
 			img.style.maxHeight = '100%'
 			img.style.maxWidth = '100%'
