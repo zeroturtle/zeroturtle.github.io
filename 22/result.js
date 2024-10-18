@@ -8,18 +8,15 @@ window.addEventListener("load", (event) => {
 		var resultTable = doc.querySelector('table')
 		resultTable.setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
-		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0)) { 
+		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').pop())[0] !=0)) { 
 			let f = lnk.href.toLowerCase()
-			alert(f)
 			if (f.endsWith('_team')) {
-				alert('team '+f)
 				lnk.addEventListener("click", displayTeamDetails)
 			}
 			else if (f.endsWith('mp4')) {
 				lnk.addEventListener("click", displayRoundVideo)
 			}
 			else {  // this is a score details
-				alert('detail '+f)
 				lnk.addEventListener("click", displayRoundDetails)
 			}
 		}
@@ -51,7 +48,7 @@ function displayTeamDetails() {
 	event.preventDefault()
 	var doc = document.implementation.createHTMLDocument('Team Photo')
 	// найти картинку по записи в 
-	fetch( new URL('Photo/'+this+'.html') )
+	fetch( new URL(this+'.html') )
 		.then(response => response.text())
 		.then((html) => {
 			// Convert the HTML string into a document object
