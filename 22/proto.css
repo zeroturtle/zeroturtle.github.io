@@ -14,7 +14,7 @@ td {
 tr:nth-child(1) td {
   display: none;
 }
-tr:nth-child(-n+4) td {
+tr:nth-child(-n+3) td {
 /*
 Bootstrap theme colors
 --bs-primary: #0d6efd;
