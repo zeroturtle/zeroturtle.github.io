@@ -11,7 +11,7 @@ window.addEventListener("load", (event) => {
 		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0)) { 
 			let f = lnk.href.toLowerCase()
 			alert(f)
-			if (f.endsWith('team_')) {
+			if (f.endsWith('_team')) {
 				alert('team '+f)
 				lnk.addEventListener("click", displayTeamDetails)
 			}
