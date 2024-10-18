@@ -98,11 +98,20 @@
             <td class="w-auto align-top"><img class="img-fluid" src="1/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="1/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-75">
-              <span class="fw-bold">${Name}</span>
-              <br>
-              <span>${DateFrom} - ${DateTo}</span>
-              <br>
-              <span>${Place}</span>
+              <div class="row">
+                <div class="col d-block">
+                  <span class="fw-bold"><a class="text-decoration-none" href="">${Name}</a></span>
+                  <br>
+                  <span>${DateFrom} - ${DateTo}</span>
+                  <br>
+                  <span>${Place}</span>
+                </div>
+                <div class="col d-none d-sm-block">
+                  <ul type="none">
+                    <li> <a class="text-decoration-none" href="">${Зачет}</a> </li>
+                  </ul>
+                </div>
+              </div>
             </td>
           </tr>
         </template>
@@ -116,7 +125,7 @@
             <td class="w-75">
               <div class="row">
                 <div class="col d-block">
-                  <span class="fw-bold">Чемпіонат України 2024</span>
+                  <span class="fw-bold"><a class="text-decoration-none" href="1/index.html">Чемпіонат України 2024</a></span>
                   <br>
                   <span>10 авг 2020 - 13 авг 2020</span>
                   <br>
@@ -125,8 +134,8 @@
 		<!-- если выводить зачеты - надо переделывать tr.onclick !-->
                 <div class="col d-none d-sm-block">
                   <ul type="none">
-                    <li> <a class="nav-link" href="2020">FS-4way Open</a> </li>
-                    <li> <a class="nav-link" href="2020">FS-2way </a> </li>
+                    <li> <a class="text-decoration-none" href="2020">FS-4way Open</a> </li>
+                    <li> <a class="text-decoration-none" href="2020">FS-2way </a> </li>
                   </ul>
                 </div>
               </div>
@@ -136,11 +145,20 @@
             <td class="w-auto align-top"><img class="img-fluid" src="22/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="22/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-75">
-              <span class="fw-bold">SM WS Performance</span>
-              <br>
-              <span>16 Jul 2022 - 17 Jul 2022</span>
-              <br>
-              <span>Vårgårda FKCG</span>
+              <div class="row">
+                <div class="col d-block">
+                  <span class="fw-bold"><a class="text-decoration-none" href="22/index.html">SM WS Performance</a></span>
+                  <br>
+                  <span>16 Jul 2022 - 17 Jul 2022</span>
+                  <br>
+                  <span>Vårgårda FKCG</span>
+                </div>
+                <div class="col d-none d-sm-block">
+                  <ul type="none">
+                    <li> <a class="text-decoration-none" href=""></a> </li>
+                  </ul>
+                </div>
+              </div>
             </td>
           </tr>
           <tr id="3">
@@ -149,19 +167,18 @@
             <td class="w-75">
               <div class="row">
                 <div class="col d-block">
-                  <span class="fw-bold">26th FAI World Formation Skydiving Championships 2024</span>
+                  <span class="fw-bold"><a class="text-decoration-none" href="3/index.html">26th FAI World Formation Skydiving Championships 2024</a></span>
                   <br>
                   <span>04 Oct 2024 - 12 Oct 2024 </span>
                   <br>
                   <span>Beaufort, NC, USA </span>
                 </div>
-		<!-- если выводить зачеты - надо переделывать tr.onclick !-->
                 <div class="col d-none d-sm-block">
                   <ul type="none">
-                    <li> <a class="nav-link" href="2020">4-Way Formation Skydiving</a> </li>
-                    <li> <a class="nav-link" href="2020">4-Way Formation Skydiving Female</a> </li>
-                    <li> <a class="nav-link" href="2020">4-Way Vertical Formation Skydiving</a> </li>
-                    <li> <a class="nav-link" href="2020">8-Way Formation Skydiving</a> </li>
+                    <li> <a class="text-decoration-none" href="2020">4-Way Formation Skydiving</a> </li>
+                    <li> <a class="text-decoration-none" href="2020">4-Way Formation Skydiving Female</a> </li>
+                    <li> <a class="text-decoration-none" href="2020">4-Way Vertical Formation Skydiving</a> </li>
+                    <li> <a class="text-decoration-none" href="2020">8-Way Formation Skydiving</a> </li>
                   </ul>
                 </div>
               </div>
@@ -174,11 +191,21 @@
             <td class="w-auto align-top"><img class="img-fluid" src="33/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="33/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-75">
-              <span class="fw-bold">${Event_Name}</span>
-              <br>
-              <span>${Event_DateFrom} - ${Event_DateTo}</span>
-              <br>
-              <span>${Event_Place}</span>
+
+              <div class="row">
+                <div class="col d-block">
+                  <span class="fw-bold"><a class="text-decoration-none" href="2/index.html">${Event_Name}</a></span>
+                  <br>
+                  <span>${Event_DateFrom} - ${Event_DateTo}</span>
+                  <br>
+                  <span>${Event_Place}</span>
+                </div>
+                <div class="col d-none d-sm-block">
+                  <ul type="none">
+                    <li> <a class="text-decoration-none" href=""></a> </li>
+                  </ul>
+                </div>
+              </div>
             </td>
           </tr>
           <!-- Template end -->
@@ -190,6 +217,7 @@
   <!-- events list -->
 
 <script>
+/*
   function addRowHandlers() {
     var rows = document.getElementById("EventsList").rows;
     for (i = 0; i < rows.length; i++) {
@@ -200,6 +228,7 @@
     }
   }
   window.addEventListener("load", addRowHandlers);
+*/
 </script>
 
 
