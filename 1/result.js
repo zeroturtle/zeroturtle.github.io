@@ -57,7 +57,6 @@ function displayTeamDetails() {
 			const table = doc.querySelector('table')
 			const rows = table.querySelectorAll("tr")
 			let img = document.createElement("img");
-			modal.style.width = '80vw'
 			img.setAttribute("src", 'Photo/'+rows[2].cells[0].innerHTML) // tr3 = filename
 			img.setAttribute("alt", '')
 			img.style.maxHeight = '100%'
