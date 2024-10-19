@@ -1,28 +1,23 @@
-﻿
-// çàãðóæàåì ïðîòîêîë
+﻿// çàãðóæàåì ïðîòîêîë
 window.addEventListener("load", (event) => {
 	fetch('proto.html')
 	.then(response => response.text())
 	.then((html) => {
 		var doc = new DOMParser().parseFromString(html, "text/html")
-		var resultTable = doc.querySelector('table')
-		resultTable.setAttribute('id','resultTable')
+		var resultTable = doc.querySelectorAll('table')
+		var Rank = 0; // use first table, redefine in by cookie()
+		resultTable[Rank].setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
-		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0)) { 
-			let f = lnk.href.toLowerCase()
-			if (f.endsWith('_team')) {
+		for (lnk of [].filter.call(resultTable[Rank].getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0))  
+			if (lnk.href.toLowerCase().endsWith('jpg')) {
 				lnk.addEventListener("click", displayTeamDetails)
 			}
-			else if (f.endsWith('mp4')) {
-				lnk.addEventListener("click", displayRoundVideo)
-			}
-			else {  // this is a score details
+			else { 
 				lnk.addEventListener("click", displayRoundDetails)
 			}
-		}
 
 		// convert country name to flag SVG-image
-		for (const cell of resultTable.querySelectorAll('td')) {
+		for (const cell of resultTable[Rank].querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
 				let img = doc.createElement("img");
 				img.setAttribute("src", `../flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
@@ -32,53 +27,38 @@ window.addEventListener("load", (event) => {
 				cell.append(img);
 			}
 		}
-		results.append(resultTable)
+		results.append(resultTable[Rank])
 		results.insertAdjacentHTML('beforebegin', '<link type="text/css" rel="stylesheet" href="proto.css">');
 	})
 })
-
-// video of perfomance
-function displayRoundVideo() {
-	// открыть видео в отдельном окне
-	event.preventDefault()
-}
 
 //Team Photo
 function displayTeamDetails() {
 	event.preventDefault()
 	var doc = document.implementation.createHTMLDocument('Team Photo')
-	// найти картинку по записи в 
-	fetch( new URL(this+'.html') )
-		.then(response => response.text())
-		.then((html) => {
-			// Convert the HTML string into a document object
-			var doc = new DOMParser().parseFromString(html, "text/html")
-			//doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="team.css">')
-			const table = doc.querySelector('table')
-			const rows = table.querySelectorAll("tr")
-			let img = document.createElement("img");
-			img.setAttribute("src", 'Photo/'+rows[2].cells[0].innerHTML) // tr3 = filename
-			img.setAttribute("alt", '')
-			img.style.maxHeight = '100%'
-			img.style.maxWidth = '100%'
-			rows[3].cells[0].appendChild(img)			// tr4 - place
-			frame.srcdoc = doc.documentElement.outerHTML
-			modal.showModal()
-		})
-		.catch(error => console.error('Error fetching file:', error))
+	let img = document.createElement("img");
+	img.setAttribute("src", 'Photo/'+(this.pathname.split('/').slice(-1))[0])
+	img.setAttribute("alt", (this.pathname.split('/').slice(-1))[0])
+	img.style.maxHeight = '100%'
+	img.style.maxWidth = '100%'
+	doc.body.appendChild(img)
+	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
+
+	frame.srcdoc = doc.documentElement.outerHTML
+	modal.style.width = '80vw'
+	modal.showModal()
 }
 
 // round detail
 function displayRoundDetails() {
 	event.preventDefault()
 	// çàãðóæàåì ñóäåéñêóþ çàïèñêó	
-	fetch( new URL(this+'.html') )
+	fetch(this+'.html')
 		.then(response => response.text())
 		.then((html) => {
 			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html")
 			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="detail.css">')
-			doc.head.insertAdjacentHTML('beforeend', '<script src="detail.js"></script>')
 //			doc.body.insertAdjacentHTML('afterbegin', '<h1>Round Details</h1>')
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
