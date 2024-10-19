@@ -94,7 +94,7 @@ const modal = document.querySelector('dialog')
 const frame = modal.querySelector('iframe')
 
 function closedialog() {
-//	frame.srcdoc = ""
+	frame.srcdoc = ""
 	modal.close()
 }
 function windowOnClick(event) {
