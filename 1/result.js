@@ -45,7 +45,6 @@ function displayTeamDetails() {
 	doc.body.insertAdjacentHTML('afterbegin',`<h2>${this.innerHTML}<h2>`) //team name
 
 	frame.srcdoc = doc.documentElement.outerHTML
-	modal.style.width = '80vw'
 	modal.showModal()
 }
 
