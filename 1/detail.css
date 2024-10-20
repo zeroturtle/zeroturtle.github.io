@@ -7,12 +7,11 @@ tr {
 tr:nth-child(1) { 
 	border-width: 0px; 
 }
-tr:nth-child(2) { 
-	font-weight: bold; 
-}
-tr:nth-child(2) td { 
-	font-size: 2em; color: white; background-color:#0d6efd;
-}
+
+/*tr:nth-child(2) { 	font-weight: bold; }
+tr:nth-child(2) td { 	font-size: 2em; color: white; background-color:#0d6efd;}*/
+
+/* первая колонка */
 tr td:first-child { 
 	text-align: left; font-weight: bold;
 }
@@ -22,7 +21,7 @@ tr td:first-child {
 .bordered {
 	border-bottom: 1px solid black;
 }
-tr:nth-child(6) { 
+tr:nth-child(4) { 
 	font-weight: bold; padding: 2px; color: white; background-color:grey;
 }
 td {
@@ -30,5 +29,11 @@ td {
 }
 .totalrow td {
 	font-weight: bold; font-size: 1.2em; color: #0d6efd; border-bottom: 1px solid black;
+}
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+tr:last-child td { 
+	text-align: center; font-weight: bold;
 }
 
