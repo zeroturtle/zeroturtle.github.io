@@ -15,7 +15,6 @@ tr td:first-child {
 .noborder { 
 	border: 0px;
 }
-/*.noborder td {	text-align: center; text-transform: uppercase;}*/
 .bordered {
 	border-bottom: 1px solid black;
 }
@@ -27,6 +26,9 @@ td {
 }
 .totalrow td {
 	font-weight: bold; font-size: 1.2em; color: #0d6efd; border-bottom: 1px solid black;
+}
+tr:nth-child(-n+3) td {
+	text-align: center; text-transform: uppercase;
 }
 /*нижн€€ строка SCORE FINAL*/
 tr:last-child td { 

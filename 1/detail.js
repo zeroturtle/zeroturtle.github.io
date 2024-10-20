@@ -5,6 +5,8 @@ window.addEventListener("load", (event) => {
 
 	var odd = false;
 	rows.forEach((row) => {
+		row.cells.length < 2 ? row.classList.add('noborder') : row.classList.add('bordered')
+/*
 		if (row.cells.length < 2) {
 		  row.classList.add('noborder') 
 		}
@@ -13,6 +15,7 @@ window.addEventListener("load", (event) => {
 		  odd = !odd;
 		  row.style.backgroundColor = odd ? #f2f2f2 : #ffffff;
 		}
+*/
 	});
 
 })
