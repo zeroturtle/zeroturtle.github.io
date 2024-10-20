@@ -15,7 +15,7 @@ tr:nth-child(1) td {
   display: none;
 }
 tr:nth-child(3) td {
-  text-wrap: nowrap;
+  white-space:nowrap;
 }
 tr:nth-child(-n+3) td {
 /*
