@@ -58,9 +58,10 @@ function displayTeamDetails() {
 			const rows = table.querySelectorAll("tr")
 			let img = document.createElement("img");
 			img.setAttribute("src", 'Photo/'+rows[2].cells[0].innerHTML) // tr3 = filename
-			img.setAttribute("alt", '')
-			img.style.maxHeight = '100%'
-			img.style.maxWidth = '100%'
+			img.setAttribute("alt", 'rows[2].cells[0].innerHTML')
+			rows[2].deleteCell(0);
+//			img.style.maxHeight = '100%'
+//			img.style.maxWidth = '100%'
 			rows[3].cells[0].appendChild(img)			// tr4 - place
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
@@ -79,7 +80,6 @@ function displayRoundDetails() {
 			var doc = new DOMParser().parseFromString(html, "text/html")
 			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="detail.css">')
 			doc.head.insertAdjacentHTML('beforeend', '<script src="detail.js"></script>')
-//			doc.body.insertAdjacentHTML('afterbegin', '<h1>Round Details</h1>')
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 			frame.srcdoc = doc.documentElement.outerHTML
@@ -93,13 +93,10 @@ const code2=['AU','AT','AZ','AL','DZ','AI','AO','AD','AQ','AG','AN','AR','AM','A
 const modal = document.querySelector('dialog')
 const frame = modal.querySelector('iframe')
 
-function closedialog() {
-	frame.srcdoc = ""
-	modal.close()
-}
 function windowOnClick(event) {
 	if (event.target === modal) {
-		closedialog()
+		//frame.srcdoc = ""
+		modal.close()
 	}
 }
 window.addEventListener("click", windowOnClick); 
