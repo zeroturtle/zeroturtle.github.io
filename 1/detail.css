@@ -1,36 +1,39 @@
 table, th, td {
-	border-collapse: collapse; font-family: Arial; font-size: 13px;
+	border: 0px; border-collapse: collapse; font-family: Arial; font-size: 13px;
 }
 tr {
 	border-bottom: 1px solid black;
 }
+td {
+	text-align: center; min-width: 13px;
+}
+/*техническа€ строка с указанием ширины столбцов*/
 tr:nth-child(1) { 
 	border-width: 0px; 
 }
-
+.even-class {
+	background-color: #e9e9e9;
+}
+.odd-class {
+	background-color: blue;
+	color: white;
+}
 /* перва€ колонка */
 tr td:first-child { 
 	text-align: left; font-weight: bold;
 }
-.noborder { 
-	border: 0px;
-}
-.bordered {
-	border-bottom: 1px solid black;
-}
 tr:nth-child(4) { 
 	font-weight: bold; padding: 2px; color: white; background-color:grey;
-}
-td {
-	text-align: center; min-width: 13px;
 }
 .totalrow td {
 	font-weight: bold; font-size: 1.2em; color: #0d6efd; border-bottom: 1px solid black;
 }
+
+/* первые три строки */
 tr:nth-child(-n+3) td {
 	text-align: center; text-transform: uppercase;
 }
-/*нижн€€ строка SCORE FINAL*/
+/* нижн€€ строка FINAL SCORE */
 tr:last-child td { 
 	text-align: center; text-transform: uppercase;
 }
