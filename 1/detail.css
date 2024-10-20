@@ -18,7 +18,7 @@ td {
 tr td:first-child { 
 	text-align: left; font-weight: bold;
 }
-tr:nth-child(2) { 
+tr:nth-child(2) td { 
 	font-size: 1.2em;
 }
 /*заголовок таблицы оценок*/
