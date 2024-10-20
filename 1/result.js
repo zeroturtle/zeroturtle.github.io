@@ -41,6 +41,7 @@ window.addEventListener("load", (event) => {
 function displayRoundVideo() {
 	// открыть видео в отдельном окне
 	event.preventDefault()
+	frame.srcdoc = ""
 }
 
 //Team Photo
@@ -63,6 +64,7 @@ function displayTeamDetails() {
 			rows[3].cells[0].appendChild(img)			// tr4 - place
 			table.deleteRow(2); 					// remove filename row
 //			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="team.css">')
+			frame.srcdoc = ""
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
@@ -82,6 +84,7 @@ function displayRoundDetails() {
 			doc.head.insertAdjacentHTML('beforeend', '<script src="detail.js"></script>')
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
+			frame.srcdoc = ""
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
@@ -93,8 +96,7 @@ const code2=['AU','AT','AZ','AL','DZ','AI','AO','AD','AQ','AG','AN','AR','AM','A
 const modal = document.querySelector('dialog')
 const frame = modal.querySelector('iframe')  //getElementById('')
 modal.addEventListener('open', (e) => {
-	frame.srcdoc = ""
-	//console.log(e);
+	console.log(e);
 });
 
 function windowOnClick(event) {
