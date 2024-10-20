@@ -41,7 +41,6 @@ window.addEventListener("load", (event) => {
 function displayRoundVideo() {
 	// открыть видео в отдельном окне
 	event.preventDefault()
-	frame.srcdoc = ""
 }
 
 //Team Photo
@@ -64,7 +63,6 @@ function displayTeamDetails() {
 			rows[3].cells[0].appendChild(img)			// tr4 - place
 			table.deleteRow(2); 					// remove filename row
 //			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="team.css">')
-			frame.srcdoc = ""
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
@@ -84,7 +82,6 @@ function displayRoundDetails() {
 			doc.head.insertAdjacentHTML('beforeend', '<script src="detail.js"></script>')
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
-			frame.srcdoc = ""
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
@@ -101,6 +98,7 @@ modal.addEventListener('open', (e) => {
 
 function windowOnClick(event) {
 	if (event.target === modal) {
+		frame.srcdoc = ""
 		modal.close('escape')
 	}
 }
