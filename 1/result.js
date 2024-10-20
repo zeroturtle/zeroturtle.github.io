@@ -63,7 +63,7 @@ function displayTeamDetails() {
 			rows[3].cells[0].appendChild(img)			// tr4 - place
 			table.deleteRow(2); 					// remove filename row
 //			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="team.css">')
-			frame.contentWindow.document  = doc.documentElement.outerHTML
+			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
 		.catch(error => console.error('Error fetching file:', error))
@@ -82,7 +82,7 @@ function displayRoundDetails() {
 			doc.head.insertAdjacentHTML('beforeend', '<script src="detail.js"></script>')
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
-			frame.contentWindow.document = doc.documentElement.outerHTML
+			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
 		.catch(error => console.error('Error fetching file:', error))
