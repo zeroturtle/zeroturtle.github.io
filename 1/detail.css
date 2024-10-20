@@ -1,11 +1,11 @@
 table, th, td {
-	border: 0px; border-collapse: collapse; font-family: Arial; font-size: 13px;
+	border-collapse: collapse; font-family: Arial; font-size: 13px;
 }
 tr {
 	border-bottom: 1px solid black;
 }
 td {
-	text-align: center; min-width: 13px;
+	border: 0px; text-align: center; min-width: 13px;
 }
 /*техническая строка с указанием ширины столбцов*/
 tr:nth-child(1) { 
