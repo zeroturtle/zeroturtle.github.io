@@ -9,9 +9,9 @@ window.addEventListener("load", (event) => {
 		  row.classList.add('noborder') 
 		}
 		else {
-		  row.classList.add('bordered')
+		  row.classList.add('bordered');
 		  odd = !odd;
-		  row.style.backgroundColor = odd ? #f2f2f2 : #ffffff
+		  row.style.backgroundColor = odd ? #f2f2f2 : #ffffff;
 		}
 	});
 
