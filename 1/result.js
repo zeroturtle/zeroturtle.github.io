@@ -60,8 +60,8 @@ function displayTeamDetails() {
 			img.setAttribute("src", 'Photo/'+rows[2].cells[0].innerHTML) // tr3 = filename
 			img.setAttribute("alt", 'rows[2].cells[0].innerHTML')
 			rows[2].deleteCell(0);
-//			img.style.maxHeight = '100%'
-//			img.style.maxWidth = '100%'
+			img.style.maxHeight = '100%'
+			img.style.maxWidth = '100%'
 			rows[3].cells[0].appendChild(img)			// tr4 - place
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
