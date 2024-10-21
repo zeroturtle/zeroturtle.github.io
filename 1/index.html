@@ -184,13 +184,13 @@
   <dialog modal-mode="mega">
     <header>
       <h3></h3>
-      <div id="dialog" title="" onclick="this.closest('dialog').close()" style="cursor: pointer;">X</div>
+      <div onclick="this.closest('dialog').close()" style="max-width: 1em;cursor: pointer;">X</div>
     </header>
     <div id="popup-content">
       <iframe src="about:blank" onload="javascript:(function(o){o.style.height=`${o.contentDocument.body.scrollHeight+45}px`;o.style.width=`${o.contentDocument.body.scrollWidth+45}px`;}(this));" style="min-width:80vw;min-width:200px;min-height:100px;max-height:550px;border:none;overflow:hidden;"></iframe>
     </div>
     <footer>
-       <button autofocus type="reset" onclick="this.closest('dialog').close('close')" style="margin-left: auto; display: block;">Close</button>
+       <button autofocus type="reset" style="margin-left: auto; display: block;" onclick="this.closest('dialog').close('close')">Close</button>
     </footer>
   </dialog>
   <div id="results" class="table-responsive p-0"> <script src="result.js"></script></div>
