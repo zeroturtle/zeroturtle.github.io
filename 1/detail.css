@@ -1,3 +1,6 @@
+table {
+	width: 100%;
+}
 table, th, td {
 	border-collapse: collapse; font-family: Arial; font-size: 13px;
 }
