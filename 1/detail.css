@@ -2,13 +2,13 @@ table {
 	width: 100%;
 }
 table, th, td {
-	border-collapse: collapse; font-family: Arial; font-size: 13px; min-width: 32px;
+	border-collapse: collapse; font-family: Arial; font-size: 13px;
 }
 tr {
 	border: 0px;
 }
 td {
-	text-align: center; min-width: 13px;
+	text-align: center; min-width: 32px;
 }
 .even-class {
 	background-color: #e9e9e9;
