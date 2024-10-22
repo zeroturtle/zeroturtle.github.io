@@ -187,7 +187,7 @@
       <div onclick="this.closest('dialog').close()" style="max-width: 1em;cursor: pointer;">X</div>
     </header>
     <div id="popup-content">
-      <iframe src="about:blank" style="height:40vh;width:80vw;min-width:300px;min-height:100px;border:none;overflow:hidden;"></iframe>
+      <iframe src="about:blank" onload="javascript:(function(o){o.style.height=`${o.contentDocument.body.scrollHeight+45}px`;" style="min-height:40vh;width:80vw;min-width:300px;border:none;overflow:hidden;"></iframe>
     </div>
     <footer>
        <button autofocus type="reset" style="margin-left: auto; display: block;" onclick="this.closest('dialog').close('close')">Close</button>
