@@ -101,3 +101,28 @@ function windowOnClick(event) {
 }
 window.addEventListener("click", windowOnClick); 
 document.getElementById('results').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
+
+
+
+// show draw
+window.addEventListener("load", (event) => {
+	for( let c of document.getElementByTagName("table").rows[2].cells ) {
+		let span = document.createElement('span')
+		span.style.display = 'none'
+		span.classList.add('draw-img')
+
+		c.innerHTML.split(/-/).forEach((v) => {
+			let img = document.createElement('img')
+			img.src = '../divepool/FS4/' + v +'.png'
+			span.append(img)
+		});
+
+		c.onmouseover = function(event) {
+			event.target.querySelector('span').style.display = 'block';
+		};
+		c.onmouseout = function(event) {
+			event.target.querySelector('span').style.display = 'none';
+		};
+		c.append(span);
+	};
+})
