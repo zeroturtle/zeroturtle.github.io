@@ -29,19 +29,21 @@ window.addEventListener("load", (event) => {
 
 			c.innerHTML.split(/-/).forEach((v) => {
 				let img = document.createElement('img')
-				img.src = '../divepool/FS4/' + v.toLowerCase() +'.png'
+				img.src = '../divepool/FS4/' + v +'.png'
 				span.append(img)
 			});
 
 			c.onmouseover = function(event) {
-				event.target.querySelector('span').style.display = 'block';
+				if (event.target.querySelector('span'))
+					event.target.querySelector('span').style.display = 'block';
 			};
 			c.onmouseout = function(event) {
-				event.target.querySelector('span').style.display = 'none';
+				if (event.target.querySelector('span'))
+					event.target.querySelector('span').style.display = 'none';
 			};
 			c.append(span);
 		};
-
+		// draw
 
 		// convert country name to flag SVG-image
 		for (const cell of resultTable.querySelectorAll('td')) {
