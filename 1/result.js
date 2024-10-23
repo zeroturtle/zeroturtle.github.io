@@ -21,6 +21,28 @@ window.addEventListener("load", (event) => {
 			}
 		}
 
+		// show draw
+		for( let c of resultTable.rows[2].cells ) {
+			let span = document.createElement('span')
+			span.style.display = 'none'
+			span.classList.add('draw-img')
+
+			c.innerHTML.split(/-/).forEach((v) => {
+				let img = document.createElement('img')
+				img.src = '../divepool/FS4/' + v +'.png'
+				span.append(img)
+			});
+
+			c.onmouseover = function(event) {
+				event.target.querySelector('span').style.display = 'block';
+			};
+			c.onmouseout = function(event) {
+				event.target.querySelector('span').style.display = 'none';
+			};
+			c.append(span);
+		};
+
+
 		// convert country name to flag SVG-image
 		for (const cell of resultTable.querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
@@ -102,27 +124,3 @@ function windowOnClick(event) {
 window.addEventListener("click", windowOnClick); 
 document.getElementById('results').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
 
-
-
-// show draw
-window.addEventListener("load", (event) => {
-	for( let c of document.getElementByID("resultTable").rows[2].cells ) {
-		let span = document.createElement('span')
-		span.style.display = 'none'
-		span.classList.add('draw-img')
-
-		c.innerHTML.split(/-/).forEach((v) => {
-			let img = document.createElement('img')
-			img.src = '../divepool/FS4/' + v +'.png'
-			span.append(img)
-		});
-
-		c.onmouseover = function(event) {
-			event.target.querySelector('span').style.display = 'block';
-		};
-		c.onmouseout = function(event) {
-			event.target.querySelector('span').style.display = 'none';
-		};
-		c.append(span);
-	};
-})
