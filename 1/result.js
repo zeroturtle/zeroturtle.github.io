@@ -106,7 +106,7 @@ document.getElementById('results').insertAdjacentText('afterend', 'Powered by OP
 
 // show draw
 window.addEventListener("load", (event) => {
-	for( let c of document.getElementByTagName("table").rows[2].cells ) {
+	for( let c of document.getElementByID("resultTable").rows[2].cells ) {
 		let span = document.createElement('span')
 		span.style.display = 'none'
 		span.classList.add('draw-img')
