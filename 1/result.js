@@ -29,7 +29,7 @@ window.addEventListener("load", (event) => {
 
 			c.innerHTML.split(/-/).forEach((v) => {
 				let img = document.createElement('img')
-				img.src = '../divepool/FS4/' + v +'.png'
+				img.src = '../divepool/FS4/' + v.toLowerCase() +'.png'
 				span.append(img)
 			});
 
