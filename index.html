@@ -72,28 +72,6 @@
             <li><a class="dropdown-item" href="#">2021</a></li>
           </ul>
         </li>
-<!--
-        <li class="nav-item">
-          <a class="nav-link" id="FS" href="#">
-            <img src="images/24_icon_FS.png" width="30" height="24" class="d-inline-block align-text-top">Formation Skydiving
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="AE" href="#">
-            <img src="images/24_icon_AE.png" width="30" height="24" class="d-inline-block align-text-top">Artistic Events
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="CF" href="#">
-            <img src="images/24_icon_CF.png" width="30" height="24" class="d-inline-block align-text-top">Canopy Formation
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="WS" href="#">
-            <img src="images/24_icon_WF.png" width="30" height="24" class="d-inline-block align-text-top">Wingsuit Flying Perfomance
-          </a>
-        </li>
--->
         <li class="nav-item btn-primary dropdown">
           <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Disciptines
@@ -104,6 +82,12 @@
             <li><a class="dropdown-item" id="AE" href="#">Artistic Events</a></li>
             <li><a class="dropdown-item" id="WS" href="#">Canopy Formation</a></li>
             <li><a class="dropdown-item disabled" id="WS" href="#">Wingsuit Flying Perfomance</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item disabled" id="IS" href="#">Indoor Solo Freestyle</a></li>
+            <li><a class="dropdown-item disabled" id="SS" href="#">Indoor Solo Speed</a></li>
+            <li><a class="dropdown-item disabled" id="DY" href="#">Dynamic Flying</a></li>
+            <li><a class="dropdown-item disabled" id="SP" href="#">Speed Skydiving</a></li>
+            <li><a class="dropdown-item disabled" id="CP" href="#">Canopy Piloting</a></li>
           </ul>
         </li>
       </ul>
@@ -324,29 +308,133 @@
       </div>
     </div>
 
+
+<legend>Select a Licence pack:</legend>
+<ul id="LicTab" class="nav nav-tabs text-uppercase" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link text-uppercase active" data-bs-toggle="tab" href="#outdoor" aria-selected="true">Outdoor</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link disabled" data-bs-toggle="tab" href="#indoor" aria-selected="false">Indoor</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link disabled" data-bs-toggle="tab" href="#generic" aria-selected="false">Generic</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link disabled" data-bs-toggle="tab" href="#custom" aria-selected="false">Custom</a>
+  </li>
+</ul>
+
 <div class="tab-content" id="myTabContent">
   <!-- Outdoor pack -->
-<legend>Choose disciplines you need:</legend>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="FS" checked>
-  <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="AE">
-  <label class="form-check-label" for="inlineCheckbox2">Artistic Events</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="SFS">
-  <label class="form-check-label" for="inlineCheckbox3">Speed Formation</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="CF">
-  <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="WSP" disabled>
-  <label class="form-check-label" for="inlineCheckbox8">Wingsuit Flying Perfomance</label>
-</div>
+  <div id="outdoor" class="tab-pane fade show active" tabindex="0">
+    <legend>Choose disciplines you need:</legend>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="FS" checked>
+      <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="AE">
+      <label class="form-check-label" for="inlineCheckbox2">Artistic Events</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="SFS">
+      <label class="form-check-label" for="inlineCheckbox3">Speed Formation</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="CF">
+      <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="WSP" disabled>
+      <label class="form-check-label" for="inlineCheckbox8">Wingsuit Flying Perfomance</label>
+    </div>
+  </div>
+
+  <!-- Indoor pack -->
+  <div id="indoor" class="tab-pane fade" tabindex="0">
+    <legend>Predefined disciplines:</legend>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="IFS" checked disabled>
+      <label class="form-check-label" for="inlineCheckbox1">Indoor Formation Skydiving</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="ISF" checked disabled>
+      <label class="form-check-label" for="inlineCheckbox5">Indoor Solo Freestyle</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="ISS" checked disabled>
+      <label class="form-check-label" for="inlineCheckbox6">Indoor Solo Speed</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="DY" checked disabled>
+      <label class="form-check-label" for="inlineCheckbox7">Dynamic Flying</label>
+    </div>
+  </div>
+    
+      <!-- Generic pack -->
+  <div id="generic" class="tab-pane fade" tabindex="0">
+    <legend>Predefined disciplines:</legend>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="WSP" checked disabled>
+      <label class="form-check-label" for="inlineCheckbox8">Wingsuit Flying Perfomance</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="CP" disabled>
+      <label class="form-check-label" for="inlineCheckbox9">Canopy Piloting</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="SP" disabled>
+      <label class="form-check-label" for="inlineCheckbox10">Speed Skydiving</label>
+    </div>
+  </div>
+    
+      <!-- Custom pack -->
+  <div id="custom" class="tab-pane fade" tabindex="0">
+    <legend>Choose disciplines you need:</legend>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="FS">
+      <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="AE">
+      <label class="form-check-label" for="inlineCheckbox2">Artistic Events</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="SFS">
+      <label class="form-check-label" for="inlineCheckbox3">Speed Formation</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="CF">
+      <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="ISF" disabled>
+      <label class="form-check-label" for="inlineCheckbox5">Indoor Solo Freestyle</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="ISS" disabled>
+      <label class="form-check-label" for="inlineCheckbox6">Indoor Solo Speed</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="DY" disabled>
+      <label class="form-check-label" for="inlineCheckbox7">Dynamic Flying</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="WSP" disabled>
+      <label class="form-check-label" for="inlineCheckbox8">Wingsuit Flying Perfomance</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="CP" disabled>
+      <label class="form-check-label" for="inlineCheckbox9">Canopy Piloting</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="SP" disabled>
+      <label class="form-check-label" for="inlineCheckbox10">Speed Skydiving</label>
+    </div>
+      </div>
+  </div>
+
 </div>
 
     <div class="my-3 text-center">
