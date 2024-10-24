@@ -56,24 +56,64 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="navbar-nav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- все поддерживаемые дисциплины -->
-        <a class="nav-link active" aria-current="page" id="ALL" href="#">All
-        </a>
-        <a class="nav-link" id="FS" href="#">
-          <img src="images/24_icon_FS.png" width="30" height="24" class="d-inline-block align-text-top">Formation Skydiving
-        </a>
-        <a class="nav-link" id="AE" href="#">
-          <img src="images/24_icon_AE.png" width="30" height="24" class="d-inline-block align-text-top">Artistic Events
-        </a>
-        <a class="nav-link" id="CF" href="#">
-          <img src="images/24_icon_CF.png" width="30" height="24" class="d-inline-block align-text-top">Canopy Formation
-        </a>
-        <a class="nav-link" id="WS" href="#">
-          <img src="images/24_icon_WF.png" width="30" height="24" class="d-inline-block align-text-top">Wingsuit Flying Perfomance
-        </a>
-        <a class="nav-link" id="SF" href="#">Speed Formation</a>
-      </div>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" id="ALL" href="#">Выберите сезон и тип соревнований для отображения.</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Seasone
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item active" href="#">2024</a></li>
+            <li><a class="dropdown-item" href="#">2023</a></li>
+            <li><a class="dropdown-item" href="#">2022</a></li>
+            <li><a class="dropdown-item" href="#">2021</a></li>
+          </ul>
+        </li>
+<!--
+        <li class="nav-item">
+          <a class="nav-link" id="FS" href="#">
+            <img src="images/24_icon_FS.png" width="30" height="24" class="d-inline-block align-text-top">Formation Skydiving
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="AE" href="#">
+            <img src="images/24_icon_AE.png" width="30" height="24" class="d-inline-block align-text-top">Artistic Events
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="CF" href="#">
+            <img src="images/24_icon_CF.png" width="30" height="24" class="d-inline-block align-text-top">Canopy Formation
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="WS" href="#">
+            <img src="images/24_icon_WF.png" width="30" height="24" class="d-inline-block align-text-top">Wingsuit Flying Perfomance
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" id="SF" href="#">Speed Formation</a>
+        </li>
+-->
+        <li class="nav-item">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Disciptines
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" id="FS" href="#">Formation Skydiving</a></li>
+            <li><a class="dropdown-item" id="SF" href="#">Speed Formation</a></li>
+            <li><a class="dropdown-item" id="AE" href="#">Artistic Events</a></li>
+            <li><a class="dropdown-item" id="WS" href="#">Canopy Formation</a></li>
+            <li><a class="dropdown-item" id="WS" href="#">Wingsuit Flying Perfomance</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
     </div>
   </div>
 </nav>
@@ -81,8 +121,9 @@
     <!-- events list -->
   <div class="container-fluid background-image" style="max-width: 1000px;margin-left:auto; margin-right:auto;">
 
-    <!-- year filter -->
-    <!-- onclick setCookie('YEAR', 2021); -->
+<!-- 
+    year filter 
+    onclick setCookie('YEAR', 2021);
     <ul class="nav nav-tabs">
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="2024">2024</a>
@@ -94,6 +135,7 @@
         <a class="nav-link" href="2020">2020</a>
       </li>
     </ul>
+-->
 
         <!-- использовать для построения списка -->
         <template id="event_tmpl">
