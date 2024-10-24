@@ -50,7 +50,7 @@
 
 <!-- discipline filter -->
 <!-- onclick setCookie('TYPE', TYPE_ID); -->
-<nav id="navigation" class="navbar sticky-top navbar-expand-lg bg-dark" data-bs-theme="dark">
+<nav id="navigation" class="navbar sticky-top navbar-expand-lg bg-dark">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -61,9 +61,10 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" id="ALL" href="#">Выберите сезон и тип соревнований для отображения.</a>
         </li>
+<!--
         <li class="nav-item btn-primary dropdown">
           <a class="btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Seasone
+            Season
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">2024</a></li>
@@ -80,7 +81,7 @@
             <li><a class="dropdown-item" id="FS" href="#">Formation Skydiving</a></li>
             <li><a class="dropdown-item" id="SF" href="#">Speed Formation Skydiving</a></li>
             <li><a class="dropdown-item" id="AE" href="#">Artistic Events</a></li>
-            <li><a class="dropdown-item" id="WS" href="#">Canopy Formation</a></li>
+            <li><a class="dropdown-item" id="CF" href="#">Canopy Formation</a></li>
             <li><a class="dropdown-item disabled" id="WS" href="#">Wingsuit Flying Perfomance</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item disabled" id="IS" href="#">Indoor Solo Freestyle</a></li>
@@ -89,6 +90,32 @@
             <li><a class="dropdown-item disabled" id="SP" href="#">Speed Skydiving</a></li>
             <li><a class="dropdown-item disabled" id="CP" href="#">Canopy Piloting</a></li>
           </ul>
+        </li>
+-->
+        <li>
+          <select class="form-select" title="Choose a season">
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+          </select>
+        </li>
+        <li>
+          <select class="form-select" title="Select a disciplines">
+              <option value="FS">Formation Skydiving</option>
+              <option value="SF">Speed Formation Skydiving</option>
+              <option value="AE">Artistic Events</option>
+              <option value="CF">Canopy Formation</option>
+              <option disabled value="WS">Wingsuit Flying Perfomance</option>
+<!--
+              <option disabled data-divider="true"></option>
+              <option disabled value="IS">Indoor Solo Freestyle</option>
+              <option disabled value="SS">Indoor Solo Speed</option>
+              <option disabled value="DY">Dynamic Flying</option>
+              <option disabled value="SP">Speed Skydiving</option>
+              <option disabled value="CP">Canopy Piloting</option>
+-->
+          </select>
         </li>
       </ul>
       <form class="d-flex" role="search">
