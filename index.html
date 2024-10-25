@@ -49,7 +49,6 @@
 
 
 <!-- discipline filter -->
-<!-- onclick setCookie('TYPE', TYPE_ID); -->
 <nav id="navigation" class="navbar sticky-top navbar-expand-lg bg-dark">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,6 +91,8 @@
           </ul>
         </li>
 -->
+
+<!-- year filter onclick setCookie('YEAR', 2021);-->
         <li>
           <select class="form-select" title="Choose a season">
             <option value="">All seasons</option>
@@ -101,6 +102,7 @@
             <option value="2021">2021</option>
           </select>
         </li>
+<!-- onclick setCookie('TYPE', TYPE_ID); -->
         <li>
           <select class="form-select" title="Select a disciplines">
             <option value="">All disciplines</option>
@@ -120,6 +122,7 @@
           </select>
         </li>
       </ul>
+<!-- SELECT * FROM Event WHERE Event_Name LIKE "%str%" OR Event_Place LIKE "%str%"-->
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
@@ -131,23 +134,7 @@
     <!-- events list -->
   <div class="container-fluid background-image" style="max-width: 1000px;margin-left:auto; margin-right:auto;">
 
-<!-- 
-    year filter 
-    onclick setCookie('YEAR', 2021);
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="2024">2024</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="2021">2021</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="2020">2020</a>
-      </li>
-    </ul>
--->
-
-        <!-- использовать для построения списка -->
+        <!-- использовать template для построения списка -->
         <template id="event_tmpl">
           <tr id="${Event_ID}">
             <td class="w-auto align-top"><img class="img-fluid" src="${Event_ID}/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
@@ -235,9 +222,7 @@
             </td>
           </tr>
 
-
-          <!-- Competition Template -->
-          <tr id="2"> <!-- ${Event_ID} -->
+          <tr id="2">
             <td class="w-auto align-top"><img class="img-fluid" src="33/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="33/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-75">
@@ -252,13 +237,13 @@
                 </div>
                 <div class="col d-none d-md-block">
                   <ul type="none">
-                    <li> <a class="text-decoration-none" href="2/index.html?e=1"></a> </li>
+                    <li> <a class="text-decoration-none" href="2/index.html?e=1">4-Way FS</a> </li>
                   </ul>
                 </div>
               </div>
             </td>
           </tr>
-          <!-- Template end -->
+
         </tbody>
       </table>
     </div>
@@ -304,13 +289,13 @@
       <input type="text" class="form-control" id="exampleLastName" required placeholder="Фамилия" >
     </div>
     <div class="mb-3">
-      <label for="exampleCompany" class="form-label">Company: </label>
-      <input type="text" class="form-control" id="exampleCompany" required placeholder="Название организации владельца лицензии" >
+      <label for="exampleEmail" class="form-label">Email address: </label>
+      <input type="email" class="form-control" id="exampleEmail" required placeholder="Адрес электронной почты">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
     </div>
     <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">Email address: </label>
-      <input type="email" class="form-control" id="exampleFormControlInput1" required placeholder="Адрес электронной почты">
-      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      <label for="exampleCompany" class="form-label">Company: </label>
+      <input type="text" class="form-control" id="exampleCompany" required placeholder="Название организации владельца лицензии" >
     </div>
     <div class="mb-3">
       <label for="exampleFormControlSelect1" class="form-label">Role: </label>
