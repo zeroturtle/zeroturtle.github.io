@@ -32,7 +32,6 @@ window.addEventListener("load", (event) => {
 				img.src = '../divepool/FS4/' + v +'.png'
 				span.append(img)
 			});
-
 			c.onmouseover = function(event) {
 				if (event.target.querySelector('span'))
 					event.target.querySelector('span').style.display = 'block';
