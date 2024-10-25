@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-critters-container>
+<html lang="en" data-critters-container data-bs-theme="green">
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -43,7 +43,6 @@
     </div>
   </div>
 
-
     <blockquote class="blockquote">
       <p>ВАЖНО! Заменить переменные ${...} нужными значениями.</p>
     </blockquote>
@@ -51,16 +50,35 @@
 <hr>
 
   <div class="my-3 h5 text-uppercase">Таблица результатов: </div>
-  <dialog>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">4-Way FS</a>
+  </li>
+</ul>
+  <dialog modal-mode="mega">
     <div onclick="closedialog();" style="cursor: pointer;">X</div>
     <div id="popup-content">
-      <iframe src="about:blank" onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";o.style.width=o.contentDocument.body.scrollWidth+45+"px";}(this));' style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe>
+      <iframe src="about:blank" onload="javascript:(function(o){o.style.height=`${o.contentDocument.body.scrollHeight+45}px`;o.style.width=`${o.contentDocument.body.scrollWidth+45}px`;}(this));'" style="max-width:80vw;min-width:200px;min-height:100px;border:none;overflow:hidden;"></iframe>
     </div>
   </dialog>
    <div id="results" class="table-responsive p-0"> <script src="result.js"></script></div> 
 
 
-  <div class="my-3" id="footer">
+<div>
+<div class="h4 pb-2 mb-4 text-danger border-bottom border-danger">
+  News Associated With This Event
+</div>
+<div class="border border-info border-start-0 rounded-end">
+    <a href="/news/153135/"><img src="" alt="News Article" style="float:left; margin: 0 5px 3px 0"></a>
+    <b>News title</b><br>
+    <span class="d-inline-block text-truncate col-9">posted: Nov 16th, 2024
+	- The Vascongo FS Cup 2024 also included an 8-way competition. In fact, all Formation Skydiving indoor events at Weembi Lille usually include 8-way, as the 16-foot flying chamber is large enough to accommodate the size of 8-way formations and maneuvers.
+    </span>  (<a href="/news/512/">more</a>)
+</div>
+</div>
+
+
+  <div class="my-3 bg-info bg-gradient" id="footer">
     <div class="text-center">
       &copy 2024  <a href="#feedback">Команда Optimus</a>
       <a href="#privacy">Privacy Policy</a>
