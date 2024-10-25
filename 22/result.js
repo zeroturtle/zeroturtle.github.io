@@ -21,6 +21,29 @@ window.addEventListener("load", (event) => {
 			}
 		}
 
+		// show draw
+		for( let c of resultTable.rows[2].cells ) {
+			let span = document.createElement('span')
+			span.style.display = 'none'
+			span.classList.add('draw-img')
+
+			c.innerHTML.split(/-/).forEach((v) => {
+				let img = document.createElement('img')
+				img.src = '../divepool/FS4/' + v +'.png'
+				span.append(img)
+			});
+			c.onmouseover = function(event) {
+				if (event.target.querySelector('span'))
+					event.target.querySelector('span').style.display = 'block';
+			};
+			c.onmouseout = function(event) {
+				if (event.target.querySelector('span'))
+					event.target.querySelector('span').style.display = 'none';
+			};
+			c.append(span);
+		};
+		// draw
+
 		// convert country name to flag SVG-image
 		for (const cell of resultTable.querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
@@ -53,15 +76,16 @@ function displayTeamDetails() {
 		.then((html) => {
 			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html")
-			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="team.css">')
 			const table = doc.querySelector('table')
 			const rows = table.querySelectorAll("tr")
 			let img = document.createElement("img");
-			img.setAttribute("src", 'Photo/'+rows[3].cells[0].innerHTML) // tr3 = filename
-			img.setAttribute("alt", '')
+			img.setAttribute("src", 'Photo/'+rows[2].cells[0].innerHTML) // tr3 = filename
+			img.setAttribute("alt", 'rows[2].cells[0].innerHTML')
 			img.style.maxHeight = '100%'
 			img.style.maxWidth = '100%'
-			rows[4].cells[0].appendChild(img)			// tr4 - place
+			rows[3].cells[0].appendChild(img)			// tr4 - place
+			table.deleteRow(2); 					// remove filename row
+//			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="team.css">')
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
 		})
@@ -79,7 +103,6 @@ function displayRoundDetails() {
 			var doc = new DOMParser().parseFromString(html, "text/html")
 			doc.head.insertAdjacentHTML('beforeend', '<link type="text/css" rel="stylesheet" href="detail.css">')
 			doc.head.insertAdjacentHTML('beforeend', '<script src="detail.js"></script>')
-//			doc.body.insertAdjacentHTML('afterbegin', '<h1>Round Details</h1>')
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 			frame.srcdoc = doc.documentElement.outerHTML
@@ -91,16 +114,14 @@ function displayRoundDetails() {
 const code3=['AUS','AUT','AZE','ALB','DZA','AIA','AGO','AND','ATA','ATG','ANT','ARG','ARM','ABW','AFG','BHS','BGD','BRB','BHR','BLR','BLZ','BEL','BEN','BMU','BVT','BGR','BOL','BIH','BWA','BRA','BRN','BFA','BDI','BTN','VUT','VAT','GBR','HUN','VEN','VGB','VIR','ASM','TMP','VNM','GAB','HTI','GUY','GMB','GHA','GLP','GTM','GIN','GNB','DEU','GIB','HND','HKG','GRD','GRL','GRC','GEO','GUM','DNK','COD','DJI','DMA','DOM','EGY','ZMB','ESH','ZWE','ISR','IND','IDN','JOR','IRQ','IRN','IRL','ISL','ESP','ITA','YEM','CPV','KAZ','CYM','KHM','CMR','CAN','QAT','KEN','CYP','KGZ','KIR','CHN','CCK','COL','COM','COG','CRI','CIV','CUB','KWT','COK','LAO','LVA','LSO','LBR','LBN','LBY','LTU','LIE','LUX','MUS','MRT','MDG','MYT','MAC','MKD','MWI','MYS','MLI','MDV','MLT','MAR','MTQ','MHL','MEX','FSM','MOZ','MDA','MCO','MNG','MSR','MMR','NAM','NRU','NPL','NER','NGA','NLD','NIC','NIU','NZL','NCL','NOR','NFK','ARE','OMN','PAK','PLW','?','PAN','PNG','PRY','PER','PCN','POL','PRT','PRI','REU','CXR','RUS','RWA','ROM','SLV','WSM','SMR','STP','SAU','SWZ','SJM','SHN','PRK','MNP','SYC','VCT','SPM','SEN','KNA','LCA','SGP','SYR','SVK','SVN','USA','SLB','SOM','SDN','SUR','SLE','TJK','THA','TWN','TZA','TCA','TGO','TKL','TON','TTO','TUV','TUN','TKM','TUR','UGA','UZB','UKR','WLF','URY','FRO','FJI','PHL','FIN','FLK','FRA','GUF','PYF','HMD','HRV','CAF','TCD','CZE','CHL','CHE','SWE','LKA','ECU','GNQ','ERI','EST','ETH','YUG','ZAF','SGS','KOR','JAM','JPN','ATF','IOT','UMI']
 const code2=['AU','AT','AZ','AL','DZ','AI','AO','AD','AQ','AG','AN','AR','AM','AW','AF','BS','BD','BB','BH','BY','BZ','BE','BJ','BM','BV','BG','BO','BA','BW','BR','BN','BF','BI','BT','VU','VA','GB','HU','VE','VG','VI','AS','TP','VN','GA','HT','GY','GM','GH','GP','GT','GN','GW','DE','GI','HN','HK','GD','GL','GR','GE','GU','DK','CD','DJ','DM','DO','EG','ZM','EH','ZW','IL','IN','ID','JO','IQ','IR','IE','IS','ES','IT','YE','CV','KZ','KY','KH','CM','CA','QA','KE','CY','KG','KI','CN','CC','CO','KM','CG','CR','CI','CU','KW','CK','LA','LV','LS','LR','LB','LY','LT','LI','LU','MU','MR','MG','YT','MO','MK','MW','MY','ML','MV','MT','MA','MQ','MH','MX','FM','MZ','MD','MC','MN','MS','MM','NA','NR','NP','NE','NG','NL','NI','NU','NZ','NC','NO','NF','AE','OM','PK','PW','PS','PA','PG','PY','PE','PN','PL','PT','PR','RE','CX','RU','RW','RO','SV','WS','SM','ST','SA','SZ','SJ','SH','KP','MP','SC','VC','PM','SN','KN','LC','SG','SY','SK','SI','US','SB','SO','SD','SR','SL','TJ','TH','TW','TZ','TC','TG','TK','TO','TT','TV','TN','TM','TR','UG','UZ','UA','WF','UY','FO','FJ','PH','FI','FK','FR','GF','PF','HM','HR','CF','TD','CZ','CL','CH','SE','LK','EC','GQ','ER','EE','ET','YU','ZA','GS','KR','JM','JP','TF','IO','UM']
 const modal = document.querySelector('dialog')
-const frame = modal.querySelector('iframe')
+const frame = modal.querySelector('iframe')  //getElementById('')
 
-function closedialog() {
-	frame.srcdoc = ""
-	modal.close()
-}
 function windowOnClick(event) {
 	if (event.target === modal) {
-		closedialog()
+		frame.srcdoc = ""
+		modal.close('escape')
 	}
 }
 window.addEventListener("click", windowOnClick); 
 document.getElementById('results').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
+
