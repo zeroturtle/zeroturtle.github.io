@@ -34,9 +34,9 @@ window.addEventListener("load", (event) => {
 			});
 			c.onmouseover = function(event) {
 				if (event.target.querySelector('span')) {
+					event.target.querySelector('span').style.display = 'block'
 					event.target.querySelector('span').style.setProperty("top", `${event.clientY}px`)
 					event.target.querySelector('span').style.setProperty("left", `${event.clientX}px`)
-					event.target.querySelector('span').style.display = 'block'
 				}
 			};
 			c.onmouseout = function(event) {
