@@ -36,7 +36,7 @@ window.addEventListener("load", (event) => {
 				if (event.target.querySelector('span')) {
 					event.target.querySelector('span').style.display = 'block'
 					event.target.querySelector('span').style.setProperty("top", `${event.clientY}px`)
-					event.target.querySelector('span').style.setProperty("left", `${event.clientX-event.scrollLeft}px`)
+					event.target.querySelector('span').style.setProperty("left", `${event.scrollLeft}px`)
 				}
 			};
 			c.onmouseout = function(event) {
