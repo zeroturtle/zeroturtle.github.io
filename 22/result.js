@@ -21,7 +21,7 @@ window.addEventListener("load", (event) => {
 			}
 		}
 
-		// show draw
+	// show draw
 		for( let c of resultTable.rows[2].cells ) {
 			let span = document.createElement('span')
 			span.style.display = 'none'
@@ -34,7 +34,7 @@ window.addEventListener("load", (event) => {
 			});
 			c.onmouseover = function(event) {
 				if (event.target.querySelector('span'))
-					event.target.querySelector('span').style.display = 'block';
+					event.target.querySelector('span').style.display = 'block'; //top: event.clientY, left: event.clientX
 			};
 			c.onmouseout = function(event) {
 				if (event.target.querySelector('span'))
@@ -42,7 +42,7 @@ window.addEventListener("load", (event) => {
 			};
 			c.append(span);
 		};
-		// draw
+	// draw
 
 		// convert country name to flag SVG-image
 		for (const cell of resultTable.querySelectorAll('td')) {
