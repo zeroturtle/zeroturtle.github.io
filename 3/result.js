@@ -33,12 +33,15 @@ window.addEventListener("load", (event) => {
 				span.append(img)
 			});
 			c.onmouseover = function(event) {
-				if (event.target.querySelector('span'))
-					event.target.querySelector('span').style.display = 'block';
+				if (event.target.querySelector('span')) {
+					event.target.querySelector('span').style.display = 'block'
+					event.target.querySelector('span').style.setProperty("top", `${event.clientY}px`)
+					event.target.querySelector('span').style.setProperty("left", `${event.clientX}px`)
+				}
 			};
 			c.onmouseout = function(event) {
 				if (event.target.querySelector('span'))
-					event.target.querySelector('span').style.display = 'none';
+					event.target.querySelector('span').style.display = 'none'
 			};
 			c.append(span);
 		};
