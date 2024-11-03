@@ -34,12 +34,12 @@ window.addEventListener("load", (event) => {
 			});
 			c.onmouseover = function(event) {
 				if (event.target.querySelector('span')) {
-					event.target.querySelector('span').style.display = 'block'
-					let spanBox = event.target.querySelector('span')
-					let spanRect = spanBox.getBoundingClientRect()
-					if ( spanRect.left+spanRect.width>spanBox.parent.clientWidth )
-						spanBox.style.setProperty("left", `${spanBox.parent.clientWidth-spanRect.width}px`)
-//					  spanBox.style.setProperty("left", `${event.clientX}px`)
+					let span = event.target.querySelector('span')
+					span.style.display = 'block'
+					let vw = document.documentElement.clientWidth;
+					if ( span.getBoundingClientRect().right > vw )
+						span.style.setProperty("left", `${vw - event.clientWidth}px`)
+					//event.target.querySelector('span').style.setProperty("left", `${window.innerWidth-event.clientWidth}px`)
 				}
 			};
 			c.onmouseout = function(event) {
