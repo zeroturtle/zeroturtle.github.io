@@ -35,8 +35,11 @@ window.addEventListener("load", (event) => {
 			c.onmouseover = function(event) {
 				if (event.target.querySelector('span')) {
 					event.target.querySelector('span').style.display = 'block'
-					//event.target.querySelector('span').style.setProperty("top", `${event.clientY}px`)
-					//event.target.querySelector('span').style.setProperty("left", `${event.clientX}px`)
+					let spanBox = event.target.querySelector('span')
+					let spanRect = spanBox.getBoundingClientRect()
+					if ( spanRect.left+spanRect.width>spanBox.parent.clientWidth )
+						spanBox.style.setProperty("left", `${spanBox.parent.clientWidth-spanRect.width}px`)
+//					  spanBox.style.setProperty("left", `${event.clientX}px`)
 				}
 			};
 			c.onmouseout = function(event) {
