@@ -37,8 +37,10 @@ window.addEventListener("load", (event) => {
 					let span = event.target.querySelector('span')
 					span.style.display = 'block'
 					let rect = span.getBoundingClientRect();
+console.log(rect)
 					if (rect.right > window.innerWidth) {
 						let l = window.innerWidth - event.clientWidth
+console.log(l)
 						span.style.setProperty("left", `${(l < 0) ? 0 : l - rect.left}px`)
 					}
 					//event.target.querySelector('span').style.setProperty("left", `${window.innerWidth-event.clientWidth}px`)
