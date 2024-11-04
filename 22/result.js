@@ -34,16 +34,14 @@ window.addEventListener("load", (event) => {
 			});
 			c.onmouseover = function(event) {
 				if (event.target.querySelector('span')) {
-					let span = event.target.querySelector('span')
+					event.target.querySelector('span').style.display = 'block'
+					/*let span = event.target.querySelector('span')
 					span.style.display = 'block'
 					let rect = span.getBoundingClientRect();
-console.log(rect)
 					if (rect.right > window.innerWidth) {
 						let l = window.innerWidth - rect.width
-console.log(window.innerWidth); console.log(l);
-						span.style.setProperty("left", `${(l < 0) ? 0 : l - rect.left}px`)
-					}
-					//event.target.querySelector('span').style.setProperty("left", `${window.innerWidth-event.clientWidth}px`)
+						span.style.setProperty("left", `${(l < 0) ? 0 : l}px`)
+					}*/
 				}
 			};
 			c.onmouseout = function(event) {
