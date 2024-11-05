@@ -22,7 +22,8 @@ window.addEventListener("load", (event) => {
 		}
 
 	// show draw
-		for( let c of resultTable.rows[2].cells ) {
+		const rowDraw = 1
+		for( let c of resultTable.rows[rowDraw].cells ) {
 			let span = document.createElement('span')
 			span.style.display = 'none'
 			span.classList.add('draw-img')
@@ -35,8 +36,11 @@ window.addEventListener("load", (event) => {
 			c.onmouseover = function(event) {
 				if (event.target.querySelector('span')) {
 					event.target.querySelector('span').style.display = 'block'
-					event.target.querySelector('span').style.setProperty("top", `${event.clientY}px`)
-					event.target.querySelector('span').style.setProperty("left", `${event.clientX}px`)
+					/*let span = event.target.querySelector('span')
+					let rect = span.getBoundingClientRect();
+					if (rect.right > window.innerWidth) {
+						span.style.setProperty("left", `${(span.clientX < window.innerWidth) ? 0 : window.innerWidth - rect.width}px`)
+					}*/
 				}
 			};
 			c.onmouseout = function(event) {
@@ -58,8 +62,8 @@ window.addEventListener("load", (event) => {
 				cell.append(img);
 			}
 		}
-		results.append(resultTable)
-		results.insertAdjacentHTML('beforebegin', '<link type="text/css" rel="stylesheet" href="proto.css">');
+		scoreSummary.append(resultTable)
+		scoreSummary.insertAdjacentHTML('beforebegin', '<link type="text/css" rel="stylesheet" href="proto.css">');
 	})
 })
 
@@ -118,6 +122,7 @@ const code3=['AUS','AUT','AZE','ALB','DZA','AIA','AGO','AND','ATA','ATG','ANT','
 const code2=['AU','AT','AZ','AL','DZ','AI','AO','AD','AQ','AG','AN','AR','AM','AW','AF','BS','BD','BB','BH','BY','BZ','BE','BJ','BM','BV','BG','BO','BA','BW','BR','BN','BF','BI','BT','VU','VA','GB','HU','VE','VG','VI','AS','TP','VN','GA','HT','GY','GM','GH','GP','GT','GN','GW','DE','GI','HN','HK','GD','GL','GR','GE','GU','DK','CD','DJ','DM','DO','EG','ZM','EH','ZW','IL','IN','ID','JO','IQ','IR','IE','IS','ES','IT','YE','CV','KZ','KY','KH','CM','CA','QA','KE','CY','KG','KI','CN','CC','CO','KM','CG','CR','CI','CU','KW','CK','LA','LV','LS','LR','LB','LY','LT','LI','LU','MU','MR','MG','YT','MO','MK','MW','MY','ML','MV','MT','MA','MQ','MH','MX','FM','MZ','MD','MC','MN','MS','MM','NA','NR','NP','NE','NG','NL','NI','NU','NZ','NC','NO','NF','AE','OM','PK','PW','PS','PA','PG','PY','PE','PN','PL','PT','PR','RE','CX','RU','RW','RO','SV','WS','SM','ST','SA','SZ','SJ','SH','KP','MP','SC','VC','PM','SN','KN','LC','SG','SY','SK','SI','US','SB','SO','SD','SR','SL','TJ','TH','TW','TZ','TC','TG','TK','TO','TT','TV','TN','TM','TR','UG','UZ','UA','WF','UY','FO','FJ','PH','FI','FK','FR','GF','PF','HM','HR','CF','TD','CZ','CL','CH','SE','LK','EC','GQ','ER','EE','ET','YU','ZA','GS','KR','JM','JP','TF','IO','UM']
 const modal = document.querySelector('dialog')
 const frame = modal.querySelector('iframe')  //getElementById('')
+var baseURL = '';
 
 function windowOnClick(event) {
 	if (event.target === modal) {
@@ -126,5 +131,5 @@ function windowOnClick(event) {
 	}
 }
 window.addEventListener("click", windowOnClick); 
-document.getElementById('results').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
+document.getElementById('scoreSummary').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
 

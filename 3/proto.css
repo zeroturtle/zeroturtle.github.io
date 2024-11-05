@@ -1,23 +1,18 @@
-table {
+#resultTable table {
   width: 100%;
 }
-td {
+#resultTable td {
   text-align: Center; vertical-align: Middle; font-style: normal;
-}
-td {
   padding: 6px 5px 5px 5px;
   min-width: 20px;	
   font-family: Arial;
   font-size: 13px;
 }
 /* thead */
-tr:nth-child(1) td {
-  display: none;
-}
-tr:nth-child(3) td {
+#resultTable tr:nth-child(3) td {
   white-space:nowrap;
 }
-tr:nth-child(-n+3) td {
+#resultTable tr:nth-child(-n+2) td {
 /*
 Bootstrap theme colors
 --bs-primary: #0d6efd;
@@ -47,23 +42,24 @@ blue:   #0d6efd;
   border-bottom-color:#FFFFFF; border-bottom-style: solid; border-bottom-width: 1px;
 }
 /* tbody */
-tr:nth-of-type(-n+8) { 
+#resultTable tr:nth-of-type(-n+8) { 
   font-weight: bold; 
 }
-tr:nth-child(n+3) td { 
+#resultTable tr:nth-child(n+3) td { 
   border-bottom-color:#C0C0C0; border-bottom-style: solid; border-bottom-width: 1px;
 }
-tr:nth-child(n+3) td:nth-child(3) { /* FIO column */
+#resultTable tr:nth-child(n+3) td:nth-child(3) { /* FIO column */
   white-space: nowrap !important;
   text-align: Left; vertical-align: Middle;
 }
 /* footer*/
-tr:nth-last-child(-n+2) td {
+#resultTable tr:nth-last-child(-n+2) td {
   border-bottom-style: none;
 }
-tr:nth-last-child(1) td {
+#resultTable tr:nth-last-child(1) td {
  text-align: Right; vertical-align: Middle;
 }
+
 
 /* show draw */
 span.draw-img img { 
@@ -74,8 +70,9 @@ span.draw-img img {
 }
 span.draw-img {
 	max-width: 700px;
-	background: #777;
+	background: #555;
 	position: absolute;
+	left: 30%;
 	padding: 5px;
 }
-/* --- */
+

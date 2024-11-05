@@ -53,19 +53,17 @@
   </li>
 </ul>
   <dialog modal-mode="mega">
-    <header>
-      <h3></h3>
-      <div onclick="this.closest('dialog').close()" style="max-width: 1em;cursor: pointer;">X</div>
-    </header>
-    <div id="popup-content">
+    <header>  <h3></h3>  <div onclick="this.closest('dialog').close()" style="max-width: 1em;cursor: pointer;">X</div>  </header>
+    <div id="scoreDetails">
       <iframe src="about:blank" onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";}(this));' style="min-height:40vh;width:80vw;min-width:300px;border:none;overflow:hidden;"></iframe>
     </div>
-    <footer>
-       <button autofocus type="reset" style="margin-left: auto; display: block;" onclick="this.closest('dialog').close('close')">Close</button>
-    </footer>
+    <footer> <button autofocus type="reset" style="margin-left: auto; display: block;" onclick="this.closest('dialog').close('close')">Close</button> </footer>
   </dialog>
-  <div id="results" class="table-responsive p-0"> <script src="result.js"></script></div> 
-  <div title="UA"> Усі результати є неофіційними до підписання головним суддею.</div> 
+  <div id="scoreSummary" class="table-responsive p-0"> 
+    <script src="result.js"></script>
+    <div title="EN"> All results are unofficial until signed by the Chief Referee. </div> 
+  </div>
+
 
 
   <div class="my-3 bg-primary-subtle" id="footer">
