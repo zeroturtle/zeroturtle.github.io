@@ -1,45 +1,45 @@
-#scoreDetails table {
+table {
 	width: 100%;
 }
-#scoreDetails table, th, td {
+table, th, td {
 	border-collapse: collapse; font-family: Arial; font-size: 13px;
 }
-#scoreDetails tr {
+tr {
 	border: 0px;
 }
-#scoreDetails td {
+td {
 	text-align: center; min-width: 12px; margin-left:3px; margin-right:3px; height:27px;
 }
-#scoreDetails .even-class {
+.even-class {
 	background-color: #e9e9e9;
 }
-#scoreDetails .odd-class {
+.odd-class {
 	background-color: blue;
 	color: white;
 }
 /* первая колонка */
-#scoreDetails tr td:first-child { 
+tr td:first-child { 
 	text-align: left; 
 	/*font-weight: bold;*/
 }
-#scoreDetails tr:nth-child(1) td { 
+tr:nth-child(1) td { 
 	font-size: 1.2em;
 }
 /*заголовок таблицы оценок*/
-#scoreDetails tr:nth-child(3) { 
+tr:nth-child(3) { 
 	font-weight: bold; padding: 2px; color: white; background-color:grey;
 }
 /*строка итоговой оценки*/
-#scoreDetails .totalrow td {
+.totalrow td {
 	font-weight: bold; font-size: 1.2em; color: #0d6efd; border-bottom: 1px solid black;
 }
 
 /* первые две строки */
-#scoreDetails tr:nth-child(-n+2) td {
+tr:nth-child(-n+2) td {
 	text-align: center; text-transform: uppercase;
 }
 /* нижняя строка FINAL SCORE */
-#scoreDetails tr:last-child td { 
+tr:last-child td { 
 	text-align: center; text-transform: uppercase; font-size: 1.2em; 
 }
 
