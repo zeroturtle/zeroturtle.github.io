@@ -3,8 +3,7 @@ table {
 }
 td {
   text-align: Center; vertical-align: Middle; font-style: normal;
-}
-td {
+  height: 29px;
   padding: 6px 5px 5px 5px;
   min-width: 20px;	
   font-family: Arial;
