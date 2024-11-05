@@ -9,7 +9,7 @@
   font-size: 13px;
 }
 /* thead */
-#resultTable tr:nth-child(3) td {
+#resultTable tr:nth-child(2) td {
   white-space:nowrap;
 }
 #resultTable tr:nth-child(-n+2) td {
