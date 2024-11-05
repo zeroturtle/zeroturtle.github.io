@@ -63,8 +63,8 @@ window.addEventListener("load", (event) => {
 				cell.append(img);
 			}
 		}
-		results.append(resultTable)
-		results.insertAdjacentHTML('beforebegin', '<link type="text/css" rel="stylesheet" href="proto.css">');
+		scoreSummary.append(resultTable)
+		scoreSummary.insertAdjacentHTML('beforebegin', '<link type="text/css" rel="stylesheet" href="proto.css">');
 	})
 })
 
@@ -132,5 +132,5 @@ function windowOnClick(event) {
 	}
 }
 window.addEventListener("click", windowOnClick); 
-document.getElementById('results').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
+document.getElementById('scoreSummary').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
 
