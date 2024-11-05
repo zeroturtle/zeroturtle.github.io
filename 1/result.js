@@ -5,9 +5,9 @@ window.addEventListener("load", (event) => {
 	.then(response => response.text())
 	.then((html) => {
 		var doc = new DOMParser().parseFromString(html, "text/html")
-		var resultTable = doc.querySelectorAll('table')
 		var Rank = 0;
-		resultTable[Rank].setAttribute('id','resultTable')
+		var resultTable = doc.querySelectorAll('table')[Rank]
+		resultTable.setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0)) { 
 			let f = lnk.href.toLowerCase()
