@@ -22,8 +22,7 @@ window.addEventListener("load", (event) => {
 		}
 
 	// show draw
-		const rowDraw = 1
-		for( let c of resultTable.rows[rowDraw].cells ) {
+		for( let c of resultTable.rows[2].cells ) {
 			let span = document.createElement('span')
 			span.style.display = 'none'
 			span.classList.add('draw-img')
@@ -37,9 +36,11 @@ window.addEventListener("load", (event) => {
 				if (event.target.querySelector('span')) {
 					event.target.querySelector('span').style.display = 'block'
 					/*let span = event.target.querySelector('span')
+					span.style.display = 'block'
 					let rect = span.getBoundingClientRect();
 					if (rect.right > window.innerWidth) {
-						span.style.setProperty("left", `${(span.clientX < window.innerWidth) ? 0 : window.innerWidth - rect.width}px`)
+						let l = window.innerWidth - rect.width
+						span.style.setProperty("left", `${(l < 0) ? 0 : l}px`)
 					}*/
 				}
 			};
