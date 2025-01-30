@@ -322,11 +322,11 @@
     <div class="mb-3">
       <label class="form-label">License type: </label>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+        <input class="form-check-input" type="radio" name="LicenseType" id="flexRadioDefault1">
         <label class="form-check-label" for="flexRadioDefault1"> Individual </label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+        <input class="form-check-input" type="radio" name="LicenseType" id="flexRadioDefault2" checked>
         <label class="form-check-label" for="flexRadioDefault2"> Premium </label>
       </div>
     </div>
@@ -485,7 +485,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="aboutModalLabel">About OPTIMUS</h1>
@@ -564,6 +564,7 @@
     </div>
   </div>
 </div>
+
 
 
 <div class="modal fade" id="policyModal" aria-hidden="true" aria-labelledby="policyModalLabel" tabindex="-1">
@@ -649,24 +650,95 @@ After the subscription has expired, you will be required to purchase a new 1-yea
 </div>
 
 
+
+<div class="modal fade" id="feedback" aria-hidden="true" aria-labelledby="feedbackModalLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="feedbackModalLabel">Contact us</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<!-- Начало -->
+<div class="card py-2">
+  <div class="card-header">
+    Contact Information
+  </div>
+  <div class="card-body">
+	<p data-bs-original-title="" title="" aria-describedby="tooltip200511">
+                <strong>Email :</strong>
+                <a href="mailto:contact@optimus.dp.ua" data-bs-original-title="" title="" class="btn btn-custom" style="border-width: 1px; border-style: solid; color: rgb(245, 157, 60);">contact[@]optimus.dp.ua</a>
+                <br>
+                <strong>Messenger :</strong>
+                <a href="https://m.me/optimusjudging/" class="btn btn-custom" data-bs-original-title="" title="" style="border-width: 1px; border-style: solid; color: rgb(245, 157, 60);">Let's Chat</a>
+                <br>
+                <strong>Facebook :</strong>
+                <a href="https://www.facebook.com/optimusjudging/" class="btn btn-custom" data-bs-original-title="" title="" style="border-width: 1px; border-style: solid; color: rgb(245, 157, 60);">OPTIMUS</a>
+                <br>
+	</p>
+	<h4>Office Hours</h4>
+	<p>We are mostly living into Paris time zone and we are not really morning people, but feel free to drop us a message 24/7 <i class="fa fa-smile-o"></i></p>
+	<p>
+		<br>
+	</p>
+  </div>
+</div>
+
+<div class="card py-2">
+  <div class="card-header">
+    Сообщение для команды OPTIMUS
+  </div>
+  <div class="card-body">
+    <form id="contactus_form" action="/website/form/" method="post" enctype="multipart/form-data">
+	<div class="row s_col_no_resize s_col_no_bgcolor">
+		<label for="c_name" class="col-form-label col-sm-auto s_website_form_label form-label" style="width: 200px" >
+			<span class="s_website_form_label_content">Name*</span>
+		</label>
+		<div class="col-sm">
+			<input type="text" class="form-control s_website_form_input" name="Name" required placeholder="Имя, как к Вам обращаться" id="c_name" data-fill-with="name">
+		</div>
+	</div>
+	<div class="row s_col_no_resize s_col_no_bgcolor">
+		<label class="col-form-label col-sm-auto s_website_form_label form-label" style="width: 200px" for="contact3">
+			<span class="s_website_form_label_content">Email</span>
+		</label>
+		<div class="col-sm">
+			<input id="contact3" type="email" class="form-control s_website_form_input" name="email" required placeholder="Адрес электронной почты" data-fill-with="email">
+		</div>
+	</div>
+	<div class="row s_col_no_resize s_col_no_bgcolor">
+		<label class="col-form-label col-sm-auto s_website_form_label form-label" style="width: 200px" for="o5dt31gf92nv">
+			<span class="s_website_form_label_content">Message</span>
+		</label>
+		<div class="col-sm">
+			<textarea class="form-control s_website_form_input" name="Message" placeholder="" id="o5dt31gf92nv" rows="5" required placeholder="Ваше сообщение"></textarea>
+		</div>
+	</div>
+
+	<div class="py-2 d-grid gap-2 col-6 mx-auto" data-name="Submit Button">
+		<a href="#"  class="btn btn-success btn-lg">Send</a>
+	</div>
+    </form>
+  </div>
+</div>
+
+<!-- Конец -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <div style="background-image: url(images/Title.jpg); background-size: 20% 100%;height: 100px;">
     <div class="row">
        <div class="col text-center">
-         &copy 2024  <a href="#feedback">Команда Optimus</a>
+         &copy 2024  <a href="#feedback" data-bs-toggle="modal">Команда Optimus</a>
          <a href="#privacy">Privacy Policy</a>
        </div>
     </div>
-    <div class="d-flex justify-content-center my-2 py-3"> Follow us
-      <!-- Facebook -->
-      <a data-mdb-ripple-init class="btn btn-primary" style="background-color: #3b5998;" href="#!" role="button"><i class="fa fa-facebook-f"></i></a>
-      <!-- Instagram -->
-      <a data-mdb-ripple-init class="btn btn-primary" style="background-color: #ac2bac;" href="#!" role="button"><i class="fa fa-instagram"></i></a>
-      <!-- Youtube -->
-      <a data-mdb-ripple-init class="btn btn-primary" style="background-color: #ed302f;" href="#!" role="button"><i class="fa fa-youtube"></i></a>
-      <!-- Whatsapp -->
-      <a data-mdb-ripple-init class="btn btn-primary" style="background-color: #25d366;" href="#!" role="button"><i class="fa fa-whatsapp"></i></a>
-    </div>
-  </div>
 
 </div> <!--container-->
 
