@@ -1,4 +1,5 @@
-﻿
+﻿let baseURL = 'https://zeroturtle.github.io/3/'
+
 // çàãðóæàåì ïðîòîêîë
 window.addEventListener("load", (event) => {
 	fetch(baseURL+'proto.html')
