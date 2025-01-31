@@ -79,7 +79,7 @@ function displayTeamDetails() {
 	event.preventDefault()
 	var doc = document.implementation.createHTMLDocument('Team Photo')
 	// найти картинку по записи в 
-	fetch( new URL(this+'.html') )
+	fetch( new URL(baseURL+this+'.html') )
 		.then(response => response.text())
 		.then((html) => {
 			// Convert the HTML string into a document object
@@ -104,7 +104,7 @@ function displayTeamDetails() {
 function displayRoundDetails() {
 	event.preventDefault()
 	// çàãðóæàåì ñóäåéñêóþ çàïèñêó	
-	fetch( new URL(this+'.html') )
+	fetch( new URL(baseURL+this+'.html') )
 		.then(response => response.text())
 		.then((html) => {
 			// Convert the HTML string into a document object
