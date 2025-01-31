@@ -110,7 +110,7 @@ function displayRoundDetails() {
 			// Convert the HTML string into a document object
 			var doc = new DOMParser().parseFromString(html, "text/html")
 			doc.head.insertAdjacentHTML('beforeend',`<link type="text/css" rel="stylesheet" href="${baseURL}detail.css">`)
-			doc.head.insertAdjacentHTML('beforeend', `'<script src="${baseURL}detail.js"></script>`)
+			doc.head.insertAdjacentHTML('beforeend', `<script src="${baseURL}detail.js"></script>`)
 			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 			frame.srcdoc = doc.documentElement.outerHTML
