@@ -97,10 +97,8 @@
         <li class="d-flex">
           <select class="form-select" title="Choose a season" onchange="getComboA(this)">
             <option value="">All seasons</option>
+            <option value="2025">2025</option>
             <option value="2024">2024</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-            <option value="2020">2020</option>
           </select>
         </li>
         <li class="d-flex">
@@ -110,13 +108,12 @@
             <!-- <option value="SF">Speed Formation Skydiving</option> -->
             <option value="AE">Artistic Events</option>
             <option value="CF">Canopy Formation</option>
-            <option value="WS" disabled>Wingsuit Flying Perfomance</option>
-            <option value="WS" disabled>Wingsuit Flying Acrobatic</option>
-            <option value="SF" disabled value="IS">Indoor Solo Freestyle</option>
-            <option value="DS" disabled value="DS">Indoor Solo Speed</option>
-            <option value="DY" disabled value="DY">Dynamic Flying</option>
-            <option value="SP" disabled value="SP">Speed Skydiving</option>
-            <option value="CP" disabled value="CP">Canopy Piloting</option>
+            <option value="WS" disabled>Wingsuit Flying</option>
+            <option value="SF" disabled>Indoor Solo Freestyle</option>
+            <option value="DS" disabled>Indoor Solo Speed</option>
+            <option value="DY" disabled>Dynamic Flying</option>
+            <option value="SP" disabled>Speed Skydiving</option>
+            <option value="CP" disabled>Canopy Piloting</option>
           </select>
         </li>
       </ul>
@@ -146,7 +143,9 @@
                   <span class="text-secondary">{$Event_Place}</span>
                 </div>
                 <div class="col d-none d-md-block">
-                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;"><a class="text-decoration-none" href="{$EventID}/index.html?e={$i}">{$EventList[i]}</a> </span>
+                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;">
+                    <a class="text-decoration-none" href="{$EventID}/index.html?r={$i}">{$Ranking[i]}</a> 
+                  </span>
                 </div>
               </div>
             </td>
