@@ -41,11 +41,11 @@
       .then(response => response.json())
       .then(json => {
         // преобразуем поле даты в строку
-        /*let json = JSON.parse(data, function(key, value) {
+        let json = JSON.parse(json, function(key, value) {
         if (key == 'datefrom' || key == 'dateto') return new Date(value).toDateString();
         return value
         });
-        */
+        
       // считать template строки event
         let event_tmpl = document.querySelector("#event_tmpl")
         let rank_tmpl = document.getElementById("rank_tmpl")
