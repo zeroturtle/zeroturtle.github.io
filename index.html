@@ -40,17 +40,13 @@
     fetch('https://zeroturtle.github.io/events.json') 
       .then(response => response.json())
       .then(json => {
-        // преобразуем поле даты в строку
-        json = JSON.parse(json, function(key, value) {
-        if (key == 'datefrom' || key == 'dateto') return new Date(value).toDateString();
-        return value
-        });
-        
       // считать template строки event
         const event_tmpl = document.querySelector("#event_tmpl")
         const rank_tmpl = document.getElementById("rank_tmpl")
         for (var key in json) {
           var event = json[key]
+          event.datefrom = new Date(event.datefrom).toDateString()    // преобразуем поле даты в строку
+          event.dateto = new Date(event.dateto).toDateString()
           var ranks = ''
           for (var key1 in event.events) {
             var rank = event.events[key1]
