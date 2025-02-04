@@ -35,9 +35,34 @@
     console.log(value);
   }
   function loadDataContent() {
+/*
+    // получаем из сервера json со списком event
+    fetch('events.php') 
+      .then(response => response.json())
+      .then(events => console.log(events))
+      .catch(error => console.log('Произошла ошибка:', error)); 
+*/
+let response = 
+`[
+{"id": 1,"name": "Чемпионат 2021","place": "Майске, Дніпропетровська обл.","datefrom": "2021-09-11","dateto": "2021-09-19","events": [{"id": 3,"name": "Open FS-4way"},{"id": 6,"name": "Open FS-8way"},{"id": 7,"name": "Open FS-6way"}]},
+{"id": 2,"name": "Чемпионат 2022","place": "Майске, Дніпропетровська обл.","datefrom": "2022-09-24","dateto": "2022-09-25","events": [{"id": 9,"name": "Open FS-4way"}]},
+{"id": 22,"name": "Чемпіонат України 2024","place": "аэродром Хрцинно, Насельск, Польща","datefrom": "2024-08-20","dateto": "2024-08-25","events": [{"id": 23,"name": "Open FS-4way"}]},
+{"id": 3,"name": "26th FAI World Formation Skydiving Championships 2024","place": "Beaufort, NC, USA ","datefrom": "2024-10-04","dateto": "2024-10-12","events": [{"id": 28,"name": "4way-FS"},{"id": 26,"name": "8way-FS"},{"id": 25,"name": "4-Way FS Female"},{"id": 24,"name": "4-Way VFS"}]}
+]`;
+    // преобразуем строку JSON в объект (+преобразуем поле даты в строку)
+    let json = JSON.parse(response, function(key, value) {
+      if (key == 'datefrom' || key == 'dateto') return new Date(value).toDateString();
+        return value;
+    });
+
+    // считать template вывода
     let temp = document.getElementsByTagName("template")[0];
-    let clon = temp.content.cloneNode(true);
-    EventsList.appendChild(clon);
+    for (var key in json) {
+      var event = json[key]
+      // заменить переменные шаблона event и выводит на страницу
+      EventsList.insertAdjacentHTML('beforeend', eval('`'+temp.innerHTML+'`'));
+    }
+
   }
 
   window.addEventListener('load', loadDataContent);  // загружаем первую страницу
@@ -95,14 +120,14 @@
           <a class="nav-link active" aria-current="page" id="ALL" href="#">Выберите сезон и тип соревнований для отображения.</a>
         </li>
         <li class="d-flex">
-          <select class="form-select" title="Choose a season" onchange="getComboA(this)">
+          <select class="form-select" title="Choose a season" id="Year" onchange="getComboA(this);">
             <option value="">All seasons</option>
             <option value="2025">2025</option>
             <option value="2024">2024</option>
           </select>
         </li>
         <li class="d-flex">
-          <select class="form-select" title="Select a disciplines" onchange="console.log(this.value);">
+          <select class="form-select" title="Select a disciplines" id="Type" onchange="getComboA(this);">
             <option value="">All disciplines</option>
             <option value="FS">Formation Skydiving</option>
             <!-- <option value="SF">Speed Formation Skydiving</option> -->
@@ -118,8 +143,8 @@
         </li>
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="Name">
+        <button class="btn btn-outline-success" type="submit" onclick="getComboA(Name);">Search</button>
       </form>
     </div>
   </div>
@@ -130,21 +155,21 @@
 
         <!-- использовать template для построения списка -->
         <template  id="event_tmpl">
-          <tr id="{$EventID}">
-            <td class="w-auto align-top"><img class="img-fluid" src="{$EventID}/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="{$EventID}/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
+          <tr id="${event.id}">
+            <td class="w-auto align-top"><img class="img-fluid" src="${event.id}/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="${event.id}/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-75">
               <div class="row">
                 <div class="col d-block text-uppercase">
-                  <span class="fw-bold"><a class="text-decoration-none" href="{$EventID}/index.html">{$Event_Name}</a></span>
+                  <span class="fw-bold"><a class="text-decoration-none" href="${event.id}/index.html">${event.name}</a></span>
                   <br>
-                  <span class="text-secondary">{$Event_DateFrom} - {$Event_DateTo}</span>
+                  <span class="text-secondary">${event.datefrom} - ${event.dateto}</span>
                   <br>
-                  <span class="text-secondary">{$Event_Place}</span>
+                  <span class="text-secondary">${event.place}</span>
                 </div>
                 <div class="col d-none d-md-block">
                   <span class="border-start border-2 px-2" style="display:inline-block;float:right;">
-                    <a class="text-decoration-none" href="{$EventID}/index.html?r={$i}">{$Ranking[i]}</a> 
+                    <a class="text-decoration-none" href="${event.id}/index.html?r=${event.events[0].id}">${event.events[0].name}</a> 
                   </span>
                 </div>
               </div>
@@ -155,67 +180,8 @@
     <div class="table-responsive">
       <table class="table table-striped table-hover w-100">
         <tbody id="EventsList">
-          <tr id="1">
-            <td class="w-auto align-top"><img class="img-fluid" src="1/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="1/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-75">
-              <div class="row">
-                <div class="col d-block text-uppercase">
-                  <span class="fw-bold"><a class="text-decoration-none" href="1/index.html">Чемпіонат України 2024</a></span>
-                  <br>
-                  <span class="text-secondary">10 авг 2020 - 13 авг 2020</span>
-                  <br>
-                  <span class="text-secondary">аэродром Хрцинно, Насельск, Польща</span>
-                </div>
-		<!-- если выводить зачеты - надо переделывать tr.onclick !-->
-                <div class="col d-none d-md-block ">
-                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;"> <a class="text-decoration-none" href="${Event_ID}/index.html?e=1">FS-4way Open</a> </span>
-                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;"> <a class="text-decoration-none" href="${Event_ID}/index.html?e=2">FS-2way </a> </span>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr id="22">
-            <td class="w-auto align-top"><img class="img-fluid" src="22/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="22/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-75">
-              <div class="row">
-                <div class="col d-block text-uppercase">
-                  <span class="fw-bold"><a class="text-decoration-none" href="22/index.html">SM WS Performance</a></span>
-                  <br>
-                  <span class="text-secondary">16 Jul 2022 - 17 Jul 2022</span>
-                  <br>
-                  <span class="text-secondary">Vårgårda FKCG</span>
-                </div>
-                <div class="col d-none d-md-block">
-                  <ul type="none">
-                    <li> <a class="text-decoration-none" href="22/index.html?e=1"></a> </li>
-                  </ul>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr id="3">
-            <td class="w-auto align-top"><img class="img-fluid" src="3/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="3/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-75">
-              <div class="row">
-                <div class="col d-block text-uppercase">
-                  <span class="fw-bold"><a class="text-decoration-none" href="3/index.html">26th FAI World Formation Skydiving Championships 2024</a></span>
-                  <br>
-                  <span class="text-secondary">04 Oct 2024 - 12 Oct 2024 </span>
-                  <br>
-                  <span class="text-secondary">Beaufort, NC, USA </span>
-                </div>
-                <div class="col d-none d-md-block">
-                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;"><a class="text-decoration-none" href="3/index.html?e=1">4-Way FS</a></span>
-                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;"><a class="text-decoration-none" href="3/index.html?e=2">4-Way FS Female</a></span>
-                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;"><a class="text-decoration-none" href="3/index.html?e=3">4-Way VFS</a></span>
-                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;"><a class="text-decoration-none" href="3/index.html?e=4">8-Way FS</a></span>
-                </div>
-              </div>
-            </td>
-          </tr>
+	
+
         </tbody>
       </table>
     </div>
