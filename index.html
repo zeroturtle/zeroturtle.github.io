@@ -50,7 +50,7 @@
 {"id": 3,"name": "26th FAI World Formation Skydiving Championships 2024","place": "Beaufort, NC, USA ","datefrom": "2024-10-04","dateto": "2024-10-12","events": [{"id": 28,"name": "4way-FS"},{"id": 26,"name": "8way-FS"},{"id": 25,"name": "4-Way FS Female"},{"id": 24,"name": "4-Way VFS"}]}
 ]`;*/
     // преобразуем строку JSON в объект (+преобразуем поле даты в строку)
-    let json = JSON.parse(response, function(key, value) {
+    let json = JSON.parse(events, function(key, value) {
       if (key == 'datefrom' || key == 'dateto') return new Date(value).toDateString();
         return value;
     });
