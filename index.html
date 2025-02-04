@@ -43,7 +43,7 @@
         // преобразуем строку JSON в объект (+преобразуем поле даты в строку)
         let json = JSON.parse(data, function(key, value) {
         if (key == 'datefrom' || key == 'dateto') return new Date(value).toDateString();
-          return value;
+        return value
         });
 
       // считать template строки event
