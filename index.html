@@ -39,7 +39,7 @@
     // получаем из сервера json со списком event
     fetch('https://zeroturtle.github.io/events.json') 
       .then(response => response.json())
-      .then(data => {
+      .then(json => {
         // преобразуем поле даты в строку
         /*let json = JSON.parse(data, function(key, value) {
         if (key == 'datefrom' || key == 'dateto') return new Date(value).toDateString();
