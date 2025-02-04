@@ -32,10 +32,9 @@
 <script>
   function getComboA(selectObject) {
     var value = selectObject.value;  
-    console.log(value);
+    console.log(value);  //установить значение фильтра в cookie
   }
   function loadDataContent() {
-
     // получаем из сервера json со списком event
     fetch('https://zeroturtle.github.io/events.json') 
       .then(response => response.json())
@@ -56,11 +55,10 @@
         }
       })
       .catch(error => console.log('Ошибка чтения json:', error)); 
-
   } //loadDataContent
 
   window.addEventListener('load', loadDataContent);  // загружаем первую страницу
-  //подгружаем в конце страницы
+  //подгружаем следующую часть списка в конце страницы
   window.addEventListener('scroll', event => { 
     if(window.scrollY+1 >= document.body.scrollHeight - innerHeight) {
       loadDataContent(); // Code here
@@ -111,7 +109,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- все поддерживаемые дисциплины -->
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" id="ALL" href="#">Выберите сезон и тип соревнований для отображения.</a>
+          <a class="nav-link link-warning" aria-current="page" id="ALL" href="#">Выберите сезон и тип соревнований для отображения.</a>
         </li>
         <li class="d-flex">
           <select class="form-select" title="Choose a season" id="Year" onchange="getComboA(this);">
