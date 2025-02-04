@@ -37,7 +37,7 @@
   function loadDataContent() {
 
     // получаем из сервера json со списком event
-    fetch(const baseURL = 'https://zeroturtle.github.io/events.json') 
+    fetch('https://zeroturtle.github.io/events.json') 
       .then(response => response.json())
       .then(events => console.log(events))
       .catch(error => console.log('Произошла ошибка:', error)); 
