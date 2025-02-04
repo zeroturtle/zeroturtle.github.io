@@ -55,15 +55,19 @@ let response =
         return value;
     });
 
-    // считать template вывода
-    let temp = document.getElementsByTagName("template")[0];
+    // считать template строки event
+    let event_tmpl = document.querySelector("#event_tmpl")
+    let rank_tmpl = document.getElementById("rank_tmpl")
     for (var key in json) {
       var event = json[key]
-      // заменить переменные шаблона event и выводит на страницу
-      EventsList.insertAdjacentHTML('beforeend', eval('`'+temp.innerHTML+'`'));
+      var ranks = ''
+      for (var key1 in event.events) {
+        var rank = event.events[key1]
+	ranks += eval('`'+rank_tmpl.innerHTML+'`')
+      }	
+      EventsList.insertAdjacentHTML('beforeend', eval('`'+event_tmpl.innerHTML+'`'))
     }
-
-  }
+  } //loadDataContent
 
   window.addEventListener('load', loadDataContent);  // загружаем первую страницу
   //подгружаем в конце страницы
@@ -152,7 +156,6 @@ let response =
 
     <!-- events list -->
   <div class="container-fluid background-image" style="margin-left:auto; margin-right:auto;">
-
         <!-- использовать template для построения списка -->
         <template  id="event_tmpl">
           <tr id="${event.id}">
@@ -167,21 +170,21 @@ let response =
                   <br>
                   <span class="text-secondary">${event.place}</span>
                 </div>
-                <div class="col d-none d-md-block">
-                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;">
-                    <a class="text-decoration-none" href="${event.id}/index.html?r=${event.events[0].id}">${event.events[0].name}</a> 
-                  </span>
+                <div class="col d-none d-md-block">${ranks}
                 </div>
               </div>
             </td>
           </tr>
-       </template>
+        </template>
+        <template  id="rank_tmpl">
+                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;">
+                    <a class="text-decoration-none" href="${event.id}/index.html?r=${rank.id}">${rank.name}</a> 
+                  </span>
+        </template>
 
     <div class="table-responsive">
       <table class="table table-striped table-hover w-100">
         <tbody id="EventsList">
-	
-
         </tbody>
       </table>
     </div>
