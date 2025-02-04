@@ -31,7 +31,8 @@
 </style>
 <script>
   function getComboA(selectObject) {
-    var value = selectObject.value;  
+    var value = selectObject.value;
+    document.cookie = `user=${value}`
     console.log(value);  //установить значение фильтра в cookie
   }
   function loadDataContent() {
@@ -56,8 +57,8 @@
       })
       .catch(error => console.log('Ошибка чтения json:', error)); 
   } //loadDataContent
-
-  window.addEventListener('load', loadDataContent);  // загружаем первую страницу
+  // загружаем первую страницу
+  window.addEventListener('load', loadDataContent);
   //подгружаем следующую часть списка в конце страницы
   window.addEventListener('scroll', event => { 
     if(window.scrollY+1 >= document.body.scrollHeight - innerHeight) {
