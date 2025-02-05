@@ -32,12 +32,14 @@
 <script>
   function getComboA(selectObject) {
     var value = selectObject.value;
-    document.cookie = `user=${value}`
+    document.cookie = `${selectObject.id}=${value}; samesite=strict`
+    document.cookie = 'page=0; samesite=strict'
+    console.log(document.cookie)
     console.log(value);  //установить значение фильтра в cookie
   }
   function loadDataContent() {
     // получаем из сервера json со списком event
-    fetch('https://zeroturtle.github.io/events.json') 
+    fetch('https://zeroturtle.github.io/events.json') //здесь будет вызов скрипта event.php
       .then(response => response.json())
       .then(json => {
       // считать template строки event
