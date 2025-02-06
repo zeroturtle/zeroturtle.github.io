@@ -37,14 +37,15 @@
     setCookie('page', 0)
     EventsList.innerHTML = ''  // загрузка данных с 0 страницы
     loadDataContent()
-    console.log(document.cookie)
+    //console.log(document.cookie)
   }
   function clearCookie() {
     deleteCookie('Year');
     deleteCookie('Type');
     deleteCookie('Name');
     deleteCookie('page');
-    console.log(document.cookie)
+    EventsList.innerHTML = ''
+    loadDataContent()
   }
   function loadDataContent() {
     // получаем из сервера json со списком event
