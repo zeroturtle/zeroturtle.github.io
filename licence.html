@@ -22,25 +22,25 @@
 <form>
   <fieldset>
     <div class="mb-3">
-      <label for="exampleFirstName" class="form-label">First Name: </label>
-      <input type="text" class="form-control" id="exampleFirstName" required placeholder="Имя" >
+      <label for="FirstName" class="form-label">First Name: </label>
+      <input type="text" class="form-control" id="FirstName" required placeholder="Имя" >
     </div>
     <div class="mb-3">
-      <label for="exampleLastName" class="form-label">Last Name: </label>
-      <input type="text" class="form-control" id="exampleLastName" required placeholder="Фамилия" >
+      <label for="LastName" class="form-label">Last Name: </label>
+      <input type="text" class="form-control" id="LastName" required placeholder="Фамилия" >
     </div>
     <div class="mb-3">
-      <label for="exampleEmail" class="form-label">Email address: </label>
-      <input type="email" class="form-control" id="exampleEmail" required placeholder="Адрес электронной почты">
+      <label for="Email" class="form-label">Email address: </label>
+      <input type="email" class="form-control" id="Email" required placeholder="Адрес электронной почты">
       <small>We'll never share your email with anyone else.</small>
     </div>
     <div class="mb-3">
-      <label for="exampleCompany" class="form-label">Company: </label>
-      <input type="text" class="form-control" id="exampleCompany" required placeholder="Название организации владельца лицензии" >
+      <label for="Company" class="form-label">Company: </label>
+      <input type="text" class="form-control" id="Company" required placeholder="Название организации владельца лицензии" >
     </div>
     <div class="mb-3">
-      <label for="exampleFormControlSelect1" class="form-label">Role: </label>
-      <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" required placeholder="Ваш статус" >
+      <label for="Role" class="form-label">Role: </label>
+      <select class="form-select" id="Role" aria-label="Default select example" required placeholder="Ваш статус" >
         <option selected>- Select an option -</option>
         <option value="1">DZ Owner</option>
         <option value="2">Judge</option>
@@ -84,23 +84,23 @@
     <fieldset>
       <legend>Outdoor pack:</legend>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="FS" checked>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="Types[]" value="FS" checked>
         <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="SFS" checked>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="Types[]" value="SFS" checked>
         <label class="form-check-label" for="inlineCheckbox3">Speed Formation</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="AE" checked>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="Types[]" value="AE" checked>
         <label class="form-check-label" for="inlineCheckbox2">Artistic Events</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="CF">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="Types[]" value="CF">
         <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="WSP" disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" name="Types[]" value="WSP" disabled>
         <label class="form-check-label" for="inlineCheckbox8">Wingsuit Flying Perfomance</label>
       </div>
     </fieldset>
@@ -110,19 +110,19 @@
     <fieldset>
       <legend>Indoor pack:</legend>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="IFS" checked disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="Types[]" value="IFS" checked disabled>
         <label class="form-check-label" for="inlineCheckbox1">Indoor Formation Skydiving</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="ISF" checked disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="Types[]" value="ISF" checked disabled>
         <label class="form-check-label" for="inlineCheckbox5">Indoor Solo Freestyle</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="ISS" checked disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" name="Types[]" value="ISS" checked disabled>
         <label class="form-check-label" for="inlineCheckbox6">Indoor Solo Speed</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="DY" checked disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" name="Types[]" value="DY" checked disabled>
         <label class="form-check-label" for="inlineCheckbox7">Dynamic Flying</label>
       </div>
     </fieldset>
@@ -132,15 +132,15 @@
     <fieldset>
       <legend>Generic pack:</legend>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="WSP" checked disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" name="Types[]" value="WSP" checked disabled>
         <label class="form-check-label" for="inlineCheckbox8">Wingsuit Flying Perfomance</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="CP" disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox9" name="Types[]" value="CP" disabled>
         <label class="form-check-label" for="inlineCheckbox9">Canopy Piloting</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="SP" disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox10" name="Types[]" value="SP" disabled>
         <label class="form-check-label" for="inlineCheckbox10">Speed Skydiving</label>
       </div>
     </fieldset>
@@ -151,43 +151,43 @@
     <fieldset>
       <legend>Choose disciplines you need:</legend>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="FS">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="Types[]" value="FS">
         <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="AE">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="Types[]" value="AE">
         <label class="form-check-label" for="inlineCheckbox2">Artistic Events</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="SFS">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="Types[]" value="SFS">
         <label class="form-check-label" for="inlineCheckbox3">Speed Formation</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="CF">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="Types[]" value="CF">
         <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="ISF" disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="Types[]" value="ISF" disabled>
         <label class="form-check-label" for="inlineCheckbox5">Indoor Solo Freestyle</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="ISS" disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" name="Types[]" value="ISS" disabled>
         <label class="form-check-label" for="inlineCheckbox6">Indoor Solo Speed</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="DY" disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" name="Types[]" value="DY" disabled>
         <label class="form-check-label" for="inlineCheckbox7">Dynamic Flying</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="WSP" disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" name="Types[]" value="WSP" disabled>
         <label class="form-check-label" for="inlineCheckbox8">Wingsuit Flying Perfomance</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="CP" disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox9" name="Types[]" value="CP" disabled>
         <label class="form-check-label" for="inlineCheckbox9">Canopy Piloting</label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox10" value="SP" disabled>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox10" name="Types[]" value="SP" disabled>
         <label class="form-check-label" for="inlineCheckbox10">Speed Skydiving</label>
       </div>
     </fieldset>
