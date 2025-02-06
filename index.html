@@ -32,8 +32,10 @@
 <script>
   function getComboA(selectObject) {
     var value = selectObject.value;
-    setCookie(selectObject.id, value)
+    if (value==0) deleteCookie(selectObject.id)
+    else setCookie(selectObject.id, value)
     setCookie('page', 0)
+    location.reload(true); // перезагрузка страницы с сервера
     console.log(document.cookie)
   }
   function clearCookie() {
@@ -141,10 +143,10 @@
           </select>
         </li>
       </ul>  
-      <form role="search" class="d-flex">
+      <div role="search" class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="Name">
           <button class="btn btn-outline-success" type="submit" onclick="getComboA(Name);">Search</button>
-      </form>
+      </div>
     </div>
   </div>
 </nav>
