@@ -45,7 +45,7 @@
   }
   function loadDataContent() {
     // получаем из сервера json со списком event
-    fetch('https://zeroturtle.github.io/events.json') //здесь будет вызов скрипта event.php
+    fetch('https://zeroturtle.github.io/events.json') //здесь будет вызов php скрипта, возвращает json массив event.
       .then(response => response.json())
       .then(json => {
       // считать template строки event
@@ -162,13 +162,15 @@
             <td class="w-75">
               <div class="row">
                 <div class="col d-block text-uppercase">
-                  <span class="fw-bold"><a class="text-decoration-none" href="${event.id}/index.html">${event.name}</a></span>
+                  <a class="text-decoration-none" href="${event.id}/index.html">
+                  <span class="fw-bold">${event.name}</span>
                   <br>
                   <span class="text-secondary">${event.date_start} - ${event.date_end}</span>
                   <br>
                   <span class="text-secondary">${event.location}</span>
+                  </a>
                 </div>
-                <div class="col d-none d-md-block">${ranks}
+                <div class="col d-none d-md-block">${events}
                 </div>
               </div>
             </td>
