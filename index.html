@@ -10,7 +10,7 @@
 
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <script src="./cookie.js"></script>
 <style>
 .background-image {
             position: relative;
@@ -32,10 +32,16 @@
 <script>
   function getComboA(selectObject) {
     var value = selectObject.value;
-    document.cookie = `${selectObject.id}=${value}; samesite=strict`
-    document.cookie = 'page=0; samesite=strict'
+    setCookie(selectObject.id, value)
+    setCookie('page', 0)
     console.log(document.cookie)
-    console.log(value);  //установить значение фильтра в cookie
+  }
+  function clearCookie() {
+    deleteCookie('Year');
+    deleteCookie('Type');
+    deleteCookie('Name');
+    deleteCookie('page');
+    console.log(document.cookie)
   }
   function loadDataContent() {
     // получаем из сервера json со списком event
@@ -59,6 +65,7 @@
       })
       .catch(error => console.log('Ошибка чтения json:', error)); 
   } //loadDataContent
+
   // загружаем первую страницу
   window.addEventListener('load', loadDataContent);
   //подгружаем следующую часть списка в конце страницы
@@ -112,7 +119,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <!-- все поддерживаемые дисциплины -->
         <li class="nav-item">
-          <a class="nav-link link-warning" aria-current="page" id="ALL" href="#">Выберите сезон и тип соревнований для отображения.</a>
+          <a class="nav-link link-warning" aria-current="page" id="ALL" href="#" onclick="clearCookie();">Выберите сезон и тип соревнований для отображения.</a>
         </li>
         <li class="d-flex">
           <select class="form-select" title="Choose a season" id="Year" onchange="getComboA(this);">
@@ -157,9 +164,9 @@
                 <div class="col d-block text-uppercase">
                   <span class="fw-bold"><a class="text-decoration-none" href="${event.id}/index.html">${event.name}</a></span>
                   <br>
-                  <span class="text-secondary">${event.datefrom} - ${event.dateto}</span>
+                  <span class="text-secondary">${event.date_start} - ${event.date_end}</span>
                   <br>
-                  <span class="text-secondary">${event.place}</span>
+                  <span class="text-secondary">${event.location}</span>
                 </div>
                 <div class="col d-none d-md-block">${ranks}
                 </div>
