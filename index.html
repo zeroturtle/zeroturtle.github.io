@@ -60,7 +60,10 @@
             var rank = event.events[key1]
             ranks += eval('`'+rank_tmpl.innerHTML+'`')
           }	
-          EventsList.insertAdjacentHTML('beforeend', eval('`'+event_tmpl.innerHTML+'`'))
+          if (getCookie('page')==0) 
+            EventsList.insertHTML = eval('`'+event_tmpl.innerHTML+'`')
+          else
+            EventsList.insertAdjacentHTML('beforeend', eval('`'+event_tmpl.innerHTML+'`'))
         }
       })
       .catch(error => console.log('Ошибка чтения json:', error)); 
