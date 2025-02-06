@@ -35,7 +35,8 @@
     if (value==0) deleteCookie(selectObject.id)
     else setCookie(selectObject.id, value)
     setCookie('page', 0)
-    location.reload(true); // перезагрузка страницы с сервера
+    //location.reload(true); // перезагрузка страницы с сервера
+    loadDataContent();
     console.log(document.cookie)
   }
   function clearCookie() {
@@ -73,7 +74,7 @@
   //подгружаем следующую часть списка в конце страницы
   window.addEventListener('scroll', event => { 
     if(window.scrollY+1 >= document.body.scrollHeight - innerHeight) {
-      loadDataContent(); // Code here
+      loadDataContent(); 
     }
   }); 
 /*
