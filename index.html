@@ -35,8 +35,7 @@
     if (value==0) deleteCookie(selectObject.id)
     else setCookie(selectObject.id, value)
     setCookie('page', 0)
-    //location.reload(true); // перезагрузка страницы с сервера
-    EventsList.innerHTML = ''
+    EventsList.innerHTML = ''  // загрузка данных с 0 страницы
     loadDataContent()
     console.log(document.cookie)
   }
@@ -78,18 +77,6 @@
       loadDataContent() 
     }
   }); 
-/*
-  function addRowHandlers() {
-    var rows = document.getElementById("EventsList").rows;
-    for (i = 0; i < rows.length; i++) {
-        rows[i].onclick = function(){ return function(){
-               window.open(new URL(this.getAttribute('id')+'/index.html', window.location.href));
-        };}(rows[i]);
-        rows[i].style.cursor='pointer'; //покажем кликабельность
-    }
-  }
-  window.addEventListener("load", addRowHandlers);
-*/
 </script>
   </head>
   <body lang="en">
