@@ -8,9 +8,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-<style></style>
+    <style></style>
   </head>
   <body lang="en">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </symbol>
+</svg>
 
 <div class="container">
 
@@ -25,10 +36,10 @@
 		<br><span class="fs-6">current release <strong>"Artemis"</strong> version 5.0.0.8</span>
              </div>
 		<div class="col" >
-		<a href="#about" class="btn btn-info pull-right" role="button">About OPTIMUS</a>
-		<a href="#policy" class="btn btn-info pull-right" role="button">Subscription</a>
-		<a href="#summary" class="btn btn-info pull-right" role="button">Summary</a>
-		<a href="#feedback" class="btn btn-info pull-right" role="button">Contact Us</a>
+		<a href="#about" class="btn btn-info pull-right text-nowrap" role="button">About</a>
+		<a href="#policy" class="btn btn-info pull-right text-nowrap" role="button">Subscription</a>
+		<a href="#summary" class="btn btn-info pull-right text-nowrap" role="button">Summary</a>
+		<a href="#feedback" class="btn btn-info pull-right text-nowrap" role="button">Contact Us</a>
 		</div>
          </div>
     </div>
@@ -43,16 +54,19 @@
 
 <h3>The Philosophy</h3>
 <p>Замыселом OPTIMUS движет эти цели - increase Quality of life (QoL):
-<ul  style="list-style-type:none;">
-	<li>zero-administration approach: No installation, No specialised equipment is required (Используется стандартное компьютерное оборудование); The system is designed to be run by you, independently of us;</li>
-	<li>Flexability, Easy to Customize: возможность адаптировать под персональные требования или условия использования;</li>
-	<li>Доступность для любого бюджета: Вы самостоятельно формируете стоимость подписки; <strong>Free for individual applying</strong>; </li>
-	<li>подробная документация, техподдержка, регулярные обновления системы - гарантия, что Вы всегда используете самые современные технические решения и методики;</li>
-	<li></li>
+<ul style="list-style-type:none;">
+	<li><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+		zero-administration approach: No installation, No specialised equipment is required (Используется стандартное компьютерное оборудование); The system is designed to be run by you, independently of us;</li>
+	<li><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+		Flexability, Easy to Customize: возможность адаптировать под персональные требования или условия использования;</li>
+	<li><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+		Доступность для любого бюджета: Вы самостоятельно формируете стоимость подписки; <strong>Free for individual applying</strong>; </li>
+	<li><svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+		подробная документация, техподдержка, регулярные обновления системы - гарантия, что Вы всегда используете самые современные технические решения и методики;</li>
 </ul>
 </p>
-<div class="mb-3 d-flex justify-content-center align-items-center bd-highlight">
-	<div class="p-2 bd-highlight">Sign up for free to get started<br><a class="btn btn-primary rounded-pill btn-lg text-nowrap" href="#" role="button">Download Free</a></div>
+<div class="mb-3 d-flex justify-content-center align-items-center bd-highlight alert alert-dark">
+	<div class="p-2 bd-highlight"><a class="btn btn-primary rounded-pill btn-lg text-nowrap" href="#" role="button">Download Free</a></div>
 	<div class="p-2 bd-highlight"><a href="#policy" class="h5">Subscription advantages.</a></div>
 </div>
 </div>
@@ -60,15 +74,8 @@
 
 
 <div id="policy" class="border-top">
-<div>
 	<h1>Subscription</h1>
-	<h3>Technical Support</h3>
-	OPTIMUS предоставляет техническую поддержку для клиентов с активной подпиской. 	Для оформления подписки необходимо заполнить форму заявки на сайте.
-	В заявке указывается регистрационная информация и список требуемых дисциплин. Online заявки обрабатываются автоматически 24/7.
-	<p>ВАЖНО! Используйте действительный email для получения файла лицензии и ссылки для загрузки системы. </p>
-</div>
 <div>
-	<h3>Лицензирование</h3>
 	<p>Лицензия на 1год включена в каждую подписку продукта. Годовой период рассчитывается как 365-дней с даты оформления подписки. </p>
 	<div><strong>Individual Subscription</strong> is a free version of the OPTIMUS, позволяет нашей судейской community:
 	<ul><li>тренироваться самостоятельно</li>
@@ -77,7 +84,9 @@
 	<li>получать online-консультации</li>
 	<li>участвовать в программе Beta-тестирования</li>
 	</ul>
-	Индивидуальная подписка не предназначена для использования на соревнованиях. 
+	<div class="alert alert-warning d-flex align-items-center" role="alert">
+		<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  		Индивидуальная подписка не предназначена для использования на соревнованиях. </div>
 	</div>
 	<div>
 	Пользователи, оформившие <strong>Premium Subscription</strong>, имеют право на:
@@ -89,9 +98,23 @@
 	<li>Все преимущества индивидуальной подписки</li>
 	</ul>
 	</div>
-	<div>При использовании OPTIMUS без подписки или с истекшим сроком подписки применяется <strong>Freemium model</strong> - когда все дисциплины работают в singlemode, без возможности технической поддержки.<br>
-	Дополнительная информация касательно использования OPTIMUS может быть найдена в документации.
-	С нашей службой поддержки можно связаться по email <a href="mailto:support@optimus.dp.ua">support@optimus.dp.ua</a> или отправить ваш запрос используя форму с нашего сайта. Обычно мы отвечаем в течении 24 часа;</div>
+	<div class="alert alert-warning d-flex align-items-center" role="alert">
+		<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+		<div>При использовании OPTIMUS без подписки или с истекшим сроком подписки применяется <strong>Freemium model</strong> - когда все дисциплины работают в singlemode, без возможности технической поддержки.</div>
+	</div>
+<div>
+	<h3>Technical Support</h3>
+	OPTIMUS предоставляет техническую поддержку для клиентов с активной подпиской. 	Для оформления подписки необходимо заполнить форму заявки на сайте.
+	В заявке указывается регистрационная информация и список требуемых дисциплин. Online заявки обрабатываются автоматически 24/7.
+	<p>ВАЖНО! Используйте действительный email для получения файла лицензии и ссылки для загрузки системы. </p>
+</div>
+
+	<div class="alert alert-primary" role="alert">
+		<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+		Дополнительная информация касательно использования OPTIMUS может быть найдена в документации.<br>
+		С нашей службой поддержки можно связаться по email <a href="mailto:support@optimus.dp.ua">support@optimus.dp.ua</a> или отправить ваш запрос используя форму с нашего сайта. Обычно мы отвечаем в течении 24 часа;
+	</div>
+
 </div>
 <div>
 	<h3>Pricing</h3>
@@ -118,11 +141,11 @@
 <div id="advantages">
 	<h3>Subscription advantages</h3>
 	<ul>
+	<li>Доступны <strong>пакеты</strong> из трех дисциплин за $510 (15% off): для outdoor [FS, SF, AE] и для indoor [DY, DS, ISF].<br> Стоимость дисциплин [IFS, CF, WS] дополнительно к пакету расчитывается по цене пакета ($170)</li>
 	<li>The OPTIMUS <strong>Renewal Program</strong> Опция позволяет продлить подписку <u>до истечения</u> Вашей текущей подписки at an upgrade price equal to 25% of the list price.</li>
 	<li>After your regular software subscription expires, you have 12 months to renew your subscription at the old price before the price increases.</li>
 	<li>The OPTIMUS <strong>Competitive Upgrade Program</strong> подволяет пользователям конкурирующих продуктов, оформить премиум подписку со скидкой 30% (требуется подтверждение собственности конкурирующего продукта).</li>
 	<li><strong>Beta-testing</strong> participants get Premium Subscription <strong>for free</strong> (для выбранной дисциплины). Дает возможность участвовать в разработке продукта, адаптировать новые доработки под персональные требования или условия использования. Требует получения отдельной лицензии.</li>
-	<li>Доступны <strong>пакеты</strong> из трех дисциплин за $510 (15% off): для outdoor [FS, SF, AE] и для indoor [DY, DS, ISF].<br> Стоимость дисциплин [IFS, CF, WS] дополнительно к пакету расчитывается по цене пакета ($170)</li>
 	</ul>
 <p>Following your renewal, you will receive software updates and version upgrades with new features and personalised technical support<br>
 Please let us know if you require any further information or assistance with OPTIMUS and services.</p>
