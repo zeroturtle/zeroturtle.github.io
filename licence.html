@@ -19,7 +19,7 @@
     <div class="my-3 text-center">
      Read <a href="about.html#policy">Subscription policy</a>.
     </div>
-<form>
+<form method="post" action="licence.php">
   <fieldset>
     <div class="mb-3">
       <label for="FirstName" class="form-label">First Name: </label>
@@ -40,8 +40,8 @@
     </div>
     <div class="mb-3">
       <label for="Role" class="form-label">Role: </label>
-      <select class="form-select" id="Role" aria-label="Default select example" required placeholder="Ваш статус" >
-        <option selected>- Select an option -</option>
+      <select class="form-select" id="Role" required aria-label="Выберите статус">
+        <option value=""selected hidden data-placeholder="true">Укажите Ваш статус</option>
         <option value="1">DZ Owner</option>
         <option value="2">Judge</option>
         <option value="3">Organizer</option>
@@ -50,11 +50,11 @@
     <div class="mb-3">
       <label class="form-label">License type: </label>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="LicenseType" id="flexRadioDefault1">
+        <input class="form-check-input" type="radio" name="LicenceType" id="flexRadioDefault1" value="0" checked>
         <label class="form-check-label" for="flexRadioDefault1"> Individual </label>
       </div>
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="LicenseType" id="flexRadioDefault2" checked>
+        <input class="form-check-input" type="radio" name="LicenceType" id="flexRadioDefault2" value="1">
         <label class="form-check-label" for="flexRadioDefault2"> Premium </label>
       </div>
       <p><small>Choose an option for individual or per-competition use.</small></p>
@@ -203,7 +203,7 @@
 <!-- Конец licence -->
 </div>
 
-    <div  class="row fixed-bottom">
+    <div  class="row">
        <div class="col text-center">
          OPTIMUS Copyright &copy; 2025  <a href="about.html#feedback">Команда Optimus</a><br>
          <a href="about.html#privacy">Privacy Policy</a>
