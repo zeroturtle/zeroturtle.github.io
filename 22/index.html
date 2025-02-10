@@ -10,7 +10,7 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>${COMPETITION_NAME}</title>
+    <title>{$COMPETITION_NAME}</title>
   </head>
 
 <body id="Body">
@@ -28,16 +28,16 @@
       <div class="col-10 col-sm-8 col-md-8">
         <div class="row text-uppercase">
           <div class="col-12 h2">
-            <div id="COMPETITION_NAME">${COMPETITION_NAME}</div>
+            <div id="COMPETITION_NAME">{$COMPETITION_NAME}</div>
           </div>
           <div class="col-12 h4">
-            <div id="DESCRIPTION">${DESCRIPTION}</div>
+            <div id="DESCRIPTION">{$DESCRIPTION}</div>
           </div>
           <div class="col-12 h6">
-            <div id="DATE_FROM" class="d-inline-block">${DATE_FROM}</div> - <div id="DATE_TO" class="d-inline-block">${DATE_TO}</div>
+            <div id="DATE_FROM" class="d-inline-block">{$DATE_FROM}</div> - <div id="DATE_TO" class="d-inline-block">{$DATE_TO}</div>
           </div>
           <div class="col-12 h6">
-             <div id="PLACE">${PLACE}</div>
+             <div id="PLACE">{$PLACE}</div>
           </div>
         </div>
       </div>
@@ -46,9 +46,9 @@
 <hr>
 
 <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">4-Way FS</a>
-  </li>
+  {foreach $RANK as $rank}
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#{$rank->id}">{$rank->name}</a></li>
+  {/foreach}
 </ul>
   <dialog modal-mode="mega">
     <header>  <h3></h3>  <div onclick="this.closest('dialog').close()" style="max-width: 1em;cursor: pointer;">X</div>  </header>
