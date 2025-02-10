@@ -10,7 +10,7 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <title>${COMPETITION_NAME}</title>
+    <title>{$COMPETITION_NAME}</title>
   </head>
 
 <body id="Body">
@@ -28,16 +28,16 @@
       <div class="col-10 col-sm-8 col-md-8">
         <div class="row text-uppercase">
           <div class="col-12 h2">
-            <div id="COMPETITION_NAME">${COMPETITION_NAME}</div>
+            <div id="COMPETITION_NAME">{$COMPETITION_NAME}</div>
           </div>
           <div class="col-12 h4">
-            <div id="DESCRIPTION">${DESCRIPTION}</div>
+            <div id="DESCRIPTION">{$DESCRIPTION}</div>
           </div>
           <div class="col-12 h6">
-            <div id="DATE_FROM" class="d-inline-block">${DATE_FROM}</div> - <div id="DATE_TO" class="d-inline-block">${DATE_TO}</div>
+            <div id="DATE_FROM" class="d-inline-block">{$DATE_FROM}</div> - <div id="DATE_TO" class="d-inline-block">{$DATE_TO}</div>
           </div>
           <div class="col-12 h6">
-             <div id="PLACE">${PLACE}</div>
+             <div id="PLACE">{$PLACE}</div>
           </div>
         </div>
       </div>
@@ -46,10 +46,11 @@
 <hr>
 
 <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">4-Way FS</a>
-  </li>
+  {foreach $RANK as $rank}
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#{$rank->id}">{$rank->name}</a></li>
+  {/foreach}
 </ul>
+
   <dialog modal-mode="mega">
     <header>  <h3></h3>  <div onclick="this.closest('dialog').close()" style="max-width: 1em;cursor: pointer;">X</div>  </header>
     <div id="scoreDetails">
@@ -58,6 +59,7 @@
     <footer> <button autofocus type="reset" style="margin-left: auto; display: block;" onclick="this.closest('dialog').close('close')">Close</button> </footer>
   </dialog>
   <div id="scoreSummary" class="table-responsive p-0 w-100"> <script src="result.js"></script> </div>
+
   <div title="UA"> Усі результати є неофіційними до підписання головним суддею.</div> 
 
 
@@ -65,16 +67,6 @@
     <div class="text-center">
       &copy 2024  <a href="#feedback">Команда Optimus</a>
       <a href="#privacy">Privacy Policy</a>
-    </div>
-    <div class="d-flex justify-content-center my-2 py-3"> Follow us
-      <!-- Facebook -->
-      <a data-mdb-ripple-init class="btn btn-primary" style="background-color: #3b5998;" href="#!" role="button"><i class="fa fa-facebook-f"></i></a>
-      <!-- Instagram -->
-      <a data-mdb-ripple-init class="btn btn-primary" style="background-color: #ac2bac;" href="#!" role="button"><i class="fa fa-instagram"></i></a>
-      <!-- Youtube -->
-      <a data-mdb-ripple-init class="btn btn-primary" style="background-color: #ed302f;" href="#!" role="button"><i class="fa fa-youtube"></i></a>
-      <!-- Whatsapp -->
-      <a data-mdb-ripple-init class="btn btn-primary" style="background-color: #25d366;" href="#!" role="button"><i class="fa fa-whatsapp"></i></a>
     </div>
   </div>
 
