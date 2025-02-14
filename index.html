@@ -49,7 +49,7 @@
   }
   function loadDataContent() {
     // получаем из сервера json со списком event
-    fetch('https://zeroturtle.github.io/events.json') //здесь будет вызов php скрипта, возвращает json массив event.
+    fetch('https://zeroturtle.github.io/events.json') //здесь вызвать index.php, возвращает json массив event.
       .then(response => response.json())
       .then(json => {
       // считать template строки event
