@@ -2,7 +2,7 @@
 const eventDivepool = 'FS4';
 
 // çàãðóæàåì ïðîòîêîë
-window.addEventListener("load", (event) => {
+function loadEvent(event) {
 	fetch(`${baseURL}proto.html`)
 	.then(response => response.text())
 	.then((html) => {
@@ -69,7 +69,7 @@ window.addEventListener("load", (event) => {
 		scoreSummary.append(resultTable)
 		scoreSummary.insertAdjacentHTML('beforebegin', `<link type="text/css" rel="stylesheet" href="${baseURL}proto.css">`);
 	})
-})
+}
 
 // video of perfomance
 function displayRoundVideo() {
@@ -133,6 +133,7 @@ function windowOnClick(event) {
 		modal.close('escape')
 	}
 }
-window.addEventListener("click", windowOnClick); 
+window.addEventListener("load", loadEvent)
+window.addEventListener("click", windowOnClick)
 document.getElementById('scoreSummary').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
 
