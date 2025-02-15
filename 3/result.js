@@ -9,7 +9,7 @@ window.addEventListener("load", (event) => {
 		var doc = new DOMParser().parseFromString(html, "text/html")
 		let params = new URLSearchParams(document.location.search)
 		let Rank = parseInt(params.get("r"), 10)
-		var resultTable = doc.querySelectorAll('table')[Rank?Rank:0]
+		var resultTable = doc.querySelectorAll('table')[isNaN(Rank)?Rank:0]
 		resultTable.setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0)) { 
