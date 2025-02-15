@@ -7,7 +7,8 @@ window.addEventListener("load", (event) => {
 	.then(response => response.text())
 	.then((html) => {
 		var doc = new DOMParser().parseFromString(html, "text/html")
-		var Rank = 0;
+		let params = new URLSearchParams(document.location.search)
+		let Rank = parseInt(params.get("r"), 10)
 		var resultTable = doc.querySelectorAll('table')[Rank]
 		resultTable.setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
