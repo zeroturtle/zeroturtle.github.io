@@ -22,7 +22,7 @@
 <form method="post" action="licence.php">
   <fieldset>
     <div class="mb-3">
-      <label for="FirstName" class="form-label">Name: </label>
+      <label for="Owner" class="form-label">Name: </label>
       <input type="text" class="form-control" id="Owner" required placeholder="Имя, как к Вам обращаться" >
     </div>
     <div class="mb-3">
@@ -55,6 +55,7 @@
       </div>
       <p><small>Choose an option for individual or per-competition use.</small></p>
     </div>
+
   </fieldset>
 
 
@@ -126,8 +127,13 @@
         <label class="form-check-label" for="inlineCheckbox12">Dynamic Flying</label>
       </div>
     </fieldset>
-  </div>    
+  </div>
 </div>
+
+    <div class="float-sm-start p-2">
+      <input class="form-check-input" type="checkbox" id="confirmSubs" name="confirmSubs" required>
+      <label class="form-check-label p-0" for="confirmSubs">I confirm that I will be the only authorized user of the license.</label>
+    </div>
 
 </div>
     <div class="modal-footer">
