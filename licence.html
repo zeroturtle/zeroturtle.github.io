@@ -57,17 +57,8 @@
       <label for="Company" class="form-label">Company: </label>
       <input type="text" class="form-control" id="Company" placeholder="Название организации" >
     </div>
-    <div class="mb-3" hidden>
-      <label class="form-label">License type: </label>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="LicenceType" id="flexRadioDefault1" value="0" checked>
-        <label class="form-check-label" for="flexRadioDefault1"> Individual </label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="LicenceType" id="flexRadioDefault2" value="1">
-        <label class="form-check-label" for="flexRadioDefault2"> Premium </label>
-      </div>
-      <p><small>Choose an option for individual or per-competition use.</small></p>
+    <div class="mb-3">
+      <input type="hidden" name="LicenceType" id="LicenceType" value="1">
     </div>
 
   </fieldset>
