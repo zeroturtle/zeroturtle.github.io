@@ -4,7 +4,8 @@
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <meta http-equiv="Cache-Control" content="no-store">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="icon" type="image/x-icon" href="../images/favicon.png">
+    <script> var baseURL = '{$BASEURL}' </script>
+    <link rel="icon" type="image/png" href="../../images/favicon-96x96.png" sizes="96x96">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
@@ -31,9 +32,6 @@
           <div class="col-12 h2">
             <div id="COMPETITION_NAME">{$COMPETITION_NAME}</div>
           </div>
-          <div class="col-12 h4">
-            <div id="DESCRIPTION">{$DESCRIPTION}</div>
-          </div>
           <div class="col-12 h6">
             <div id="DATE_FROM" class="d-inline-block">{$DATE_FROM}</div> - <div id="DATE_TO" class="d-inline-block">{$DATE_TO}</div>
           </div>
@@ -47,11 +45,11 @@
 <hr>
 
 <ul class="nav nav-tabs">
-  {foreach $RANK as $rank}
-    <li class="nav-item"><a class="nav-link active" aria-current="page" href="?r={$rank->id}">{$rank->name}</a></li>
+  {foreach from=$RANK item=rank name=foo}
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="?r={$smarty.foreach.foo.index}">{$rank->name}</a></li>
   {/foreach}
 </ul>
-
+{literal}
   <dialog modal-mode="mega">
     <header>  <h3></h3>  <div onclick="this.closest('dialog').close()" style="max-width: 1em;cursor: pointer;">X</div>  </header>
     <div id="scoreDetails">
@@ -60,7 +58,7 @@
     <footer> <button autofocus type="reset" style="margin-left: auto; display: block;" onclick="this.closest('dialog').close('close')">Close</button> </footer>
   </dialog>
   <div id="scoreSummary" class="table-responsive p-0 w-100"> <script src="result.js"></script> </div>
-
+{/literal}
   <div title="UA"> Усі результати є неофіційними до підписання головним суддею.</div> 
 
 
