@@ -52,7 +52,7 @@
     if (isLoading) { return; }
     isLoading = true;
     // получаем из сервера json со списком event
-    fetch('https://zeroturtle.github.io/events.json?page='+page) //здесь вызвать index.php, возвращает json массив event.
+    fetch('http://127.0.0.1/index.php?page='+page) //здесь вызвать index.php, возвращает json массив event.
       .then(response => response.json())
       .then(json => {
         // считать template строки event
@@ -64,7 +64,7 @@
           event.datefrom = new Date(event.datefrom).toDateString()    // преобразуем поле даты в строку
           event.dateto = new Date(event.dateto).toDateString()
           var ranks = ''
-          event.events.forEach((rank, index)=>{
+          event.events.forEach( (rank, index) => {
             ranks += eval('`'+rank_tmpl.innerHTML+'`')
           })
           EventsList.insertAdjacentHTML('beforeend', eval('`'+event_tmpl.innerHTML+'`'))
@@ -179,7 +179,7 @@
         </template>
 
     <div class="table-responsive">
-      <table class="table table-striped table-hover w-100">
+      <table class="table table-striped table-hover align-middle">
         <tbody id="EventsList">
         </tbody>
       </table>
