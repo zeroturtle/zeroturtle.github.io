@@ -52,7 +52,7 @@
     if (isLoading) { return; }
     isLoading = true;
     // получаем из сервера json со списком event
-    fetch('http://127.0.0.1/index.php?page='+page) //здесь вызвать index.php, возвращает json массив event.
+    fetch('https://zeroturtle.github.io/events.json?page='+page) //здесь вызвать index.php, возвращает json массив event.
       .then(response => response.json())
       .then(json => {
         // считать template строки event
