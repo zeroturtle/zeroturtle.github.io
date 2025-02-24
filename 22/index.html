@@ -47,9 +47,8 @@
 <hr>
 
 <ul class="nav nav-tabs">
-  {foreach $RANK as $rank}
-    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#{$rank->id}">{$rank->name}</a></li>
-  {/foreach}
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="?r=0">FS 4-way Open</a></li>
+    <li class="nav-item"><a class="nav-link active" aria-current="page" href="?r=1">FS 2-way </a></li>
 </ul>
   <dialog modal-mode="mega">
     <header>  <h3></h3>  <div onclick="this.closest('dialog').close()" style="max-width: 1em;cursor: pointer;">X</div>  </header>

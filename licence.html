@@ -37,16 +37,16 @@
   <fieldset>
     <div class="mb-3">
       <label for="Owner" class="form-label">Name: </label>
-      <input type="text" class="form-control" id="Owner" required placeholder="Имя, как к Вам обращаться" >
+      <input type="text" class="form-control" id="Owner" name="Owner" required placeholder="Имя, как к Вам обращаться" >
     </div>
     <div class="mb-3">
       <label for="Email" class="form-label">Email address: </label>
-      <input type="email" class="form-control" id="Email" required placeholder="Адрес электронной почты">
+      <input type="email" class="form-control" id="Email"name="Email" required placeholder="Адрес электронной почты">
       <small>We'll never share your email with anyone else.</small>
     </div>
     <div class="mb-3">
       <label for="Role" class="form-label">Category: </label>
-      <select class="form-select" id="Role" required>
+      <select class="form-select" id="Role" name="Role" required>
         <option value=""selected hidden data-placeholder="true">Выберите категорию пользователя</option>
         <option value="1">DZ Owner</option>
         <option value="2">Judge</option>
@@ -55,7 +55,7 @@
     </div>
     <div class="mb-3">
       <label for="Company" class="form-label">Company: </label>
-      <input type="text" class="form-control" id="Company" placeholder="Название организации" >
+      <input type="text" class="form-control" id="Company" name="Company" placeholder="Название организации" >
     </div>
     <div class="mb-3">
       <input type="hidden" name="LicenceType" id="LicenceType" value="1">
@@ -95,7 +95,7 @@
         <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
       </div>
       <div class="float-sm-start p-2">
-        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="Types[]" value="WP" checked>
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="Types[]" value="WS" checked>
         <label class="form-check-label" for="inlineCheckbox5">Wingsuit Flying Perfomance</label>
       </div>
       <div class="float-sm-start p-2">

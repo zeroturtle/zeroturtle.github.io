@@ -30,52 +30,58 @@
         }
 </style>
 <script>
+  var page = 0;
+  var isLoading = false;
   function getComboA(selectObject) {
     var value = selectObject.value;
     if (value==0) deleteCookie(selectObject.id)
     else setCookie(selectObject.id, value)
-    setCookie('page', 0)
-    EventsList.innerHTML = ''  // загрузка данных с 0 страницы
-    loadDataContent()
-    //console.log(document.cookie)
+    window.location.reload();
   }
   function clearCookie() {
     deleteCookie('Year');
     deleteCookie('Type');
     deleteCookie('Name');
-    deleteCookie('page');
-    EventsList.innerHTML = ''
-    loadDataContent()
+    window.location.reload();
   }
+  /* thanks to 
+	https://www.toolify.ai/gpts/how-to-implement-infinite-scroll-pagination-with-php-mysql-jquery-366007
+	https://sky.pro/media/kak-sozdat-sajt-s-dinamicheskoj-zagruzkoj-kontenta-pri-prokrutke/#title2
+*/	
   function loadDataContent() {
+    if (isLoading) { return; }
+    isLoading = true;
     // получаем из сервера json со списком event
-    fetch('https://zeroturtle.github.io/events.json') //здесь вызвать index.php, возвращает json массив event.
+    fetch('http://127.0.0.1/index.php?page='+page) //здесь вызвать index.php, возвращает json массив event.
       .then(response => response.json())
       .then(json => {
-      // считать template строки event
+        // считать template строки event
         const event_tmpl = document.querySelector("#event_tmpl")
         const rank_tmpl = document.getElementById("rank_tmpl")
-        for (var key in json) {
-          var event = json[key]
-          event.id = key
+        for (item in json) {
+          var event = json[item]	//item = competition_id
+          event.id = item.slice(1)	//убираем первый пробел (см. индекс массива Events) - prevent sort
           event.datefrom = new Date(event.datefrom).toDateString()    // преобразуем поле даты в строку
           event.dateto = new Date(event.dateto).toDateString()
           var ranks = ''
-          for (var key1 in event.events) {
-            var rank = event.events[key1]
+          event.events.forEach((rank, index)=>{
             ranks += eval('`'+rank_tmpl.innerHTML+'`')
-          }
+          })
           EventsList.insertAdjacentHTML('beforeend', eval('`'+event_tmpl.innerHTML+'`'))
         }
+        isLoading = false;
+        page++
       })
       .catch(error => console.log('Ошибка чтения json:', error)); 
-  } //loadDataContent
+  }
 
   // загружаем первую страницу
   window.addEventListener('load', loadDataContent);
   //подгружаем следующую часть списка в конце страницы
-  window.addEventListener('scroll', event => { 
-    if(window.scrollY+1 >= document.body.scrollHeight - innerHeight) {
+  window.addEventListener('scroll', () => { 
+    var scrollPosition = window.innerHeight + window.pageYOffset;
+    var pageHeight = document.documentElement.scrollHeight;
+    if ((scrollPosition >= pageHeight - 100) && !isLoading) {
       loadDataContent() 
     }
   }); 
@@ -147,12 +153,12 @@
         <!-- использовать template для построения списка -->
         <template  id="event_tmpl">
           <tr id="${event.id}">
-            <td class="w-auto align-top"><img class="img-fluid" src="${event.id}/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="${event.id}/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="w-auto align-top"><img class="img-fluid" src="events/${event.id}/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="events/${event.id}/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-75">
               <div class="row">
                 <div class="col d-block text-uppercase">
-                  <a class="text-decoration-none" href="${event.id}/index.html">
+                  <a class="text-decoration-none" href="events/${event.id}/index.html">
                   <span class="fw-bold">${event.name}</span>
                   <br>
                   <span class="text-secondary">${event.date_start} - ${event.date_end}</span>
@@ -168,7 +174,7 @@
         </template>
         <template  id="rank_tmpl">
                   <span class="border-start border-2 px-2" style="display:inline-block;float:right;">
-                    <a class="text-decoration-none" href="${event.id}/index.html?r=${rank.id}">${rank.name}</a> 
+                    <a class="text-decoration-none" href="events/${event.id}/index.html?r=${index}">${rank.name}</a> 
                   </span>
         </template>
 

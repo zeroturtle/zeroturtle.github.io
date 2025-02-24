@@ -14,7 +14,7 @@ td {
 tr:nth-child(1) td {
   display: none;
 }
-tr:nth-child(-n+4) td {
+tr:nth-child(-n+3) td {
 /*
 Bootstrap theme colors
 --bs-primary: #0d6efd;
@@ -38,7 +38,7 @@ purple: #6f42c1;
 indigo: #6610f2;
 blue:   #0d6efd;
 */
-  background-color: #6610f2 !important; /*color-mix(in oklab, orange 100%, black 0%) */
+  background-color: #0d6efd !important; /*color-mix(in oklab, orange 100%, black 0%) */
   color: #FFFFFF;
   border-left-color:#FFFFFF; border-left-style: solid; border-left-width: 1px;
   border-bottom-color:#FFFFFF; border-bottom-style: solid; border-bottom-width: 1px;
@@ -47,10 +47,10 @@ blue:   #0d6efd;
 tr:nth-of-type(-n+8) { 
   font-weight: bold; 
 }
-tr:nth-child(n+4) td { 
+tr:nth-child(n+3) td { 
   border-bottom-color:#C0C0C0; border-bottom-style: solid; border-bottom-width: 1px;
 }
-tr:nth-child(n+4) td:nth-child(3) { /* FIO column */
+tr:nth-child(n+3) td:nth-child(3) { /* FIO column */
   white-space: nowrap !important;
   text-align: Left; vertical-align: Middle;
 }

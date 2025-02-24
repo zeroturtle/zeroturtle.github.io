@@ -25,7 +25,7 @@ function getCookie(name, json=false) {
   return undefined;
 }
 
-function setCookie(name, value, options = {path: '/', samesite: 'strict'}) {
+function setCookie(name, value, options = {path: '/', SameSite: 'strict'}) {
   /*
   Sets a cookie with specified name (str), value (str) & options (dict)
 
