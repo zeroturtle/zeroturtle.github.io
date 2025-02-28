@@ -60,7 +60,9 @@
         const rank_tmpl = document.getElementById("rank_tmpl")
         for (item in json) {
           var event = json[item]	//item = competition_id
+console.log(event.id);
           event.id = item.slice(1)	//убираем первый пробел (см. индекс массива Events) - prevent sort
+console.log(event.id);
           event.datefrom = new Date(event.datefrom).toDateString()    // преобразуем поле даты в строку
           event.dateto = new Date(event.dateto).toDateString()
           var ranks = ''
