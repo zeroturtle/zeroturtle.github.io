@@ -52,7 +52,7 @@
     if (isLoading) { return; }
     isLoading = true;
     // получаем из сервера json со списком event
-    fetch('https://zeroturtle.github.io/events.json') //здесь вызвать index.php, возвращает json массив event.
+    fetch('https://zeroturtle.github.io?page='+page) //здесь вызвать index.php, возвращает json массив event.
       .then(response => response.json())
       .then(json => {
         // считать template строки event
@@ -60,9 +60,7 @@
         const rank_tmpl = document.getElementById("rank_tmpl")
         for (item in json) {
           var event = json[item]	//item = competition_id
-console.log(event.id);
           event.id = item.slice(1)	//убираем первый пробел (см. индекс массива Events) - prevent sort
-console.log(event.id);
           event.datefrom = new Date(event.datefrom).toDateString()    // преобразуем поле даты в строку
           event.dateto = new Date(event.dateto).toDateString()
           var ranks = ''
@@ -155,12 +153,12 @@ console.log(event.id);
         <!-- использовать template для построения списка -->
         <template  id="event_tmpl">
           <tr id="${event.id}">
-            <td class="w-auto align-top"><img class="img-fluid" src="events/${event.id}/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="events/${event.id}/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="w-auto align-top"><img class="img-fluid" src="${event.id}/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="w-auto align-top d-none d-sm-block"><img class="img-fluid" src="${event.id}/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-75">
               <div class="row">
                 <div class="col d-block text-uppercase">
-                  <a class="text-decoration-none" href="events/${event.id}/index.html">
+                  <a class="text-decoration-none" href="${event.id}/index.html">
                   <span class="fw-bold">${event.name}</span>
                   <br>
                   <span class="text-secondary">${event.date_start} - ${event.date_end}</span>
@@ -176,7 +174,7 @@ console.log(event.id);
         </template>
         <template  id="rank_tmpl">
                   <span class="border-start border-2 px-2" style="display:inline-block;float:right;">
-                    <a class="text-decoration-none" href="events/${event.id}/index.html?r=${index}">${rank.name}</a> 
+                    <a class="text-decoration-none" href="${event.id}/index.html?r=${index}">${rank.name}</a> 
                   </span>
         </template>
 
