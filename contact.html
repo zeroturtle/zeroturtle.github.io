@@ -23,6 +23,12 @@
 		document.getElementById("myForm").reset();
             });
         }
+	const form = document.querySelector("#myForm");
+	// Take over form submission
+	form.addEventListener("submit", (event) => {
+		event.preventDefault();
+		sendData();
+	});
     </script>
   </head>
   <body lang="en">
@@ -50,7 +56,7 @@
   </p>
   <div class="row">
     <div class="card col-lg-6 m-3">
-    <form id="myForm" onsubmit="sendData(event)">
+    <form id="myForm">
 	<div class="row s_col_no_resize s_col_no_bgcolor p-2">
 		<label for="c_name" class="col-form-label col-sm-auto " style="width: 200px" >
 			<span class="s_website_form_label_content fw-bold">Name</span>*
