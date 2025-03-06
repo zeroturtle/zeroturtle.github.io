@@ -28,6 +28,11 @@
             opacity: 0.2; /* Adjust opacity level */
             z-index: -1; /* Ensure background image is behind the text */
         }
+table td:nth-child(-n+2) {
+    width: 100px;
+    white-space: nowrap;
+    text-align: center;
+}
 </style>
 <script>
   var page = 0
@@ -162,8 +167,8 @@
         <!-- использовать template для построения списка -->
         <template  id="event_tmpl">
           <tr id="${event.id}" class="d-flex flex-row">
-            <td class="align-top"><img class="img-fluid" src="${eventsDir}${event.id}/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="align-top d-none d-sm-block"><img class="img-fluid" src="${eventsDir}${event.id}/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="align-top"><img class="img-fluid mx-2" src="${eventsDir}${event.id}/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="align-top d-none d-sm-block"><img class="img-fluid mx-2" src="${eventsDir}${event.id}/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-75">
               <div class="row">
                 <div class="col d-block text-uppercase">
