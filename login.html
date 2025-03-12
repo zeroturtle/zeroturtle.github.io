@@ -1,3 +1,12 @@
+<?php
+// Initialize the session
+session_start();
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if(isset($_SESSION["account_loggedin"]) && $_SESSION["account_loggedin"] === true){
+    header("location: download.html");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,8 +41,8 @@
 		<form action="login.php" method="post">
 		<fieldset>
 		<div class="form-group py-2">
-			<label class="sr-only active">Username or Email</label>
-			<input type="text" id="username_or_email" name="username_or_email" placeholder="Username or Email:*" class="form-control" required>
+			<label class="sr-only active">Username</label>
+			<input type="text" id="username" name="username" placeholder="Username:*" class="form-control" required>
 		</div>        
 		<div class="input-group py-2">
 			<input type="password" id="password" name="password" placeholder="Password:*" class="form-control" data-toggle="password" required>

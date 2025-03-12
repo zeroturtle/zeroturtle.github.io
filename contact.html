@@ -10,25 +10,27 @@
 
     <style> </style>
     <script>
-        function sendData(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
+        function submitData(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target)
             fetch('http://127.0.0.1/contact.php', {
-                method: 'POST',
-                body: formData
+                method: "POST",
+                body: formData,
             })
             .then(response => response.text())
             .then(data => {
-                document.getElementById('result').innerHTML = data;
-		document.getElementById("myForm").reset();
+                document.getElementById('result').innerHTML = data
+		myForm.reset()
+            })
+            .catch((error) => {
+               // Handle error
+              console.log("error ", error);
             });
         }
-	const form = document.querySelector("#myForm");
-	// Take over form submission
-	form.addEventListener("submit", (event) => {
-		event.preventDefault();
-		sendData();
-	});
+        window.addEventListener("load", (event) => {
+            const myForm = document.querySelector("form");
+	    myForm.addEventListener("submit", submitData);
+	})
     </script>
   </head>
   <body lang="en">
@@ -83,10 +85,10 @@
 	</div>
 
 	<div class="py-2 d-grid gap-2 col-6 mx-auto" data-name="Submit Button">
-		<button class="btn btn-outline-primary rounded-pill" type="submit">Send</button>
+		<button type="submit" class="btn btn-outline-primary rounded-pill">Send</button>
 	</div>
-	<div id="result"></div>
     </form>
+    <div id="result"></div>
     </div>
     <div class="card col-lg-5 m-3">
 	<p class=" p-2" data-bs-original-title="" title="" aria-describedby="tooltip200511">

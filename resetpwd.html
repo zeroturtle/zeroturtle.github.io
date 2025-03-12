@@ -15,6 +15,29 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>OPTIMUS Customer Portal</title>
+    <script>
+        function submitData(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target)
+            fetch('http://127.0.0.1/resetpwd.php', {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('result').innerHTML = data
+		myForm.reset()
+            })
+            .catch((error) => {
+               // Handle error
+              console.log("error ", error);
+            });
+        }
+        window.addEventListener("load", (event) => {
+            const myForm = document.querySelector("form");
+	    myForm.addEventListener("submit", submitData);
+	})
+    </script>
 </head>
 <body>
 
@@ -24,27 +47,27 @@
 				
         <!--Grid row-->
         <div class="row wow fadeIn">
-	   <form method="post" action="resetpwd.php">
                 <!--Grid column-->
 		<div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
-			<h3>Forgot Password?</h3>
-			<p class="grey-text">To receive a new password, enter your email address below.</p>
-
+		  <form id="myForm">
+			<h3>Reset account password</h3>
+			<p class="grey-text">Please create a new password.</p>
                         <div class="col input-group py-2">
                             <label for="password" class="sr-only active">Enter New Password:</label>
-                            <input type="password" id="password" name="password" placeholder="Password:*" class="form-control" data-toggle="password" required>
+                            <input type="password" id="password" name="password" placeholder="New Password:*" class="form-control" data-toggle="password" required>
                         </div>
                         <div class="col input-group py-2">
-                            <label for="confirm_password" class="sr-only active">Re-Enter New Password:</label>
-                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password:*" class="form-control" data-toggle="password" required>
+                            <label for="confirm_password" class="sr-only active">Confirm New Password:</label>
+                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm New Password:*" class="form-control" data-toggle="password" required>
                         </div>
 
 			<div class="text-left form-group py-2">
-				<button type="sublit" class="btn btn-primary btn-md waves-effect waves-light" id="btnF" style="" role="button" aria-label="Recover your Password">Recover your Password</button>
+				<button type="submit" class="btn btn-primary btn-md">Change Account Password</button>
 			</div>
+	           </form>
 		</div>
             <!--Grid column-->
-            </form>
+            <div id="result"></div>
         </div>
 	<!--Grid row-->
 
