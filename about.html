@@ -9,6 +9,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <style> 
+	table th{ text-align:center; }
+	table th:nth-child(2) { background: #4BF; }
+	table td:not(:first-child) { text-align:center; }
+	table td:nth-child(2) { background: #7BF; }
     </style>
   </head>
   <body lang="en">
@@ -31,10 +35,10 @@
       <p class="h2">Digital judgement and scoring system</p>
       <p class="">OPTIMUS is all-in-one software suite developed for judging Formation Skydiving, Artistic Events, Canopy Formation and scoring for Wingsuit Flying Performance. </p>
       <div class="p-2">
-        <a href="free.html" class="btn btn-primary rounded-pill btn-lg text-nowrap" role="button">Download Free</a>
-        <a href="licence.html" class="btn btn-lg btn-outline-primary rounded-pill" role="button">Subscribe</a>
+        <a href="register.html" class="btn btn-primary rounded-pill btn-lg text-nowrap" role="button">Create a free account</a>
+        <a href="login.html" class="btn btn-lg btn-outline-primary rounded-pill" role="button">Sign In</a>
       </div>
-      <div><a href="new50.html" class="link-dark">See Whats New in current release OPTIMUS 5.0 <span class="text-danger">Artemis</span></a></div>
+      <div><a href="#whatsnew" class="link-dark fw-bold">See Whats New in OPTIMUS <span class="text-danger">Artemis</span></a></div>
     </div>
     <div class="col">
       <img src="images/OPTIMUS3.svg" class="w-100">
@@ -45,7 +49,7 @@
 <div id="benefits" style="background: linear-gradient(rgb(255, 255, 255) 10%, rgb(102, 204, 255) 100%);">
   <div class="m-3">
     <p class="h6">Our Proven Approach</p>
-    <h2 class="display-3">Why OPTIMUS Stands Out</h2>
+    <h2 class="display-3">Why OPTIMUS Stand Out</h2>
     <dl class="row">
       <dt class="col-sm-3">Zero-administration approach</dt>
       <dd class="col-sm-9">No installation, No specialised equipment is required; Designed to run independently of us</dd>
@@ -95,7 +99,7 @@
   <div class="card w-100">
     <div class="card-body">
       <p>Premium</p>
-      <h3><img src="images/turtle_premium.png"><strong> Get subscription</strong></h3>
+      <h3><img src="images/turtle_premium.png"><strong> Already own a licence?</strong></h3>
       <p class="card-text">
 		<ul>
 		<li>Web publishing & integration</li>
@@ -123,7 +127,7 @@
   </div>
 </div>
   </div>
-  <small>After your regular software subscription expires, you can still use the product, but won't get new versions or updates. A <strong>Freemium model</strong> will apply.</small>
+    <p>&nbsp;</p>
 </div>
 </div>
 <!-- Конец features-->
@@ -147,12 +151,11 @@
 </div>
 
 
-<div id="price" style="background: #ABC;">
+<div id="price" style="background: #DDD;">
   <div class="m-3">
   <p class="h6">Affordable Solutions for Every Budget</p>
     <h2 class="display-3">Compare Licenses</h2>
-    <p>Стоимость подписки рассчитывается по количеству выбранных дисциплин. Можно выбрать любую комбинацию дисциплин из доступных;</p>
-    <table border="1" class="table table-striped table-hover w-100">
+    <table border="1" class="table table-striped table-hover w-100 align-middle">
       <thead  class="table-dark">
 	<tr><th></th><th>Premium</th><th>Individual</th><th>Free</th></tr>
       </thead>
@@ -164,15 +167,36 @@
         <tr><td>Vanguard Upload Station</td><td>+</td><td>+</td><td>-</td></tr>
         <tr><td>Ferret autonomous judgment</td><td>+</td><td>+</td><td>-</td></tr>
         <tr><td>Zodiak Video Overlay Replays</td><td>+</td><td>+</td><td>-</td></tr>
-        <tr><td>Subsciption Period</td><td colspan="2">1 year (365 days from subscription's date)</td><td>N/A</td></tr>
         <tr><td>Regular Purchase Price</td><td>$200** per discipline</td><td>$0 (Free)</td><td>N/A</td></tr>
-        <tr><td>Outdoor дисциплины</td><td colspan="3">Formation Skydiving (FS), Canopy Formation (CF), Artistic Events Freeflying/Freestyle (AE), Formation Skydiving Speed (SF), Wingsuit Performance Flying (WSP)</td></tr>
       </tbody>
     </table>
-    <p>&nbsp; </p>
+    <small>
+      <ul>
+        <li>Стоимость подписки рассчитывается по количеству выбранных дисциплин. Можно выбрать любую комбинацию дисциплин из доступных;</li>
+        <li>1 year subsciption Period means 365 days from subscription's date</li>
+        <li>include Outdoor дисциплины: Formation Skydiving (FS), Canopy Formation (CF), Artistic Events Freeflying/Freestyle (AE), Formation Skydiving Speed (SF), Wingsuit Performance Flying (WSP)</li>
+        <li>After your regular software subscription expires, you can still use the product, but won't get new versions or updates. A <strong>Freemium model</strong> will apply.</li>
+      </il>
+    </small>
+    <p>&nbsp;</p>
   </div>
 </div>
 <!-- end price-->
+
+<div id="whatsnew" class="border" style="">
+  <div class="m-3">
+    <div class="row align-items-center m-3">
+      <div class="col m-5">
+         <h2>Latest OPTIMUS Update: 2025.1</h2>
+         <p>OPTIMUS 2025.1 adds two features web integration and new DB engine. </p>
+         <a href="new50.html" class="btn btn-danger rounded-pill btn-lg text-nowrap" role="button">See Whats New</a>
+      </div>
+      <div class="col text-center">
+        <div class="h1 fw-bold p-3 m-3" style="background:darkgray"><img src="images/turtleZ_color.png" height="100px"><br>OPTIMUS 5.0 <span class="text-danger">Artemis</span> release</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="cases" class="border" style="background: linear-gradient(rgb(255, 255, 255) 10%, rgb(200,100,0) 100%);">
   <div class="m-3">

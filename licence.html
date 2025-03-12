@@ -1,4 +1,15 @@
-<!doctype html>
+<?php
+// We need to use sessions, so you should always initialize sessions using the below function
+session_start();
+
+// If the user is not logged in, redirect to the login page
+if (!isset($_SESSION['account_loggedin'])) {
+    header('Location: login.php');
+    exit;
+}
+?>
+
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
   <head>
     <title>Official OPTIMUS Results Site</title>
@@ -26,46 +37,47 @@
          </div>
     </div>
 
-  <h1>Licence constructor</h1>
-  <div class="my-3 text-center">
-    Read <a href="policy.html">Subscription policy</a>.
-    <p>Please fill out the form bellow. Once you have submitted your request, we will send you an email with your personal licence and link to download OPTIMUS.</p>
-  </div>
-
-<div class="row">
-<section class="col">
-<div id="licence">
-<form method="post" action="licence.php">
+	<h1>Subscription<br></h1>
+<section class="py-2">
+   <h3>General information</h3>
   <fieldset>
     <div class="mb-3">
       <label for="Owner" class="form-label">Name: </label>
-      <input type="text" class="form-control" id="Owner" name="Owner" required placeholder="Имя, как к Вам обращаться" >
+      <input type="text" class="form-control" id="Owner" name="Owner" required placeholder="Имя, как к Вам обращаться" value="">
     </div>
     <div class="mb-3">
       <label for="Email" class="form-label">Email address: </label>
-      <input type="email" class="form-control" id="Email" name="Email" required placeholder="Адрес электронной почты">
+      <input type="email" class="form-control" id="Email" name="Email" required placeholder="Адрес электронной почты" value="">
+    </div>
+    <div class="mb-3">
+      <label for="Company" class="form-label">Company Name: </label>
+      <input type="text" class="form-control" id="Company" name="Company" placeholder="Company Name" value="">
     </div>
     <div class="mb-3">
       <label for="Role" class="form-label">Category: </label>
       <select class="form-select" id="Role" name="Role" required>
-        <option value=""selected hidden data-placeholder="true">Выберите категорию пользователя</option>
+        <option value=""selected hidden data-placeholder="true">Category</option>
         <option value="1">DZ Owner</option>
         <option value="2">Judge</option>
         <option value="3">Organizer</option>
       </select>
     </div>
-    <div class="mb-3">
-      <label for="Company" class="form-label">Company: </label>
-      <input type="text" class="form-control" id="Company" name="Company" placeholder="Название организации" >
-    </div>
-    <div class="mb-3">
-      <input type="hidden" name="LicenceType" id="LicenceType" value="1">
-    </div>
-
   </fieldset>
+</section>
 
+<div class="mb-3">
+<div class="btn-group" role="group" aria-label="Choose Licence type group">
+  <input type="radio" class="btn-check" name="LicenseType" id="btnradio1" autocomplete="off" checked>
+  <label class="btn btn-outline-primary" for="btnradio1">Premium</label>
 
-  <!-- Subscription packList -->
+  <input type="radio" class="btn-check" name="LicenseType" id="btnradio2" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio2">Renew subscription</label>
+
+  <input type="radio" class="btn-check" name="LicenseType" id="btnradio3" autocomplete="off">
+  <label class="btn btn-outline-primary" for="btnradio3"> Individuals </label>
+</div>
+</div>
+
   <label class="form-check-label" for="PackTab">Select disciplines: </label>
   <ul id="PackTab" class="nav nav-tabs text-uppercase" role="tablist" aria-labelledby="pack-list-title">
     <li class="nav-item">
@@ -134,75 +146,52 @@
       </div>
     </fieldset>
   </div>
-    <div class="float-sm-start p-2">
+
+</div>
+<div class="form-group m-b-5 py-2">
+	<label class="sr-only active">Comment</label>
+	<textarea placeholder="Comment" class="form-control" id="s_comment" style=""></textarea>
+</div>
+    <div class="form-group m-b-5 py-2">
       <input class="form-check-input" type="checkbox" id="confirmSubs" name="confirmSubs" required>
       <label class="form-check-label p-0" for="confirmSubs">I confirm that I will be the only authorized user of the license.</label>
     </div>
-</div>
-</form>
-<!-- Конец licence -->
-</div>
-</section>
-
-<!-- -->
-<section class="col">
-                          <div>
-                            <div class="wt-order-summary-heading text-lg-center text-start">
-                                <h2>Order Summary</h2>
-                            </div>
-                            <div class="wt-order-details">
-                                <div class="d-flex flex-row align-items-center justify-content-between">
-                                    <div class="wt-order-details-title">
-                                        <p>Product Name</p>
-                                    </div>
-                                    <div class="wt-order-details-info">
-                                        <p class="wt-plans-name js-order-title">{$ProductName}</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-row align-items-center justify-content-between">
-                                    <div class="wt-order-details-title">
-                                        <p>Price</p>
-                                    </div>
-                                    <div class="wt-order-details-info">
-                                        <p class="wt-plans-price js-price">$ <span>{$RegularPrice}</span></p>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-row align-items-center justify-content-between discount-title">
-                                    <div class="wt-order-details-title">
-                                        <p>Discount Promo</p>
-                                    </div>
-                                    <div class="wt-order-details-info">
-                                        <p class="wt-plans-price js-price-discount">$ <span>{$Discount}</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border-top text-end p-3">
-                                <ul class="list-unstyled d-grid gap-3">
-                                  <li><span>VAT (20% on $):<span>$ {$Price*20%}</span></span> </li>
-                                  <li><span class="h3">Total Price: $ <span>{$Price}</span></span></li>
-                                  <li><a href="javascript:void(0)" class="btn btn-outline-primary rounded-pill btn-lg text-nowrap" onclick="" data-quote="/purchase/quote">
-                                            Request a Quote
-                                    </a>
-                                    <a href="javascript:void(0);" type="submit"  class="me-0 btn btn-primary rounded-pill btn-lg text-nowrap" onclick="" data-coupon-code="WHOLEMYLOVING20" data-cart="">
-                                            Check Out
-                                    </a></li>
-                                </ul>
-                            </div>
-                          </div>
-</section>
-<!-- -->
-</div> <!-- row-->
+    <p>Once you have submitted your request, we will send you an email with your personal licence and link to download OPTIMUS.</p>
     <p><strong>WARNING!</strong> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.</p>
 
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
-    <div class="d-flex p-2 align-items-center flex-fill" style="background-image: radial-gradient(circle at top right,#08088A,#58A2FA 50%);">
-      <span class="mb-3 mb-md-0 text-body-secondary"> 
-        &copy 2025  <a href="contact.html#feedback">Optimus Team</a><br>
-      </span>
-    </div>
-  </footer>
+<hr>
+	
+<section>
+       <div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
+           <h2>Order Summary</h2>
+           <div class="">
+               <div class="d-flex flex-row align-items-center justify-content-between">
+                   <p>Product Name</p>
+                   <p class="wt-plans-name js-order-title">{$ProductName}</p>
+               </div>
+               <div class="d-flex flex-row align-items-center justify-content-between">
+                   <p>Price</p>
+                   <p class="wt-plans-price js-price">$ <span>{$RegularPrice}</span></p>
+               </div>
+               <div class="d-flex flex-row align-items-center justify-content-between discount-title">
+                   <p>Discount Promo</p>
+                   <p class="wt-plans-price js-price-discount">$ <span>{$Discount}</span></p>
+               </div>
+           </div>
+           <div class="border-top text-end p-3">
+               <ul class="list-unstyled d-grid gap-3">
+                 <li><span>VAT (20% on $):<span>$ {$Price*20%}</span></span> </li>
+                 <li><span class="h3">Total Price: $ <span>{$Price}</span></span></li>
+                 <li><a href="javascript:void(0)" class="btn btn-outline-primary rounded-pill btn-lg text-nowrap" onclick="" data-quote="/purchase/quote">
+                           Request a Quote
+                   </a>
+                   <a href="javascript:void(0);" type="submit"  class="me-0 btn btn-primary rounded-pill btn-lg text-nowrap" onclick="" data-coupon-code="WHOLEMYLOVING20" data-cart="">
+                           Check Out
+                   </a></li>
+               </ul>
+           </div>
+       </div>
+</section>
 
-</div> <!--container-->
-
-  </body>
+</body>
 </html>
