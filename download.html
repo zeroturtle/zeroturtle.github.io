@@ -14,7 +14,7 @@ if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp'])
     session_destroy();
 
     //Redirect user to login page
-    header("Location: login.php");
+    header("Location: login.html");
     exit();
   }else{
     // Regenerate new session id and delete old one to prevent session fixation attack
@@ -29,7 +29,7 @@ if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp'])
 <html lang="en" data-bs-theme="light">
   <head>
     <title>Official OPTIMUS Results Site</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="refresh" content="9001">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -68,9 +68,9 @@ if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp'])
 
     <div class="border-bottom pb-5">  <span class="h3 text-center">Download Components </span><br>
       <ul>
-        <li>OPTIMUS core: <a href="">Русский</a> | <a href="">English</a><br> <small>включает exe-файлы + библиотека ffmpeg и файлы конфигурации</small></li>
-        <li>Report - печатные формы:  <a href="">Русский</a> | <a href="">Українська</a> | <a href="">English</a></li>
-        <li>Firebird SQL server x86 v5.0.2: <a href="Firebird-5.0.2.1613-0-windows-x86.zip"> ZIP</a> | <a href="Firebird-5.0.2.1613-0-windows-x86.exe ">EXE</a><br>
+        <li>OPTIMUS core files: <a href="">Русский</a> | <a href="">English</a><br> <small>includes exe-files + ffmpeg libraries and config files.</small></li>
+        <li>Report - печатные формы:  <a href="downloads/Reports_ru.zip">Русский</a> | <a href="downloads/Reports_ua.zip">Українська</a> | <a href="downloads/Reports_en.zip">English</a></li>
+        <li>Firebird SQL server x86 v5.0.2: <a href="downloads/Firebird-5.0.2.1613-0-windows-x86.zip"> ZIP</a> | <a href="downloads/Firebird-5.0.2.1613-0-windows-x86.exe ">EXE</a><br>
            <small>Также можно загрузить с официального сайта <a href="https://www.firebirdsql.org/en/firebird-5-0"> The Firebird Project</a></small>.
         </li>
         <li>методичка (русский) <a href="">DOC</a> | <a href="">PDF</a> | <a href="">HTML</a></li>
