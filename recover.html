@@ -1,3 +1,7 @@
+<?php
+  require_once "session.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,34 +18,26 @@
 
     <title>OPTIMUS Customer Portal</title>
 </head>
-<body>
+<body style="background-color: #f3f4f7;">
 
 <div class="container">
-	
-        <!--Grid row-->
-        <div class="row">
-                <!--Grid column-->
-		<div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
-		  <form id="myForm" method="post" action="recover.php">
+      <div class="d-flex justify-content-center m-3">	
+        <div class="shadow p-3 mb-5 bg-body-tertiary rounded" style="background-color: #fff; width: 400px;  max-width: 95%;">
+		  <form id="myForm" action="recover.php" method="post">
 			<h3>Forgot Password?</h3>
 			<p class="grey-text">Please enter your email address below. You will recieve a link to create a new password.</p>
 
 			<div class="form-group py-2">
 				<label class="sr-only active">Email</label>
-				<input type="email" id="Email" name="email" class="form-control" placeholder="Email address associated with your account*" required>
+				<input type="email" id="Email" name="email" class="form-control" required>
 			</div>
-
+			<p class="text-warning"><?php echo (!empty($error) ? $error : ''); ?></p>
 			<div class="text-left form-group py-2">
 				<button type="submit" class="btn btn-primary btn-md">Reset password</button>
 			</div>
 	           </form>
-		</div>
-            <!--Grid column-->
-
         </div>
-	<!--Grid row-->
-
-        <hr class="mb-5">
+      </div>
 </div>
 
 </body>
