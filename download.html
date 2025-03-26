@@ -1,19 +1,81 @@
 ﻿<?php
 //include auth.php file on all secure pages
-require_once("auth.php");
+include("auth.php");
 
-require_once("header.html"); 
+// Automatically Logout Inactive User
+// Set the inactivity time of 15 minutes (900 seconds)
+$inactivity_time = 15 * 60;
+
+// Check if the last_timestamp is set
+// and last_timestamp is greater then 15 minutes or 9000 seconds
+// then unset $_SESSION variable & destroy session data
+if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp']) > $inactivity_time) {
+    session_unset();
+    session_destroy();
+
+    //Redirect user to login page
+    header("Location: login.html");
+    exit();
+  }else{
+    // Regenerate new session id and delete old one to prevent session fixation attack
+    session_regenerate_id(true);
+
+    // Update the last timestamp
+    $_SESSION['last_timestamp'] = time();
+  }
 ?>
 
-<!-- отправка новая лицензия -->
-<h2 class="display-3">OPTIMUS <span class="text-danger">Customer Page</span></h2>
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <title>Official OPTIMUS Results Site</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="9001">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<section class="border-bottom pb-5">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style> 
+	table th{ text-align:center; }
+	table th:nth-child(2) { background: #4BF; }
+	table td:not(:first-child) { text-align:center; }
+	table td:nth-child(2) { background: #7BF; }
+    </style>
+  </head>
+  <body lang="en">
+
+<div class="container">
+     <!-- page header -->
+    <div class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
+    <!--div style="background: linear-gradient(#b35900 55%, white);"-->
+        <div class="row align-items-center">
+           <div class="col">
+		<a href="#"><img src="images/OPTIMUS3.svg" alt="OPTIMUS LOGO" class="float-start" height="140"></a>
+                <span class="fs-1"><strong>OPTIMUS</strong> </span><span>by Zeroturtle</span>
+		<br><span class="fs-4">Digital judgement and scoring system</span>
+           </div>
+           <div class="col m-3">
+                <a href="logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['account_name'], ENT_QUOTES)?></a>
+           </div>
+         </div>
+    </div>
+
+
+
+<!-- отправка новая лицензия -->
+<div class="border-bottom pb-5">
+    <div class="h1 text-center pb-5">
+      <span class="text-danger fw-bold">OPTIMUS</span> Customer Page
+    </div>
+
     <div class="row">
       <div class="col-sm-6">
         <span class="h3">Current OPTIMUS release </span><br>
-        View all new features of version <strong>5.0.0.23 <span class="text-danger">"Artemis"</span></strong> here: <a href="new50.html">What's New </a>
-        <p class="text-center p-5"><a href="licence.html" class="btn btn-lg btn-primary rounded-pill">Subscribe</a>  <a href="renew.html" class="btn btn-lg btn-outline-primary rounded-pill">Renew</a></p>
+        View all new features of version <strong>5.0.0.14 <span class="text-danger">"Artemis"</span></strong> here: <a href="new50.html">What's New </a>
+        <p class="p-3"><a href="licence.html" class="btn btn-lg btn-primary rounded-pill">Subscribe</a>  <a href="renew.html" class="btn btn-lg btn-outline-primary rounded-pill">Renew</a></p>
       </div>
       <div class="col-sm-6">
         <span class="h3 text-center">Download Components </span><br>
@@ -26,18 +88,61 @@ require_once("header.html");
         </ul>
       </div>
     </div>
-</section>
+</div>
 
-    <div class="border-bottom pb-5">
+<div class="border-bottom pb-5">
       <div class="col-sm-6">
         <span class="h3 text-center">Documentation</span><br>
         <ul>
-          <li>Руководство по эксплуатации (русский) <a href="operation_manual_ru.doc ">DOC</a> | <a href="operation_manual_ru.pdf ">PDF</a> </li>
-          <li>методичка (русский) <a href="training_fs_ru.doc">DOC</a> | <a href="training_fs_ru.pdf">PDF</a> </li>
+          <li>Руководство по эксплуатации (русский) <a href="">DOC</a> | <a href="">PDF</a> | <a href="">HTML</a></li>
+          <li>методичка (русский) <a href="">DOC</a> | <a href="">PDF</a> | <a href="">HTML</a></li>
         </ul>
       </div>
-    </div>
+</div>
 
+  <div class="border-bottom pb-5">
+    <p class="h3">Standard or Premium?</p>
+    <p>Subscription is available in Standard and Premium.</p>
+    <table border="1" class="table table-striped table-hover w-100 align-middle">
+      <thead>
+	<tr class=""><th>Benefits</th><th>Premium Subscription</th><th>Standard Subscription</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Number of concurrent Judge's panels</td><td>up to 5*</td><td>1 (singlemode)</td></tr>
+        <tr><td>Online check updates</td><td>+</td><td>+</td></tr>
+        <tr><td>Updates, Bug Fixes, Feature Improvements</td><td>+</td><td>+</td></tr>
+        <tr><td>Vanguard Upload Station</td><td>+</td><td>+</td></tr>
+        <tr><td>Ferret autonomous judgment</td><td>+</td><td>+</td></tr>
+        <tr><td>Zodiak Video Overlay Replays</td><td>+</td><td>+</td></tr>
+        <tr><td><del>Static Results Publishing</del></td><td>+</td></tr>
+        <tr><td>Web Sync Scores</td><td>+</td><td>-</td></tr>
+        <tr><td>Advanced Beta Access to Updates & Hotifixes</td><td>+</td><td>-</td></tr>
+        <tr><td>Regular Purchase Price</td><td>$200** per discipline</td><td>$0 (Free)</td></tr>
+      </tbody>
+    </table>
+    <small>
+      <ul>
+        <li>Стоимость подписки рассчитывается по количеству выбранных дисциплин. Можно выбрать любую комбинацию дисциплин из доступных;</li>
+        <li>1 year subsciption Period means 365 days from subscription's date</li>
+        <li>include Outdoor дисциплины: Formation Skydiving (FS), Canopy Formation (CF), Artistic Events Freeflying/Freestyle (AE), Formation Skydiving Speed (SF), Wingsuit Performance Flying (WSP)</li>
+      </il>
+    </small>
+  </div>
+
+    <div class="border-bottom pb-5">  
+	<h3>1 year subscription </h3>
+	<p><span class="fw-bold">OPTIMUS</span> offers technical support for customers with active subscription. 
+        Renew for that license at a fraction of the cost of a new license. </p>
+        <b>Technical support provides:</b>
+	<ul>
+		<li>free upgrades including new releases, updates and hotfixes;</li>
+		<li>Online check version, also you will get an E-Mail when a new OPTIMUS version is available;</li>
+		<li>fast free technical support via e-mail for one year.</li>
+		<li>30 days before a subscription expires, OPTIMUS will send an email notification to alert you to the fact that a new subscription will need to be purchased. 
+		An email notification will then again be sent 14 days before a subscription expires. </li>
+	</ul>
+        Online orders are processed automatically 24/7.<br>
+    </div>
 
     <div class="border-bottom pb-5">  <span class="h3 text-center">Have a questions?</span><br>
        Please contact us via e-mail  <a href="mailto:support@optimus.dp.ua">email</a> or submit your question via <a href="contact.html">Web form</a>.
