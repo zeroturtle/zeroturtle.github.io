@@ -1,11 +1,5 @@
 ﻿<?php
-// Initialize the session
-session_start();
-// Check if the user is already logged in, if yes then redirect him to welcome page
-if(isset($_SESSION["account_loggedin"]) && $_SESSION["account_loggedin"] === true){
-    header("location: download.html");
-    exit;
-}
+  require_once "session.php";
 ?>
 
 <!DOCTYPE html>
@@ -23,93 +17,50 @@ if(isset($_SESSION["account_loggedin"]) && $_SESSION["account_loggedin"] === tru
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <title>OPTIMUS Customer Portal</title>
-    <script>
-        function submitData(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target)
-            fetch('http://127.0.0.1/register.php', {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('result').innerHTML = data
-		myForm.reset()
-            })
-            .catch((error) => {
-               // Handle error
-              console.log("error ", error);
-            });
-        }
-        window.addEventListener("load", (event) => {
-            const myForm = document.querySelector("form");
-	    myForm.addEventListener("submit", submitData);
-	})
-    </script>
-</head>
-<body>
+  </head>
+<body style="background-color: #f3f4f7;">
 
-<div class="container">
-	
-        <!--Grid row-->
-        <div class="row">
-
-			<!--Grid column-->
-			<div class="col-lg-7 col-xl-7 ml-xl-4 mb-4">
-                            <h3>Sign Up</h3>
-				<p>Already have an account? <a href="login.html">Sign in </a></p>
-				<p class="grey-text">Fields marked by * are mandatory!</p>
-                            <form>
-				<fieldset>
-				<div class="row py-2">
-                                <div class="col form-group m-b-5 ">
-                                    <label for="login" class="active">Login:</label>
-				    <input type="text" id="login" name="login" class="form-control" placeholder="Login*" required>
-                                </div>
-                                <div class="col form-group">
-                                    <label for="email" class="active">Email:</label>
-				    <input type="email" id="email" name="email" class="form-control" placeholder="Email*" required>
-                                </div>
-				</div>
-				<div class="row py-2">
-                                <div class="col form-group">
-                                    <label for="email" class="active">Password:</label>
-                                    <input type="password" id="password" name="password" placeholder="Password*" class="form-control" data-toggle="password" required>
-                                </div>
-                                <div class="col form-group">
-                                    <label for="email" class="active">Confirm Password:</label>
-                                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password*" class="form-control" data-toggle="password" required>
-                                </div>
-				</div>
-				<p><strong>WARNING!</strong> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.</p>
-                                <div class="form-group form-inline text-left">
-                                             <div class="form-check">
-                                                  <label>
-                                                  <input type="checkbox" id="cbNewsletter" required style="outline: none;" tabindex="0"><small>&nbsp;&nbsp;I agree to receive marketing communication from OPTIMUS via email or any other form for product updates, sales services, promotions, news and events.</small>
-                                                  </label>
-                                             </div>
-                                </div>
-                                <div class="form-group form-inline text-left">
-                                             <div class="form-check">
-                                                  <label>
-                                                  <input type="checkbox" id="cbNewsletter" required style="outline: none;" tabindex="0"><small>&nbsp;&nbsp;I confirm that I have read, understand and agree to <a href="">Terms of Use</a> and <a href="">Privacy Statement</a></small>
-                                                  </label>
-                                             </div>
-                                </div>
-				</fieldset>
-                                <div class="text-left form-group">
-                                    <button type="submit" class="btn btn-primary btn-md waves-effect waves-light" id="btnR" style="" role="button" aria-label="Register">Register</button>
-                                    <button type="reset" class="btn btn-danger btn-md waves-effect waves-light" id="btnC" style="" role="button" aria-label="Cancel">Cancel</button>
-                                </div>
-                            </form>
-			</div>
-			<!--Grid column-->
-           <div id="result"></div>
-        <!--Grid row-->
+  <div class="container">
+      <div class="d-flex justify-content-center m-3">
+        <div class="shadow p-3 mb-5 bg-body-tertiary rounded" style="background-color: #fff; width: 400px;  max-width: 95%;">
+              <h3 class="mb-3 dark-grey-text">Sign Up</h3>
+              <p>Already have an account? <a href="login.html">Sign in </a></p>
+              <form action="register.php" method="post">
+		<fieldset>
+                  <div class="form-group py-2">
+                      <label>Full Name:</label>
+		    <input type="text" name="name" class="form-control" required>
+                  </div>
+                  <div class="form-group py-2">
+                      <label>Email:</label>
+		    <input type="email" name="email" class="form-control" required>
+                  </div>
+                  <div class="form-group py-2">
+                      <label>Password:</label>
+                      <input type="password" name="password" class="form-control" required>
+                  </div>
+                  <div class="form-group py-2">
+                      <label>Confirm Password:</label>
+                      <input type="password" name="confirm_password" class="form-control" required>
+		</div>
+		<p><strong>WARNING!</strong> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.</p>
+                  <div class="form-group form-inline text-left">
+                               <div class="form-check">
+                                    <label>
+                                    <input type="checkbox" id="cbNewsletter" required style="outline: none;" tabindex="0"><small>&nbsp;&nbsp;I confirm that I have read, understand and agree to <a href="">Terms of Use</a> and <a href="">Privacy Statement</a></small>
+					<br>(<small>&nbsp;&nbsp;I agree to receive marketing communication from OPTIMUS via email or any other form for product updates, sales services, promotions, news and events.</small>)
+                                    </label>
+                               </div>
+                  </div>
+		</fieldset>
+                  <p class="text-warning"><?php echo (!empty($error) ? $error : ''); ?></p>
+                  <div class="text-left form-group">
+                      <button type="submit" name="submit" class="btn btn-primary">Register</button>
+                  </div>
+              </form>
         </div>
-
-        <hr class="mb-5">
-</div>
+      </div>
+  </div>
 
 
 </body>

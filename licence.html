@@ -1,6 +1,17 @@
 <?php
-//include auth.php file on all secure pages
-include("auth.php");
+  if ( !session_id() ) @session_start();
+
+  // Automatically Logout Inactive User
+  // Set the inactivity time of 15 minutes (900 seconds)
+  $inactivity_time = 15 * 60;
+
+  // Check if the last_timestamp is set
+  // and last_timestamp is greater then 15 minutes or 9000 seconds
+  // then unset $_SESSION variable & destroy session data
+  if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp']) > $inactivity_time) {
+    session_unset();
+    session_destroy();
+  }
 ?>
 
 <!DOCTYPE html>
@@ -22,33 +33,37 @@ include("auth.php");
 
 <div class="container">
      <!-- page header -->
-    <div class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
+    <section class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
     <!--div style="background: linear-gradient(#b35900 55%, white);"-->
         <div class="row align-items-center">
-           <div class="col">
-		<a href="#"><img src="images/OPTIMUS3.svg" alt="OPTIMUS LOGO" class="float-start" height="140"></a>
-                <span class="fs-1"><strong>OPTIMUS</strong> </span><span>by Zeroturtle</span>
-		<br><span class="fs-4">Digital judgement and scoring system</span>
-           </div>
+             <div class="col">
+		<a href="about.html"><img src="images/turtleZ_color.png" alt="LOGO" class="float-start m-3" height="100px"></a>
+                <span class="fs-1 m-3"><strong>OPTIMUS</strong></span> <span>by Zeroturtle</span>
+                <br><span class="fs-4">Digital judgement and scoring system</span>
+             </div>
            <div class="col m-3">
-                <a href="logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['account_name'], ENT_QUOTES)?></a>
+		<?php if(!isset($_SESSION["account_loggedin"])){ ?>
+			<a href="login.html" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
+		<?php } else { ?>
+	                <a href="logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['account_name'], ENT_QUOTES)?></a>
+		<?php } ?>
            </div>
          </div>
-    </div>
+    </section>
 
-  <h1>OPTIMUS <span class="text-danger">Subscription</span></h1>
+  <h2 class="display-3">OPTIMUS <span class="text-danger">Annual Subscription</span></h2>
   <div>
     <p class="">Please complete the form below. Annual subscription for 1 year (365 days)<br> 
-     Personal use <b>Free/ all disciplines</b>,
-     Business use, US$200/ each schoosen discipline w/o tax.
+     Personal Licensed to the individual who purchases, uses <b>Free/ all disciplines</b>,<br>
+     Standard License can be used by one individual or employee, uses $200 w/o tax/ each schoosen discipline. Non-transferrable.
     <p>Once you have submitted your request, you will recieve a detailed product licensing information and OPTIMUS licence file in attachment.</p>
   </div>
 <form action="licence.php" method="post">
   <div>
     <input type="radio" class="btn-check" name="licence" id="option1" autocomplete="off" checked>
-    <label class="btn btn-outline-primary" for="option1">Individuals</label>
+    <label class="btn btn-outline-primary" for="option1">Personal</label>
     <input type="radio" class="btn-check" name="licence" id="option2" autocomplete="off">
-    <label class="btn btn-outline-primary" for="option2">Premium</label>
+    <label class="btn btn-outline-primary" for="option2">Standard</label>
   </div>
 
 <section>
@@ -165,10 +180,10 @@ include("auth.php");
     <p><b>WARNING!</b> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.</p>
     <p>Your payment is non-refundable, and your service will continue until the end of your contracted term. </p>
     <p>By filling and submitting this form you understand and agree that the use of OPTIMUS' website is subject to the General Website Terms of Use. I confirm that I will be the only authorized user of the license.</p>
-
-<button type="submit" class="btn btn-lg btn-primary">Register</button>
+<button type="submit" class="btn btn-lg btn-primary">Check Out</button>
 </form>
 
+    <p>If you don't have OPTIMUS yet, visit a <a href="download.html" class="">download page</a>.</p>
 <div>
 <p>&nbsp;</p>
 </div>
