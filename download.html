@@ -1,75 +1,27 @@
 ﻿<?php
-  if ( !session_id() ) @session_start();
+//include auth.php file on all secure pages
+require_once("auth.php");
 
-  // Automatically Logout Inactive User
-  // Set the inactivity time of 15 minutes (900 seconds)
-  $inactivity_time = 15 * 60;
-
-  // Check if the last_timestamp is set
-  // and last_timestamp is greater then 15 minutes or 9000 seconds
-  // then unset $_SESSION variable & destroy session data
-  if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp']) > $inactivity_time) {
-    session_unset();
-    session_destroy();
-  }
+require_once("header.html"); 
 ?>
 
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
-  <head>
-    <title>Official OPTIMUS Results Site</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-    <!-- Add icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style> 
-    </style>
-  </head>
-  <body lang="en">
-
-<div class="container">
-     <!-- page header -->
-    <section class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
-    <!--div style="background: linear-gradient(#b35900 55%, white);"-->
-        <div class="row align-items-center">
-             <div class="col">
-		<a href="about.html"><img src="images/turtleZ_color.png" alt="LOGO" class="float-start m-3" height="100px"></a>
-                <span class="fs-1 m-3"><strong>OPTIMUS</strong></span> <span>by Zeroturtle</span>
-                <br><span class="fs-4">Digital judgement and scoring system</span>
-             </div>
-           <div class="col m-3">
-		<?php if(!isset($_SESSION["account_loggedin"])){ ?>
-			<a href="login.html" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
-		<?php } else { ?>
-	                <a href="logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['account_name'], ENT_QUOTES)?></a>
-		<?php } ?>
-           </div>
-         </div>
-    </section>
-
 <!-- отправка новая лицензия -->
-<h2 class="display-3">OPTIMUS <span class="text-danger">Customer Page</span></h2>
+<h2 class="display-3">OPTIMUS <span class="text-danger">download page</span></h2>
 
 <section class="border-bottom pb-5">
-    <div class="row">
-      <div class="col-sm-6">
-        <span class="h3">Current OPTIMUS release </span><br>
-        View all new features of version <strong>5.0.0.23 <span class="text-danger">"Artemis"</span></strong> here: <a href="new50.html">What's New </a>
-        <p class="text-center p-5"><a href="licence.html" class="btn btn-lg btn-primary rounded-pill">Subscribe</a>  <a href="renew.html" class="btn btn-lg btn-outline-primary rounded-pill">Renew</a></p>
-      </div>
+    <div>
+      <span class="h3">Current OPTIMUS release </span>
+      <p>View all new features of version <strong>5.0.0.23 "Artemis"</strong> here: <a href="new50.html">What's New </a></p>
+      <p class="text-center"><a href="licence.html#constructor" class="btn btn-lg btn-primary rounded-pill">Subscribe</a> </p>
     </div>
 </section>
 
-<section class="border-bottom pb-5">
+<section class="border-bottom pb-5" style="background-color: #f2f2f2;">
     <div class="row">
       <div class="col-sm-6">
-        <span class="h3 text-center">Download Components </span><br>
+        <span class="h3 text-center">Download Components </span>
         <ul>
-          <li>OPTIMUS core files: <a href="">Русский</a> | <a href="">English</a><br> <small>includes exe-files + ffmpeg libraries and config files.</small></li>
+          <li>OPTIMUS core files: <a href="">Русский</a> | <a href="">English</a><br> <small>includes exe-files + libraries and config files.</small></li>
           <li>Report - печатные формы:  <a href="downloads/Reports_ru.zip">Русский</a> | <a href="downloads/Reports_ua.zip">Українська</a> | <a href="downloads/Reports_en.zip">English</a></li>
           <li>Firebird SQL server x86 v5.0.2: <a href="downloads/Firebird-5.0.2.1613-0-windows-x86.zip"> ZIP</a> | <a href="downloads/Firebird-5.0.2.1613-0-windows-x86.exe ">EXE</a><br>
             <small>Также можно загрузить с официального сайта <a href="https://www.firebirdsql.org/en/firebird-5-0"> The Firebird Project</a></small>.
@@ -79,16 +31,23 @@
       <div class="col-sm-6">
         <span class="h3 text-center">Documentation</span><br>
         <ul>
-          <li>Руководство по эксплуатации (русский) <a href="operation_manual_ru.doc ">DOC</a> | <a href="operation_manual_ru.pdf ">PDF</a> </li>
-          <li>методичка (русский) <a href="training_fs_ru.doc">DOC</a> | <a href="training_fs_ru.pdf">PDF</a> </li>
+          <li>Руководство по эксплуатации (русский) <a href="downloads/operation_manual_ru.doc ">DOC</a> | <a href="downloads/operation_manual_ru.pdf ">PDF</a> </li>
+          <li>Методичка ГА (русский) <a href="downloads/training_fs_ru.doc">DOC</a> | <a href="downloads/training_fs_ru.pdf">PDF</a> </li>
+          <li>Методичка "Организация и проведение соревнований" (русский) <a href="downloads/training_org_ru.doc">DOC</a> | <a href="downloads/training_org_ru.pdf">PDF</a> </li>
+          <li>Журнал изменений (русский) <a href="downloads/whatsnew">What's new</a> </li>
         </ul>
       </div>
     </div>
 </section>
 
 
+<section class="border-bottom pb-5">  <span class="h3 text-center">Update to the latest build.</span>
+       <p>Compare your maintenance term to the release date of the latest build. <a href="licence.html#licence">Find out how</a>.</p>
+       <p> <a href="">Release notes</a></p>
+</section>
+
 <section class="border-bottom pb-5">  <span class="h3 text-center">Have a questions?</span><br>
-       Please contact us via e-mail  <a href="mailto:support@optimus.dp.ua">email</a> or submit your question via <a href="contact.html">Web form</a>.
+       <p>Please contact us via  <a href="mailto:support@optimus.dp.ua">email</a> or submit your question via <a href="contact.html">Web form</a>.</p>
 </section>
 
 
@@ -97,7 +56,7 @@
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
     <div class="d-flex p-2 align-items-center flex-fill" style="background-image: radial-gradient(circle at top right,#08088A,#58A2FA 50%);">
       <span class="mb-3 mb-md-0 text-body-secondary"> 
-        &copy 2025  <a href="contact.html#feedback">Optimus Team</a><br>
+        &copy 2025  <a href="mailto:support@optimus.dp.ua">Optimus Team</a><br>
       </span>
     </div>
   </footer>
