@@ -1,0 +1,175 @@
+
+<section id="constructor">
+  <h2 class="display-3">Licence <span class="text-danger">Constructor</span></h2>
+  <div>
+    <p class="">Please complete the form below.<br> 
+     Once you have submitted your request, you will recieve a detailed product licensing information and OPTIMUS licence file in attachment.</p>
+    <p>By filling and submitting this form you understand and agree that the use of OPTIMUS' website is subject to the General Website Terms of Use. I confirm that I will be the only authorized user of the license.</p>
+  </div>
+<form action="licence.php" method="post">
+  <fieldset>
+    <div>
+      <input type="radio" class="btn-check" name="licence" id="option2" value="1">
+      <label class="btn btn-outline-primary" for="option2">Standard</label>
+      <input type="radio" class="btn-check" name="licence" id="option1" value="0" checked>
+      <label class="btn btn-outline-primary" for="option1">Personal</label>
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <label for="first_name" class="form-label fw-bold">First Name*: </label>
+        <input type="text" class="form-control" id="first_name" name="first_name" required placeholder="First Name">
+      </div>
+      <div class="col-sm-6">
+        <label for="last_name" class="form-label fw-bold">Last Name*: </label>
+        <input type="text" class="form-control" id="last_name" name="last_name" required placeholder="Last Name">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col">
+        <label for="email" class="form-label fw-bold">Email*: </label>
+        <input type="email" class="form-control" id="email" name="email" required placeholder="Email address">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <label for="company" class="form-label fw-bold">Company: </label>
+        <input type="text" class="form-control" id="company" name="company" placeholder="Company Name">
+      </div>
+      <div class="col-sm-6">
+        <label for="jobtitle" class="form-label fw-bold">Job Title: </label>
+        <input type="text" class="form-control" id="jobtitle" name="jobtitle" placeholder="Type your current job title">
+      </div>
+    </div>
+  </fieldset>
+
+<div class="mb-3">
+  <label class="form-check-label" for="PackTab">Select <b>disciplines</b> you need: </label>
+  <div class="border p-2">
+      <!-- outdoor -->
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="types[]" value="FS" checked>
+        <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="types[]" value="SF" checked>
+        <label class="form-check-label" for="inlineCheckbox3">Speed Formation</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="types[]" value="AE" checked>
+        <label class="form-check-label" for="inlineCheckbox2">Artistic Events</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="types[]" value="CF" checked>
+        <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="types[]" value="WS" checked>
+        <label class="form-check-label" for="inlineCheckbox5">Wingsuit Flying Perfomance</label>
+      </div>
+      <!-- 
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" name="types[]" value="WA" disabled>
+        <label class="form-check-label" for="inlineCheckbox6">Wingsuit Flying Acrobatic</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" name="types[]" value="CP" disabled>
+        <label class="form-check-label" for="inlineCheckbox7">Canopy Piloting</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox8" name="types[]" value="SP" disabled>
+        <label class="form-check-label" for="inlineCheckbox8">Speed Skydiving</label>
+      </div>
+indoor
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox9" name="types[]" value="IF" disabled>
+        <label class="form-check-label" for="inlineCheckbox9">Indoor Formation Skydiving</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox10" name="types[]" value="IS" disabled>
+        <label class="form-check-label" for="inlineCheckbox10">Indoor Solo Freestyle</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox11" name="types[]" value="DS" disabled>
+        <label class="form-check-label" for="inlineCheckbox11">Dynamic Solo Speed</label>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox12" name="types[]" value="DY" disabled>
+        <label class="form-check-label" for="inlineCheckbox12">Dynamic Flying</label>
+      </div>
+      -->
+  </div>
+</div>
+
+<p>You can keep use your copy OPTIMUS with updated licence just replace a licence file parameter in settings.</p>
+<p>Online orders are processed automatically 24/7.</p>
+
+<p class="text-warning"><?php echo (!empty($err) ? $err : ''); ?></p>
+    <p><b>WARNING!</b> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.</p>
+    <p>Your <b>payment is <span class="text-danger">Non-transferrable.</span></b>, and your service will continue until the end of your contracted term. </p>
+<button type="submit" class="btn btn-lg btn-primary">Check Out</button>
+</form>
+</section>
+
+
+
+<section id="renew">
+  <h2 class="display-3">Renewal policy</h2>
+  <p>Following your renewal, you will receive software updates and version upgrades with new features and personalised technical support.
+        Keeping your license up-to-date guaranteed you always will be on board and have access to the best features and rule changes.</p>
+    <div>
+	<h3>How to renew <strong>Personal Subscribers</strong></h3>
+	<p>If your license has expired, you can easily get a new license by following these steps:</p>
+	<ol>
+	<li>Visit our <a href="licence.html#free">subsciption page</a>.</li>
+	<li>Select "Personal Subscription" license.</li>
+	<li>Fill in the details and complete your checkout.</li>
+	<li>Check your email for your license confirmation.</li>
+	<li>select Register and input your license details from your email.</li>
+	<li>You can now continue using OPTIMUS with the same settings and setup.</li>
+	</ol>
+	<p>If you have other questions and renewal-related inquiries, feel free to contact our renewals team.</p>
+    </div>
+    <div>
+      <h3>The OPTIMUS <strong><span class="text-danger">Loyalty </span>Program</strong></h3>
+      <p>The most thrifty way to own licenses!  <small>It is available only for the <u>Standard Licence holders</u>.</small></p>
+      <ol>
+      <li>
+      <div class=" m-3">
+ 	<strong> Update Subscription </strong> 
+	<p> It's not required to renew this each year, but your subscription will renew at an affordable low price (20% off) and you will continue to receive another year of major upgrades, updates and hotfixes.
+	You may opt out of your subscription, however in order to re-subscribe you will be required to purchase a new license when you re-subscribe. 
+	Therefore, it is advantageous to maintain your subscription annually.<br>
+	Option available <b><u>before your current subscription expires</u></b>!  After your regular software subscription expires, you will be required to purchase a <strong>a new 1-year subscription</strong> at current price.
+	</p>
+	<p>Contact <a href="contact.html">Our team</a> to learn more. </p>
+      </div>
+      </li>
+      <li>
+      <div class=" m-3">
+        <strong>Competitive Program</strong>
+        <p>Опция подволяет пользователям конкурирующих продуктов, оформить Standard подписку OPTIMUS со <strong>скидкой 30% </strong>(требуется подтверждение собственности конкурирующего продукта).</p>
+        <p>Присылайте заявку на почту или заполните форму на сайте. Мы ответим в течении недели - перепроверим, действительно ли Ваш запрос соответствует условиям программы. Если все ОК - мы вышлем персональную лицензию OPTIMUS.</p>
+      </div>
+      </li>
+      <li>
+      <div class=" m-3">
+        <strong>Bring your ideas to OPTIMUS</strong>
+        <p>OPTIMUS provides the opportunity to participate in product development, to adapt new improvements to personal requirements or conditions of use.<br> 
+            Beta-testing participants get <strong>Standard Subscription  <span class="text-danger">for free</span></strong> (for the selected discipline). It requires to order a separate license.<br>
+            Please contact <a href="#feedback" class="link-warning">Our sells team</a> to take part the program.
+        </p>
+        <p>В заявке укажите по какой парашютной дисципиплине желаете участвовать. Заявку присылайте на <a href="mailto:sales@optiomus.com">почту</a> или из <a href="contact.html">формы на сайте</a>. </p>
+      </div>
+      </li>
+      <li>
+      <div class="m-3">
+        <strong>Как получить купон на скидку</strong>
+        <p>Чтобы получить купон на скидку, заполните форму. Мы ответим в течении недели - перепроверим, действительно ли Ваш запрос соответствует условиям программы. Если все ОК - мы вышлем промокод.<br>
+          **An <strong> Outdoor pack</strong> [FS, SF, AE] and <strong>indoor pack</strong> [DY, DS, IS] are available in $510 (15% off regular price). Additional item [IS, CF, WP] costs $170 each of them.<br>
+          <a href="">Request price quote</a>
+        </p>
+      </div>
+      </li>
+      <ol>
+    </div>
+</section>
