@@ -15,6 +15,7 @@ metis not commonly used
     $email = trim($_POST["email"]); //stripslashes
     $password = trim($_POST["password"]);
     $confirmPassword = trim($_POST["confirm_password"]);
+    $newsLetter = isset($_POST["newsletter"]);
 
     $error = "";
     // Validate inputs
@@ -52,10 +53,10 @@ metis not commonly used
     }
 
     // Check input errors before inserting in database
-    // Insert data into the database
     if(empty($error)){
       try {
-        $pdo->prepare("INSERT INTO ACCOUNTS (username, password, email) VALUES (?, ?, ?)")->execute([$fullname, password_hash($password, PASSWORD_DEFAULT), $email]);
+        // Insert data into the database
+        $pdo->prepare("INSERT INTO ACCOUNTS (username, password, email, newsletter) VALUES (?, ?, ?, ?)")->execute([$fullname, password_hash($password, PASSWORD_DEFAULT), $email, $newsLetter]);
         header("location: login.php");
         exit;
       }

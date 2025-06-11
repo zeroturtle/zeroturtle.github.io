@@ -10,21 +10,21 @@ require_once("header.html");
          const checkboxes = div.querySelectorAll('input[type="checkbox"]')
          return !Array.from(checkboxes).some((cb) => cb.checked == true)
        }
+
        function Single() {
          //найти все checkbox в блоке disciplines
          const div = document.getElementById('disciplines')
          const checkboxes = div.querySelectorAll('input[type="checkbox"]');
          checkboxes.forEach( checkbox => {
-           //checkbox.checked = !(checkbox.checked)
            checkbox.checked = true
-           checkbox.disabled = true
+//           checkbox.disabled = true
          })
          document.getElementById('buyNow').disabled = false
          document.getElementById("total").innerHTML = '&euro;0'
-         single.style.display = 'block';
-         site.style.display = 'none';
-
+         single.style.display = 'block'
+         site.style.display = 'none'
        }
+
        function Site() {
          //найти все checkbox в блоке disciplines
          const div = document.getElementById('disciplines')
@@ -35,8 +35,8 @@ require_once("header.html");
            checkbox.disabled = false
          })
          document.getElementById('buyNow').disabled = true
-         single.style.display = 'none';
-         site.style.display = 'block';
+         single.style.display = 'none'
+         site.style.display = 'block'
        }
 
        function submitData(e) {
@@ -64,14 +64,16 @@ require_once("header.html");
           checkboxes.forEach( checkbox => {
             checkbox.addEventListener("change", submitData)
           })
+          Single()  //single by default
         })
 </script>
 
 <section id="price">
-<form id="myForm" action="price.php" method="post">
+<form id="myForm" action="subscribe.html" method="post">
   <h2 class="display-3">Pricing options</h2>
   <div class="row">
     <div class="col-sm-6 d-grid gap-3">
+      <input type="hidden" name="years" value=1>
       <!--div>
         <h5 class="text-uppercase">Extend support & upgrade period</h5>
           <div>

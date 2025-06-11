@@ -20,14 +20,12 @@
   if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp']) > $inactivity_time) {
     session_unset();
     session_destroy();
-
     //Redirect user to login page
     header("Location: login.html");
     exit();
   }else{
     // Regenerate new session id and delete old one to prevent session fixation attack
     session_regenerate_id(true);
-
     // Update the last timestamp
     $_SESSION['last_timestamp'] = time();
   }

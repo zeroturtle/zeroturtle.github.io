@@ -2,13 +2,7 @@
 // оформление подписки
 require_once "auth.php";
 require_once "config.php";
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require './PHPMailer/src/Exception.php';
-require './PHPMailer/src/PHPMailer.php';
-require './PHPMailer/src/SMTP.php';
+require_once "sendmail.php";
 
 require 'libs/Smarty.class.php';
 
@@ -86,25 +80,7 @@ $smarty->assign("dateend", date_format($Licence['DateEnd'],'Y-m-d '));
 $smarty->assign("desc", $TypeList['types']);
 $template = $smarty->fetch('new_subscription.tpl'); 
 
-// отправка письма
-$mail = new PHPMailer(true);
-$mail->CharSet = "utf-8";
-$mail->isHTML(true);
-$mail->setFrom('webmaster@skydive.dp.ua', 'Skydive.dp.ua');
-$mail->addAddress($Licence['Email'], $Licence['Owner']);
-$mail->addBCC('zeroturtle@ua.fm', '');
-$mail->addReplyTo('no-replyto@skydive.dp.ua', 'Noreply');
-$mail->Subject = 'Thank You for subscribe OPTIMUS';
-$mail->AddAttachment($Licencefile);
-$mail->msgHTML($template);
-if (!$mail->send()) {
-	$err.="Mailer Error: ".$mail->ErrorInfo;
-} else {
-	$err.="Message sent!";
-}
-$mail->ClearAllRecipients(); // reset the `To:` list to empty
-// конец отправки
-
+send($template, $Licencefile, $Licence);
 
 header('location: thanks.html'); // редирект на index.php после выполнения скрипта
 

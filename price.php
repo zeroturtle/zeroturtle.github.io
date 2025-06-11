@@ -1,20 +1,30 @@
 <?php
 
-switch(isset($Type)?$Type:0) {
-  case 0: $RegularPrice = 200;
+switch($_POST['licence']) {
+  case 0: $RegularPrice = 0;
           break;
-  case 1: $RegularPrice = 0;
+  case 1: $RegularPrice = 200;
           break;
   default: $RegularPrice = 200;
 }
-
-$Discount = 0;
+$Period = 1; //isset($_POST['years']) ? intval($_POST['years']) : 1;
 
 $Price = 0;
 if (isset($_POST['types'])) 
   for ($i=0; $i<count($_POST['types']); $i++) {
-    $Price += $RegularPrice * (1 - $Discount/100);
-}
+    for ($y=1; $y<=$Period; $y++) {
+      switch($y){
+        case 1: $Discount = 0;
+                break;
+        case 2: $Discount = 10;
+                break;
+        case 3: $Discount = 25;
+                break;
+        default: $Discount = 0;
+      }
+      $Price += $RegularPrice * (1 - $Discount/100);
+    }
+  }
 
 echo $Price;
 

@@ -1,13 +1,9 @@
 <?php
   // Start the session
   session_start();
-  // Destroy the active session, which logs the user out
- 
-  // Unset all of the session variables
-  $_SESSION = array();
-
+  // Destroy the active session, which logs the user out 
   session_destroy();
-  // Redirect to the login pag
+  // Redirect to the welcone page
   header('Location: about.html');
   exit;
 ?>
