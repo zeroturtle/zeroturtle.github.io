@@ -23,7 +23,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // create temporary token
     $emailTo = trim($_POST['email']);
     $code = uniqid(true); // true for more uniqueness 
-    $expFormat = mktime( date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y") );
+    $expFormat = mktime( date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y") ); // +1day
     $expDate = date("Y-m-d H:i:s",$expFormat);
     try {
       $pdo->prepare("INSERT INTO resetPasswords (code, email, expDate) VALUES(?,?,?)")->execute([$code, $emailTo, $expDate]);
@@ -45,16 +45,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $mail->Password = 'password';                           // SMTP password
 
         //Recipients
-        $mail->setFrom('my-email@optimus-domain.com', 'OPTIMUS'); // from who? 
+        $mail->setFrom('no-replay@optimus.dp.ua', 'No Replay'); // from who? 
         $mail->addAddress($emailTo, '');     // Add a recipient
-        $mail->addReplyTo('no-replay@example.com', 'No Replay');
+        //$mail->addReplyTo('no-replay@optimus.dp.ua', 'No Replay');
 
         //Content
         // this give you the exact link of you site in the right page 
         // if you are in actual web server, instead of http://" . $_SERVER['HTTP_HOST'] write your link 
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Your password reset link';
-        $url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']). "/resetpwd.html?code=$code"; 
+        $url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']). "/resetpwd.php?code=$code"; 
         $smarty->assign("URL", $url);
         $mail->Body = $smarty->fetch('recover.tpl');					//шаблон страницы соревнований
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';

@@ -32,13 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"  && isset($_POST['submit'])) {
           $_SESSION['account_name'] = $user['USERNAME'];
           $_SESSION['account_id'] = $user['ID'];  // Store user ID in the session
           header('Location: '.$_SESSION['target_link']); 
-
-//          header("Location: {$SERVER['HTTP_REFERRER'] == '' ? 'download.html' : 'licence.html'}");  // Redirect to the dashboard
-          //echo 'Welcome back, ' . htmlspecialchars($_SESSION['account_name'], ENT_QUOTES) . '!';
           exit;
       }
       else {
-        $error .= 'No User exist with that email address or incorrect password!';
+        $error .= 'No User exist with that email address or incorrect password or inactive account!';
       }
    }
    //echo '<p class="error">'.$error.'</p>';
