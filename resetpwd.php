@@ -8,12 +8,14 @@ if (!isset($_GET['code'])) {
 
 $error = "";
 $code = $_GET['code']; 
-$row = $pdo->prepare("SELECT * FROM resetPasswords WHERE code = ?")->execute([$code])->fetch();
-if (!$row) {
+$stmt = $pdo->prepare("SELECT * FROM resetPasswords WHERE code = ?");
+$stmt->execute([$code]);
+$user = $stmt->fetch();
+if (!$user) {
   $err .= ("<p>can't find the page because not same code</p>"); 
 }
 else {
-  $email = $row['EMAIL']; 
+  $email = $user['email']; 
 }
 
 // handling the form 
@@ -29,7 +31,7 @@ if (isset($_POST['password'])) {
     } else {
 	try {
           $pw = password_hash($_POST['password'], PASSWORD_DEFAULT);
-  	  $pdo->prepare("UPDATE users SET password = ? WHERE email = ?")->execute([$pw, $email]);
+  	  $pdo->prepare("UPDATE accounts SET password = ? WHERE email = ?")->execute([$pw, $email]);
           $pdo->prepare("DELETE FROM resetPasswords WHERE code = ?")->execute([$code]);
           $error .= '<div class="success"><p>Your password has been updated successfully!</p>
                      <p><a href="/login.html">Click here</a> to Login.</p></div><br />';

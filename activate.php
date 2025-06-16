@@ -1,4 +1,5 @@
 <?php
+//if ($_SERVER['REFERER'] != '') exit;
 
 require_once "session.php";
 require_once "config.php";
@@ -9,14 +10,16 @@ if (!isset($_GET['code'])) {
 
 $error = "";
 $code = $_GET['code']; 
-$row = $pdo->prepare("SELECT * FROM resetPasswords WHERE code = ?")->execute([$code])->fetch();
-if (!$row) {
+$stmt = $pdo->prepare("SELECT * FROM resetPasswords WHERE code = ?");
+$stmt->execute([$code]);
+$user = $stmt->fetch();
+if (!$user) {
   $err .= ("<p>can't find the page because not same code</p>"); 
 }
 else {
   //
-  $email = $row['EMAIL']; 
-  $pdo->prepare("UPDATE users SET activate = 1 WHERE email = ?")->execute([$email]);
+  $email = $user['email'];  
+  $pdo->prepare("UPDATE accounts SET active = 1 WHERE email = ?")->execute([$email]);
   $pdo->prepare("DELETE FROM resetPasswords WHERE code = ?")->execute([$code]);
   header("location: login.html");
   exit;

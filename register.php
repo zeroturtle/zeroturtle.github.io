@@ -57,7 +57,7 @@ metis not commonly used
       try {
         // Insert data into the database
         $pdo->prepare("INSERT INTO ACCOUNTS (username, password, email, newsletter) VALUES (?, ?, ?, ?)")->execute([$fullname, password_hash($password, PASSWORD_DEFAULT), $email, $newsLetter]);
-/*
+
         // create temporary token
         $code = uniqid(true); // true for more uniqueness 
         $expFormat = mktime( date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y") ); // +1day
@@ -66,9 +66,9 @@ metis not commonly used
           $pdo->prepare("INSERT INTO resetPasswords (code, email, expDate) VALUES(?,?,?)")->execute([$code, $email, $expDate]);
         }
         catch(PDOException $e) { echo $e->getMessage(); }
-*/
-        //отправить email-сообщение с линком для активации 
+
 /*
+        //отправить email-сообщение с линком для активации 
     $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
     try {
         //Server settings
@@ -111,6 +111,7 @@ metis not commonly used
     }
 */
         //показать на экране дальнейшие шаги.
+      $error .= "http://".$_SERVER['HTTP_HOST']."/activate.php?code=$code"; 
       $error .=  '<div class="success"><p>Please check your email, follow a link in email to complete registration.</p></div><br />';
 
       }
