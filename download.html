@@ -3,6 +3,35 @@
   require_once("auth.php");
 
   require_once("header.html"); 
+
+function human_filesize($bytes, $decimals = 2) {
+    $factor = floor((strlen($bytes) - 1) / 3);
+    if ($factor > 0) $sz = 'KMGT';
+    return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor - 1] . 'B';
+}
+function line($Num) {
+  $files = [
+    ['optimus-full-ru.zip','Русский','zip'],
+    ['optimus-full-en.zip','English','zip'],
+    ['optimus-core-ru.zip','Русский','zip'],
+    ['optimus-core-en.zip','English','zip'],
+    ['Reports_ru.zip','Русский','zip'],
+    ['Reports_ua.zip','Українська','zip'],
+    ['Reports_en.zip','English','zip'],
+    ['Firebird-5.0.2.1613-0-windows-x86.zip','ZIP','zip'],
+    ['Firebird-5.0.2.1613-0-windows-x86.exe','EXE','binary'],
+    ['operation_manual_ru.doc','Русский','word'],
+    ['operation_manual_ru.pdf','Русский','pdf'],
+    ['training_fs_ru.doc','Русский','word'],
+    ['training_fs_ua.doc','Українська','word'],
+    ['training_gs_ru.doc','Русский','word'],
+    ['','',''],
+  ];
+  $filename = './downloads/'.$files[$Num][0];
+  echo '<i class="bi bi-file-'.$files[$Num][2].'"></i> ';
+  echo '<a href="'.$filename.'">'.$files[$Num][1].'</a>   <span class="small text-secondary text-nowrap m-3">'.
+      ((file_exists($filename)) ? date ("j-M-Y", filectime($filename)).' - '.human_filesize(filesize($filename),2) : "file $filename not exists").'</span>';
+}
 ?>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
@@ -12,12 +41,14 @@
 
 <section class="border-bottom pb-5">
     <div>
-      <span class="h3">Current OPTIMUS release </span>
-      <p>View all new features of version <strong>5.2.0.12 "Artemis"</strong> here: <a href="new52.html">What's New </a></p>
+      <p>View all new features of current version <strong>5.2.0.12 </strong> here: <a href="new52.html">What's New </a></p>
     </div>
     <span class="dl-info">
-      <span class="dl-title">Download Full version:  <a href="">Русский</a> | <a href="">English</a></span>
-      <span class="small text-secondary text-nowrap m-3">13 Jun 2025  - 2.31 Mb</span>
+      <span class="dl-title">Full package:
+              <ul>
+                <li><?php line(0); ?> </li>
+                <li><?php line(1); ?> </li>
+              </ul>
     </span>
 </section>
 
@@ -27,18 +58,30 @@
         <span class="h3 text-center">Components </span>
         <ul>
           <li>
-            <span class="dl-title">OPTIMUS core files <small>(exe & dll)</small>:  <a href="">Русский</a> | <a href="">English</a></span>
-            <span class="small text-secondary text-nowrap m-3">13 Jun 2025  - 2.31 Mb</span>
-            </li>
+            <span class="dl-title">OPTIMUS core files <small>(exe & dll, fdb)</small>:  
+              <ul>
+                <li><?php line(2); ?> </li>
+                <li><?php line(3); ?> </li>
+              </ul>
+            </span>
           </li>
           <li>
-            <span class="dl-title">Report <small>(print templates)</small>:  <a href="downloads/Reports_ru.zip">Русский</a> | <a href="downloads/Reports_ua.zip">Українська</a> | <a href="downloads/Reports_en.zip">English</a> </span>
-            <span class="small text-secondary text-nowrap m-3">13 Jun 2025  - 2.31 Mb</span></li>
+            <span class="dl-title">Report <small>(print templates)</small>:
+              <ul>
+                <li><?php line(4); ?> </li>
+                <li><?php line(5); ?> </li>
+                <li><?php line(6); ?> </li>
+              </ul>
+            </span>
           </li>
           <li>
-            <span class="dl-title">Firebird SQL server x86 v5.0.2:  <a href="downloads/Firebird-5.0.2.1613-0-windows-x86.zip"> ZIP</a> | <a href="downloads/Firebird-5.0.2.1613-0-windows-x86.exe ">EXE</a>
-            <span class="small text-secondary text-nowrap m-3">13 Jun 2025  - 2.31 Mb</span>
-            <br><small>(You can also download it from the official website <a href="https://www.firebirdsql.org/en/firebird-5-0" class="text-decoration-none"> The Firebird Project</a>)</small> </span>
+            <span class="dl-title">Firebird SQL server x86 v5.0.2:<br>  
+              <small>(You can download it from the official website <a href="https://www.firebirdsql.org/en/firebird-5-0" class="text-decoration-none"> The Firebird Project</a>)</small> 
+              <ul>
+                <li><?php line(7); ?> </li>
+                <li><?php line(8); ?> </li>
+              </ul>
+            </span>
           </li>
         </ul>
       </div>
@@ -46,16 +89,25 @@
         <span class="h3 text-center">Documentation</span><br>
         <ul>
           <li>
-            <span class="dl-title"><i class="bi bi-file-earmark-pdf"></i> OPTIMUS operational manual:   <a href="downloads/operation_manual_ru.pdf ">Русский</a> </span>
-            <span class="small text-secondary text-nowrap m-3">13 Jun 2025  - 2.31 Mb</span>
+            <span class="dl-title"> OPTIMUS operational manual:   
+              <ul>
+                <li><?php line(9); ?> </li>
+                <li><?php line(10); ?> </li>
+              </ul>
+          </li>
+          <li><span class="dl-title"> Formation Skydiving guide : 
+              <ul>
+                <li><?php line(11); ?> </li>
+                <li><?php line(12); ?> </li>
+              </ul>
+            </span>
           </li>
           <li>
-            <span class="dl-title"><i class="bi bi-file-earmark-pdf"></i> Formation Skydiving guide :   <a href="downloads/training_fs_ru.pdf">Русский</a> | <a href="downloads/training_fs_ua.pdf">Українська</a> </span>
-            <span class="small text-secondary text-nowrap m-3">13 Jun 2025  - 2.31 Mb</span>
-          </li>
-          <li>
-            <span class=""><i class="bi bi-file-earmark-pdf"></i> Competitions' organizing guide:  <a href="downloads/training_org_ru.pdf">Русский</a></span>
-            <span class="small text-secondary text-nowrap m-3">13 Jun 2025  - 2.31 Mb</span>
+            <span class=""> Competitions' organizing guide:  
+              <ul>
+                <li><?php line(13); ?> </li>
+              </ul>
+            </span>
           </li>
         </ul>
       </div>
