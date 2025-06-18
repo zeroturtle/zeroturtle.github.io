@@ -1,4 +1,7 @@
 <?php
+//phpinfo(); 
+if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != $_SERVER['HTTP_ORIGIN'].'/licence.html')  header("Location: licence.html");
+
 //include auth.php file on all secure pages
 include("auth.php");
 
@@ -50,8 +53,8 @@ require_once("header.html");
     <p>Online orders are processed automatically 24/7.</p>
     </small>
   </div>
-<p class="text-warning"><?php echo (!empty($err) ? $err : ''); ?></p>
-<button type="submit" class="btn btn-lg btn-primary">Check Out</button>
+  <p class="text-warning"><?php echo (!empty($err) ? $err : ''); ?></p>
+  <button type="submit" class="btn btn-lg btn-primary">Check Out</button>
 </form>
 </section>
 
