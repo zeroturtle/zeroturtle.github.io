@@ -186,45 +186,55 @@ file_put_contents( $Licensefile, implode(PHP_EOL, str_split(createLicenceFile($L
 // без активации
 $version = parse_ini_file('version.info', true);
 $query = "INSERT INTO LICENCE(NUMBER, NAME, EMAIL, TITLE, COMPANY, LICENCETYPE, EVENTTYPES, DateStart, DateEnd, LICENCEHASH, ACCOUNT_ID, VERSION) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-$stmt= $pdo->prepare($query);                                                   
+$stmt= $pdo->prepare($query);
 $stmt->execute([$License['Number'], $License['Owner'], $License['Email'], $title, $License['Company'], $License['Type'], $License['EventType'],
          date_format($License['DateStart'], 'Y-m-d H:i:s'), date_format($License['DateEnd'], 'Y-m-d H:i:s'), $CheckSum, $_SESSION['account_id'],
          implode(';', array_map( function ($v, $k) { return $k.'='.$v; }, $version['Apps'], array_keys($version['Apps']) ))]);
-// получить ID
+// получить ID ?
 ///////////////////////////////////
 
 
-switch ($License['Type']) //single
+///////////////////////////////////
+//активация лицензии
+function activateLicanse($Number) {
+  global $pdo;
+  $pdo->prepare("UPDATE LICENCE SET ACTIVE=true WHERE Number=?")->execute([$Number]);
+}
+// отправить письмо с файлом лицензии
+function sendLicanse($License) {
+  // считать шаблон письма
+  $smarty = new Smarty;
+  $smarty->debugging = false;
+  $smarty->caching = false;
+  $smarty->cache_lifetime = 300;
+  $smarty->assign("licence", $License);
+  $smarty->assign("type", ($License['Type']==1?'Site':'Single'));
+  $smarty->assign("datestart", date_format($License['DateStart'],'Y-m-d'));
+  $smarty->assign("dateend", date_format($License['DateEnd'],'Y-m-d '));
+  $smarty->assign("desc", $TypeList['types']);
+  $text = $smarty->fetch('new_subscription.tpl'); 
+  send($text, $Licensefile, $License);
+}
+
+///////////////////////////////////
+// Делать в зависимости от типа лицензии
+switch ($License['Type']) 
 {
-  case 0: activateLicanse($License['Number']); 
+  case 0: activateLicanse($License["Number"]); //single
+          sendLicanse($License);
+          header('location: thanks.html'); // редирект на index.php после выполнения скрипта
           break;
-  case 1: //отправить в банк на оплату
+  case 1:  //site
+          //отправить в банк на оплату
           break;
   default ;
 }
+// банк вызывает callback-скрипт, где вызвать
+// activateLicanse($License["Number"]); sendLicanse($License);
+
 
 
 ///////////////////////////////////
-// отправить письмо с файлом лицензии
-///////////////////////////////////
-
-// считать шаблон письма
-$smarty = new Smarty;
-$smarty->debugging = false;
-$smarty->caching = false;
-$smarty->cache_lifetime = 300;
-$smarty->assign("licence", $License);
-$smarty->assign("type", ($License['Type']==1?'Standard':'Personal'));
-$smarty->assign("datestart", date_format($License['DateStart'],'Y-m-d'));
-$smarty->assign("dateend", date_format($License['DateEnd'],'Y-m-d '));
-$smarty->assign("desc", $TypeList['types']);
-$text = $smarty->fetch('new_subscription.tpl'); 
-
-send($text, $Licensefile, $License);
-header('location: thanks.html'); // редирект на index.php после выполнения скрипта
-///////////////////////////////////
-
-
 /*
 // пример как прочитать лицензию из файла на php
    $fileContent = base64_decode($fileContent);
