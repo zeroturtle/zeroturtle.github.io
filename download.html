@@ -11,10 +11,10 @@ function human_filesize($bytes, $decimals = 2) {
 }
 function line($Num) {
   $files = [
-    ['optimus-full-ru.zip','Русский','zip'],
-    ['optimus-full-en.zip','English','zip'],
-    ['optimus-core-ru.zip','Русский','zip'],
-    ['optimus-core-en.zip','English','zip'],
+    ['optimus-5.2.0.19-full-ru.zip','Русский','zip'],
+    ['optimus-5.2.0.19-full-en.zip','English','zip'],
+    ['optimus-5.2.0.19-core-ru.zip','Русский','zip'],
+    ['optimus-5.2.0.19-core-en.zip','English','zip'],
     ['Reports_ru.zip','Русский','zip'],
     ['Reports_ua.zip','Українська','zip'],
     ['Reports_en.zip','English','zip'],
@@ -28,9 +28,13 @@ function line($Num) {
     ['','',''],
   ];
   $filename = './downloads/'.$files[$Num][0];
-  echo '<i class="bi bi-file-'.$files[$Num][2].'"></i> ';
-  echo '<a href="'.$filename.'">'.$files[$Num][1].'</a>   <span class="small text-secondary text-nowrap m-3">'.
-      ((file_exists($filename)) ? date ("j-M-Y", filectime($filename)).' - '.human_filesize(filesize($filename),2) : "file $filename not exists").'</span>';
+  if (file_exists($filename)) {
+    echo '<i class="bi bi-file-'.$files[$Num][2].'"></i> '.
+       '<a href="'.$filename.'">'.$files[$Num][1].'</a>  <span class="text-secondary text-nowrap m-3"><small>'.
+         date ("j-M-Y", filectime($filename)).' - '.human_filesize(filesize($filename),2).'</small></span>';
+  } else {
+    echo "<i class='text-danger'>file $filename doesn't exists</i>";
+  }
 }
 ?>
 
@@ -40,9 +44,6 @@ function line($Num) {
 <h2 class="display-3">OPTIMUS <span class="text-danger">download page</span></h2>
 
 <section class="border-bottom pb-5">
-    <div>
-      <p>View all new features of current version <strong>5.2.0.12 </strong> here: <a href="new52.html">What's New </a></p>
-    </div>
     <span class="dl-info">
       <span class="dl-title">Full package:
               <ul>
@@ -115,16 +116,14 @@ function line($Num) {
 </section>
 
 
-<section class="border-bottom pb-5">  <span class="h3 text-center">Update to the latest build.</span>
-   ВНИМАНИЕ!  Техподдержка оказывается только для пользователей с активной лицензией. Консультации только по текущей версии системы (той что выложеная на web).
+<section class="border-bottom pb-5">  <span class="h3 text-center">Update to the latest build.</span><br>
+   <b>ВНИМАНИЕ!</b>  Техподдержка оказывается только для пользователей с активной лицензией. Консультации только по текущей версии системы (той что выложеная на web).
    Лицензия включена в годовую подписку.
    Если вы имеете активную Site-лицензию напишите запрос в <a href="mailto:support@optimus.dp.ua">службу поддержки</a>, где укажите №лицензии и версию системы.
    Для пользоватлей Single-лицензии продление не доступно, потребуется оформление новой подписки.
-   Данные лицензии можно увидеть в окне Справка-About. 
+   <p>Compare your maintenance term to the release date of the latest build.  License terms you can check in About window.</p>
 
-   <p>Compare your maintenance term to the release date of the latest build. <a href="licence.html#licence">Find out how</a>.</p>
-
-   <p class="text-center">Оформить подписку на странице <a href="licence.html" class="btn btn-lg btn-primary rounded-pill">Subscribe</a> </p>
+   <p class="text-center"><a href="licence.html" class="btn btn-lg btn-primary rounded-pill">Subscribe</a> </p>
    Для использования лицензии укажите файл в окне "Параметры запуска" для параметра "файл лицензии" или через ком.строку ключ -l.
    При неактивной лицензии (истекший строк действия, поврежденный файл лицензии) будет появляться nag-window, обратитесь в тех.поддержку.
 </section>
