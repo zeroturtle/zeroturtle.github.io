@@ -12,7 +12,7 @@ $stmt = $pdo->prepare("SELECT * FROM resetPasswords WHERE code = ?");
 $stmt->execute([$code]);
 $user = $stmt->fetch();
 if (!$user) {
-  $error.="<p>can't find the page because not same code</p>"; 
+  $error.="<p>can't find the page because not same code</p>";
 }
 else {
   $email = $user['email']; 
@@ -41,6 +41,8 @@ if (empty($error) && isset($_POST['password'])) {
  	}
     }
   }
+} else {
+  $error.="<p>Please, click <a href="recover.php">recover</a> again to refresh your password!</p>"; 
 }
 
 require("resetpwd.html");
