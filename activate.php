@@ -6,17 +6,17 @@
 require_once "session.php";
 require_once "config.php";
 
+$error = "";
 if (!isset($_GET['code'])) {
-	exit("can't find the page"); 
+  $error.="can't find the page"; 
 }
 
-$error = "";
 $code = $_GET['code']; 
 $stmt = $pdo->prepare("SELECT * FROM resetPasswords WHERE code = ?");
 $stmt->execute([$code]);
 $user = $stmt->fetch();
 if (!$user) {
-  $err .= ("<p>can't find the page because not same code</p>"); 
+  $error.="<p>can't find the page because not same code</p>"; 
 }
 else {
   //
