@@ -137,5 +137,5 @@ function windowOnClick(event) {
 
 window.addEventListener("load", loadEvent)
 window.addEventListener("click", windowOnClick)
-document.getElementById('scoreSummary').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
+document.getElementById('scoreSummary').insertAdjacentText('afterend', 'Powered by OPTIMUS Artemius')
 
