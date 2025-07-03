@@ -135,11 +135,7 @@ function windowOnClick(event) {
 	}
 }
 
-//window.addEventListener("load", loadEvent)
-window.addEventListener("load", (event) => {
-	loadEvent(event);
-//	for(a of document.getElementsByClassName('nav-link')) a.addEventListener('click', loadEvent)
-})
+window.addEventListener("load", loadEvent)
 window.addEventListener("click", windowOnClick)
 document.getElementById('scoreSummary').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
 
