@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-critters-container data-bs-theme="green">
+<html lang="en" data-critters-container data-bs-theme="light">
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <meta http-equiv="Cache-Control" content="no-store">
