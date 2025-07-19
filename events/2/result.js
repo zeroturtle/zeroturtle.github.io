@@ -55,7 +55,6 @@ function loadEvent(event) {
 			c.append(span);
 		};
 	// draw
-
 		// convert country name to flag SVG-image
 		for (const cell of resultTable.querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
@@ -68,7 +67,6 @@ function loadEvent(event) {
 			}
 		}
 		scoreSummary.append(resultTable)
-		scoreSummary.insertAdjacentHTML('beforebegin', `<link type="text/css" rel="stylesheet" href="${baseURL}proto.css">`);
 	})
 }
 
@@ -137,5 +135,5 @@ function windowOnClick(event) {
 
 window.addEventListener("load", loadEvent)
 window.addEventListener("click", windowOnClick)
-document.getElementById('scoreSummary').insertAdjacentText('afterend', 'Powered by OPTIMUS Artemius')
+document.getElementById('scoreSummary').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
 
