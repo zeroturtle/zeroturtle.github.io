@@ -14,18 +14,16 @@ $page   = ( isset($_GET['page']) && filter_var($_GET['page'],FILTER_VALIDATE_INT
 
 // 3. запрашиваем список Events в json формате
 $Events = [];
-
 $query = "SELECT COMPETITION_ID, DESCRIPTION FROM competition WHERE Visible=1"
 // MySQL
-	.(($F_Name != '') ? " AND (DESCRIPTION->'$.name' LIKE '%'||'$F_Name'||'%') OR (DESCRIPTION->'$.location' LIKE '%'||'$F_Name'||'%')" : '')
+/*	.(($F_Name != '') ? " AND (DESCRIPTION->'$.name' LIKE '%'||'$F_Name'||'%') OR (DESCRIPTION->'$.location' LIKE '%'||'$F_Name'||'%')" : '')
 	.(($F_Year != 0)  ? " AND YEAR(json_unquote(DESCRIPTION->'$.date_start')) = '$F_Year' " : '')  //работает для MySQL>=8.0
 	.(($F_Type != '') ? " AND DESCRIPTION->$.type_id IN (".implode(',',$TypeArr[$F_Type]).")" : '')
+*/
 //MariDB
-/*
-	.(($F_Name != '') ? " AND (JSON_VALUE(DESCRIPTION, '$.name') LIKE CONCAT('%','$F_Name','%') OR JSON_VALUE(DESCRIPTION, '$.location') LIKE CONCAT('%','$F_Name','%') )" : '')
+	.(($F_Name != '') ? " AND ( UPPER(JSON_VALUE(DESCRIPTION, '$.name')) LIKE UPPER(CONCAT('%','$F_Name','%')) OR UPPER(JSON_VALUE(DESCRIPTION, '$.location')) LIKE UPPER(CONCAT('%','$F_Name','%')) )" : '')
 	.(($F_Year != 0)  ? " AND YEAR(JSON_VALUE(DESCRIPTION, '$.date_start')) = '$F_Year' " : '')  //работает для MySQL>=8.0
 	.(($F_Type != '') ? " AND JSON_VALUE(DESCRIPTION, '$.type_id') IN (".implode(',',$TypeArr[$F_Type]).")" : '')
-*/
 //Sqlite
 /*
 	.(($F_Name != '') ? " AND (json_extract(DESCRIPTION, '$.name') LIKE '%'||'$F_Name'||'%' OR json_extract(DESCRIPTION, '$.location') LIKE '%'||'$F_Name'||'%' )" : '')

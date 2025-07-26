@@ -1,81 +1,99 @@
 <?php
+// Include config file
+require_once "config.php";
 
-/*
-$mysqli = mysqli_connect("localhost", "root", "", "optimus");
-if (mysqli_connect_errno()) {
-    printf("Connect failed: %s\n", mysqli_connect_error());
-    exit();
+define('EVENTS_DIR', 'events/');
+
+function Licence_Validation($number,$hash) {
+  global $pdo;
+  $query = "SELECT * FROM LICENCE WHERE ACTIVE=true" 
+    ." AND NOW() BETWEEN DATESTART AND DATEEND"	//дата в диапазоне срока действия лицензии
+    ." AND LICENCETYPE=1"			//только для Site типа
+    ." AND NUMBER = ?"				//номер лицензии
+    ." AND LICENCEHASH = ?";			//сверяем md5hash
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$number, $hash]);
+  $row = $stmt->fetch();
+  return isset($row) ? $row : false;
 }
+
+//считать из json параметры загрузки файла
+// формат json: {comp_id="int", event_id="string", resource_name="string", filename="string", file="...base64code..."}
+$file = json_decode($_POST['JSON']); 
+if ( json_last_error() != JSON_ERROR_NONE) { die(json_last_error_msg()); }
+$compID = $file->comp_id;
+$event_id = $file->event_id;
+$resource_id = $file->resource;
 
 // check POST variables
 $NUMBER = ( isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["NUMBER"])) ? $_POST["NUMBER"] : 0;
 if (!isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["HASH"])) { die ('Incorrect hash'); } 
 $HASH = $_POST["HASH"];
-$EVENT_ID = $_POST["EVENTI_ID"];
+$HASH = 'c51ef7bd8dfcdf7d76fde411f1dca228';
+$NUMBER = '190051E7-F81D-4068-B78C-BD8CDE9A';
+$License = Licence_Validation($NUMBER,$HASH);
+if (!$License) die('Error licence validation or Incompatible type!');
+else $LicID = $License['LICENCE_ID'];
 
+//загружать данные только с той же лицензией, кем создано 
+$query="SELECT * FROM COMPETITION WHERE LICENCE_ID = ? AND JSON_VALUE(DESCRIPTION, '$.id') = ?";  //MariaDB
+$stmt = $pdo->prepare($query);
+$stmt->execute([$LicID, $compID]); 
+$row = $stmt->fetch();
+if (!isset($row)) die('You should use identical licence to upload data!'); 
+else $compID = $row['COMPETITION_ID']; 
 
-//Licence_Validation
-$query = "SELECT co.LICENCE_ID, co.DESCRIPTION->'$.id' EVENT_ID FROM COMPETITION co LEFT JOIN LICENCE li ON li.LICENCE_ID=co.LICENCE_ID" // standard
-  ." WHERE ACTIVE=true AND LICENCETYPE=1 AND NOW() BETWEEN DATESTART AND DATEEND"	//дата в диапазоне срока действия лицензии
-  ." AND NUMBER='{$NUMBER}'"
-  ." AND LICENCEHASH = '{$HASH}'"		//сверяем md5hash
-  ." AND (EVENTTYPES & (1 << {$TYPE})) = 1"	//входит ли дисциплина в список лицензии 
-  ." AND EVENT_ID = {$EVENT_ID}";
-$result = mysqli_query($mysqli, $query); 
-$row = mysqli_fetch_assoc($result);
-if ( is_null($row['LICENCE_ID']) ) die('Error licence validation or Incompatible type!');
-list($LicID, $EventID) = $row;
-*/
-
-$EventID=0;
 // определяем $target_dir куда копировать файлы
-$target_dir = "events/{$EventID}/";
-$target_file = $target_dir . basename($_FILES["FILE"]["name"]);
-echo $target_file;
-$uploadOk = 1;
+$comp_dir = EVENTS_DIR.$compID.'/';
+$event_dir = $comp_dir.'/'.$event_id.'/';
+$resource_name = ['logo', 'proto', 'divepool', 'team', 'photo', 'detail', 'video'];
+switch(array_search($resource_id, $resource_name)) {
+  case 0: $target_dir =  $comp_dir;
+    break;
+  case 1: $target_dir =  $event_dir;
+    break;
+  case 2: $target_dir =  $event_dir."divepool/";
+    break;
+  case 3: $target_dir =  $comp_dir."team/";
+    break;
+  case 4: $target_dir =  $comp_dir."photo/";
+    break;
+  case 5: $target_dir =  $event_dir."detail/";
+    break;
+  case 6: $target_dir =  $event_dir."video/";
+    break;
+  default: die('Unexpected destination!');
+}
+$imageData = base64_decode($file->file);
 /*
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+$imageInfo = getimagesizefromstring($imageData);
+if ($imageInfo !== false) {
+    $imageType = $imageInfo[2]; // Индекс 2 содержит тип изображения
+    $mimeType = $imageInfo['mime']; // Также можно получить mime-тип
 
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
-}
-
-// Check if file already exists
-if (file_exists($target_file)) {
-  echo "Sorry, file already exists.";
-  $uploadOk = 0;
-}
-
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-  echo "Sorry, your file is too large.";
-  $uploadOk = 0;
-}
-
-// Allow certain file formats
-if (!in_array($imageFileType, ["jpg","png","jpeg","gif"])) {
-  echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-  $uploadOk = 0;
+    switch ($imageType) {
+        case IMAGETYPE_JPEG:
+            echo "Тип изображения: JPEG";
+            break;
+        case IMAGETYPE_PNG:
+            echo "Тип изображения: PNG";
+            break;
+        case IMAGETYPE_GIF:
+            echo "Тип изображения: GIF";
+            break;
+        case IMAGETYPE_BMP:
+             echo "Тип изображения: BMP";
+             break;
+        case IMAGETYPE_WEBP:
+            echo "Тип изображения: WebP";
+            break;
+        default:
+            echo "Неизвестный тип изображения";
+    }
+    echo "MIME-тип: " . $mimeType;
+} else {
+    echo "Ошибка: Не удалось определить тип изображения";
 }
 */
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
-} else {
-echo 'Copying '.$target_file;
-  if (move_uploaded_file($_FILES["FILE"]["tmp_name"], $target_file)) {
-    echo "The file ". htmlspecialchars( basename( $_FILES["FILE"]["name"])). " has been uploaded.";
-  } else {
-    echo "Sorry, there was an error uploading your file.";
-  }
-}
+file_put_contents($target_dir.$file->name, $imageData);
 ?>
