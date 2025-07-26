@@ -19,25 +19,20 @@
 
   <!-- Event detail -->
   <div class="container-fluid h-100">
-    <div class="row h-100 align-items-center">
-      <div class="col-1 col-sm-2 col-md-3 d-none d-sm-inline">
+    <div class="row h-100 align-items-center text-uppercase">
+      <div class="col-2 col-sm-2">
+         <a href="/index.html" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"><&nbsp;All events</a>
+      </div>
+      <div class="col-3 col-sm-3 col-md-3 d-none d-sm-inline">
         <img src="Logo1.jpg" class="img-fluid p-1 d-none d-sm-inline" onerror="this.onerror=null;this.src='../../images/OPTIMUS3.svg'" style="max-height:100px; max-width: 100px">
         <img src="Logo2.jpg" class="img-fluid p-1 d-none d-md-inline" onerror="this.onerror=null;this.src='../../images/OPTIMUS3.svg'" style="max-height:100px; max-width: 100px">
       </div>
-      <div class="col-10 col-sm-8 col-md-8">
-        <div class="row text-uppercase">
-          <div class="col-12 h2">
-            <div id="COMPETITION_NAME">{$COMPETITION_NAME}</div>
-          </div>
-          <!--div class="col-12 h4">
-            парашутна групова акробатика, вправа "четвірка"
-          </div-->
-          <div class="col-12 h6">
-            <div id="DATE_FROM" class="d-inline-block">{$DATE_FROM}</div> - <div id="DATE_TO" class="d-inline-block">{$DATE_TO}</div>
-          </div>
-          <div class="col-12 h6">
-             <div id="PLACE">{$PLACE}</div>
-          </div>
+      <div class="col-8 col-sm-8 col-md-8">
+        <div class="w-100 h2">
+          <div id="COMPETITION_NAME">{$COMPETITION_NAME}</div>
+        </div>
+        <div class="w-100 h6">
+          <div class="d-inline-block  text-nowrap">{$DATE_FROM}&nbsp;-&nbsp;{$DATE_TO}</div>, <div class="d-inline-block">{$PLACE}</div>
         </div>
       </div>
     </div>
