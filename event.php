@@ -3,6 +3,7 @@
 // Получаем json-файл вида: '{"id": int,"name": "string", "location": "string", "date_start": "string Y-m-d", "date_end": "string Y-m-d", "type_id": int, "event": [{"id": int, "name": "string"},...{}]}';
 //для авторизации используется NUMBER и HASH лицензии 
 
+
 // Include config file
 require_once "config.php";
 
@@ -11,18 +12,16 @@ define('EVENT_TEMPLATE_DIR', EVENTS_DIR.'template/');
 
 function Licence_Validation($number,$hash,$type) {
 global $pdo;
-/*
-$query = "SELECT * FROM LICENCE WHERE ACTIVE=true" 
-." AND NOW() BETWEEN DATESTART AND DATEEND"	//дата в диапазоне срока действия лицензии
-." AND LICENCETYPE=1"			//Site
-." AND NUMBER = ?"			//номер лицензии
-." AND LICENCEHASH = ?"			//сверяем md5hash
-." AND (EVENTTYPES & (1 << ?)) <> 0";	//тип соревнования входит в список дисциплин лицензии
-$stmt = $pdo->prepare($query);
-$stmt->execute([$number, $hash, $type]);
-$row = $stmt->fetch();
-return ( is_null($row['LICENCE_ID']) ) ? null : $row;
-*/
+  $query = "SELECT * FROM LICENCE WHERE ACTIVE=true" 
+    ." AND NOW() BETWEEN DATESTART AND DATEEND"	//дата в диапазоне срока действия лицензии
+    ." AND LICENCETYPE=1"			//Site
+    ." AND NUMBER = ?"			//номер лицензии
+    ." AND LICENCEHASH = ?"			//сверяем md5hash
+    ." AND (EVENTTYPES & (1 << ?)) <> 0";	//тип соревнования входит в список дисциплин лицензии
+  $stmt = $pdo->prepare($query);
+  $stmt->execute([$number, $hash, $type]);
+  $row = $stmt->fetch();
+  return isset($row) ? $row : false;
 }
 
 
@@ -38,14 +37,18 @@ $DATE_TO = $event->date_end;
 $PLACE = $event->location;
 $RANK = $event->events;
 $THEME = $event->theme;
-$TITLE_LOGO = $event->title_img;
+$PAGE_LOGO = $event->title_img;
 
 // check POST variables
 $NUMBER = ( isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["NUMBER"])) ? $_POST["NUMBER"] : 0;
 if (!isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["HASH"])) { die ('Incorrect hash'); } 
 $HASH = $_POST["HASH"];
-if (!Licence_Validation($NUMBER,$HASH,$TYPE)) die('Error licence validation or Incompatible type!');
-else $LicID = $row['LICENCE_ID'];
+$HASH = 'c51ef7bd8dfcdf7d76fde411f1dca228';
+$NUMBER = '190051E7-F81D-4068-B78C-BD8CDE9A';
+$License = Licence_Validation($NUMBER,$HASH,$TYPE);
+if (!$License) die('Error licence validation or Incompatible type!');
+else $LicID = $License['LICENCE_ID'];
+
 
 //блокируем повторный запрос создания такого же event
 //$query="SELECT * FROM COMPETITION WHERE LICENCE_ID = ? AND DESCRIPTION->'$.id' = ?";            //MySQL
@@ -61,12 +64,44 @@ $row = $pdo->query("SELECT LAST_INSERT_ID();")->fetch();
 $COMPETITION_ID = $row[0];     // COMPETITION_ID
 $D = EVENTS_DIR.$COMPETITION_ID;
 rrmdir($D);            // на всякий случай удаляем все 
-mkdir($D, 0777, true); //надо if (!mkdir($D, 0777, true)) { die('Failed to create directories...'); };  но так не рабоатет!
+//папка соревнования
+if (!mkdir($D, 0777, true)) { die('Failed to create directories...'); } 
 //папки для данных
-mkdir($D."/team", 0777, true);
-mkdir($D."/photo", 0777, true);
+if (!mkdir($D."/team", 0777, true)) { die('Failed to create directories...'); } 
+if (!mkdir($D."/photo", 0777, true)) { die('Failed to create directories...'); } 
 // скопировать из шаблона все файлы в папку event'а
 rcopy(EVENT_TEMPLATE_DIR, $D);
+
+//картинка для
+if ($PAGE_LOGO) {
+  $imageData = base64_decode($PAGE_LOGO);
+  $imageInfo = getimagesizefromstring($imageData);
+  if ($imageInfo !== false) {
+    $imageType = $imageInfo[2]; // Индекс 2 содержит тип изображения
+    switch ($imageType) {
+        case IMAGETYPE_JPEG:
+            $PAGE_LOGO_IMAGE = "PAGE_LOGO.JPEG";
+            break;
+        case IMAGETYPE_PNG:
+            $PAGE_LOGO_IMAGE = "PAGE_LOGO.PNG";
+            break;
+        case IMAGETYPE_BMP:
+             $PAGE_LOGO_IMAGE = "PAGE_LOGO.BMP";
+             break;
+        case IMAGETYPE_GIF:
+            $PAGE_LOGO_IMAGE = "PAGE_LOGO.GIF";
+            break;
+/*        case IMAGETYPE_WEBP:
+            $PAGE_LOGO_IMAGE = "PAGE_LOGO.WebP";
+            break;
+*/
+        default:
+            $PAGE_LOGO_IMAGE = ""; //Неизвестный тип изображения
+    }
+  } else {
+    echo "Ошибка: Не удалось определить тип изображения";
+  }
+}
 
 //создать папку для каждого зачета
 foreach ($RANK as $value) {
@@ -94,21 +129,15 @@ $smarty->assign("PLACE", $PLACE);
 $smarty->assign("RANK", $RANK);
 $smarty->assign("BASEURL", "http://{$_SERVER['SERVER_NAME']}/".EVENTS_DIR.$COMPETITION_ID."/");
 $smarty->assign("THEME", (isset($THEME) && in_array($THEME,['dark','light'])) ? $THEME : "light");
-$smarty->assign("PAGE_LOGO", 'Title.jpg');
+$smarty->assign("PAGE_LOGO", ($PAGE_LOGO != '' ? $PAGE_LOGO_IMAGE : 'Title.jpg') );
 $output = $smarty->fetch('index.tpl');					//шаблон страницы соревнований
 file_put_contents(EVENTS_DIR.$COMPETITION_ID.'/index.html',$output);	// write to file event в папку COMPETITION_ID
-if (!$TITLE_LOGO) file_put_contents(EVENTS_DIR.$COMPETITION_ID.'/Title.jpg', base64_decode($TITLE_LOGO)); //header image
-echo $COMPETITION_ID;
-
-
-//$PAGE_LOGO = isset($_FILES['page_logo']) ? $_FILES['PageLogo'] : 'Title.jpg';
-//organizer_logo
-//competition_logo
+if ($PAGE_LOGO != '') file_put_contents(EVENTS_DIR.$COMPETITION_ID.'/'.$PAGE_LOGO_IMAGE, $imageData); //header image
 
 // вернуть full path URL папки event'а
 //echo "http://{$_SERVER['SERVER_NAME']}/{EVENTS_DIR}{$COMPETITION_ID}/";
 // вернуть ID созданного мероприятия
-
+echo $COMPETITION_ID;
 
 
 
