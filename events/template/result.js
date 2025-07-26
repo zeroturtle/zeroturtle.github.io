@@ -69,6 +69,7 @@ function loadEvent(event) {
 				cell.append(img);
 			}
 		}
+
 		scoreSummary.append(resultTable)
 	})
 }
