@@ -25,6 +25,7 @@ $compID = $file->comp_id;
 $event_id = $file->event_id;
 $resource_id = $file->resource;
 
+
 // check POST variables
 $NUMBER = ( isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["NUMBER"])) ? $_POST["NUMBER"] : 0;
 if (!isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["HASH"])) { die ('Incorrect hash'); } 
@@ -43,10 +44,12 @@ $row = $stmt->fetch();
 if (!isset($row)) die('You should use identical licence to upload data!'); 
 else $compID = $row['COMPETITION_ID']; 
 
+
+
 // определяем $target_dir куда копировать файлы
 $comp_dir = EVENTS_DIR.$compID.'/';
 $event_dir = $comp_dir.'/'.$event_id.'/';
-$resource_name = ['logo', 'proto', 'divepool', 'team', 'photo', 'detail', 'video'];
+$resource_name = ['logo', 'proto', 'divepool', 'team', 'detail', 'video'];
 switch(array_search($resource_id, $resource_name)) {
   case 0: $target_dir =  $comp_dir;
     break;
@@ -54,9 +57,7 @@ switch(array_search($resource_id, $resource_name)) {
     break;
   case 2: $target_dir =  $event_dir."divepool/";
     break;
-  case 3: $target_dir =  $comp_dir."team/";
-    break;
-  case 4: $target_dir =  $comp_dir."photo/";
+  case 3: $target_dir =  $event_dir."team/";
     break;
   case 5: $target_dir =  $event_dir."detail/";
     break;

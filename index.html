@@ -53,8 +53,8 @@
     if (isLoading) { return; }
     isLoading = true;
     // получаем из сервера json со списком event
-//    fetch('http://127.0.0.1/index.php?page='+page) //здесь вызвать index.php, возвращает json массив event.
-    fetch('https://zeroturtle.github.io/events.json') //здесь вызвать index.php, возвращает json массив event.
+    fetch('http://127.0.0.1/index.php?page='+page) //здесь вызвать index.php, возвращает json массив event.
+//    fetch('https://zeroturtle.github.io/events.json') //здесь вызвать index.php, возвращает json массив event.
       .then(response => response.json())
       .then(json => {
         // считать template строки event
@@ -131,7 +131,7 @@
     <div class="collapse navbar-collapse w-100" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="d-flex">
-          <a class="nav-link link-warning text-truncate" aria-current="page" id="ALL" href="#" onclick="clearCookie();">Выберите сезон и тип соревнований для отображения.</a>
+          <a title="сбросить фильтры" class="nav-link link-warning text-truncate" aria-current="page" id="ALL" href="#" onclick="clearCookie();">Выберите сезон и тип соревнований для отображения.</a>
         </li>
         <li class="d-flex">
           <select class="form-select w-auto" title="Choose a season" id="Year" onchange="getComboA(this);">
@@ -159,7 +159,7 @@
         </li>
       </ul>  
       <div role="search" class="d-flex">
-          <input class="form-control me-2 d-flex" type="search" placeholder="Search" aria-label="Search" id="Name">
+          <input class="form-control me-2 d-flex" type="search" placeholder="Search" title="set part of string name or place" id="Name">
           <button class="btn btn-outline-success" type="submit" onclick="getComboA(Name);" id="searchButton">Search</button>
       </div>
     </div>

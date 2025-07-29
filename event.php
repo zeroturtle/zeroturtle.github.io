@@ -109,6 +109,7 @@ foreach ($RANK as $value) {
   mkdir($event_dir, 0777, true);
   //
   mkdir($event_dir."/divepool", 0777, true);
+  mkdir($event_dir."/team", 0777, true);
   mkdir($event_dir."/detail", 0777, true);
   mkdir($event_dir."/video", 0777, true);
 }
