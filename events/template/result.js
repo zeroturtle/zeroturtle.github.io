@@ -4,14 +4,14 @@ function loadEvent(event) {
 	const urlParams = new URLSearchParams(window.location.search)
 	let Rank = urlParams.get("r")
 	//2. default параметр r
-	//Rank = isNaN(Rank) ? doc.querySelector("nav-item").href : Rank
+	Rank = (isNaN(Rank) || Rank==null) ? document.getElementsByClassName("nav-link")[0].getAttribute('href').slice(3) : Rank
 
 	event.preventDefault()
 	fetch(`${baseURL}${Rank}/proto.html`)
 	.then(response => response.text())
 	.then((html) => {
 		let doc = new DOMParser().parseFromString(html, "text/html")
-		document.head.insertAdjacentHTML('beforeend',`<link type="text/css" rel="stylesheet" href="proto.css">`)
+		//document.head.insertAdjacentHTML('beforeend',`<link type="text/css" rel="stylesheet" href="proto.css">`)
 		let resultTable = doc.querySelector('table')
 		resultTable.setAttribute('id','resultTable')
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
