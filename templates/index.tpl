@@ -14,13 +14,16 @@
 
 <body id="Body">
   <div class="container">
-
-  <div class="sticky-top" style="background-image: url({$PAGE_LOGO});background-size: contain; height: 100px; background-color: rgba(255,0,0,.1);"></div>
+  {literal}
+  <!-- $PAGE_LOGO_BASE64CODE should be less 64k -->
+  <!--div class="sticky-top" style="background-image: url(data:image/{$PAGE_LOGO_MIME};base64, {$PAGE_LOGO_BASE64CODE}), url('Title.jpg'); background-size: contain; height: 100px; background-color: rgba(255,0,0,.1);"></div-->
+  {/literal}
+  <div class="sticky-top" style="background-image: url({$PAGE_LOGO}), url('Title.jpg'); background-size: contain; height: 100px;"></div>
 
   <!-- Event detail -->
   <div class="container-fluid h-100">
     <div class="row h-100 align-items-center text-uppercase">
-      <div class="col-2 col-sm-2">
+      <div class="col-2 col-sm-2 col-md-1 p-0">
          <a href="/index.html" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"><&nbsp;All events</a>
       </div>
       <div class="col-3 col-sm-3 col-md-3 d-none d-sm-inline">
