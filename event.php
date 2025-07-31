@@ -37,7 +37,9 @@ $DATE_TO = $event->date_end;
 $PLACE = $event->location;
 $RANK = $event->events;
 $THEME = $event->theme;
-$PAGE_LOGO = $event->title_img;
+$PAGE_LOGO_MIME = $event->title_mime;
+$PAGE_LOGO_BASE64CODE = $event->title_img;
+
 
 // check POST variables
 $NUMBER = ( isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["NUMBER"])) ? $_POST["NUMBER"] : 0;
@@ -73,8 +75,8 @@ if (!mkdir($D."/photo", 0777, true)) { die('Failed to create directories...'); }
 rcopy(EVENT_TEMPLATE_DIR, $D);
 
 //картинка для
-if ($PAGE_LOGO) {
-  $imageData = base64_decode($PAGE_LOGO);
+if ($PAGE_LOGO_BASE64CODE) {
+  $imageData = base64_decode($PAGE_LOGO_BASE64CODE);
   $imageInfo = getimagesizefromstring($imageData);
   if ($imageInfo !== false) {
     $imageType = $imageInfo[2]; // Индекс 2 содержит тип изображения
@@ -91,14 +93,14 @@ if ($PAGE_LOGO) {
         case IMAGETYPE_GIF:
             $PAGE_LOGO_IMAGE = "PAGE_LOGO.GIF";
             break;
-/*        case IMAGETYPE_WEBP:
+        case IMAGETYPE_WEBP:
             $PAGE_LOGO_IMAGE = "PAGE_LOGO.WebP";
             break;
-*/
         default:
             $PAGE_LOGO_IMAGE = ""; //Неизвестный тип изображения
     }
   } else {
+    $PAGE_LOGO_IMAGE = 'PAGE_LOGO.'.$PAGE_LOGO_MIME;
     echo "Ошибка: Не удалось определить тип изображения";
   }
 }
@@ -130,10 +132,15 @@ $smarty->assign("PLACE", $PLACE);
 $smarty->assign("RANK", $RANK);
 $smarty->assign("BASEURL", "http://{$_SERVER['SERVER_NAME']}/".EVENTS_DIR.$COMPETITION_ID."/");
 $smarty->assign("THEME", (isset($THEME) && in_array($THEME,['dark','light'])) ? $THEME : "light");
-$smarty->assign("PAGE_LOGO", ($PAGE_LOGO != '' ? $PAGE_LOGO_IMAGE : 'Title.jpg') );
+//$smarty->assign("PAGE_LOGO_MIME", $PAGE_LOGO_MIME);
+//$smarty->assign("PAGE_LOGO_BASE64CODE", $PAGE_LOGO_BASE64CODE); //максимальный размер 64k
+$smarty->assign("PAGE_LOGO", $PAGE_LOGO_IMAGE);
 $output = $smarty->fetch('index.tpl');					//шаблон страницы соревнований
+
 file_put_contents(EVENTS_DIR.$COMPETITION_ID.'/index.html',$output);	// write to file event в папку COMPETITION_ID
-if ($PAGE_LOGO != '') file_put_contents(EVENTS_DIR.$COMPETITION_ID.'/'.$PAGE_LOGO_IMAGE, $imageData); //header image
+if ($PAGE_LOGO_BASE64CODE != '') file_put_contents(EVENTS_DIR.$COMPETITION_ID.'/'.$PAGE_LOGO_IMAGE, $imageData); //header image
+
+
 
 // вернуть full path URL папки event'а
 //echo "http://{$_SERVER['SERVER_NAME']}/{EVENTS_DIR}{$COMPETITION_ID}/";

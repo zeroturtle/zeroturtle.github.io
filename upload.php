@@ -3,6 +3,8 @@
 require_once "config.php";
 
 define('EVENTS_DIR', 'events/');
+$resource_name = ['logo', 'proto', 'divepool', 'team', 'detail', 'video'];
+
 
 function Licence_Validation($number,$hash) {
   global $pdo;
@@ -18,7 +20,7 @@ function Licence_Validation($number,$hash) {
 }
 
 //считать из json параметры загрузки файла
-// формат json: {comp_id="int", event_id="string", resource_name="string", filename="string", file="...base64code..."}
+// формат json: {comp_id="int", event_id="string", resource_name="string", filename="string", file="base64code(image)"}
 $file = json_decode($_POST['JSON']); 
 if ( json_last_error() != JSON_ERROR_NONE) { die(json_last_error_msg()); }
 $compID = $file->comp_id;
@@ -36,7 +38,7 @@ $License = Licence_Validation($NUMBER,$HASH);
 if (!$License) die('Error licence validation or Incompatible type!');
 else $LicID = $License['LICENCE_ID'];
 
-//загружать данные только с той же лицензией, кем создано 
+//разрешить загружать данные только той же лицензии, кем создано 
 $query="SELECT * FROM COMPETITION WHERE LICENCE_ID = ? AND JSON_VALUE(DESCRIPTION, '$.id') = ?";  //MariaDB
 $stmt = $pdo->prepare($query);
 $stmt->execute([$LicID, $compID]); 
@@ -49,7 +51,6 @@ else $compID = $row['COMPETITION_ID'];
 // определяем $target_dir куда копировать файлы
 $comp_dir = EVENTS_DIR.$compID.'/';
 $event_dir = $comp_dir.'/'.$event_id.'/';
-$resource_name = ['logo', 'proto', 'divepool', 'team', 'detail', 'video'];
 switch(array_search($resource_id, $resource_name)) {
   case 0: $target_dir =  $comp_dir;
     break;
