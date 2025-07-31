@@ -42,7 +42,7 @@ blue:   #0d6efd;
   border-bottom-color:#FFFFFF; border-bottom-style: solid; border-bottom-width: 1px;
 }
 /* tbody */
-#scoreSummary tr:nth-of-type(-n+8) { 
+#scoreSummary tr:nth-of-type(-n+5) { 
   font-weight: bold; 
 }
 #scoreSummary tr:nth-child(n+3) td { 
