@@ -41,6 +41,11 @@ blue:   #0d6efd;
   border-left-color:#FFFFFF; border-left-style: solid; border-left-width: 1px;
   border-bottom-color:#FFFFFF; border-bottom-style: solid; border-bottom-width: 1px;
 }
+#scoreSummary td a:link { color: #0D6EFD; }   /* Непосещённая ссылка: ярко-синий, как небо в безоблачный день */
+#scoreSummary td a:visited { color: purple; } /* Посещённая ссылка: тёмно-фиолетовый, напоминающий виноград под солнечными лучами */
+#scoreSummary td a:hover { color: red; }      /* При наведении курсора: красный, как яркий огонь */
+#scoreSummary td a:active { color: blue; }    /* Активная ссылка: насыщенный красный, как горящий сигнал ошибки 404 */
+
 /* tbody */
 #scoreSummary tr:nth-of-type(-n+5) { 
   font-weight: bold; 
