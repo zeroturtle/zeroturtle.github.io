@@ -7,7 +7,13 @@
     <link rel="icon" type="image/png" href="../../images/favicon-96x96.png" sizes="96x96">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script> var baseURL = '{$BASEURL}'; </script>
+    <script> var baseURL = '{$BASEURL}'; 
+      //обработчик ошибок для всех изображений
+      function imageError(image) {
+        image.onerror = null;
+        image.src = "../../images/OPTIMUS3.svg";
+      }
+    </script>
     <link type="text/css" rel="stylesheet" href="proto.css">
     <title>{$COMPETITION_NAME}</title>
   </head>
@@ -27,8 +33,8 @@
          <a href="/index.html" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"><&nbsp;All events</a>
       </div>
       <div class="col-3 col-sm-3 col-md-3 d-none d-sm-inline">
-        <img src="Logo1.jpg" class="img-fluid p-1 d-none d-sm-inline" onerror="this.onerror=null;this.src='../../images/OPTIMUS3.svg'" style="max-height:100px; max-width: 100px">
-        <img src="Logo2.jpg" class="img-fluid p-1 d-none d-md-inline" onerror="this.onerror=null;this.src='../../images/OPTIMUS3.svg'" style="max-height:100px; max-width: 100px">
+        <img src="Logo1.jpg" class="img-fluid p-1 d-none d-sm-inline" onerror="imageError(this)" style="max-height:100px; max-width: 100px">
+        <img src="Logo2.jpg" class="img-fluid p-1 d-none d-md-inline" onerror="imageError(this)" style="max-height:100px; max-width: 100px">
       </div>
       <div class="col-8 col-sm-8 col-md-8">
         <div class="w-100 h2">
@@ -64,7 +70,7 @@
 
   <div class="my-3 bg-primary-subtle" id="footer">
     <div class="text-center">
-      &copy 2024  <a href="#feedback">Команда Optimus</a>
+      &copy 2025  <a href="#feedback">Команда Optimus</a>
       <a href="#privacy">Privacy Policy</a>
     </div>
   </div>
