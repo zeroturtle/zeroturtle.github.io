@@ -3,7 +3,6 @@
 // Получаем json-файл вида: '{"id": int,"name": "string", "location": "string", "date_start": "string Y-m-d", "date_end": "string Y-m-d", "type_id": int, "event": [{"id": int, "name": "string"},...{}]}';
 //для авторизации используется NUMBER и HASH лицензии 
 
-
 // Include config file
 require_once "config.php";
 
@@ -25,6 +24,7 @@ global $pdo;
 }
 
 
+
 // отклоняем запрос при неправильном json PHP>=8.3.0
 //if( !json_validate($_POST['JSON']) ) { die('invalid json') }
 $event = json_decode($_POST['JSON']); 
@@ -37,10 +37,12 @@ $DATE_TO = $event->date_end;
 $PLACE = $event->location;
 $RANK = $event->events;
 $THEME = $event->theme;
-$PAGE_LOGO_MIME = $event->title_mime;
 $PAGE_LOGO_BASE64CODE = $event->title_img;
+if (!is_null($PAGE_LOGO_BASE64CODE)) $PAGE_LOGO_MIME = $event->title_mime;
 
 
+////////////////////////////////////////
+// авторизуемся
 // check POST variables
 $NUMBER = ( isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["NUMBER"])) ? $_POST["NUMBER"] : 0;
 if (!isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["HASH"])) { die ('Incorrect hash'); } 
@@ -51,7 +53,6 @@ $License = Licence_Validation($NUMBER,$HASH,$TYPE);
 if (!$License) die('Error licence validation or Incompatible type!');
 else $LicID = $License['LICENCE_ID'];
 
-
 //блокируем повторный запрос создания такого же event
 //$query="SELECT * FROM COMPETITION WHERE LICENCE_ID = ? AND DESCRIPTION->'$.id' = ?";            //MySQL
 $query="SELECT * FROM COMPETITION WHERE LICENCE_ID = ? AND JSON_VALUE(DESCRIPTION, '$.id') = ?";  //MariaDB
@@ -59,23 +60,33 @@ $stmt = $pdo->prepare($query);
 $stmt->execute([$LicID, $event->id]); 
 $row = $stmt->fetch();
 if (!isset($row)) { die('Event already exists!'); }
+////////////////////////////////////////
 
-//создать event
-$stmt= $pdo->prepare("INSERT INTO COMPETITION (DESCRIPTION,LICENCE_ID) VALUES(?,?)")->execute([json_encode($event), 40]);
-$row = $pdo->query("SELECT LAST_INSERT_ID();")->fetch();
+
+//получить ID
+$row = $pdo->query("SELECT NEXTVAL(event_sequence);")->fetch();
 $COMPETITION_ID = $row[0];     // COMPETITION_ID
 $D = EVENTS_DIR.$COMPETITION_ID;
-rrmdir($D);            // на всякий случай удаляем все 
+
 //папка соревнования
-if (!mkdir($D, 0777, true)) { die('Failed to create directories...'); } 
-//папки для данных
-if (!mkdir($D."/team", 0777, true)) { die('Failed to create directories...'); } 
-if (!mkdir($D."/photo", 0777, true)) { die('Failed to create directories...'); } 
+rrmdir($D);            // на всякий случай удаляем все 
+if (!mkdir($D, 0777, true))  die('Failed to create directories...'); 
+//папки для каждого зачета
+foreach ($RANK as $value) {
+  $event_dir = $D.'/'.get_object_vars($value)['event_id'];
+  if (!mkdir($event_dir, 0777, true))  die('Failed to create directories...'); 
+  //папки для данных
+  if (!mkdir($event_dir."/divepool", 0777, true))  die('Failed to create directories...');
+  if (!mkdir($event_dir."/team", 0777, true))  die('Failed to create directories...');
+  if (!mkdir($event_dir."/detail", 0777, true))  die('Failed to create directories...');
+  if (!mkdir($event_dir."/video", 0777, true))  die('Failed to create directories...');
+}
 // скопировать из шаблона все файлы в папку event'а
 rcopy(EVENT_TEMPLATE_DIR, $D);
 
-//картинка для
-if ($PAGE_LOGO_BASE64CODE) {
+
+//картинка шапки страницы
+if (!is_null($PAGE_LOGO_BASE64CODE)) {
   $imageData = base64_decode($PAGE_LOGO_BASE64CODE);
   $imageInfo = getimagesizefromstring($imageData);
   if ($imageInfo !== false) {
@@ -100,21 +111,13 @@ if ($PAGE_LOGO_BASE64CODE) {
             $PAGE_LOGO_IMAGE = ""; //Неизвестный тип изображения
     }
   } else {
-    $PAGE_LOGO_IMAGE = 'PAGE_LOGO.'.$PAGE_LOGO_MIME;
+    $PAGE_LOGO_IMAGE = 'PAGE_LOGO.'.$PAGE_LOGO_MIME;  //берем данные из json
     echo "Ошибка: Не удалось определить тип изображения";
   }
+} else {
+  $PAGE_LOGO_IMAGE = "";
 }
 
-//создать папку для каждого зачета
-foreach ($RANK as $value) {
-  $event_dir = $D.'/'.get_object_vars($value)['event_id'];
-  mkdir($event_dir, 0777, true);
-  //
-  mkdir($event_dir."/divepool", 0777, true);
-  mkdir($event_dir."/team", 0777, true);
-  mkdir($event_dir."/detail", 0777, true);
-  mkdir($event_dir."/video", 0777, true);
-}
 
 //создать html страницу event из шаблона
 require 'libs/Smarty.class.php';
@@ -133,19 +136,20 @@ $smarty->assign("RANK", $RANK);
 $smarty->assign("BASEURL", "http://{$_SERVER['SERVER_NAME']}/".EVENTS_DIR.$COMPETITION_ID."/");
 $smarty->assign("THEME", (isset($THEME) && in_array($THEME,['dark','light'])) ? $THEME : "light");
 //$smarty->assign("PAGE_LOGO_MIME", $PAGE_LOGO_MIME);
-//$smarty->assign("PAGE_LOGO_BASE64CODE", $PAGE_LOGO_BASE64CODE); //максимальный размер 64k
+//$smarty->assign("PAGE_LOGO_BASE64CODE", $PAGE_LOGO_BASE64CODE); //не применишь, т.к. максимальный размер для css - 64k
 $smarty->assign("PAGE_LOGO", $PAGE_LOGO_IMAGE);
 $output = $smarty->fetch('index.tpl');					//шаблон страницы соревнований
 
 file_put_contents(EVENTS_DIR.$COMPETITION_ID.'/index.html',$output);	// write to file event в папку COMPETITION_ID
 if ($PAGE_LOGO_BASE64CODE != '') file_put_contents(EVENTS_DIR.$COMPETITION_ID.'/'.$PAGE_LOGO_IMAGE, $imageData); //header image
 
-
+//если все ОК - добавить event в базу
+$stmt= $pdo->prepare("INSERT INTO COMPETITION (COMPETITION_ID, DESCRIPTION,LICENCE_ID) VALUES(?,?,?)")->execute([$COMPETITION_ID,json_encode($event), 40]);
 
 // вернуть full path URL папки event'а
-//echo "http://{$_SERVER['SERVER_NAME']}/{EVENTS_DIR}{$COMPETITION_ID}/";
+echo "http://{$_SERVER['SERVER_NAME']}/{EVENTS_DIR}{$COMPETITION_ID}/";
 // вернуть ID созданного мероприятия
-echo $COMPETITION_ID;
+//echo $COMPETITION_ID;
 
 
 
@@ -164,9 +168,8 @@ function rrmdir($dir) {
 
 // copies files and non-empty directories
 function rcopy($src, $dst) {
-  if (file_exists($dst)) rrmdir($dst);
   if (is_dir($src)) {
-    mkdir($dst);
+    //if (file_exists($dst)) { rrmdir($dst); } else { mkdir($dst); }
     $files = scandir($src);
     foreach ($files as $file)
     if ($file != "." && $file != "..") rcopy("$src/$file", "$dst/$file"); 
