@@ -50,7 +50,7 @@ else $compID = $row['COMPETITION_ID'];
 
 // определяем $target_dir куда копировать файлы
 $comp_dir = EVENTS_DIR.$compID.'/';
-$event_dir = $comp_dir.'/'.$event_id.'/';
+$event_dir = $comp_dir.$event_id.'/';
 switch(array_search($resource_id, $resource_name)) {
   case 0: $target_dir =  $comp_dir;
     break;

@@ -24,7 +24,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            sbackground-image: url('images/code.png');
+            background-image: url('images/code.png');
             opacity: 0.2; /* Adjust opacity level */
             z-index: -1; /* Ensure background image is behind the text */
         }
@@ -49,6 +49,7 @@
 	https://www.toolify.ai/gpts/how-to-implement-infinite-scroll-pagination-with-php-mysql-jquery-366007
 	https://sky.pro/media/kak-sozdat-sajt-s-dinamicheskoj-zagruzkoj-kontenta-pri-prokrutke/#title2
 */	
+
   function loadDataContent() {
     if (isLoading) { return; }
     isLoading = true;
@@ -57,20 +58,30 @@
     fetch('https://zeroturtle.github.io/events.json') //здесь вызвать index.php, возвращает json массив event.
       .then(response => response.json())
       .then(json => {
-        // считать template строки event
-        const event_tmpl = document.querySelector("#event_tmpl")
-        const rank_tmpl = document.getElementById("rank_tmpl")
-        for (item in json) {
-          var event = json[item]	//item = competition_id
-          event.id = item.slice(1)	//убираем первый пробел (см. индекс массива Events) - prevent sort
-          event.datefrom = new Date(event.datefrom).toDateString()    // преобразуем поле даты в строку
-          event.dateto = new Date(event.dateto).toDateString()
-          var ranks = ''
-          event.events.forEach( (rank, index) => {
-            ranks += eval('`'+rank_tmpl.innerHTML+'`')
-          })
-          EventsList.insertAdjacentHTML('beforeend', eval('`'+event_tmpl.innerHTML+'`'))
-        }
+
+         const template = document.getElementById('event_template');
+         const rank_tmpl = document.getElementById("rank_template")
+         for (item in json) {
+           var event = json[item]
+           event.id = item.slice(1)
+           event.datefrom = new Date(event.date_start).toDateString()    // преобразуем поле даты в строку
+           event.dateto = new Date(event.date_end).toDateString()
+           const clone = template.content.cloneNode(true);
+           clone.getElementById('event_location').textContent = event.location
+           clone.getElementById('event_date').textContent = `${event.datefrom} - ${event.dateto}`
+           clone.getElementById('event_name').textContent = event.name
+           clone.getElementById('event_link').href = `${eventsDir}${event.id}/`
+           clone.getElementById('event_logo1').src = `${eventsDir}${event.id}/Logo1.jpg`
+           clone.getElementById('event_logo2').src = `${eventsDir}${event.id}/Logo2.jpg`
+           event.events.forEach( (rank, index) => {
+             const rank_clone = rank_tmpl.content.cloneNode(true);
+             rank_clone.getElementById('rank_link').href = `${eventsDir}${event.id}/?r=${rank.event_id}`
+             rank_clone.getElementById('rank_link').textContent = rank.name
+             clone.getElementById('event_ranks').appendChild(rank_clone);
+           })
+           EventsList.appendChild(clone);
+         }
+
         isLoading = false;
         page++
       })
@@ -101,6 +112,11 @@
       loadDataContent() 
     }
   }); 
+      //обработчик ошибок для всех изображений
+  function imageError(image) {
+    image.onerror = null;
+    image.src = "../../images/OPTIMUS3.svg";
+  }
 </script>
   </head>
   <body lang="en">
@@ -168,31 +184,31 @@
 
     <!-- events list -->
   <div class="container-fluid background-image" style="margin-left:auto; margin-right:auto;">
-        <!-- использовать template для построения списка -->
-        <template  id="event_tmpl">
-          <tr id="${event.id}" class="d-flex flex-row">
-            <td class="align-top"><img class="img-fluid mx-2" src="${eventsDir}${event.id}/Logo1.jpg" alt="Logo1" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="align-top d-none d-sm-block"><img class="img-fluid mx-2" src="${eventsDir}${event.id}/Logo2.jpg" alt="Logo2" onerror="this.onerror=null;this.src='images/OPTIMUS3.svg'" style="max-height: 80px; max-width: 80px;"></td>
+        <!-- использовать template для построения списка--> 
+        <template  id="event_template">
+          <tr class="d-flex flex-row">
+            <td class="align-top"><img class="img-fluid mx-2" id="event_logo1" src="" alt="Logo1" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="align-top d-none d-sm-block"><img class="img-fluid mx-2" id="event_logo2" src="" alt="Logo2" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></td>
             <td class="w-75">
               <div class="row">
                 <div class="col d-block text-uppercase">
-                  <a class="text-decoration-none" href="${eventsDir}${event.id}/">
-                  <span class="fw-bold">${event.name}</span>
+                  <a class="text-decoration-none" id="event_link" href="">
+                  <span class="fw-bold" id="event_name"></span>
                   <br>
-                  <span class="text-secondary">${event.date_start} - ${event.date_end}</span>
+                  <span class="text-secondary" id="event_date"></span>
                   <br>
-                  <span class="text-secondary">${event.location}</span>
+                  <span class="text-secondary" id="event_location"></span>
                   </a>
                 </div>
-                <div class="col d-none d-md-block">${ranks}
+                <div class="col d-none d-md-block" id="event_ranks">
                 </div>
               </div>
             </td>
           </tr>
         </template>
-        <template  id="rank_tmpl">
+        <template  id="rank_template">
                   <span class="border-start border-2 px-2" style="display:inline-block;float:right;">
-                    <a class="text-decoration-none" href="${eventsDir}${event.id}/?r=${rank.event_id}">${rank.name}</a> 
+                    <a class="text-decoration-none" id="rank_link" href=""></a> 
                   </span>
         </template>
 
