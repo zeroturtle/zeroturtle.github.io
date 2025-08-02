@@ -19,7 +19,8 @@ function loadEvent(event) {
 				lnk.addEventListener("click", displayRoundVideo)
 			}
 			else {  // this is a score details
-				lnk.addEventListener("click", displayRoundDetails)
+				if (Number.isFinite(lnk))
+					lnk.addEventListener("click", displayRoundDetails)
 			}
 		}
 
