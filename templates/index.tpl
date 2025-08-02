@@ -33,15 +33,15 @@
          <a href="/index.html" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"><&nbsp;All events</a>
       </div>
       <div class="col-3 col-sm-3 col-md-3 d-none d-sm-inline">
-        <img src="Logo1.jpg" class="img-fluid p-1 d-none d-sm-inline" onerror="imageError(this)" style="max-height:100px; max-width: 100px">
-        <img src="Logo2.jpg" class="img-fluid p-1 d-none d-md-inline" onerror="imageError(this)" style="max-height:100px; max-width: 100px">
+        <img id="event_logo1"src="Logo1.jpg" class="img-fluid p-1 d-none d-sm-inline" onerror="imageError(this)" style="max-height:100px; max-width: 100px">
+        <img id="event_logo2" src="Logo2.jpg" class="img-fluid p-1 d-none d-md-inline" onerror="imageError(this)" style="max-height:100px; max-width: 100px">
       </div>
       <div class="col-8 col-sm-8 col-md-8">
         <div class="w-100 h2">
-          <div id="COMPETITION_NAME">{$COMPETITION_NAME}</div>
+          <div id="event_name">{$COMPETITION_NAME}</div>
         </div>
         <div class="w-100 h6">
-          <div class="d-inline-block  text-nowrap">{$DATE_FROM}&nbsp;-&nbsp;{$DATE_TO}</div>, <div class="d-inline-block">{$PLACE}</div>
+          <div class="d-inline-block  text-nowrap" id="event_date">{$DATE_FROM}&nbsp;-&nbsp;{$DATE_TO}</div>, <div class="d-inline-block" id="event_location">{$PLACE}</div>
         </div>
       </div>
     </div>
