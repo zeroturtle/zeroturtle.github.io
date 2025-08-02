@@ -57,13 +57,15 @@ include("auth.php");
 
 <section id="constructor">
   <h2 class="display-3">Licence <span class="text-danger">Details</span></h2>
+<form action="licence.php" method="post">
   <div style="background:#CCC">                                 
     <div>Вы выбрали: <b><?php echo $_POST['licence']; ?></b></div>
     <div>Дисциплины: <b><?php echo implode(', ', $_POST['types']); ?> <!--Formation Skydiving | Speed Formation | Artistic Events | Canopy Formation | Wingsuit Flying Perfomance--></b></div>
     <div>Price: <b>&euro;<?php require("price.php"); ?></b></div>
   </div>
-<form action="licence.php" method="post">
   <fieldset>
+    <input type="hidden" name="licence" value="<?php echo $_POST['licence']; ?>" required>
+    <input type="hidden" name="types" value="<?php echo implode(',',$_POST['types']); ?>" required>
     <div class="row mb-3">
       <div class="col-sm-6">
         <label for="first_name" class="form-label fw-bold">First Name*: </label>

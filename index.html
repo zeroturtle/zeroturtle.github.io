@@ -55,7 +55,7 @@
     isLoading = true;
     // получаем из сервера json со списком event
 //    fetch('http://127.0.0.1/index.php?page='+page) //здесь вызвать index.php, возвращает json массив event.
-    fetch('https://zeroturtle.github.io/events.json') //здесь вызвать index.php, возвращает json массив event.
+    fetch('https://zeroturtle.github.io/events.json') // получаем массив event из json-файла.
       .then(response => response.json())
       .then(json => {
 
@@ -82,7 +82,7 @@
            EventsList.appendChild(clone);
          }
 
-        isLoading = false;
+        isLoading = false; //для постраничного вывода
         page++
       })
       .catch(error => console.log('Ошибка чтения json:', error)); 
@@ -184,7 +184,8 @@
 
     <!-- events list -->
   <div class="container-fluid background-image" style="margin-left:auto; margin-right:auto;">
-        <!-- использовать template для построения списка--> 
+
+        <!-- template для построения списка event --> 
         <template  id="event_template">
           <tr class="d-flex flex-row">
             <td class="align-top"><img class="img-fluid mx-2" id="event_logo1" src="" alt="Logo1" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></td>

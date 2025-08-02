@@ -10,9 +10,10 @@ function Licence_Validation($number,$hash) {
   global $pdo;
   $query = "SELECT * FROM LICENCE WHERE ACTIVE=true" 
     ." AND NOW() BETWEEN DATESTART AND DATEEND"	//дата в диапазоне срока действия лицензии
-    ." AND LICENCETYPE=1"			//только для Site типа
+//    ." AND LICENCETYPE=1"			//только для Site типа
     ." AND NUMBER = ?"				//номер лицензии
     ." AND LICENCEHASH = ?";			//сверяем md5hash
+//    ." AND (EVENTTYPES & (1 << ?)) <> 0";	//тип соревнования входит в список дисциплин лицензии
   $stmt = $pdo->prepare($query);
   $stmt->execute([$number, $hash]);
   $row = $stmt->fetch();
@@ -27,13 +28,11 @@ $compID = $file->comp_id;
 $event_id = $file->event_id;
 $resource_id = $file->resource;
 
-
+//авторизация
 // check POST variables
-$NUMBER = ( isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["NUMBER"])) ? $_POST["NUMBER"] : 0;
-if (!isset($_POST["NUMBER"]) || !ctype_xdigit($_POST["HASH"])) { die ('Incorrect hash'); } 
-$HASH = $_POST["HASH"];
-$HASH = 'c51ef7bd8dfcdf7d76fde411f1dca228';
-$NUMBER = '190051E7-F81D-4068-B78C-BD8CDE9A';
+$HASH = (ctype_xdigit($_POST["HASH"])) ? $_POST["HASH"] : 0;
+$guid_regex = "/^(?:\\{{0,1}(?:[0-9a-fA-F]){8}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){12}\\}{0,1})$/"; 
+$NUMBER = (is_string($_POST["NUMBER"]) || preg_match($guid_regex, $_POST["NUMBER"])) ? $_POST["NUMBER"] : 0;   //UUIDv4
 $License = Licence_Validation($NUMBER,$HASH);
 if (!$License) die('Error licence validation or Incompatible type!');
 else $LicID = $License['LICENCE_ID'];
@@ -45,7 +44,6 @@ $stmt->execute([$LicID, $compID]);
 $row = $stmt->fetch();
 if (!isset($row)) die('You should use identical licence to upload data!'); 
 else $compID = $row['COMPETITION_ID']; 
-
 
 
 // определяем $target_dir куда копировать файлы
