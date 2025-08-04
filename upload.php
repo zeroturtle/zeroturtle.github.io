@@ -16,8 +16,8 @@ function Licence_Validation($number,$hash) {
 //    ." AND (EVENTTYPES & (1 << ?)) <> 0";	//тип соревнования входит в список дисциплин лицензии
   $stmt = $pdo->prepare($query);
   $stmt->execute([$number, $hash]);
-  $row = $stmt->fetch();
-  return isset($row) ? $row : false;
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  return !empty($row) ? $row : false;
 }
 
 //считать из json параметры загрузки файла
@@ -41,9 +41,9 @@ else $LicID = $License['LICENCE_ID'];
 $query="SELECT * FROM COMPETITION WHERE LICENCE_ID = ? AND JSON_VALUE(DESCRIPTION, '$.id') = ?";  //MariaDB
 $stmt = $pdo->prepare($query);
 $stmt->execute([$LicID, $compID]); 
-$row = $stmt->fetch();
-if (!isset($row)) die('You should use identical licence to upload data!'); 
-else $compID = $row['COMPETITION_ID']; 
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+if (empty($row)) die('You should use identical licence to upload data!'); 
+else $compID = $row['COMPETITION_ID']; //ID мероприятия
 
 
 // определяем $target_dir куда копировать файлы

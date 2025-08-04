@@ -19,8 +19,8 @@ global $pdo;
     ." AND (EVENTTYPES & (1 << ?)) <> 0";	//тип соревнования входит в список дисциплин лицензии
   $stmt = $pdo->prepare($query);
   $stmt->execute([$number, $hash, $type]);
-  $row = $stmt->fetch();
-  return isset($row) ? $row : false;
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  return !empty($row) ? $row : false;
 }
 
 
@@ -56,12 +56,12 @@ else $LicID = $License['LICENCE_ID'];
 $query="SELECT * FROM COMPETITION WHERE LICENCE_ID = ? AND JSON_VALUE(DESCRIPTION, '$.id') = ?";  //MariaDB
 $stmt = $pdo->prepare($query);
 $stmt->execute([$LicID, $event->id]); 
-$row = $stmt->fetch();
-if (!isset($row)) { die('Event already exists!'); }
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+if (empty($row)) { die('Event already exists!'); }
 ////////////////////////////////////////
 
 
-//получить ID
+//получить ID мероприятия
 $row = $pdo->query("SELECT NEXTVAL(event_sequence);")->fetch();
 $COMPETITION_ID = $row[0];     // COMPETITION_ID
 $D = EVENTS_DIR.$COMPETITION_ID.'/';
@@ -144,12 +144,13 @@ file_put_contents($D.'index.html',$output);	// write to file event в папку
 //сохранить исходный json в папке event'а
 if (file_put_contents($D.'event.json', json_encode($event,JSON_PRETTY_PRINT)));
 //unset($event['title_img']); //не хранить image в БД, т.к. уже сохранена в $PAGE_LOGO_IMAGE
-//если все ОК - добавить event в базу
+
+//если все ОК - добавить мероприятие в список
 $stmt= $pdo->prepare("INSERT INTO COMPETITION (COMPETITION_ID, DESCRIPTION,LICENCE_ID) VALUES(?,?,?)")->execute([$COMPETITION_ID,json_encode($event), $LicID]);
 
-// вернуть full path URL папки event'а
+// вернуть full path URL папки мероприятия
 echo "http://{$_SERVER['SERVER_NAME']}/{$D}";
-// вернуть ID созданного мероприятия
+// или вернуть только ID созданного мероприятия
 //echo $COMPETITION_ID;
 
 
