@@ -9,6 +9,7 @@ require_once "config.php";
 define('EVENTS_DIR', 'events/');
 define('EVENT_TEMPLATE_DIR', EVENTS_DIR.'template/');
 
+
 function Licence_Validation($number,$hash,$type) {
 global $pdo;
   $query = "SELECT * FROM LICENCE WHERE ACTIVE=true" 

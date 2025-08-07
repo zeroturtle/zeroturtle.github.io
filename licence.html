@@ -1,18 +1,7 @@
 <?php
-//include auth.php file on all secure pages
-include("auth.php");
-
-  // Automatically Logout Inactive User
-  // Set the inactivity time of 15 minutes (900 seconds)
-  $inactivity_time = 15 * 60;
-
-  // Check if the last_timestamp is set
-  // and last_timestamp is greater then 15 minutes or 9000 seconds
-  // then unset $_SESSION variable & destroy session data
-  if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp']) > $inactivity_time) {
-    session_unset();
-    session_destroy();
-  }
+  require __DIR__ . '/auth/src/bootstrap.php';
+  require_login();
+  inactivity_time();
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +83,7 @@ include("auth.php");
 
 <div class="container">
    <!-- page header -->
-  <section class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
+  <header class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
   <!--div style="background: linear-gradient(#b35900 55%, white);"-->
       <div class="row align-items-center">
          <div class="col">
@@ -103,14 +92,14 @@ include("auth.php");
               </div>
          </div>
          <div class="col m-3 text-end">
-		<?php if(!isset($_SESSION["account_loggedin"])){ ?>
-			<a href="login.html" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
+		<?php if(!is_user_logged_in()) { ?>
+			<a href="auth/login.php" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
 		<?php } else { ?>
-	                <a href="logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['account_name'], ENT_QUOTES)?></a>
+	                <a href="auth/logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES)?></a>
 		<?php } ?>
          </div>
        </div>
-  </section>
+  </header>
 
 
 <section id="price">
@@ -233,6 +222,7 @@ indoor
 </section>
 
 
+
 <section id="download" class="my-5" style="background:#ffaa33">
   <p class="text-center p-2">
     If you don't have OPTIMUS yet, visit a <a href="download.html" class="">download page</a>.
@@ -259,6 +249,35 @@ indoor
 	After your regular software subscription expires or used corupted license file a <strong>Freemium model</strong> will apply (nag window will appears, you won't get new versions or updates, any modules won't work.
 	In these cases please contact with our tech support service.</p>
 </section>
+
+
+<section class="border-bottom pb-5" style="background-color: #E6F5F8;">
+    <div class="text-center"><h1>Priority Support </h1><small>(*for discussion)</small></div>
+    <div class="row m-3">
+      <div class="col-sm d-flex align-items-stretch">
+         <p><i class="bi bi-chat-left-text h1"></i>  <strong>Unlimited number of standard support requests </strong></p>
+      </div>
+      <div class="col-sm d-flex align-items-stretch">
+         <p><i class="bi bi-clock-history h1"></i>  <strong>Guaranteed response time </strong></p>
+      </div>
+      <div class="col-sm d-flex align-items-stretch">
+         <p><i class="bi bi-check2-circle h1"></i>  <strong>Remote assistance support </strong></p>
+      </div>
+    </div>
+    <form role="form" id="addtocart" name="addtocart" method="post" action="/add_to_cart">	
+       <div class="row">
+           <div class="col-md-12 text-center">
+               <div class="">
+                   <input type="hidden" name="pro_support" value="on">
+                   <input type="hidden" name="prod_type_id" value="0">
+                   <div class="btn-info"><span>From </span>$249
+                   <button type="submit" class="btn btn-primary">Buy now</button></div>
+               </div>
+           </div>
+       </div>
+   </form>
+</section>
+
 
 
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">

@@ -1,17 +1,10 @@
 <?php
+  require_once __DIR__ . '/auth/src/libs/helpers.php';
+  require_once __DIR__ . '/auth/src/inc/auth.php';
+
   if ( !session_id() ) @session_start();
-
-  // Automatically Logout Inactive User
-  // Set the inactivity time of 15 minutes (900 seconds)
-  $inactivity_time = 15 * 60;
-
-  // Check if the last_timestamp is set
-  // and last_timestamp is greater then 15 minutes or 9000 seconds
-  // then unset $_SESSION variable & destroy session data
-  if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp']) > $inactivity_time) {
-    session_unset();
-    session_destroy();
-  }
+  $_SESSION['target_link'] = $_SERVER['PHP_SELF'];
+  inactivity_time();
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +26,7 @@
 
 <div class="container">
      <!-- page header -->
-  <section class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
+  <header class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
   <!--div style="background: linear-gradient(#b35900 55%, white);"-->
       <div class="row align-items-center">
          <div class="col">
@@ -42,14 +35,14 @@
               </div>
          </div>
          <div class="col m-3 text-end">
-		<?php if(!isset($_SESSION["account_loggedin"])){ ?>
-			<a href="login.html" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
+		<?php if(!is_user_logged_in()) { ?>
+			<a href="auth/login.php" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
 		<?php } else { ?>
-	                <a href="logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['account_name'], ENT_QUOTES)?></a>
+	                <a href="auth/logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES)?></a>
 		<?php } ?>
          </div>
        </div>
-  </section>
+  </header>
 
 <section id="logo" class="row row-cols-1 row-cols-sm-2 align-items-center border-bottom">
     <div class="col text-center">
@@ -124,6 +117,8 @@
                 <dd class="col-sm-9">Avoid unnecessary expenses when you buy annual license accourding to your events list, use online licence constructor to choose disciplines you need;   <span class="text-danger">Free for individual use</span></dd>
                 <dt class="col-sm-3">Unlimited e-mail support</dt>
                 <dd class="col-sm-9">Online check for new version availability; Bug fixes and Quality improvements; Free updates during subscription period.</dd>
+                <dt class="col-sm-3">Access to preview releases</dt>
+                <dd class="col-sm-9">Subscribers have access to preview releases of the products under support.</dd>
               </dl>
     </div>
     <div class="col-sm-4 text-center">
@@ -239,11 +234,11 @@
         <div class="accordion-body">
           <p> гарантирует соответствие правилам; получаете исправления и доступ к новому функционалу; Мы предоставляем техническую поддержку для текущей версии системы (в рамках X.Y версии). 
             В OPTIMUS семантическая версия состоит из четырёх номеров: major, minor, patch, build. Они различаются следующими вещами:
-    build-версия компиляции кода в процессе разработки;
-    patch-версия инкрементируется при выпуске релиза, закрывающего баги;
-    minor-версия инкрементируется при выпуске релиза с новым функционалом, не затрагивающем старый;
-    major-версия инкрементируется при выпуске релиза, которые меняют способ использования старого функционала.
-            Номер версии exe-файла можно проверить в свойствах на закладке Подробно.
+    <ul><li>build-версия компиляции кода в процессе разработки;</li>
+    <li>patch-версия инкрементируется при выпуске релиза, закрывающего баги;</li>
+    <li>minor-версия инкрементируется при выпуске релиза с новым функционалом, не затрагивающем старый;</li>
+    <li>major-версия инкрементируется при выпуске релиза, которые меняют способ использования старого функционала.</li></ul>
+            Номер версии можно проверить в свойствах exe-файла на закладке Подробно.
           </p>
         </div>
       </div>

@@ -4,10 +4,17 @@
 
 require_once "auth.php";
 require_once "config.php";
-require_once "sendmail.php";
 require 'libs/Smarty.class.php';
 
 date_default_timezone_set('UTC');
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require './PHPMailer/src/Exception.php';
+require './PHPMailer/src/PHPMailer.php';
+require './PHPMailer/src/SMTP.php';
+
 
 ///////////////////////////////////
 // ОПИСАНИЕ ФОРМАТА ПОЛЕЙ ЛИЦЕНЗИИ
@@ -105,7 +112,7 @@ function activateLicanse($Number) {
   $pdo->prepare("UPDATE LICENCE SET ACTIVE=true WHERE Number=?")->execute([$Number]);
 }
 // отправить письмо с файлом лицензии
-function sendLicanse($License) {
+function sendLicense($file, $License) {
   // считать шаблон письма
   $smarty = new Smarty;
   $smarty->debugging = false;
@@ -117,7 +124,31 @@ function sendLicanse($License) {
   $smarty->assign("dateend", date_format($License['DateEnd'],'Y-m-d '));
   $smarty->assign("desc", $TypeList['types']);
   $text = $smarty->fetch('new_subscription.tpl'); 
-  send($text, $Licensefile, $License);
+
+  // отправка письма
+  $mail = new PHPMailer(true);
+  $mail->isSMTP();                                            // Send using SMTP
+  $mail->Host       = 'smtp.example.com';                     // Set the SMTP server to send through
+  $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+  $mail->Username   = 'your_email@example.com';               // SMTP username
+  $mail->Password   = 'your_password';                        // SMTP password
+  $mail->SMTPSecure = 'tls'; // Enable TLS encryption
+  $mail->Port       = 587; 
+
+  $mail->setFrom('info@skydive.dp.ua', 'Optimus info');
+  $mail->addAddress($Licence['Email'], $Licence['Owner']);
+  $mail->addBCC('zeroturtle@ua.fm', '');
+  $mail->addReplyTo('no-replyto@skydive.dp.ua', 'Noreply');
+  $mail->isHTML(true);
+  $mail->Subject = 'Thank You for subscribe OPTIMUS';
+  $mail->msgHTML($text);
+  $mail->AddAttachment($file);
+  try {
+    $mail->send();
+    echo 'Message has been sent';
+  } catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+  }  
 }
 // привести к именованному массиву ['types']= [Type_ID], чтоб конвертить в json
 function type_list( $array ) {
@@ -141,7 +172,6 @@ function test_input($data) {
 function filter(&$value) {
   $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
-
 
 
 ///////////////////////////////////
@@ -206,7 +236,7 @@ $version = parse_ini_file('version.info', true);
 $query = "INSERT INTO LICENCE(NUMBER, NAME, EMAIL, TITLE, COMPANY, LICENCETYPE, EVENTTYPES, DateStart, DateEnd, LICENCEHASH, ACCOUNT_ID, VERSION) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 $stmt= $pdo->prepare($query);
 $stmt->execute([$License['Number'], $License['Owner'], $License['Email'], $title, $License['Company'], $License['Type'], $License['EventType'],
-         date_format($License['DateStart'], 'Y-m-d H:i:s'), date_format($License['DateEnd'], 'Y-m-d H:i:s'), $GLOBALS['CheckSum'], $_SESSION['account_id'],
+         date_format($License['DateStart'], 'Y-m-d H:i:s'), date_format($License['DateEnd'], 'Y-m-d H:i:s'), $GLOBALS['CheckSum'], $_SESSION['user_id'],
          implode(';', array_map( function ($v, $k) { return $k.'='.$v; }, $version['Apps'], array_keys($version['Apps']) ))]);
 
 // Делать в зависимости от типа лицензии
@@ -214,13 +244,13 @@ switch ($License['Type'])
 {
   case 0: //single
           activateLicanse($License["Number"]);  //активируем сразу
-//          sendLicanse($License);
+          sendLicense($Licensefile, $License);
           header('location: thanks.html'); // редирект на index.php после выполнения скрипта
           break;
   case 1:  //site
           //отправить на оплату в банк
           //для банка создать callback-скрипт, где вызвать
-          //activateLicanse($License["Number"]); sendLicanse($License);
+          //activateLicanse($License["Number"]); sendLicense($Licensefile, $License);
           break;
   default ;
 }

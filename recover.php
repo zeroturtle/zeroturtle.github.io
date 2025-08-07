@@ -23,8 +23,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // create temporary token
     $emailTo = trim($_POST['email']);
     $code = uniqid(true); // true for more uniqueness 
-    $expFormat = mktime( date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y") ); // +1day
-    $expDate = date("Y-m-d H:i:s",$expFormat);
+    $dateTime  = (new DateTime())->modify('+1 day');
+    $expDate = $dateTime->format('Y-m-d H:i:s');
+
     try {
       $pdo->prepare("INSERT INTO resetPasswords (code, email, expDate) VALUES(?,?,?)")->execute([$code, $emailTo, $expDate]);
     }

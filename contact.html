@@ -1,17 +1,10 @@
 <?php
+  require_once __DIR__ . '/auth/src/libs/helpers.php';
+  require_once __DIR__ . '/auth/src/inc/auth.php';
+
   if ( !session_id() ) @session_start();
-
-  // Automatically Logout Inactive User
-  // Set the inactivity time of 15 minutes (900 seconds)
-  $inactivity_time = 15 * 60;
-
-  // Check if the last_timestamp is set
-  // and last_timestamp is greater then 15 minutes or 9000 seconds
-  // then unset $_SESSION variable & destroy session data
-  if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp']) > $inactivity_time) {
-    session_unset();
-    session_destroy();
-  }
+  $_SESSION['target_link'] = $_SERVER['PHP_SELF'];
+  inactivity_time();
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +49,7 @@
 
 <div class="container">
      <!-- page header -->
-    <section class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
+    <header class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
     <!--div style="background: linear-gradient(#b35900 55%, white);"-->
         <div class="row align-items-center">
            <div class="col">
@@ -65,14 +58,14 @@
                 </div>
            </div>
            <div class="col m-3 text-end">
-		<?php if(!isset($_SESSION["account_loggedin"])){ ?>
-			<a href="login.html" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
+		<?php if(!is_user_logged_in()) { ?>
+			<a href="auth/login.php" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
 		<?php } else { ?>
-	                <a href="logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['account_name'], ENT_QUOTES)?></a>
+	                <a href="auth/logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES)?></a>
 		<?php } ?>
            </div>
          </div>
-    </section>
+    </header>
 
 <div id="feedback">
 <h2 class="display-3">Contact us</span></h2>
@@ -82,7 +75,7 @@
 	Please feel free by leaving your comments and suggestions, you help us better understand your needs, to improve design OPTIMUS and service.
   </p>
   <div class="row">
-    <div class="card col-lg-6 m-3">
+    <div class="card col-lg-6 m-3" style="background:#f2f2f2">
     <form id="myForm">
 	<div class="row s_col_no_resize s_col_no_bgcolor p-2">
 		<label for="c_name" class="col-form-label col-sm-auto " style="width: 200px" >
@@ -113,7 +106,7 @@
 		<button type="submit" class="btn btn-outline-primary rounded-pill">Send</button>
 	</div>
 	<div class="py-2">
-		<p>Usually we respond in 24 hours, but feel free to drop us a message 24/7 <i class="fa fa-smile-o"></i></p>
+		<span class="text-danger"><b>*</b> Required Field</span> 
 	</div>
     </form>
     <div id="result"></div>
@@ -139,8 +132,8 @@
                <a href="https://www.facebook.com/groups/399304463592210" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">&nbsp;Друзья OPTIMUS &nbsp;</a>
              </li>
           </ul>
-
-
+          </p>
+          <p class="p-2">Usually we respond in 24 hours, but feel free to drop us a message 24/7 <i class="fa fa-smile-o"></i></p>
 <!--
                 <strong>Email :</strong>
                 <a href="mailto:support@optimus.dp.ua" data-bs-original-title="" title="" class="btn btn-custom" style="border-width: 1px; border-style: solid; color: rgb(245, 157, 60);">contact[@]optimus.dp.ua</a>
@@ -151,8 +144,6 @@
                 <strong>Facebook :</strong>
                 <a href="https://www.facebook.com/optimusjudging/" class="btn btn-custom" data-bs-original-title="" title="" style="border-width: 1px; border-style: solid; color: rgb(245, 157, 60);">OPTIMUS</a>
 -->
-                <br>
-	</p>
     </div>
   </div>
 </div>

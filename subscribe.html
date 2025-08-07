@@ -1,20 +1,9 @@
 <?php
 if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != $_SERVER['HTTP_ORIGIN'].'/licence.html')  header("Location: licence.html");
 
-//include auth.php file on all secure pages
-include("auth.php");
-
-  // Automatically Logout Inactive User
-  // Set the inactivity time of 15 minutes (900 seconds)
-  $inactivity_time = 15 * 60;
-
-  // Check if the last_timestamp is set
-  // and last_timestamp is greater then 15 minutes or 9000 seconds
-  // then unset $_SESSION variable & destroy session data
-  if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp']) > $inactivity_time) {
-    session_unset();
-    session_destroy();
-  }
+  require __DIR__ . '/auth/src/bootstrap.php';
+  require_login();
+  inactivity_time();
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +25,7 @@ include("auth.php");
 
 <div class="container">
      <!-- page header -->
-    <section class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
+    <header class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
     <!--div style="background: linear-gradient(#b35900 55%, white);"-->
         <div class="row align-items-center">
            <div class="col">
@@ -45,14 +34,14 @@ include("auth.php");
                 </div>
            </div>
            <div class="col m-3 text-end">
-		<?php if(!isset($_SESSION["account_loggedin"])){ ?>
-			<a href="login.html" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
+		<?php if(!is_user_logged_in()) { ?>
+			<a href="auth/login.php" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
 		<?php } else { ?>
-	                <a href="logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['account_name'], ENT_QUOTES)?></a>
+	                <a href="auth/logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES)?></a>
 		<?php } ?>
            </div>
          </div>
-    </section>
+    </header>
 
 
 <section id="constructor">

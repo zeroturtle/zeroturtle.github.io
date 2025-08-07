@@ -1,18 +1,8 @@
 ﻿<?php
-  //include auth.php file on all secure pages
-  require_once("auth.php");
+  require __DIR__ . '/auth/src/bootstrap.php';
+  require_login();
+  inactivity_time();
 
-  // Automatically Logout Inactive User
-  // Set the inactivity time of 15 minutes (900 seconds)
-  $inactivity_time = 15 * 60;
-
-  // Check if the last_timestamp is set
-  // and last_timestamp is greater then 15 minutes or 9000 seconds
-  // then unset $_SESSION variable & destroy session data
-  if (isset($_SESSION['last_timestamp']) && (time() - $_SESSION['last_timestamp']) > $inactivity_time) {
-    session_unset();
-    session_destroy();
-  }
 
 function human_filesize($bytes, $decimals = 2) {
     $factor = floor((strlen($bytes) - 1) / 3);
@@ -65,7 +55,7 @@ function line($Num) {
 
 <div class="container">
      <!-- page header -->
-    <section class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
+    <header class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
     <!--div style="background: linear-gradient(#b35900 55%, white);"-->
         <div class="row align-items-center">
            <div class="col">
@@ -74,14 +64,14 @@ function line($Num) {
                 </div>
            </div>
            <div class="col m-3 text-end">
-		<?php if(!isset($_SESSION["account_loggedin"])){ ?>
-			<a href="login.html" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
+		<?php if(!is_user_logged_in()) { ?>
+			<a href="auth/login.php" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
 		<?php } else { ?>
-	                <a href="logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['account_name'], ENT_QUOTES)?></a>
+	                <a href="auth/logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES)?></a>
 		<?php } ?>
            </div>
          </div>
-    </section>
+    </header>
 
 
 <!-- отправка новая лицензия -->
@@ -164,7 +154,8 @@ function line($Num) {
   Explore <a href="whatsnew">what’s great</a> about the latest release the <strong>OPTIMUS Artemis </strong> available since June 2025.
 </section-->
 
-<section class="border-bottom pb-5">  <span class="h3 text-center">Update to the latest build.</span><br>
+<section class="border-bottom pb-5">
+   <span class="h3 text-center">Update to the latest build.</span><br>
    <b>ВНИМАНИЕ!</b>  Техподдержка оказывается только для пользователей с активной лицензией. Консультации только по текущей версии системы (той что выложеная на web).
    Лицензия включена в годовую подписку.
    Если вы имеете активную Site-лицензию напишите запрос в <a href="mailto:support@optimus.dp.ua">службу поддержки</a>, где укажите №лицензии и версию системы.
@@ -175,7 +166,9 @@ function line($Num) {
 </section>
 
 
-<section class="border-bottom pb-5">  <span class="h3 text-center">How you can contribute…</span><br>
+
+<section class="border-bottom pb-5">
+  <span class="h3 text-center">How you can contribute…</span><br>
   <ul>
     <li>Translate content <br>
 	Help us translate Optimus products into your local language.</li>
