@@ -3,6 +3,7 @@
 require __DIR__ . '/../auth/src/bootstrap.php';
 require_login();
 
+
 $logfile = __DIR__ .'/download_files.log';
 //appLog("Start of download tracker include", "DEBUG");
 
