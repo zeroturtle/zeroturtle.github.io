@@ -11,7 +11,7 @@ if (is_post_request()) {
 
     // sanitize & validate user inputs
     [$inputs, $errors] = filter($_POST, [
-        'code' => 'string | required',
+        'validation_code' => 'string | required',
         'password' => 'string | required | secure',
         'password2' => 'string | required | same: password'
     ]);
@@ -24,9 +24,9 @@ if (is_post_request()) {
         ]);
     }
 
-    if (найти_user()) {
+    $user = find_user($inputs['validation_code']);
 
-        reset_password();
+    if ($user && reset_password($user['id'], $inputs['password'])) {
 
         redirect_with_message(
             'login.php', 

@@ -268,5 +268,20 @@ function reset_password(int $user_id, string $password): bool
     return $statement->execute();
 }
 
+function find_user(string $activation_code)
+{
+    $sql = 'SELECT id, activation_code, activation_expiry < now() as expired
+            FROM accounts
+            WHERE active = 1 AND activation_code = :activation_code';
+
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':email', $email);
+    $statement->execute();
+
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    return ($user) ? $user : null;
+}
+
 
 ?>

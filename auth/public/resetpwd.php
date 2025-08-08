@@ -32,6 +32,7 @@ if (is_get_request()) {
 		<form id="myForm" action="resetpwd.php" method="post">
 		<h3>Reset account password</h3>
                     <fieldset class="d-grid gap-3">
+                        <input type="hidden" name="validation_code" value="<?= $inputs['validation_code'] ?>">
                         <div class="form-group">
                           <label for="password">Please create a new password:</label>
                           <input type="password" name="password" id="password" value="<?= $inputs['password'] ?? '' ?>"
