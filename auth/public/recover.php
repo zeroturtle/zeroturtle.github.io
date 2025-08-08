@@ -11,7 +11,7 @@ require __DIR__ . '/../src/recover.php';
         <div class="shadow p-3 mb-5 bg-body-tertiary rounded" style="background-color: #fff; width: 400px;  max-width: 95%;">
 		  <form id="myForm" action="recover.php" method="post">
 			<h3>Forgot Password?</h3>
-			<p class="grey-text">Please enter your email address below. You will recieve a link to create a new password.</p>
+			<p class="grey-text">Please enter your email address below. You will receive link to create a new password.</p>
 
 			<div class="form-group py-2">
                           <label for="email">Email:</label>

@@ -11,17 +11,40 @@ define('EVENT_TEMPLATE_DIR', EVENTS_DIR.'template/');
 
 
 function Licence_Validation($number,$hash,$type) {
-global $pdo;
   $query = "SELECT * FROM LICENCE WHERE ACTIVE=true" 
     ." AND NOW() BETWEEN DATESTART AND DATEEND"	//дата event'а в диапазоне срока действия лицензии
 //    ." AND LICENCETYPE=1"			//только для Site-лицензии
     ." AND NUMBER = ?"				//номер лицензии
     ." AND LICENCEHASH = ?"			//сверяем md5hash
     ." AND (EVENTTYPES & (1 << ?)) <> 0";	//тип соревнования входит в список дисциплин лицензии
-  $stmt = $pdo->prepare($query);
+  $stmt = db()->prepare($query);
   $stmt->execute([$number, $hash, $type]);
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
   return !empty($row) ? $row : false;
+}
+
+/////////////////////////////////////////////////////
+// from https://www.php.net/manual/ru/function.copy.php example
+// removes files and non-empty directories
+function rrmdir($dir) {
+  if (is_dir($dir)) {
+    $files = scandir($dir);
+    foreach ($files as $file)
+    if ($file != "." && $file != "..") rrmdir("$dir/$file");
+    rmdir($dir);
+  }
+  else if (file_exists($dir)) unlink($dir);
+} 
+
+// copies files and non-empty directories
+function rcopy($src, $dst) {
+  if (is_dir($src)) {
+    //if (file_exists($dst)) { rrmdir($dst); } else { mkdir($dst); }
+    $files = scandir($src);
+    foreach ($files as $file)
+    if ($file != "." && $file != "..") rcopy("$src/$file", "$dst/$file"); 
+  }
+  else if (file_exists($src)) copy($src, $dst);
 }
 
 
@@ -55,7 +78,7 @@ else $LicID = $License['LICENCE_ID'];
 //блокируем повторный запрос создания такого же event
 //$query="SELECT * FROM COMPETITION WHERE LICENCE_ID = ? AND DESCRIPTION->'$.id' = ?";            //MySQL
 $query="SELECT * FROM COMPETITION WHERE LICENCE_ID = ? AND JSON_VALUE(DESCRIPTION, '$.id') = ?";  //MariaDB
-$stmt = $pdo->prepare($query);
+$stmt = db()->prepare($query);
 $stmt->execute([$LicID, $event->id]); 
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 if (empty($row)) { die('Event already exists!'); }
@@ -63,7 +86,7 @@ if (empty($row)) { die('Event already exists!'); }
 
 
 //получить ID мероприятия
-$row = $pdo->query("SELECT NEXTVAL(event_sequence);")->fetch();
+$row = db()->query("SELECT NEXTVAL(event_sequence);")->fetch();
 $COMPETITION_ID = $row[0];     // COMPETITION_ID
 $D = EVENTS_DIR.$COMPETITION_ID.'/';
 
@@ -119,6 +142,7 @@ if (!is_null($PAGE_LOGO_BASE64CODE)) {
 if ($PAGE_LOGO_BASE64CODE != '') file_put_contents($D.$PAGE_LOGO_IMAGE, $imageData); //header image
 
 
+
 //создать html страницу event из шаблона
 require 'libs/Smarty.class.php';
 $smarty = new Smarty;
@@ -144,10 +168,10 @@ file_put_contents($D.'index.html',$output);	// write to file event в папку
 
 //сохранить исходный json в папке event'а
 if (file_put_contents($D.'event.json', json_encode($event,JSON_PRETTY_PRINT)));
-//unset($event['title_img']); //не хранить image в БД, т.к. уже сохранена в $PAGE_LOGO_IMAGE
+unset($event['title_img']); //не хранить image в БД, т.к. уже сохранена в $PAGE_LOGO_IMAGE
 
 //если все ОК - добавить мероприятие в список
-$stmt= $pdo->prepare("INSERT INTO COMPETITION (COMPETITION_ID, DESCRIPTION,LICENCE_ID) VALUES(?,?,?)")->execute([$COMPETITION_ID,json_encode($event), $LicID]);
+$stmt= db()->prepare("INSERT INTO COMPETITION (COMPETITION_ID, DESCRIPTION,LICENCE_ID) VALUES(?,?,?)")->execute([$COMPETITION_ID,json_encode($event), $LicID]);
 
 // вернуть full path URL папки мероприятия
 echo "http://{$_SERVER['SERVER_NAME']}/{$D}";
@@ -155,28 +179,4 @@ echo "http://{$_SERVER['SERVER_NAME']}/{$D}";
 //echo $COMPETITION_ID;
 
 
-
-/////////////////////////////////////////////////////
-// from https://www.php.net/manual/ru/function.copy.php example
-// removes files and non-empty directories
-function rrmdir($dir) {
-  if (is_dir($dir)) {
-    $files = scandir($dir);
-    foreach ($files as $file)
-    if ($file != "." && $file != "..") rrmdir("$dir/$file");
-    rmdir($dir);
-  }
-  else if (file_exists($dir)) unlink($dir);
-} 
-
-// copies files and non-empty directories
-function rcopy($src, $dst) {
-  if (is_dir($src)) {
-    //if (file_exists($dst)) { rrmdir($dst); } else { mkdir($dst); }
-    $files = scandir($src);
-    foreach ($files as $file)
-    if ($file != "." && $file != "..") rcopy("$src/$file", "$dst/$file"); 
-  }
-  else if (file_exists($src)) copy($src, $dst);
-}
 ?>

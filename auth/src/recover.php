@@ -22,15 +22,17 @@ if (is_post_request()) {
         ]);
     }
 
-    // if login fails
-    if (true) {
+    $validation_code = generate_activation_code();
 
-        //$errors['login'] = 'Invalid username or password';
+    if (recover_request($inputs['email'], $validation_code)) {
 
-        redirect_with('recover.php', [
-            'errors' => $errors,
-            'inputs' => $inputs
-        ]);
+        send_validation_email($inputs, $validation_code);
+
+        redirect_with_message(
+            'recover.php',
+            'Please check your email, follow a link in email to reset password.<br>Return to <a href="/about.html">home page</a>'
+        );
+
     }
 
 

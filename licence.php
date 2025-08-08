@@ -2,9 +2,10 @@
 // оформление подписки
 // ВАЖНО! Хранить в секрете код, т.к. он расскрывает формат лицензии
 
-require_once "auth.php";
-require_once "config.php";
-require 'libs/Smarty.class.php';
+if ( !session_id() ) @session_start();
+
+require_once __DIR__ . '/auth/config/database.php';
+require_once __DIR__ . '/auth/src/libs/connection.php';
 
 date_default_timezone_set('UTC');
 
@@ -15,6 +16,15 @@ require './PHPMailer/src/Exception.php';
 require './PHPMailer/src/PHPMailer.php';
 require './PHPMailer/src/SMTP.php';
 
+require 'libs/Smarty.class.php';
+
+$Disciplines = [
+  "FS" => 'Formation Skydiving',
+  "SF" => 'Speed Formation Skydiving',
+  "AE" => 'Artistic Events',
+  "CF" => 'Canopy Formation',
+  "WS" => 'Wingsuit Flying'
+];
 
 ///////////////////////////////////
 // ОПИСАНИЕ ФОРМАТА ПОЛЕЙ ЛИЦЕНЗИИ
@@ -62,8 +72,10 @@ function GUID()
     }
     return sprintf('%04X%04X-%04X-%04X-%04X-%04X%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(16384, 20479), mt_rand(32768, 49151), mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535));
 }
+
 // Создание лицензии по описанному формату
-function makeLicence($form) {
+function makeLicence($form) 
+{
 	$License = [];
 	// строку из UTF-8 надо ОБЕЗЯТЕЛЬНО перевести в однобайтовый код!
 	$License['Owner']  = iconv("UTF-8", "Windows-1251", $form[0]);		// Владелец
@@ -81,7 +93,9 @@ function makeLicence($form) {
 	$License['Active'] = true;						// признак активной подписки, для новой всегда = true
 	return $License;
 }
-function createLicenceFile($License) {
+
+function createLicenceFile($License) 
+{
 	$LicenseStr = 
 		pack("C", $License['Version'])
 		.pack("CA*", strlen($License['Number']), $License['Number']) 
@@ -107,24 +121,30 @@ function createLicenceFile($License) {
 ///////////////////////////////////
 
 //активация лицензии
-function activateLicanse($Number) {
-  global $pdo;
-  $pdo->prepare("UPDATE LICENCE SET ACTIVE=true WHERE Number=?")->execute([$Number]);
+function activateLicanse($Number) 
+{
+  db()->prepare("UPDATE LICENCE SET ACTIVE=true WHERE Number=?")->execute([$Number]);
 }
-// отправить письмо с файлом лицензии
-function sendLicense($file, $License) {
+
+function read_template(array $License, array $TypeList): string
+{
   // считать шаблон письма
   $smarty = new Smarty;
   $smarty->debugging = false;
   $smarty->caching = false;
   $smarty->cache_lifetime = 300;
-  $smarty->assign("licence", $License);
+  $smarty->assign("owner", $License['Owner']);
   $smarty->assign("type", ($License['Type']==1?'Site':'Single'));
   $smarty->assign("datestart", date_format($License['DateStart'],'Y-m-d'));
   $smarty->assign("dateend", date_format($License['DateEnd'],'Y-m-d '));
-  $smarty->assign("desc", $TypeList['types']);
-  $text = $smarty->fetch('new_subscription.tpl'); 
+  $smarty->assign("desc", $TypeList);
 
+  return $smarty->fetch('new_subscription.tpl'); 
+}
+
+// отправить письмо с файлом лицензии
+function sendLicense($file, $License, $TypeList) 
+{
   // отправка письма
   $mail = new PHPMailer(true);
   $mail->isSMTP();                                            // Send using SMTP
@@ -141,7 +161,7 @@ function sendLicense($file, $License) {
   $mail->addReplyTo('no-replyto@skydive.dp.ua', 'Noreply');
   $mail->isHTML(true);
   $mail->Subject = 'Thank You for subscribe OPTIMUS';
-  $mail->msgHTML($text);
+  $mail->msgHTML( read_template($License, array_intersect_key($Disciplines, array_fill_keys($TypeList,''))) ); 
   $mail->AddAttachment($file);
   try {
     $mail->send();
@@ -150,6 +170,7 @@ function sendLicense($file, $License) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
   }  
 }
+
 // привести к именованному массиву ['types']= [Type_ID], чтоб конвертить в json
 function type_list( $array ) {
   // список всех дисциплин
@@ -161,15 +182,19 @@ function type_list( $array ) {
     }
   return $F_Types;
 }
+
 //Validate Form Data
-function test_input($data) {
+function test_input($data) 
+{
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;
 }
+
 //вспомогательная функция 
-function filter(&$value) {
+function filter(&$value) 
+{
   $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
@@ -214,8 +239,8 @@ if ( isset($_POST["jobtitle"]) && (filter_var($_POST['jobtitle'], FILTER_SANITIZ
 $T = explode(',',(isset($_POST['types']) ? $_POST['types'] : ''));
 if (count($T)>0) {
   // для Free - все дисциплины, для Standard берем список из $_POST
-  $TypeList['types'] = ($licenсeType==0) ? ['FS','SF','AE','CF','WS'] : $T;
-  array_walk_recursive($TypeList['types'], "filter");
+  $TypeList = ($licenсeType==0) ? ['FS','SF','AE','CF','WS'] : $T;
+  array_walk_recursive($TypeList, "filter");
 } else {
   $err.="error disciplines";
 }
@@ -225,8 +250,10 @@ if (!empty($err)) {
   header('location: licence.html'); exit; 
 }
 
+
 // Создание лицензии по данным из формы
-$License = makeLicence([$owner, $company, $email, $licenсeType, type_list($TypeList['types'])]); 
+$License = makeLicence([$owner, $company, $email, $licenсeType, type_list($TypeList)]); 
+
 // созхранить лицензию в файл 
 $Licensefile = 'media/'.$License['Number'].'.lic';
 file_put_contents( $Licensefile, implode(PHP_EOL, str_split(createLicenceFile($License),64)) );	 //делим частями шоб выглядело красиво :)
@@ -234,7 +261,7 @@ file_put_contents( $Licensefile, implode(PHP_EOL, str_split(createLicenceFile($L
 // Сохраняем подписку в БД 
 $version = parse_ini_file('version.info', true);
 $query = "INSERT INTO LICENCE(NUMBER, NAME, EMAIL, TITLE, COMPANY, LICENCETYPE, EVENTTYPES, DateStart, DateEnd, LICENCEHASH, ACCOUNT_ID, VERSION) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-$stmt= $pdo->prepare($query);
+$stmt = db()->prepare($query);
 $stmt->execute([$License['Number'], $License['Owner'], $License['Email'], $title, $License['Company'], $License['Type'], $License['EventType'],
          date_format($License['DateStart'], 'Y-m-d H:i:s'), date_format($License['DateEnd'], 'Y-m-d H:i:s'), $GLOBALS['CheckSum'], $_SESSION['user_id'],
          implode(';', array_map( function ($v, $k) { return $k.'='.$v; }, $version['Apps'], array_keys($version['Apps']) ))]);
@@ -244,13 +271,14 @@ switch ($License['Type'])
 {
   case 0: //single
           activateLicanse($License["Number"]);  //активируем сразу
-          sendLicense($Licensefile, $License);
+          //sendLicense($Licensefile, $License);
           header('location: thanks.html'); // редирект на index.php после выполнения скрипта
           break;
   case 1:  //site
           //отправить на оплату в банк
           //для банка создать callback-скрипт, где вызвать
           //activateLicanse($License["Number"]); sendLicense($Licensefile, $License);
+          header('location: thanks.html'); // редирект на index.php после выполнения скрипта
           break;
   default ;
 }

@@ -33,5 +33,4 @@ $sql = "SELECT COMPETITION_ID, DESCRIPTION FROM competition WHERE Visible=1"
   }
 echo json_encode($Events);	//вывести json объект, где ключи -это _COMPETITION_ID_, а значения event-объект json
 
-$pdo = null; 
 ?>

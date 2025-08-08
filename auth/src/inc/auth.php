@@ -32,7 +32,7 @@ function inactivity_time(): void
     }
 }
 
-function register_user(string $email, string $username, string $password, string $activation_code, bool $newsletter = false, string $expiry = '+1 day', bool $is_admin = false): bool
+function register_user(string $email, string $username, string $password, string $activation_code, bool $newsletter = false, string $lifetime = '+1 day', bool $is_admin = false): bool
 {
     $sql = 'INSERT INTO accounts(username, email, password, newsletter, activation_code, activation_expiry)
             VALUES(:username, :email, :password, :newsletter, :activation_code,:activation_expiry)';
@@ -44,7 +44,7 @@ function register_user(string $email, string $username, string $password, string
     $statement->bindValue(':password', password_hash($password, PASSWORD_BCRYPT));
     $statement->bindValue(':newsletter', (bool)$newsletter, PDO::PARAM_INT);
     $statement->bindValue(':activation_code', password_hash($activation_code, PASSWORD_DEFAULT));
-    $statement->bindValue(':activation_expiry', (new DateTime())->modify($expiry)->format('Y-m-d H:i:s'));
+    $statement->bindValue(':activation_expiry', (new DateTime())->modify($lifetime)->format('Y-m-d H:i:s'));
 
     return $statement->execute();
 }
@@ -129,6 +129,8 @@ function generate_activation_code(): string
     return bin2hex(random_bytes(16));
 }
 
+/*
+// пока без smarty
 function get_message_text(string $template_name, array $data): string
 {
     $smarty = new Smarty;
@@ -140,6 +142,7 @@ function get_message_text(string $template_name, array $data): string
 
     return $smarty->fetch($template_name);
 }
+*/
 
 function send_activation_email(array $data, string $activation_code): void
 {
@@ -150,7 +153,7 @@ function send_activation_email(array $data, string $activation_code): void
     // set email subject & body
     $subject = 'Please activate your account';
     $message = <<<MESSAGE
-            Hi, $username!
+            Hi, $username
             Please click the following link to activate your account:
             $activation_link
             MESSAGE;
@@ -163,7 +166,6 @@ function send_activation_email(array $data, string $activation_code): void
 
     // log to a file
     file_put_contents('activation_email.log', $message, FILE_APPEND);
-
 }
 
 function delete_user_by_id(int $id, int $active = 0)
@@ -218,4 +220,53 @@ function activate_user(int $user_id): bool
 
     return $statement->execute();
 }
+
+function recover_request(string $email, string $validation_code, string $lifetime = '+1 day'): bool
+{
+    $sql = 'UPDATE accounts SET activation_code = :activation_code, activation_expiry = :activation_expiry WHERE email = :email';
+    $statement = db()->prepare($sql);
+
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':activation_code', $validation_code);
+    $statement->bindValue(':activation_expiry', (new DateTime())->modify($lifetime)->format('Y-m-d H:i:s'));
+
+    return $statement->execute();
+}
+
+function send_validation_email(array $data, string $validation_code)
+{
+    // create the activation link
+    $validation_link = APP_URL . "/resetpwd.php?validation_code=$validation_code";
+    $username = $data['username'];
+
+    // set email subject & body
+    $subject = 'Request for reset password';
+    $message = <<<MESSAGE
+            Hi, $username
+            Please click the following link to reset your account's password:
+            $validation_link
+            MESSAGE;
+    //$message = get_message_text('register.tpl', [$data['username'], $validation_link]);
+    // email header
+    $header = "From:" . SENDER_EMAIL_ADDRESS;
+
+    // send the email
+    //mail($user['email'], $subject, $message, $header);
+
+    // log to a file
+    file_put_contents('activation_email.log', $message, FILE_APPEND);
+}
+
+function reset_password(int $user_id, string $password): bool
+{
+    $sql = "UPDATE accounts SET password = :password WHERE id = :id";
+
+    $statement = db()->prepare($sql);
+    $statement->bindValue(':password', $password);
+    $statement->bindValue(':id', $user_id);
+
+    return $statement->execute();
+}
+
+
 ?>

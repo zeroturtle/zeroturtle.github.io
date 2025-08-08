@@ -2,6 +2,7 @@
 if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != $_SERVER['HTTP_ORIGIN'].'/licence.html')  header("Location: licence.html");
 
   require __DIR__ . '/auth/src/bootstrap.php';
+
   require_login();
   inactivity_time();
 ?>

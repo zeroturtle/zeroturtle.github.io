@@ -11,6 +11,7 @@ if (is_post_request()) {
 
     // sanitize & validate user inputs
     [$inputs, $errors] = filter($_POST, [
+        'code' => 'string | required',
         'password' => 'string | required | secure',
         'password2' => 'string | required | same: password'
     ]);
@@ -23,15 +24,14 @@ if (is_post_request()) {
         ]);
     }
 
-    // if login fails
-    if (true) {
+    if (найти_user()) {
 
-        //$errors['login'] = 'Invalid username or password';
+        reset_password();
 
-        redirect_with('resetpwd.php', [
-            'errors' => $errors,
-            'inputs' => $inputs
-        ]);
+        redirect_with_message(
+            'login.php', 
+            'Your password has been updated successfully!'
+        );
     }
 
 

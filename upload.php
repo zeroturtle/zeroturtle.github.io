@@ -1,20 +1,21 @@
 <?php
-// Include config file
-require_once "config.php";
+
+require_once __DIR__ . '/auth/config/database.php';
+require_once __DIR__ . '/auth/src/libs/connection.php';
+
 
 define('EVENTS_DIR', 'events/');
 $resource_name = ['logo', 'proto', 'divepool', 'team', 'detail', 'video'];
 
 
 function Licence_Validation($number,$hash) {
-  global $pdo;
   $query = "SELECT * FROM LICENCE WHERE ACTIVE=true" 
     ." AND NOW() BETWEEN DATESTART AND DATEEND"	//дата в диапазоне срока действия лицензии
 //    ." AND LICENCETYPE=1"			//только для Site типа
     ." AND NUMBER = ?"				//номер лицензии
     ." AND LICENCEHASH = ?";			//сверяем md5hash
 //    ." AND (EVENTTYPES & (1 << ?)) <> 0";	//тип соревнования входит в список дисциплин лицензии
-  $stmt = $pdo->prepare($query);
+  $stmt = db()->prepare($query);
   $stmt->execute([$number, $hash]);
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
   return !empty($row) ? $row : false;
@@ -39,7 +40,7 @@ else $LicID = $License['LICENCE_ID'];
 
 //разрешить загружать данные только той же лицензии, кем создано 
 $query="SELECT * FROM COMPETITION WHERE LICENCE_ID = ? AND JSON_VALUE(DESCRIPTION, '$.id') = ?";  //MariaDB
-$stmt = $pdo->prepare($query);
+$stmt = db()->prepare($query);
 $stmt->execute([$LicID, $compID]); 
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 if (empty($row)) die('You should use identical licence to upload data!'); 

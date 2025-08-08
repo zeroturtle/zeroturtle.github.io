@@ -1,15 +1,36 @@
 <?php
 
 require __DIR__ . '/../src/bootstrap.php';
-require __DIR__ . '/../src/resetpwd.php';
-?>
+//require __DIR__ . '/../src/resetpwd.php';
 
-<?php view('header', ['title' => 'Reset password']) ?>
+
+view('header', ['title' => 'Reset password']); 
+
+if (is_get_request()) {
+
+    // sanitize the email & activation code
+    [$inputs, $errors] = filter($_GET, [
+        'validation_code' => 'string | required'
+    ]);
+
+    if ($errors) {
+
+       // redirect to the register page in other cases
+        redirect_with_message(
+            'recover.php',
+            'You are trying to use the expired link which as valid only 24 hours after request or you have already used the key in which case it is deactivated.<br>
+             Please try again.',
+            FLASH_ERROR
+        );
+    }
+}
+
+?>
 
       <div class="d-flex justify-content-center m-3">
         <div class="shadow p-3 mb-5 bg-body-tertiary rounded" style="background-color: #fff; width: 400px;  max-width: 95%;">
 		<form id="myForm" action="resetpwd.php" method="post">
-			<h3>Reset account password</h3>
+		<h3>Reset account password</h3>
                     <fieldset class="d-grid gap-3">
                         <div class="form-group">
                           <label for="password">Please create a new password:</label>
