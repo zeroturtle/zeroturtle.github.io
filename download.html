@@ -78,9 +78,9 @@ function line($Num) {
 <h2 class="display-3">OPTIMUS <span class="text-success">download page</span></h2>
 <p><b>Current build 5.2.1.0 </b></p>
 
-<section class="border-bottom pb-5">
-    <span class="dl-info">
-      <span class="dl-title">Full package:
+<section class="border-bottom py-3">
+    <span>
+      <span class="h3 text-center">Full packages: </span>
               <ul>
                 <li><?php line(0); ?> </li>
                 <li><?php line(1); ?> </li>
@@ -88,13 +88,13 @@ function line($Num) {
     </span>
 </section>
 
-<section class="border-bottom pb-5" style="background-color: #f2f2f2;">
+<section class="border-bottom py-3 bg-secondary-subtle">
     <div class="row">
       <div class="col-sm-6">
-        <span class="h3 text-center">Components </span>
+        <span class="h3 text-center">Components: </span>
         <ul>
           <li>
-            <span class="dl-title">OPTIMUS core files <small>(exe & dll, fdb)</small>:  
+            <span>OPTIMUS core files <small>(exe & dll, fdb)</small>:  
               <ul>
                 <li><?php line(2); ?> </li>
                 <li><?php line(3); ?> </li>
@@ -102,7 +102,7 @@ function line($Num) {
             </span>
           </li>
           <li>
-            <span class="dl-title">Print report templates:
+            <span>Print report templates:
               <ul>
                 <li><?php line(4); ?> </li>
                 <li><?php line(5); ?> </li>
@@ -111,7 +111,7 @@ function line($Num) {
             </span>
           </li>
           <li>
-            <span class="dl-title">Firebird SQL server x86 v5.0.2:<br>  
+            <span>Firebird SQL server x86 v5.0.2:<br>  
               <small>(You can download it from the official website <a href="https://www.firebirdsql.org/en/firebird-5-0" class="text-decoration-none"> The Firebird Project</a>)</small> 
               <ul>
                 <li><?php line(7); ?> </li>
@@ -125,13 +125,14 @@ function line($Num) {
         <span class="h3 text-center">Documentation</span><br>
         <ul>
           <li>
-            <span class="dl-title"> OPTIMUS operational manual:   
+            <span> OPTIMUS operational manual:   
               <ul>
                 <li><?php line(9); ?> </li>
                 <li><?php line(10); ?> </li>
               </ul>
           </li>
-          <li><span class="dl-title"> Formation Skydiving guide: 
+          <li>
+            <span> Formation Skydiving guide: 
               <ul>
                 <li><?php line(11); ?> </li>
                 <li><?php line(12); ?> </li>
@@ -139,7 +140,7 @@ function line($Num) {
             </span>
           </li>
           <li>
-            <span class=""> Organizing competition guide:  
+            <span> Organizing competition guide:  
               <ul>
                 <li><?php line(13); ?> </li>
               </ul>
@@ -154,8 +155,8 @@ function line($Num) {
   Explore <a href="whatsnew">what’s great</a> about the latest release the <strong>OPTIMUS Artemis </strong> available since June 2025.
 </section-->
 
-<section class="border-bottom pb-5">
-   <span class="h3 text-center">Update to the latest build.</span><br>
+<section class="border-bottom py-3">
+  <h2 class="display-3">Update to the latest build</h2>
    <b>ВНИМАНИЕ!</b>  Техподдержка оказывается только для пользователей с активной лицензией. Консультации только по текущей версии системы (той что выложеная на web).
    Лицензия включена в годовую подписку.
    Если вы имеете активную Site-лицензию напишите запрос в <a href="mailto:support@optimus.dp.ua">службу поддержки</a>, где укажите №лицензии и версию системы.
@@ -166,8 +167,8 @@ function line($Num) {
 </section>
 
 
-<section class="border-bottom pb-5" style="background-color: #f2f2f2;">
-  <span class="h3 text-center">How you can contribute…</span><br>
+<section class="border-bottom py-3 bg-secondary-subtle" >
+  <h2 class="display-3">How you can contribute…</h2>
   <ul>
     <li>Translate content <br>
 	Help us translate Optimus products into your local language.</li>
@@ -181,8 +182,9 @@ function line($Num) {
 
 
 
-<section class="border-bottom pb-5">
-   <div id="fileContent" class="m-3 border">See <a href="#" id="history">Version history</a></div>
+<section class="border-bottom py-3">
+  <h2 class="display-3">Discover OPTIMUS</h2>
+   <div id="fileContent" class="mx-3 border bg-info-subtle">See <a href="#" id="history">Version history</a></div>
    <script>
      async function loadFile(filePath) {
        try {
@@ -202,7 +204,6 @@ function line($Num) {
           if (fileContent) {
             let divElement = document.getElementById("fileContent");
             divElement.innerHTML = `<pre>${fileContent}</pre>`;
-            //console.log(fileContent);
           }
        })
      });
