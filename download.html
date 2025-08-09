@@ -182,12 +182,13 @@ function line($Num) {
      const fileInput = document.getElementById('history');
      fileInput.addEventListener('click', (event) => {
        event.preventDefault();
-       const fileContent = await loadFile("https://127.0.0.1/whatsnew");
+       //const fileContent = loadFile("https://127.0.0.1/whatsnew");
+       loadFile("https://zeroturtle.github.io/whatsnew").then(fileContent => {
           if (fileContent) {
-              let myVariable = fileContent;
-              console.log(myVariable);
+              console.log(fileContent);
           }
-    });
+       })
+     });
    </script>
 </section>
 
