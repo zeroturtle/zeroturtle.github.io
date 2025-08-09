@@ -185,7 +185,9 @@ function line($Num) {
        //const fileContent = loadFile("https://127.0.0.1/whatsnew");
        loadFile("https://zeroturtle.github.io/whatsnew").then(fileContent => {
           if (fileContent) {
-              console.log(fileContent);
+            let divElement = document.getElementById("fileContent");
+            divElement.textContent = fileContent;
+            //console.log(fileContent);
           }
        })
      });
