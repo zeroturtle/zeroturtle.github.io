@@ -76,7 +76,7 @@ function line($Num) {
 
 <!-- отправка новая лицензия -->
 <h2 class="display-3">OPTIMUS <span class="text-success">download page</span></h2>
-<p><b>Current version 5.2.1.0 </b></p>
+<p><b>Current build 5.2.1.0 </b></p>
 
 <section class="border-bottom pb-5">
     <span class="dl-info">
@@ -165,7 +165,31 @@ function line($Num) {
    <p class="text-center"><a href="licence.html" class="btn btn-lg btn-primary rounded-pill">Subscribe</a> </p>
 </section>
 
-
+<section class="border-bottom pb-5">
+   See <a href="#" id="history">Version history</a>
+   <div id="fileContent"></div>
+   <script>
+     async function loadFile(filePath) {
+       try {
+         const response = await fetch(filePath);
+         const fileContent = await response.text();
+         return fileContent;
+       } catch (error) {
+         console.error("Ошибка загрузки файла:", error);
+         return null;
+       }
+     }
+     const fileInput = document.getElementById('history');
+     fileInput.addEventListener('click', (event) => {
+       event.preventDefault();
+       const fileContent = await loadFile("https://127.0.0.1/whatsnew");
+          if (fileContent) {
+              let myVariable = fileContent;
+              console.log(myVariable);
+          }
+    });
+   </script>
+</section>
 
 <section class="border-bottom pb-5">
   <span class="h3 text-center">How you can contribute…</span><br>
