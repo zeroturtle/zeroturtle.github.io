@@ -1,10 +1,26 @@
-[Apps]
-Optimus=5.2.1.0
-Ferret=2.1.1.0
-Vanguard=3.0.1.0
-Zodiak=2.3.1.0
-[Check]
-Optimus=ee76fe3758f96f9a91ef4e1a76fe4c83
-Ferret=7e9163ed6c487a41a6fee1871194cb70
-Vanguard=9464759deecefce85bb261355be7d566
-Zodiak=a823751be92244016c95029cb2a774bc
+[
+    {
+        "name": "Optimus",
+        "version": "5.2.1.2",
+        "checksum": "ee76fe3758f96f9a91ef4e1a76fe4c83",
+        "published": "2025-08-13"
+    },
+    {
+        "name": "Ferret",
+        "version": "2.1.1.0",
+        "checksum": "7e9163ed6c487a41a6fee1871194cb70",
+        "published": "2025-08-13"
+    },
+    {
+        "name": "Vanguard",
+        "version": "3.0.1.0",
+        "checksum": "9464759deecefce85bb261355be7d566",
+        "published": "2025-08-13"
+    },
+    {
+        "name": "Zodiak",
+        "version": "2.3.1.0",
+        "checksum": "a823751be92244016c95029cb2a774bc",
+        "published": "2025-08-13"
+    }
+]

@@ -49,8 +49,8 @@ if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != $_SERVER['HT
   <h2 class="display-3">Licence <span class="text-danger">Details</span></h2>
 <form action="licence.php" method="post">
   <div style="background:#CCC">                                 
-    <div>Вы выбрали: <b><?php echo $_POST['licence']; ?></b></div>
-    <div>Дисциплины: <b><?php echo implode(', ', $_POST['types']); ?> <!--Formation Skydiving | Speed Formation | Artistic Events | Canopy Formation | Wingsuit Flying Perfomance--></b></div>
+    <div>Вы выбрали: <b><?= $_POST['licence']; ?></b></div>
+    <div>Дисциплины: <b><?= implode(', ', $_POST['types']); ?> <!--Formation Skydiving | Speed Formation | Artistic Events | Canopy Formation | Wingsuit Flying Perfomance--></b></div>
     <div>Price: <b>&euro;<?php require("price.php"); ?></b></div>
   </div>
   <fieldset>
