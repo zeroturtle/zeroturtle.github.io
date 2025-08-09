@@ -26,36 +26,6 @@ $Disciplines = [
   "WS" => 'Wingsuit Flying'
 ];
 
-///////////////////////////////////
-// ОПИСАНИЕ ФОРМАТА ПОЛЕЙ ЛИЦЕНЗИИ
-///////////////////////////////////
-/*
-  TLicence = packed record
-    Version : byte;                  // версия формата данных, reserved
-    Number : String[32];             // внутренний номер подписки, используется в качестве ключа для идентификации (!) 5символов маловато..  надо бы сделать длиннее
-    DateStart, DateEnd: TDateTime;   // дата выдачи и конец лицензии
-    Email     : String[127];         // email для связи
-    Company   : String[127];         // название организации
-    Owner : String[127];             // Владелец  FirstName + LastName
-    QtyLicence: byte;                // Максимальное количество портов, 5 для Standard или 1 для Personal
-    EventType : TEventSet;           // список разрешенных дисциплин, каждый бит соответствует типу
-    Active : BOOL;                   // признак активной лицензии
-    WebPublishing : BOOL;            // разрешена публикация на Web-сайт результатов (только для Standard подписки)
-  end;
-
-  т.к. Null-terminated string легко определяются, для представления строк используется стиль хранения pascal
-  где 0-байт хранит длину строки, а не значащие символы заполняются "мусором"
-  чтоб заполнить нулями вместо random_bytes использовать str_pad($Number,32,chr(0))
-  delphi ведет отсчет DateTime от этой даты "1899-12-30" :)
-
-  Формат файла лицензии 
-  TLicenceFile = packed record
-    Licence: TLicence;
-    CheckSum: string[32];	// md5-hash лицензии (32-character hexadecimal number)
-    SecureKey: Cardinal;	// unsigned integer (4 байта)
-  end;
-*/
-
 // array в число. Каждый бит соответствует типу дисциплины
 function convert2bin($array) {				// array список дисциплин 
 	$T = 0;
@@ -96,20 +66,7 @@ function makeLicence($form)
 
 function createLicenceFile($License) 
 {
-	$LicenseStr = 
-		pack("C", $License['Version'])
-		.pack("CA*", strlen($License['Number']), $License['Number']) 
-		.pack("d", (date_timestamp_get($License['DateStart']) - strtotime("1899-12-30")) / 86400)
-		.pack("d", (date_timestamp_get($License['DateEnd']) - strtotime("1899-12-30")) / 86400)
-		.pack("CA*", strlen($License['Email']), $License['Email'].random_bytes(127-strlen($License['Email']))) 
-		.pack("CA*", strlen($License['Company']), $License['Company'].random_bytes(127-strlen($License['Company']))) 
-		.pack("CA*", strlen($License['Owner']), $License['Owner'].random_bytes(127-strlen($License['Owner']))) 
-		.pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))		//QtyLicence - Максимальное количество портов, 5 для Standard или 1 для Personal
-		.pack("v", $License['EventType'])					//unsigned short
-		.pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0))	//boolean занимает 4 байта!
-		.pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0));	//WebPublishing зависит от типа подписки
-	$GLOBALS['CheckSum'] = md5($LicenseStr); 
-	$LicenseStr.= pack("CA*", strlen($GLOBALS['CheckSum']), $GLOBALS['CheckSum']);		//добавить контрольную сумму лицензии
+	$LicenseStr = '';
 
 	// "шифруем" черз xor по байтам
 	$ar = str_split( $LicenseStr );							// разбираем строку лицензии по байтам
