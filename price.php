@@ -1,5 +1,7 @@
 <?php
+$Price = 0;
 
+//базовая цена
 switch($_POST['licence']) {
   case 0: $RegularPrice = 0;
           break;
@@ -7,9 +9,9 @@ switch($_POST['licence']) {
           break;
   default: $RegularPrice = 200;
 }
-$Period = 1; //isset($_POST['years']) ? intval($_POST['years']) : 1;
 
-$Price = 0;
+//считаем скидку за предоплату 
+$Period = 1; //isset($_POST['years']) ? intval($_POST['years']) : 1;
 if (isset($_POST['types'])) 
   for ($i=0; $i<count($_POST['types']); $i++) {
     for ($y=1; $y<=$Period; $y++) {
