@@ -44,7 +44,7 @@ function register_user(string $email, string $username, string $password, string
     $statement->bindValue(':password', password_hash($password, PASSWORD_BCRYPT));
     $statement->bindValue(':newsletter', (bool)$newsletter, PDO::PARAM_INT);
     $statement->bindValue(':activation_code', password_hash($activation_code, PASSWORD_DEFAULT));
-    $statement->bindValue(':activation_expiry', (new DateTime())->modify($lifetime)->format('Y-m-d H:i:s'));
+    $statement->bindValue(':activation_expiry', (new DateTime($lifetime))->format('Y-m-d H:i:s'));
 
     return $statement->execute();
 }
@@ -228,7 +228,7 @@ function recover_request(string $email, string $validation_code, string $lifetim
 
     $statement->bindValue(':email', $email);
     $statement->bindValue(':activation_code', $validation_code);
-    $statement->bindValue(':activation_expiry', (new DateTime())->modify($lifetime)->format('Y-m-d H:i:s'));
+    $statement->bindValue(':activation_expiry', (new DateTime($lifetime))->format('Y-m-d H:i:s'));
 
     return $statement->execute();
 }
