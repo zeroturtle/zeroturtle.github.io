@@ -66,7 +66,7 @@ function makeLicence($form)
 
 function createLicenceFile($License) 
 {
-	$LicenseStr = '';
+	$LicenseStr = 'Новая лицензия';
 
 	return $LicenseStr;
 } 
