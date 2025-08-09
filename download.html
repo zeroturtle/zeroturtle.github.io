@@ -187,8 +187,8 @@ function line($Num) {
           if (fileContent) {
             let divElement = document.getElementById("fileContent");
             //divElement.textContent = fileContent;
-            //divElement.innerHTML = `<pre>${fileContent}</pre>`;
-            divElement.querySelector('.pre').textContent = fileContent;
+            divElement.innerHTML = `<pre>${fileContent}</pre>`;
+            //divElement.querySelector('.pre').textContent = fileContent;
             //console.log(fileContent);
           }
        })
