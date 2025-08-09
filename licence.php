@@ -68,12 +68,7 @@ function createLicenceFile($License)
 {
 	$LicenseStr = '';
 
-	// "шифруем" черз xor по байтам
-	$ar = str_split( $LicenseStr );							// разбираем строку лицензии по байтам
-	$SecureKey = random_int(1, PHP_INT_MAX);					// генерим случайный "секретный" ключ 4 байта
-	$Key = pack('V', $SecureKey);							// разбираем ключ по байтам
-	for ($i=0;$i<count($ar); $i++)  $ar[$i] = $ar[$i] ^ $Key[$i % 4];
-	return  base64_encode(implode('',$ar).pack('V',$SecureKey));			//добавить к лицензии ключ  :) 
+	return $LicenseStr;
 } 
 ///////////////////////////////////
 
