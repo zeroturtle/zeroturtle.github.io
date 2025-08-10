@@ -18,13 +18,37 @@ require './PHPMailer/src/SMTP.php';
 
 require 'libs/Smarty.class.php';
 
-$Disciplines = [
-  "FS" => 'Formation Skydiving',
-  "SF" => 'Speed Formation Skydiving',
-  "AE" => 'Artistic Events',
-  "CF" => 'Canopy Formation',
-  "WS" => 'Wingsuit Flying'
-];
+
+
+///////////////////////////////////
+// ОПИСАНИЕ ФОРМАТА ПОЛЕЙ ЛИЦЕНЗИИ
+///////////////////////////////////
+/*
+  TLicence = packed record
+    Version : byte;                  // версия формата данных, reserved
+    Number : String[32];             // внутренний номер подписки, используется в качестве ключа для идентификации (!) 5символов маловато..  надо бы сделать длиннее
+    DateStart, DateEnd: TDateTime;   // дата выдачи и конец лицензии
+    Email     : String[127];         // email для связи
+    Company   : String[127];         // название организации
+    Owner : String[127];             // Владелец  FirstName + LastName
+    QtyLicence: byte;                // Максимальное количество портов, 5 для Standard или 1 для Personal
+    EventType : TEventSet;           // список разрешенных дисциплин, каждый бит соответствует типу
+    Active : BOOL;                   // признак активной лицензии
+    WebPublishing : BOOL;            // разрешена публикация на Web-сайт результатов (только для Standard подписки)
+  end;
+
+  т.к. Null-terminated string легко определяются, для представления строк используется стиль хранения pascal
+  где 0-байт хранит длину строки, а не значащие символы заполняются "мусором"
+  чтоб заполнить нулями вместо random_bytes использовать str_pad($Number,32,chr(0))
+  delphi ведет отсчет DateTime от этой даты "1899-12-30" :)
+
+  Формат файла лицензии 
+  TLicenceFile = packed record
+    Licence: TLicence;
+    CheckSum: string[32];	// md5-hash лицензии (32-character hexadecimal number)
+    SecureKey: Cardinal;	// unsigned integer (4 байта)
+  end;
+*/
 
 // array в число. Каждый бит соответствует типу дисциплины
 function convert2bin($array) {				// array список дисциплин 
@@ -57,7 +81,7 @@ function makeLicence($form)
 	$License['Version'] = 4;						// версия формата данных
 	$License['Number'] = GUID();//uniqid();						// сгенерить уникальный номер подписки string[32]
 	$License['DateStart'] = new DateTime;					// дата выдачи 	
-	$License['DateEnd'] = new DateTime('+365 day');				// срок действия до = +1год 
+	$License['DateEnd'] = new DateTime('+1 year');				// срок действия до = +365 day 
 	date_time_set($License['DateStart'],0,0,0,0);				// приводим к формату strtotime("2025-01-01 00:00:00")
 	date_time_set($License['DateEnd'],0,0,0,0);
 	$License['Active'] = true;						// признак активной подписки, для новой всегда = true
@@ -66,9 +90,27 @@ function makeLicence($form)
 
 function createLicenceFile($License) 
 {
-	$LicenseStr = 'Новая лицензия';
+	$LicenseStr = 
+		pack("C", $License['Version'])
+		.pack("CA*", strlen($License['Number']), $License['Number']) 
+		.pack("d", (date_timestamp_get($License['DateStart']) - strtotime("1899-12-30")) / 86400)
+		.pack("d", (date_timestamp_get($License['DateEnd']) - strtotime("1899-12-30")) / 86400)
+		.pack("CA*", strlen($License['Email']), $License['Email'].random_bytes(127-strlen($License['Email']))) 
+		.pack("CA*", strlen($License['Company']), $License['Company'].random_bytes(127-strlen($License['Company']))) 
+		.pack("CA*", strlen($License['Owner']), $License['Owner'].random_bytes(127-strlen($License['Owner']))) 
+		.pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))		//QtyLicence - Максимальное количество портов, 5 для Standard или 1 для Personal
+		.pack("v", $License['EventType'])					//unsigned short
+		.pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0))	//boolean занимает 4 байта!
+		.pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0));	//WebPublishing зависит от типа подписки
+	$GLOBALS['CheckSum'] = md5($LicenseStr); 
+	$LicenseStr.= pack("CA*", strlen($GLOBALS['CheckSum']), $GLOBALS['CheckSum']);		//добавить контрольную сумму лицензии
 
-	return $LicenseStr;
+	// "шифруем" черз xor по байтам
+	$ar = str_split( $LicenseStr );							// разбираем строку лицензии по байтам
+	$SecureKey = random_int(1, PHP_INT_MAX);					// генерим случайный "секретный" ключ 4 байта
+	$Key = pack('V', $SecureKey);							// разбираем ключ по байтам
+	for ($i=0;$i<count($ar); $i++)  $ar[$i] = $ar[$i] ^ $Key[$i % 4];
+	return  base64_encode(implode('',$ar).pack('V',$SecureKey));			//добавить к лицензии ключ  :) 
 } 
 ///////////////////////////////////
 
@@ -113,7 +155,8 @@ function sendLicense($file, $License, $TypeList)
   $mail->addReplyTo('no-replyto@skydive.dp.ua', 'Noreply');
   $mail->isHTML(true);
   $mail->Subject = 'Thank You for subscribe OPTIMUS';
-  $mail->msgHTML( read_template($License, array_intersect_key($Disciplines, array_fill_keys($TypeList,''))) ); 
+  $mail->msgHTML( read_template($License, 
+                array_intersect_key(["FS"=>'Formation Skydiving',"SF"=>'Speed Formation Skydiving',"AE"=>'Artistic Events',"CF"=>'Canopy Formation',"WS"=>'Wingsuit Flying'], array_fill_keys($TypeList,''))) ); 
   $mail->AddAttachment($file);
   try {
     $mail->send();
@@ -126,7 +169,7 @@ function sendLicense($file, $License, $TypeList)
 // привести к именованному массиву ['types']= [Type_ID], чтоб конвертить в json
 function type_list( $array ) {
   // список всех дисциплин
-  $disciplines = ['FS'=>[1],'SF'=>[2,3],'AE'=>[4],'CF'=>[9],'IS'=>[5],'DS'=>[6],'DY'=>[10,11],'WS'=>[7,12],'CP'=>[8],'SP'=>[13]];  
+$disciplines = ['FS'=>[1],'SF'=>[2,3],'AE'=>[4],'CF'=>[9],'IS'=>[5],'DS'=>[6],'DY'=>[10,11],'WS'=>[7,12],'CP'=>[8],'SP'=>[13]];  
   $F_Types=[];
   foreach( array_unique($array) as $t )
     if (array_key_exists($t, $disciplines)) { // убедимся, что в массиве корректные данные
