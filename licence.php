@@ -72,14 +72,19 @@ function makeLicence($form)
 {
 	$License = [];
 	// строку из UTF-8 надо ОБЕЗЯТЕЛЬНО перевести в однобайтовый код!
+	//v.4
 	$License['Owner']  = iconv("UTF-8", "Windows-1251", $form[0]);		// Владелец
 	$License['Company'] = iconv("UTF-8", "Windows-1251", $form[1]);		// организация
 	$License['Email']  = iconv("UTF-8", "Windows-1251", $form[2]);		// email 
+	//v.5
+	//$License['Owner']  = mb_substr(iconv("UTF-8", "UTF-16", $form[0]), 0, 127, 'UTF-16');		// Владелец
+	//$License['Company'] = mb_substr(iconv("UTF-8", "UTF-16", $form[1]), 0, 127, 'UTF-16');	// организация
+	//$License['Email']  = mb_substr(iconv("UTF-8", "UTF-16", $form[2]), 0, 127, 'UTF-16');		// email 
 	$License['Type'] = $form[3];						// тип подписки Standard/Personal, определяет количество консолей
 	$License['EventType'] = convert2bin($form[4]);
 	// автоматически заполняемые поля
 	$License['Version'] = 4;						// версия формата данных
-	$License['Number'] = GUID();//uniqid();						// сгенерить уникальный номер подписки string[32]
+	$License['Number'] = GUID();//uniqid();					// сгенерить уникальный номер подписки string[32]
 	$License['DateStart'] = new DateTime;					// дата выдачи 	
 	$License['DateEnd'] = new DateTime('+1 year');				// срок действия до = +365 day 
 	date_time_set($License['DateStart'],0,0,0,0);				// приводим к формату strtotime("2025-01-01 00:00:00")
@@ -91,6 +96,7 @@ function makeLicence($form)
 function createLicenceFile($License) 
 {
 	$LicenseStr = 
+		//v.4
 		pack("C", $License['Version'])
 		.pack("CA*", strlen($License['Number']), $License['Number']) 
 		.pack("d", (date_timestamp_get($License['DateStart']) - strtotime("1899-12-30")) / 86400)
@@ -98,10 +104,15 @@ function createLicenceFile($License)
 		.pack("CA*", strlen($License['Email']), $License['Email'].random_bytes(127-strlen($License['Email']))) 
 		.pack("CA*", strlen($License['Company']), $License['Company'].random_bytes(127-strlen($License['Company']))) 
 		.pack("CA*", strlen($License['Owner']), $License['Owner'].random_bytes(127-strlen($License['Owner']))) 
-		.pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))		//QtyLicence - Максимальное количество портов, 5 для Standard или 1 для Personal
-		.pack("v", $License['EventType'])					//unsigned short
-		.pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0))	//boolean занимает 4 байта!
-		.pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0));	//WebPublishing зависит от типа подписки
+		.pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))		// QtyLicence - Максимальное количество портов, 5 для Standard или 1 для Personal
+		.pack("v", $License['EventType'])					// unsigned short
+		.pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0))	// boolean занимает 4 байта!
+		.pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0));	// WebPublishing зависит от типа подписки
+		//v.5
+		//.pack("CA*", mb_strlen($License['Email']), $License['Email'].random_bytes(255-mb_strlen($License['Email']))) 
+		//.pack("CA*", mb_strlen($License['Company']), $License['Company'].random_bytes(255-mb_strlen($License['Company']))) 
+		//.pack("CA*", mb_strlen($License['Owner']), $License['Owner'].random_bytes(255-mb_strlen($License['Owner']))) 
+
 	$GLOBALS['CheckSum'] = md5($LicenseStr); 
 	$LicenseStr.= pack("CA*", strlen($GLOBALS['CheckSum']), $GLOBALS['CheckSum']);		//добавить контрольную сумму лицензии
 
