@@ -79,7 +79,7 @@ function makeLicence($form)
 	$License['Version'] = 5;						// версия формата данных
 	$License['Number'] = GUID();//uniqid();					// сгенерить уникальный номер подписки string[32]
 	$License['DateStart'] = new DateTime;					// дата выдачи 	
-	$License['DateEnd'] = new DateTime('+1 year');				// срок действия до = +365 day 
+	$License['DateEnd'] = new DateTime('+365 day');				// срок действия до = +1 year
 	date_time_set($License['DateStart'],0,0,0,0);				// приводим к формату strtotime("2025-01-01 00:00:00")
 	date_time_set($License['DateEnd'],0,0,0,0);
 	$License['Active'] = true;						// признак активной подписки, для новой всегда = true
