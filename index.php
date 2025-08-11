@@ -2,6 +2,7 @@
 require_once __DIR__ . '/auth/config/database.php';
 require_once __DIR__ . '/auth/src/libs/connection.php';
 
+mb_internal_encoding('UTF-8');
 
 define('EVENTS_PER_PAGE', 8);
 // дисциплины по группам

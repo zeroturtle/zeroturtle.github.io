@@ -9,6 +9,7 @@ require_once "config.php";
 define('EVENTS_DIR', 'events/');
 define('EVENT_TEMPLATE_DIR', EVENTS_DIR.'template/');
 
+mb_internal_encoding('UTF-8');
 
 function Licence_Validation($number,$hash,$type) 
 {

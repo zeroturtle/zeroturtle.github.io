@@ -18,29 +18,28 @@ require './PHPMailer/src/SMTP.php';
 
 require 'libs/Smarty.class.php';
 
+//header('Content-Type: text/html; charset=utf-8');
+mb_internal_encoding('UTF-8');
 
 
 ///////////////////////////////////
 // ОПИСАНИЕ ФОРМАТА ПОЛЕЙ ЛИЦЕНЗИИ
 ///////////////////////////////////
 /*
-  TLicence = packed record
-    Version : byte;                  // версия формата данных, reserved
-    Number : String[32];             // внутренний номер подписки, используется в качестве ключа для идентификации (!) 5символов маловато..  надо бы сделать длиннее
-    DateStart, DateEnd: TDateTime;   // дата выдачи и конец лицензии
-    Email     : String[127];         // email для связи
-    Company   : String[127];         // название организации
-    Owner : String[127];             // Владелец  FirstName + LastName
-    QtyLicence: byte;                // Максимальное количество портов, 5 для Standard или 1 для Personal
-    EventType : TEventSet;           // список разрешенных дисциплин, каждый бит соответствует типу
-    Active : BOOL;                   // признак активной лицензии
-    WebPublishing : BOOL;            // разрешена публикация на Web-сайт результатов (только для Standard подписки)
+  TLicenceW = packed record
+    Version: Byte;                  // версия формата данных, reserved
+    Number: String[36];             // внутренний номер подписки, GUID всегда содержит только A..Z0..9-
+    Email,                          // email для связи
+    Company,                        // название организации
+    Owner: TByteA;                  // Владелец  FirstName + LastName  array[0..127*SizeOf(Char)] of Byte;
+    DateStart,                      // дата выдачи и конец лицензии
+    DateEnd: TDateTime;             
+    EventType: TEventSet;           // список разрешенных дисциплин, каждый бит соответствует типу
+    QtyLicence: Byte;               // Максимальное количество портов, 5 для Standard или 1 для Personal
+    WebPublishing: BOOL;            // разрешена публикация на Web-сайт результатов (только для Standard подписки)
+    Active: BOOL;                   // признак активной лицензии
   end;
 
-  т.к. Null-terminated string легко определяются, для представления строк используется стиль хранения pascal
-  где 0-байт хранит длину строки, а не значащие символы заполняются "мусором"
-  чтоб заполнить нулями вместо random_bytes использовать str_pad($Number,32,chr(0))
-  delphi ведет отсчет DateTime от этой даты "1899-12-30" :)
 
   Формат файла лицензии 
   TLicenceFile = packed record
@@ -71,19 +70,13 @@ function GUID()
 function makeLicence($form) 
 {
 	$License = [];
-	// строку из UTF-8 надо ОБЕЗЯТЕЛЬНО перевести в однобайтовый код!
-	//v.4
-	$License['Owner']  = iconv("UTF-8", "Windows-1251", $form[0]);		// Владелец
-	$License['Company'] = iconv("UTF-8", "Windows-1251", $form[1]);		// организация
-	$License['Email']  = iconv("UTF-8", "Windows-1251", $form[2]);		// email 
-	//v.5
-	//$License['Owner']  = mb_substr(iconv("UTF-8", "UTF-16", $form[0]), 0, 127, 'UTF-16');		// Владелец
-	//$License['Company'] = mb_substr(iconv("UTF-8", "UTF-16", $form[1]), 0, 127, 'UTF-16');	// организация
-	//$License['Email']  = mb_substr(iconv("UTF-8", "UTF-16", $form[2]), 0, 127, 'UTF-16');		// email 
+	$License['Owner']  = mb_substr(mb_convert_encoding($form[0], 'UTF-8', 'auto'), 0, 127*2);       // Владелец   
+	$License['Company'] = mb_substr(mb_convert_encoding($form[1], 'UTF-8', 'auto'), 0, 127*2);      // организация
+	$License['Email']  = mb_substr(mb_convert_encoding($form[2], 'UTF-8', 'auto'), 0, 127*2);       // email      
 	$License['Type'] = $form[3];						// тип подписки Standard/Personal, определяет количество консолей
 	$License['EventType'] = convert2bin($form[4]);
 	// автоматически заполняемые поля
-	$License['Version'] = 4;						// версия формата данных
+	$License['Version'] = 5;						// версия формата данных
 	$License['Number'] = GUID();//uniqid();					// сгенерить уникальный номер подписки string[32]
 	$License['DateStart'] = new DateTime;					// дата выдачи 	
 	$License['DateEnd'] = new DateTime('+1 year');				// срок действия до = +365 day 
@@ -96,23 +89,31 @@ function makeLicence($form)
 function createLicenceFile($License) 
 {
 	$LicenseStr = 
-		//v.4
 		pack("C", $License['Version'])
 		.pack("CA*", strlen($License['Number']), $License['Number']) 
-		.pack("d", (date_timestamp_get($License['DateStart']) - strtotime("1899-12-30")) / 86400)
+		.pack("VA*", strlen($License['Email']), $License['Email'].random_bytes(127*2-3-strlen($License['Email']))) 
+		.pack("VA*", strlen($License['Company']), $License['Company'].random_bytes(127*2-3-strlen($License['Company']))) 
+		.pack("VA*", strlen($License['Owner']), $License['Owner'].random_bytes(127*2-3-strlen($License['Owner']))) 
+		.pack("d", (date_timestamp_get($License['DateStart']) - strtotime("1899-12-30")) / 86400)   // delphi ведет отсчет DateTime от этой даты "1899-12-30" :)
 		.pack("d", (date_timestamp_get($License['DateEnd']) - strtotime("1899-12-30")) / 86400)
-		.pack("CA*", strlen($License['Email']), $License['Email'].random_bytes(127-strlen($License['Email']))) 
-		.pack("CA*", strlen($License['Company']), $License['Company'].random_bytes(127-strlen($License['Company']))) 
-		.pack("CA*", strlen($License['Owner']), $License['Owner'].random_bytes(127-strlen($License['Owner']))) 
-		.pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))		// QtyLicence - Максимальное количество портов, 5 для Standard или 1 для Personal
 		.pack("v", $License['EventType'])					// unsigned short
-		.pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0))	// boolean занимает 4 байта!
-		.pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0));	// WebPublishing зависит от типа подписки
-		//v.5
-		//.pack("CA*", mb_strlen($License['Email']), $License['Email'].random_bytes(255-mb_strlen($License['Email']))) 
-		//.pack("CA*", mb_strlen($License['Company']), $License['Company'].random_bytes(255-mb_strlen($License['Company']))) 
-		//.pack("CA*", mb_strlen($License['Owner']), $License['Owner'].random_bytes(255-mb_strlen($License['Owner']))) 
-
+		.pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))		// QtyLicence - Максимальное количество портов, 5 для Standard или 1 для Personal
+		.pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0))	// WebPublishing зависит от типа подписки
+		.pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0));	// boolean занимает 4 байта!
+/*
+		$l = 0;
+		$l += strlen(pack("C", $License['Version']));
+		echo $l.'Number='; $l += strlen(pack("CA*", strlen($License['Number']), $License['Number']) ) ;
+		echo $l.'Email='; $l += strlen(pack("VA*", mstrlen($License['Email']), $License['Email'].random_bytes(127*2-3-strlen($License['Email']))) );
+		echo $l.'Company='; $l += strlen(pack("VA*", strlen($License['Company']), $License['Company'].random_bytes(127*2-3-strlen($License['Company']))) );
+		echo $l.'Owner='; $l += strlen(pack("VA*", strlen($License['Owner']), $License['Owner'].random_bytes(127*2-3-strlen($License['Owner']))) );
+		echo $l.'DateStart='; $l += strlen(pack("d", (date_timestamp_get($License['DateStart']) - strtotime("1899-12-30")) / 86400)) ;
+		echo $l.'DateEnd='; $l += strlen(pack("d", (date_timestamp_get($License['DateEnd']) - strtotime("1899-12-30")) / 86400) );
+		echo $l.'EventType='; $l += strlen(pack("v", $License['EventType']));
+		echo $l.'QtyLicence='; $l += strlen(pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))	);
+		echo $l.'WebPublishing='; $l += strlen(pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0)));
+		echo $l.'Active='; $l += strlen(pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0)));
+die;    */
 	$GLOBALS['CheckSum'] = md5($LicenseStr); 
 	$LicenseStr.= pack("CA*", strlen($GLOBALS['CheckSum']), $GLOBALS['CheckSum']);		//добавить контрольную сумму лицензии
 
@@ -195,7 +196,7 @@ function test_input($data)
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
-  return $data;
+  return $data; //mb_convert_encoding($data, 'UTF-8', 'auto');
 }
 
 //вспомогательная функция 
@@ -265,12 +266,13 @@ $Licensefile = 'media/'.$License['Number'].'.lic';
 file_put_contents( $Licensefile, implode(PHP_EOL, str_split(createLicenceFile($License),64)) );	 //делим частями шоб выглядело красиво :)
 
 // Сохраняем подписку в БД 
-$version = parse_ini_file('version.info', true);
+//$version = parse_ini_file('version.info', true);
 $query = "INSERT INTO LICENCE(NUMBER, NAME, EMAIL, TITLE, COMPANY, LICENCETYPE, EVENTTYPES, DateStart, DateEnd, LICENCEHASH, ACCOUNT_ID, VERSION) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 $stmt = db()->prepare($query);
 $stmt->execute([$License['Number'], $License['Owner'], $License['Email'], $title, $License['Company'], $License['Type'], $License['EventType'],
          date_format($License['DateStart'], 'Y-m-d H:i:s'), date_format($License['DateEnd'], 'Y-m-d H:i:s'), $GLOBALS['CheckSum'], $_SESSION['user_id'],
-         implode(';', array_map( function ($v, $k) { return $k.'='.$v; }, $version['Apps'], array_keys($version['Apps']) ))]);
+         '' //implode(';', array_map( function ($v, $k) { return $k.'='.$v; }, $version['Apps'], array_keys($version['Apps']) ))]
+         ]);
 
 // Делать в зависимости от типа лицензии
 switch ($License['Type']) 

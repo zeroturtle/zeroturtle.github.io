@@ -3,6 +3,8 @@
 require_once __DIR__ . '/auth/config/database.php';
 require_once __DIR__ . '/auth/src/libs/connection.php';
 
+mb_internal_encoding('UTF-8');
+
 
 define('EVENTS_DIR', 'events/');
 $resource_name = ['logo', 'proto', 'divepool', 'team', 'detail', 'video'];

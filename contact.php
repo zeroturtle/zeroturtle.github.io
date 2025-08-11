@@ -8,9 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   require './PHPMailer/src/Exception.php';
   require './PHPMailer/src/PHPMailer.php';
   //require './PHPMailer/src/SMTP.php';
-  $mail = new PHPMailer(true);
 
+  mb_internal_encoding('UTF-8');
+
+  $mail = new PHPMailer(true);
   $err = '';
+
   if ( isset($_POST["name"]) && filter_var($_POST['name'], FILTER_SANITIZE_STRING) ) {
     $name = test_input($_POST['name']);
   } else {
