@@ -265,13 +265,13 @@ $License = makeLicence([$owner, $company, $email, $licenсeType, type_list($Type
 $Licensefile = 'media/'.$License['Number'].'.lic';
 file_put_contents( $Licensefile, implode(PHP_EOL, str_split(createLicenceFile($License),64)) );	 //делим частями шоб выглядело красиво :)
 
-// Сохраняем подписку в БД 
-//$version = parse_ini_file('version.info', true);
+// Сохраняем subscription в БД 
+$versionString = file_get_contents('version.info');
 $query = "INSERT INTO LICENCE(NUMBER, NAME, EMAIL, TITLE, COMPANY, LICENCETYPE, EVENTTYPES, DateStart, DateEnd, LICENCEHASH, ACCOUNT_ID, VERSION) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 $stmt = db()->prepare($query);
 $stmt->execute([$License['Number'], $License['Owner'], $License['Email'], $title, $License['Company'], $License['Type'], $License['EventType'],
          date_format($License['DateStart'], 'Y-m-d H:i:s'), date_format($License['DateEnd'], 'Y-m-d H:i:s'), $GLOBALS['CheckSum'], $_SESSION['user_id'],
-         '' //implode(';', array_map( function ($v, $k) { return $k.'='.$v; }, $version['Apps'], array_keys($version['Apps']) ))]
+         $versionStrindg
          ]);
 
 // Делать в зависимости от типа лицензии

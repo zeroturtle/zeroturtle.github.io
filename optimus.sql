@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Авг 08 2025 г., 08:02
+-- Время создания: Авг 11 2025 г., 14:54
 -- Версия сервера: 10.4.32-MariaDB
 -- Версия PHP: 8.2.12
 
@@ -41,14 +41,6 @@ CREATE TABLE `accounts` (
   `CHANGED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Дамп данных таблицы `accounts`
---
-
-INSERT INTO `accounts` (`ID`, `USERNAME`, `PASSWORD`, `EMAIL`, `NEWSLETTER`, `ACTIVE`, `ACTIVATION_CODE`, `ACTIVATION_EXPIRY`, `ACTIVATED_AT`, `REGISTERED`, `CHANGED`) VALUES
-(2, 'miketyson', '$2y$10$YuSfRs1ttXf7GVMyY9ZFHOzRDCvhFtosINJFZMSeyeIPeZYPnWRAm', 'miketyson@fuck.you', 0, 1, '', NULL, NULL, '2025-03-12 06:13:14', '2025-08-06 18:57:26'),
-(27, 'user3', '$2y$10$4GQ9Vb3nsuBa5j.n92PBJeMmRHqQ6ixWzWeVhDHSzBeb9sLzmF4p2', 'as3@as.one', 0, 1, '$2y$10$p6bLU0bINXdyIJ4VxN9/3O/1t.v/Ir14MRaOSbSZgEoJR7Dlg11PO', '2025-08-08 10:42:33', '2025-08-07 11:44:44', '2025-08-07 08:42:33', '2025-08-07 08:44:44'),
-(12, 'user1', '$2y$10$n4CBM73Cl4mM4k3DeSqDS.Vrx9Ia2lryrGSsEza66iNF7N3DXHCd2', 'as@as.one', 0, 1, '918fac740f43561bda6d2e8da307c23e', '2025-08-08 19:13:17', '2025-08-07 08:34:28', '2025-08-07 05:29:59', '2025-08-07 17:13:17');
 
 -- --------------------------------------------------------
 
@@ -58,15 +50,12 @@ INSERT INTO `accounts` (`ID`, `USERNAME`, `PASSWORD`, `EMAIL`, `NEWSLETTER`, `AC
 
 CREATE TABLE `competition` (
   `COMPETITION_ID` int(11) NOT NULL,
-  `DESCRIPTION` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`DESCRIPTION`)),
+  `DESCRIPTION` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `LICENCE_ID` int(11) NOT NULL,
   `VISIBLE` tinyint(1) DEFAULT 1,
   `CREATED` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Дамп данных таблицы `competition`
---
 
 -- --------------------------------------------------------
 
@@ -126,28 +115,8 @@ CREATE TABLE `licence` (
   `ACTIVE` tinyint(1) DEFAULT 1,
   `CREATED` timestamp NOT NULL DEFAULT current_timestamp(),
   `ACCOUNT_ID` int(11) NOT NULL,
-  `VERSION` varchar(255) NOT NULL
+  `VERSION` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`VERSION`))
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `licence`
---
-
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `maintenance`
---
-
-CREATE TABLE `maintenance` (
-  `LICENCE_ID` int(11) NOT NULL,
-  `VERSION` varchar(100) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Дамп данных таблицы `maintenance`
---
 
 
 -- --------------------------------------------------------
@@ -162,10 +131,6 @@ CREATE TABLE `resetpasswords` (
   `email` varchar(255) NOT NULL,
   `EXPDATE` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Дамп данных таблицы `resetpasswords`
---
 
 
 --
@@ -197,12 +162,6 @@ ALTER TABLE `licence`
   ADD PRIMARY KEY (`LICENCE_ID`);
 
 --
--- Индексы таблицы `maintenance`
---
-ALTER TABLE `maintenance`
-  ADD KEY `LICENCE_ID` (`LICENCE_ID`);
-
---
 -- Индексы таблицы `resetpasswords`
 --
 ALTER TABLE `resetpasswords`
@@ -228,7 +187,7 @@ ALTER TABLE `downloads`
 -- AUTO_INCREMENT для таблицы `licence`
 --
 ALTER TABLE `licence`
-  MODIFY `LICENCE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `LICENCE_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT для таблицы `resetpasswords`
