@@ -70,9 +70,9 @@ function GUID()
 function makeLicence($form) 
 {
 	$License = [];
-	$License['Owner']  = mb_substr(mb_convert_encoding($form[0], 'UTF-8', 'auto'), 0, 127*2);       // Владелец   
-	$License['Company'] = mb_substr(mb_convert_encoding($form[1], 'UTF-8', 'auto'), 0, 127*2);      // организация
-	$License['Email']  = mb_substr(mb_convert_encoding($form[2], 'UTF-8', 'auto'), 0, 127*2);       // email      
+	$License['Owner']  = mb_substr(mb_convert_encoding($form[0], 'UTF-8', 'auto'), 0, 256);       // Владелец   
+	$License['Company'] = mb_substr(mb_convert_encoding($form[1], 'UTF-8', 'auto'), 0, 256);      // организация
+	$License['Email']  = mb_substr(mb_convert_encoding($form[2], 'UTF-8', 'auto'), 0, 256);       // email      
 	$License['Type'] = $form[3];						// тип подписки Standard/Personal, определяет количество консолей
 	$License['EventType'] = convert2bin($form[4]);
 	// автоматически заполняемые поля
@@ -91,29 +91,30 @@ function createLicenceFile($License)
 	$LicenseStr = 
 		pack("C", $License['Version'])
 		.pack("CA*", strlen($License['Number']), $License['Number']) 
-		.pack("VA*", strlen($License['Email']), $License['Email'].random_bytes(127*2-3-strlen($License['Email']))) 
-		.pack("VA*", strlen($License['Company']), $License['Company'].random_bytes(127*2-3-strlen($License['Company']))) 
-		.pack("VA*", strlen($License['Owner']), $License['Owner'].random_bytes(127*2-3-strlen($License['Owner']))) 
+		.pack("VA*", strlen($License['Email']), $License['Email'].random_bytes(252-strlen($License['Email']))) 
+		.pack("VA*", strlen($License['Company']), $License['Company'].random_bytes(252-strlen($License['Company']))) 
+		.pack("VA*", strlen($License['Owner']), $License['Owner'].random_bytes(252-strlen($License['Owner']))) 
 		.pack("d", (date_timestamp_get($License['DateStart']) - strtotime("1899-12-30")) / 86400)   // delphi ведет отсчет DateTime от этой даты "1899-12-30" :)
 		.pack("d", (date_timestamp_get($License['DateEnd']) - strtotime("1899-12-30")) / 86400)
 		.pack("v", $License['EventType'])					// unsigned short
 		.pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))		// QtyLicence - Максимальное количество портов, 5 для Standard или 1 для Personal
 		.pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0))	// WebPublishing зависит от типа подписки
 		.pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0));	// boolean занимает 4 байта!
-/*
+
+/*              //тест адреса полей TLicenceW
 		$l = 0;
 		$l += strlen(pack("C", $License['Version']));
 		echo $l.'Number='; $l += strlen(pack("CA*", strlen($License['Number']), $License['Number']) ) ;
-		echo $l.'Email='; $l += strlen(pack("VA*", mstrlen($License['Email']), $License['Email'].random_bytes(127*2-3-strlen($License['Email']))) );
-		echo $l.'Company='; $l += strlen(pack("VA*", strlen($License['Company']), $License['Company'].random_bytes(127*2-3-strlen($License['Company']))) );
-		echo $l.'Owner='; $l += strlen(pack("VA*", strlen($License['Owner']), $License['Owner'].random_bytes(127*2-3-strlen($License['Owner']))) );
+		echo $l.'Email='; $l += strlen(pack("VA*", strlen($License['Email']), $License['Email'].random_bytes(252-strlen($License['Email']))) );
+		echo $l.'Company='; $l += strlen(pack("VA*", strlen($License['Company']), $License['Company'].random_bytes(252-strlen($License['Company']))) );
+		echo $l.'Owner='; $l += strlen(pack("VA*", strlen($License['Owner']), $License['Owner'].random_bytes(252-strlen($License['Owner']))) );
 		echo $l.'DateStart='; $l += strlen(pack("d", (date_timestamp_get($License['DateStart']) - strtotime("1899-12-30")) / 86400)) ;
 		echo $l.'DateEnd='; $l += strlen(pack("d", (date_timestamp_get($License['DateEnd']) - strtotime("1899-12-30")) / 86400) );
 		echo $l.'EventType='; $l += strlen(pack("v", $License['EventType']));
 		echo $l.'QtyLicence='; $l += strlen(pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))	);
 		echo $l.'WebPublishing='; $l += strlen(pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0)));
 		echo $l.'Active='; $l += strlen(pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0)));
-die;    */
+die;  */  
 	$GLOBALS['CheckSum'] = md5($LicenseStr); 
 	$LicenseStr.= pack("CA*", strlen($GLOBALS['CheckSum']), $GLOBALS['CheckSum']);		//добавить контрольную сумму лицензии
 
