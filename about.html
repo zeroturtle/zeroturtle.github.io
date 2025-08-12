@@ -4,7 +4,6 @@
 
   if ( !session_id() ) @session_start();
   $_SESSION['target_link'] = $_SERVER['PHP_SELF'];
-  inactivity_time();
 ?>
 
 <!DOCTYPE html>
@@ -66,10 +65,9 @@
      <h1 class="display-4 text-danger"><strong>Overview</strong></h1>
      <p class="h4" style="color: #065187;">All-in-one software suite developed for judging Formation Skydiving, Artistic Events, Canopy Formation and scoring for Wingsuit Flying Performance. </p>
      <div class="row">
-        <div class="col-sm-3"><h4 class="fw-bold"><i class="bi bi-compass"></i>&nbsp;Compatible with rules</h4><p></p></div>
-        <div class="col-sm-3"><h4 class="fw-bold"><i class="bi bi-feather"></i>&nbsp;Easy to use</h4><p></p></div>
-        <div class="col-sm-3"><h4 class="fw-bold"><i class="bi bi-coin"></i>&nbsp;Priced Right for You</h4><p></p></div>
-        <div class="col-sm-3"><h4 class="fw-bold"><i class="bi bi-cup-hot "></i>&nbsp;Customazible</h4><p></p></div>
+        <div class="col-sm-4"><h4 class="fw-bold"><i class="bi bi-compass"></i>&nbsp;Suitable for any size</h4><p>Weekend competitions or World championship, OPTIMUS can be scaled as you like.</p></div>
+        <div class="col-sm-4"><h4 class="fw-bold"><i class="bi bi-coin"></i>&nbsp;Priced Right for You</h4><p>Use online licence constructor to choose disciplines you need</p></div>
+        <div class="col-sm-4"><h4 class="fw-bold"><i class="bi bi-cup-hot "></i>&nbsp;Open to society</h4><p>Introduce your event to audience at <a href="index.html">ScoreBoard</a> </p></div>
      </div>
   </div>
 <section>
@@ -80,12 +78,12 @@
   <div class="row m-3">
      <h1 class="display-4"><strong>Smart way to <span class="text-danger">judge competition</span></strong></h1>
               <dl class="row">
-		<dt class="col-sm-3">Suitable for any size </dt>
-                <dd class="col-sm-9">Supports FS, AE, CF disciplines</dd>
                 <dt class="col-sm-3">Compatible with rules</dt>
                 <dd class="col-sm-9">There are more then 30 divepool images DFV, AXIS, USPA, ФПСУ, ФПСР и Axis; </dd>
                 <dt class="col-sm-3">Practice-anywhere</dt>
                 <dd class="col-sm-9">Intern can involved in competition. Judges certification and verification tools</dd>
+		<dt class="col-sm-3">Affordable </dt>
+                <dd class="col-sm-9">No specialised equipment, adaptable and portable.</dd>
               </dl>
      <div class="row">
        <div class="p-4 col-lg-4 col-md-4 col-sm-4 text-center"> <span style="font-size: 2rem; width:33%"><i class="bi bi-1-circle"></i></span><br> Upload video</div>
@@ -106,7 +104,7 @@
                 <dd class="col-sm-9">Web-embeddable results;  SSL secure</dd>
                 <dt class="col-sm-3">DZTV integration</dt>
                 <dd class="col-sm-9">Video replays; dynamic playlists</dd>
-                <dt class="col-sm-3">Event's info</dt>
+                <dt class="col-sm-3">Customizable event info</dt>
                 <dd class="col-sm-9">One-pager for publish event related info; *Cloud Integration</dd>
               </dl>
     </div>
@@ -123,10 +121,10 @@
     <div class="col-sm-8">
               <h1 class="display-4"><strong>Subscribe to get <span class="text-danger">more benefits</span></strong></h1>
               <dl class="row">
-                <dt class="col-sm-3">Personal licence</dt>
+                <dt class="col-sm-3">Licensed per named user</dt>
                 <dd class="col-sm-9">Free download fully functional application, No advertising nor nag-window</dd>
                 <dt class="col-sm-3">Pay-as-you-go licencing</dt> 
-                <dd class="col-sm-9">Avoid unnecessary expenses when you buy annual license accourding to your events list, use online licence constructor to choose disciplines you need;   <span class="text-danger">Free for individual use</span></dd>
+                <dd class="col-sm-9">Avoid unnecessary expenses when you buy annual license accourding to your events list;   <span class="text-danger">Free for individual use</span></dd>
                 <dt class="col-sm-3">Unlimited e-mail support</dt>
                 <dd class="col-sm-9">Online check for new version availability; Bug fixes and Quality improvements; Free updates during subscription period.</dd>
                 <dt class="col-sm-3">Access to preview releases</dt>
@@ -136,7 +134,7 @@
     <div class="col-sm-4 text-center">
       <img src="images/OPTIMUS3.svg" style="max-width: 100%;" alt="subscibe">
     </div>
-    <div class="p-2 text-center"> <a href="licence.html" class="btn btn-lg btn-primary">&nbsp;&nbsp;Subscribe &nbsp;&nbsp;</a> </div>
+    <div class="p-2 text-center"> <a href="licence.html" class="btn btn-lg btn-primary text-nowrap btn-block">&nbsp;&nbsp; Subscribe &nbsp;&nbsp;</a> </div>
   </div>
 </section>
 
@@ -193,10 +191,10 @@
 <section id="download" class="my-5" style="background-image: radial-gradient(ellipse, Yellow, Orange);">
   <div class="m-3">
     <div class="row align-items-center m-3">
-      <div class="col m-5">
+      <div class="col m-3">
         <h2>Haven't you the latest version <b>OPTIMUS </b> yet?</h2>
         <p></p>
-        <div class="text-center"><a href="download.html" class="btn btn-lg btn-primary">Download Now</a></div>
+        <div class="text-center"><a href="download.html" class="btn btn-lg btn-primary text-nowrap">Download Now</a></div>
         <p>&nbsp;</p>
         <p>Have a questions? Please feel free to reach us directly by <a href="mailto:support@optimus.dp.ua">email</a> or submit your question via <a href="contact.html">Web form</a>.</p>
       </div>
@@ -211,7 +209,6 @@
 
 <section id="faq" class="border my-5">
 <div class="m-3">
-  <p class="h6">Answers to Your Most Common Questions</p>
   <h2 class="display-4"><strong>Frequently Asked <span class="text-danger">Questions</span></strong></h2>
   <div class="accordion accordion-flush" id="accordionFlushExample">
 
