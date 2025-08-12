@@ -2,7 +2,9 @@
 // оформление подписки
 // ВАЖНО! Хранить в секрете код, т.к. он расскрывает формат лицензии
 
-if ( !session_id() ) @session_start();
+require __DIR__ . '/auth/src/bootstrap.php';
+require_login();
+
 
 require_once __DIR__ . '/auth/config/database.php';
 require_once __DIR__ . '/auth/src/libs/connection.php';
@@ -201,7 +203,7 @@ function test_input($data)
 }
 
 //вспомогательная функция 
-function filter(&$value) 
+function filterF(&$value) 
 {
   $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
@@ -248,7 +250,7 @@ $T = explode(',',(isset($_POST['types']) ? $_POST['types'] : ''));
 if (count($T)>0) {
   // для Free - все дисциплины, для Standard берем список из $_POST
   $TypeList = ($licenсeType==0) ? ['FS','SF','AE','CF','WS'] : $T;
-  array_walk_recursive($TypeList, "filter");
+  array_walk_recursive($TypeList, "filterF");
 } else {
   $err.="error disciplines";
 }
