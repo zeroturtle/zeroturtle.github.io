@@ -27,6 +27,7 @@ if (is_post_request()) {
     $user = find_user($inputs['validation_code']);
 
     if ($user && reset_password($user['id'], $inputs['password'])) {
+        
 
         redirect_with_message(
             'login.php', 

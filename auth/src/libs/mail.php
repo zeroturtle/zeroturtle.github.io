@@ -11,15 +11,17 @@ require './PHPMailer/src/PHPMailer.php';
 require './PHPMailer/src/SMTP.php';
 
 
-function get_message_text(array $user, string $activation_link): string
+
+function get_message_text(string $template_name, array $data): string
 {
     $smarty = new Smarty;
     $smarty->debugging = false;
     $smarty->caching = false;
     $smarty->cache_lifetime = 300;
-    $smarty->assign("USERNAME", $user['username']);
-    $smarty->assign("URL", $activation_link);
-    return $smarty->fetch('register.tpl')
+    $smarty->assign("USERNAME", $data['username']);
+    $smarty->assign("URL", $data['activation_link']);
+
+    return $smarty->fetch($template_name);
 }
 
 function send_confirm_message(int $uuid, array $fields): bool

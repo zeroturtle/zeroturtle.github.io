@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-critters-container data-bs-theme="{$THEME}">
   <head>
-    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" type="image/png" href="../../images/favicon-96x96.png" sizes="96x96">

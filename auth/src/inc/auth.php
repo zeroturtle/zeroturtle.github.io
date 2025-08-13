@@ -129,21 +129,6 @@ function generate_activation_code(): string
     return bin2hex(random_bytes(16));
 }
 
-/*
-// пока без smarty
-function get_message_text(string $template_name, array $data): string
-{
-    $smarty = new Smarty;
-    $smarty->debugging = false;
-    $smarty->caching = false;
-    $smarty->cache_lifetime = 300;
-    $smarty->assign("USERNAME", $data['username']);
-    $smarty->assign("URL", $data['activation_link']);
-
-    return $smarty->fetch($template_name);
-}
-*/
-
 function send_activation_email(array $data, string $activation_code): void
 {
     // create the activation link
