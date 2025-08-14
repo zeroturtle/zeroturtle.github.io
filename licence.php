@@ -100,7 +100,7 @@ function createLicenceFile($License)
 		.pack("d", (date_timestamp_get($License['DateEnd']) - strtotime("1899-12-30")) / 86400)
 		.pack("v", $License['EventType'])					// unsigned short
 		.pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))		// QtyLicence - Максимальное количество портов, 5 для Standard или 1 для Personal
-		.pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0))	// WebPublishing зависит от типа подписки
+		.pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0))	// WebPublishing доступен только для Site-подписки
 		.pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0));	// boolean занимает 4 байта!
 
 /*              //тест адреса полей TLicenceW
