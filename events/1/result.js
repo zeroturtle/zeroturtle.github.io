@@ -47,7 +47,7 @@ function loadEvent(event) {
 					const vw = window.innerWidth && document.documentElement.clientWidth ? 
 						Math.min(window.innerWidth, document.documentElement.clientWidth) : 
 						window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-					let newX = (rect.right < vw) ? event.clientX : (( rect.width > vw) ? 0 : vw - rect.width)
+					let newX = (rect.right < vw) ? rect.left : (( rect.width > vw) ? 0 : vw - rect.width)
 					span.style.left = newX + 'px';
 				}
 			};
