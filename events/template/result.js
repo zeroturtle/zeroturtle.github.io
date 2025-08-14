@@ -38,13 +38,11 @@ function loadEvent(event) {
 			});
 			c.onmouseover = function(event) {
 				if (event.target.querySelector('span')) {
-					event.target.querySelector('span').style.display = 'block'
-					/* //1. попытка двигать блок за курсором
-					let span = event.target.querySelector('span')
-					let rect = span.getBoundingClientRect();
-					if (rect.right > window.innerWidth) {
-						span.style.setProperty("left", `${(span.clientX < window.innerWidth) ? 0 : window.innerWidth - rect.width}px`)
-					}*/
+					const span = event.target.querySelector('span')
+					span.style.display = 'block'
+					const rect = span.getBoundingClientRect();
+					let newX = (rect.right < window.innerWidth) ? event.clientX : (( rect.width > window.innerWidth) ? 0 : window.innerWidth - rect.width)
+					span.style.left = newX + 'px';
 				}
 			};
 			c.onmouseout = function(event) {
