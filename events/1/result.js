@@ -43,14 +43,11 @@ function loadEvent(event) {
 					const span = event.target.querySelector('span')
 					span.style.display = 'block'
 					const rect = span.getBoundingClientRect();
-/*// Getting the available viewport width
+					// Getting the available viewport width
 					const vw = window.innerWidth && document.documentElement.clientWidth ? 
-Math.min(window.innerWidth, document.documentElement.clientWidth) : 
-window.innerWidth || 
-document.documentElement.clientWidth || 
-document.getElementsByTagName('body')[0].clientWidth;
-					let newX = (rect.right < vw) ? event.clientX : (( rect.width > vw) ? 0 : vw - rect.width)*/
-					let newX = (rect.right < window.outerWidth) ? event.clientX : (( rect.width > window.outerWidth) ? 0 : window.outerWidth - rect.width)
+						Math.min(window.innerWidth, document.documentElement.clientWidth) : 
+						window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+					let newX = (rect.right < vw) ? event.clientX : (( rect.width > vw) ? 0 : vw - rect.width)
 					span.style.left = newX + 'px';
 				}
 			};
