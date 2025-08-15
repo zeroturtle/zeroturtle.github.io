@@ -9,25 +9,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-.background-image {
-            position: relative;
-            color: white;
-            z-index: 1; 
-}
-.background-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('images/code.png');
-            opacity: 0.2; /* Adjust opacity level */
-            z-index: -1; /* Ensure background image is behind the text */
-        }
-</style>
+
 <script>
+/*here helpful func to work with cookie*/
 function getCookie(name, json=false) {
   if (!name) {
     return undefined;
@@ -103,8 +87,9 @@ function deleteCookie(name) {
   })
 }
 </script>
+
 <script>
-  var page = 0
+  var page = 0  //pagination endless/infinity list
   var isLoading = false
 
   var eventsDir = './events/'
@@ -213,7 +198,6 @@ function deleteCookie(name) {
     </header>
 
 
-<!-- discipline filter -->
 <nav id="navigation" class="navbar navbar-dark navbar-expand-lg bg-dark">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -221,18 +205,18 @@ function deleteCookie(name) {
     </button>
     <div class="collapse navbar-collapse w-100" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="d-flex">
+        <li class="nav-item">
           <a title="сбросить фильтры" class="nav-link link-warning text-truncate" aria-current="page" id="ALL" href="#" onclick="clearCookie();">Выберите сезон и тип соревнований для отображения.</a>
         </li>
-        <li class="d-flex">
-          <select class="form-select w-auto" title="Choose a season" id="Year" onchange="getComboA(this);">
+        <li class="nav-item m-1">
+          <select class="form-select " title="Choose a season" id="Year" onchange="getComboA(this);">
             <option value="">All seasons</option>
             <option value="2025">2025</option>
             <option value="2024">2024</option>
           </select>
         </li>
-        <li class="d-flex">
-          <select class="form-select w-auto" title="Select a disciplines" id="Type" onchange="getComboA(this);">
+        <li class="nav-item m-1">
+          <select class="form-select " title="Select a disciplines" id="Type" onchange="getComboA(this);">
             <option value="">All disciplines</option>
             <option value="FS">Formation Skydiving</option>
             <!-- <option value="SF">Speed Formation Skydiving</option> -->
@@ -257,15 +241,14 @@ function deleteCookie(name) {
   </div>
 </nav>
 
-    <!-- events list -->
-  <div class="container-fluid background-image" style="margin-left:auto; margin-right:auto;">
-
+<!-- events list -->
+<div class="container-fluid">
         <!-- template для построения списка event --> 
         <template  id="event_template">
           <tr class="d-flex flex-row">
-            <td class="align-top"><img class="img-fluid mx-2" id="event_logo1" src="" alt="Logo1" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="align-top d-none d-sm-block"><img class="img-fluid mx-2" id="event_logo2" src="" alt="Logo2" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-75">
+            <td class=""><img class="img-fluid mx-2" id="event_logo1" src="" alt="Logo1" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="d-none d-sm-block"><img class="img-fluid mx-2" id="event_logo2" src="" alt="Logo2" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="w-100">
               <div class="row">
                 <div class="col d-block text-uppercase">
                   <a class="text-decoration-none" id="event_link" href="">
@@ -284,11 +267,12 @@ function deleteCookie(name) {
         </template>
         <template  id="rank_template">
                   <span class="border-start border-2 px-2" style="display:inline-block;float:right;">
-                    <a class="text-decoration-none" id="rank_link" href=""></a> 
+                     <a class="text-decoration-none" id="rank_link" href=""></a> 
                   </span>
         </template>
 
     <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
       <style scoped>
         table td:nth-child(-n+2) {
           width: 100px;
@@ -296,14 +280,12 @@ function deleteCookie(name) {
           text-align: center;
         }
       </style>
-      <table class="table table-striped table-hover align-middle">
         <tbody id="EventsList">
         </tbody>
       </table>
     </div>
-
-  </div>
-  <!-- events list -->
+</div>
+<!-- events list -->
 
 
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
