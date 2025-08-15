@@ -24,33 +24,6 @@ require 'libs/Smarty.class.php';
 mb_internal_encoding('UTF-8');
 
 
-///////////////////////////////////
-// ОПИСАНИЕ ФОРМАТА ПОЛЕЙ ЛИЦЕНЗИИ
-///////////////////////////////////
-/*
-  TLicenceW = packed record
-    Version: Byte;                  // версия формата данных, reserved
-    Number: String[36];             // внутренний номер подписки, GUID всегда содержит только A..Z0..9-
-    Email,                          // email для связи
-    Company,                        // название организации
-    Owner: TByteA;                  // Владелец  FirstName + LastName  array[0..127*SizeOf(Char)] of Byte;
-    DateStart,                      // дата выдачи и конец лицензии
-    DateEnd: TDateTime;             
-    EventType: TEventSet;           // список разрешенных дисциплин, каждый бит соответствует типу
-    QtyLicence: Byte;               // Максимальное количество портов, 5 для Standard или 1 для Personal
-    WebPublishing: BOOL;            // разрешена публикация на Web-сайт результатов (только для Standard подписки)
-    Active: BOOL;                   // признак активной лицензии
-  end;
-
-
-  Формат файла лицензии 
-  TLicenceFile = packed record
-    Licence: TLicence;
-    CheckSum: string[32];	// md5-hash лицензии (32-character hexadecimal number)
-    SecureKey: Cardinal;	// unsigned integer (4 байта)
-  end;
-*/
-
 // array в число. Каждый бит соответствует типу дисциплины
 function convert2bin($array) {				// array список дисциплин 
 	$T = 0;
@@ -102,8 +75,8 @@ function createLicenceFile($License)
 		.pack("C", (boolval($License['Type'])=='Standard' ? 5 : 1))		// QtyLicence - Максимальное количество портов, 5 для Standard или 1 для Personal
 		.pack("V", (boolval($License['Type'])=='Standard' ? 0xFFFFFFFF : 0))	// WebPublishing доступен только для Site-подписки
 		.pack("V", (boolval($License['Active'])==true ? 0xFFFFFFFF : 0));	// boolean занимает 4 байта!
-
-/*              //тест адреса полей TLicenceW
+/*
+              //тест адреса полей TLicenceW
 		$l = 0;
 		$l += strlen(pack("C", $License['Version']));
 		echo $l.'Number='; $l += strlen(pack("CA*", strlen($License['Number']), $License['Number']) ) ;
@@ -208,6 +181,14 @@ function filterF(&$value)
   $value = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
+//callback-скрипт для банка 
+function PostPurchase()
+{
+  activateLicanse($License["Number"]);
+  //sendLicense($Licensefile, $License);
+  header('location: thanks.html');
+}
+
 
 ///////////////////////////////////
 // проверяем входные данные
@@ -281,15 +262,11 @@ $stmt->execute([$License['Number'], $License['Owner'], $License['Email'], $title
 switch ($License['Type']) 
 {
   case 0: //single
-          activateLicanse($License["Number"]);  //активируем сразу
-          //sendLicense($Licensefile, $License);
-          header('location: thanks.html'); // редирект на index.php после выполнения скрипта
+          PostPurchase(); //активируем сразу
           break;
   case 1:  //site
-          //отправить на оплату в банк
-          //для банка создать callback-скрипт, где вызвать
-          //activateLicanse($License["Number"]); sendLicense($Licensefile, $License);
-          header('location: thanks.html'); // редирект на index.php после выполнения скрипта
+          //вызвать скрипт платежной системы банка
+          //после оплаты банк вызывает PostPurchase() для завершения
           break;
   default ;
 }

@@ -4,7 +4,7 @@
 
   if ( !session_id() ) @session_start();
   $_SESSION['target_link'] = $_SERVER['PHP_SELF'];
-  inactivity_time();
+  $_SESSION['last_timestamp'] = time();
 ?>
 
 <!DOCTYPE html>

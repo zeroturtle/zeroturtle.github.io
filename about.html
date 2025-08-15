@@ -4,6 +4,7 @@
 
   if ( !session_id() ) @session_start();
   $_SESSION['target_link'] = $_SERVER['PHP_SELF'];
+  $_SESSION['last_timestamp'] = time();
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +77,7 @@
 <!-- раздел рассказывает как полезна система (оценка выступлений, публикация результатов) -->
 <section id="" class="d-flex align-items-center bg-secondary-subtle" style="min-height:500px;">
   <div class="row m-3">
-     <h1 class="display-4"><strong>Smart way to <span class="text-danger">judge competition</span></strong></h1>
+     <h1 class="display-4"><strong>Level up your <span class="text-danger">judge workflow </span></strong></h1>
               <dl class="row">
                 <dt class="col-sm-3">Compatible with rules</dt>
                 <dd class="col-sm-9">There are more then 30 divepool images DFV, AXIS, USPA, ФПСУ, ФПСР и Axis; </dd>
