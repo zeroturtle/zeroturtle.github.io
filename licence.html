@@ -1,12 +1,15 @@
 <?php
-  require __DIR__ . '/auth/src/bootstrap.php';
+  require_once __DIR__ . '/auth/src/libs/helpers.php';
+  require_once __DIR__ . '/auth/src/inc/auth.php';
+
+  if ( !session_id() ) @session_start();
   inactivity_time();
 ?>
 
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
   <head>
-    <title>OPTIMUS License Page</title>
+    <title>OPTIMUS Licensing Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -213,7 +216,7 @@ indoor
       </p>
       <p class="text-center p-2">
         <br>
-        <b>Looking to upgrade? <a href="contact.html">Contact Our team</a></b> to move to a more flexible license type.
+        <strong>Looking to upgrade?</strong> Contact <a href="contact.html" class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Our team</a> to move to a more flexible license type.
       </p>
     </div>
   </div>
@@ -224,7 +227,7 @@ indoor
 
 <section id="download" class="my-5 bg-warning">
   <p class="text-center p-2">
-    If you don't have OPTIMUS yet, visit a <a href="download.html" class="">download page</a>.
+    If you don't have OPTIMUS yet, visit a <a href="download.html" class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">download page</a>.
   </p>
   <p>&nbsp;</p>
 </section>

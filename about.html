@@ -3,14 +3,13 @@
   require_once __DIR__ . '/auth/src/inc/auth.php';
 
   if ( !session_id() ) @session_start();
-  $_SESSION['target_link'] = $_SERVER['PHP_SELF'];
-  $_SESSION['last_timestamp'] = time();
+  inactivity_time();
 ?>
 
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
   <head>
-    <title>OPTIMUS About Page</title>
+    <title>About OPTIMUS </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

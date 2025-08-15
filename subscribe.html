@@ -1,10 +1,9 @@
 <?php
-if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != $_SERVER['HTTP_ORIGIN'].'/licence.html')  header("Location: licence.html");
-
+  if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != $_SERVER['HTTP_ORIGIN'].'/licence.html')  header("Location: licence.html");
   require __DIR__ . '/auth/src/bootstrap.php';
 
-  require_login();
   inactivity_time();
+  require_login();
 ?>
 
 <!DOCTYPE html>
@@ -45,62 +44,62 @@ if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != $_SERVER['HT
     </header>
 
 
-<section id="constructor">
+<section id="constructor" class="p-3">
   <h2 class="display-3">Licence <span class="text-danger">Details</span></h2>
-<form action="licence.php" method="post">
-  <div style="background:#CCC">                                 
-    <div>Вы выбрали: <b><?= $_POST['licence']; ?></b></div>
-    <div>Дисциплины: <b><?= implode(', ', $_POST['types']); ?> <!--Formation Skydiving | Speed Formation | Artistic Events | Canopy Formation | Wingsuit Flying Perfomance--></b></div>
-    <div>Price: <b>&euro;<?php require("price.php"); ?></b></div>
-  </div>
-  <fieldset>
-    <div class="d-grid gap-3">
-      <input type="hidden" name="licence" value="<?php echo $_POST['licence']; ?>" required>
-      <input type="hidden" name="types" value="<?php echo implode(',',$_POST['types']); ?>" required>
-      <div class="row">
-        <div class="col-sm-6">
-          <label for="first_name" class="form-label fw-bold">First Name*: </label>
-          <input type="text" class="form-control" id="first_name" name="first_name" required placeholder="First Name">
-        </div>
-        <div class="col-sm-6">
-          <label for="last_name" class="form-label fw-bold">Last Name*: </label>
-          <input type="text" class="form-control" id="last_name" name="last_name" required placeholder="Last Name">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label for="email" class="form-label fw-bold">Email*: </label>
-          <input type="email" class="form-control" id="email" name="email" required placeholder="Email address">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6">
-          <label for="company" class="form-label fw-bold">Company: </label>
-          <input type="text" class="form-control" id="company" name="company" placeholder="Company Name">
-        </div>
-        <div class="col-sm-6">
-          <label for="jobtitle" class="form-label fw-bold">Job Title: </label>
-          <input type="text" class="form-control" id="jobtitle" name="jobtitle" placeholder="Type your current job title">
-        </div>
-      </div>
-      <div class="row">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="" value="" required>
-              <label class="form-check-label" for="inlineCheckbox1">By filling and submitting this form you understand and agree that the use of OPTIMUS' website is subject to the General Website Terms of Use. I confirm that I will be the only authorized user of the license.</label>
-            </div>
-      </div>
+  <form action="licence.php" method="post">
+    <div style="background:#CCC">                                 
+      <div>Вы выбрали: <b><?= $_POST['licence']; ?></b></div>
+      <div>Дисциплины: <b><?= implode(', ', $_POST['types']); ?> <!--Formation Skydiving | Speed Formation | Artistic Events | Canopy Formation | Wingsuit Flying Perfomance--></b></div>
+      <div>Price: <b>&euro;<?php require("price.php"); ?></b></div>
     </div>
-  </fieldset>
-  <div class="p-3"><small>
-    <p>Online orders are processed automatically 24/7.</p>
-    <p><b>WARNING!</b> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.<br>
-      Once you have submitted your request, you will recieve a detailed product licensing information and OPTIMUS licence file in attachment.</p>
-    <p><b>WARNING!</b> Your <b>payment is <span class="text-danger">Non-transferrable.</span></b>, and your service will continue until the end of your contracted term. </p>
-    </small>
-  </div>
-  <p class="text-warning"><?php echo (!empty($err) ? $err : ''); ?></p>
-  <button type="submit" class="btn btn-lg btn-primary">Check Out</button>
-</form>
+    <fieldset>
+      <div class="d-grid gap-3">
+        <input type="hidden" name="licence" value="<?php echo $_POST['licence']; ?>" required>
+        <input type="hidden" name="types" value="<?php echo implode(',',$_POST['types']); ?>" required>
+        <div class="row">
+          <div class="col-sm-6">
+            <label for="first_name" class="form-label fw-bold">First Name*: </label>
+            <input type="text" class="form-control" id="first_name" name="first_name" required placeholder="First Name">
+          </div>
+          <div class="col-sm-6">
+            <label for="last_name" class="form-label fw-bold">Last Name*: </label>
+            <input type="text" class="form-control" id="last_name" name="last_name" required placeholder="Last Name">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="email" class="form-label fw-bold">Email*: </label>
+            <input type="email" class="form-control" id="email" name="email" required placeholder="Email address">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <label for="company" class="form-label fw-bold">Company: </label>
+            <input type="text" class="form-control" id="company" name="company" placeholder="Company Name">
+          </div>
+          <div class="col-sm-6">
+            <label for="jobtitle" class="form-label fw-bold">Job Title: </label>
+            <input type="text" class="form-control" id="jobtitle" name="jobtitle" placeholder="Type your current job title">
+          </div>
+        </div>
+        <div class="row">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="" value="" required>
+                <label class="form-check-label" for="inlineCheckbox1">By filling and submitting this form you understand and agree that the use of OPTIMUS' website is subject to the General Website Terms of Use. I confirm that I will be the only authorized user of the license.</label>
+              </div>
+        </div>
+      </div>
+    </fieldset>
+    <div class="p-3"><small>
+      <p>Online orders are processed automatically 24/7.</p>
+      <p><b>WARNING!</b> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.<br>
+        Once you have submitted your request, you will recieve a detailed product licensing information and OPTIMUS licence file in attachment.</p>
+      <p><b>WARNING!</b> Your <b>payment is <span class="text-danger">Non-transferrable.</span></b>, and your service will continue until the end of your contracted term. </p>
+      </small>
+    </div>
+    <p class="text-warning"><?php echo (!empty($err) ? $err : ''); ?></p>
+    <button type="submit" class="btn btn-lg btn-primary">Check Out</button>
+  </form>
 </section>
 
 

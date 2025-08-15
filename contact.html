@@ -3,8 +3,7 @@
   require_once __DIR__ . '/auth/src/inc/auth.php';
 
   if ( !session_id() ) @session_start();
-  $_SESSION['target_link'] = $_SERVER['PHP_SELF'];
-  $_SESSION['last_timestamp'] = time();
+  inactivity_time();
 ?>
 
 <!DOCTYPE html>

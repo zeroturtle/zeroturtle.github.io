@@ -35,7 +35,7 @@ if (is_post_request()) {
     }
 
     // login successfully
-    redirect_to($_SESSION['target_link']);
+    redirect_to( isset($_SESSION['target_link']) ? $_SESSION['target_link'] : $_SERVER['PHP_SELF'] );
 
 } else if (is_get_request()) {
     [$errors, $inputs] = session_flash('errors', 'inputs');

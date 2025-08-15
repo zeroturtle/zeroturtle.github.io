@@ -1,6 +1,8 @@
 <?php
-  require __DIR__ . '/auth/src/bootstrap.php';
-  require_login();
+  require_once __DIR__ . '/auth/src/libs/helpers.php';
+  require_once __DIR__ . '/auth/src/inc/auth.php';
+
+  if ( !session_id() ) @session_start();
   inactivity_time();
 ?>
 
