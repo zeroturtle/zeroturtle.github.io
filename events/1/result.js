@@ -40,15 +40,12 @@ function loadEvent(event) {
 			});
 			c.onmouseover = function(event) {
 				if (event.target.querySelector('span')) {
-					const span = event.target.querySelector('span')
-					span.style.display = 'block'
-					const rect = span.getBoundingClientRect();
-					// Getting the available viewport width
-					const vw = window.innerWidth && document.documentElement.clientWidth ? 
-						Math.min(window.innerWidth, document.documentElement.clientWidth) : 
-						window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-					let newX = (rect.right < vw) ? event.clientX : (( rect.width > vw) ? 0 : vw - rect.width)
-					span.style.left = newX + 'px';
+					event.target.querySelector('span').style.display = 'block'
+					/*let span = event.target.querySelector('span')
+					let rect = span.getBoundingClientRect();
+					if (rect.right > window.innerWidth) {
+						span.style.setProperty("left", `${(span.clientX < window.innerWidth) ? 0 : window.innerWidth - rect.width}px`)
+					}*/
 				}
 			};
 			c.onmouseout = function(event) {
@@ -58,11 +55,12 @@ function loadEvent(event) {
 			c.append(span);
 		};
 	// draw
+
 		// convert country name to flag SVG-image
 		for (const cell of resultTable.querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
 				let img = doc.createElement("img");
-				img.setAttribute("src", `../../flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
+				img.setAttribute("src", `../flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
 				img.setAttribute("alt", `${cell.innerText}`)
 				img.style.width = "36px";
 				cell.innerHTML = '';
@@ -70,6 +68,7 @@ function loadEvent(event) {
 			}
 		}
 		scoreSummary.append(resultTable)
+		scoreSummary.insertAdjacentHTML('beforebegin', `<link type="text/css" rel="stylesheet" href="${baseURL}proto.css">`);
 	})
 }
 
@@ -136,7 +135,11 @@ function windowOnClick(event) {
 	}
 }
 
-window.addEventListener("load", loadEvent)
+//window.addEventListener("load", loadEvent)
+window.addEventListener("load", (event) => {
+	loadEvent(event);
+//	for(a of document.getElementsByClassName('nav-link')) a.addEventListener('click', loadEvent)
+})
 window.addEventListener("click", windowOnClick)
-document.getElementById('scoreSummary').insertAdjacentHTML('afterend', '<small>Powered by OPTIMUS Artemis</small>')
+document.getElementById('scoreSummary').insertAdjacentText('afterend', 'Powered by OPTIMUS Prometheus')
 
