@@ -83,7 +83,7 @@ function deleteCookie(name) {
   setCookie(name, null, {
     expires: new Date(),
     path: '/',
-    samesite: 'strict'
+    SameSite: 'strict'
   })
 }
 </script>
@@ -108,17 +108,16 @@ function deleteCookie(name) {
   /* thanks to 
 	https://www.toolify.ai/gpts/how-to-implement-infinite-scroll-pagination-with-php-mysql-jquery-366007
 	https://sky.pro/media/kak-sozdat-sajt-s-dinamicheskoj-zagruzkoj-kontenta-pri-prokrutke/#title2
-*/	
+  */	
 
   function loadDataContent() {
     if (isLoading) { return; }
     isLoading = true;
     // получаем из сервера json со списком event
-//    fetch('http://127.0.0.1/index.php?page='+page) //здесь вызвать index.php, возвращает json массив event.
-    fetch('https://zeroturtle.github.io/events.json') // получаем массив event из json-файла.
+    fetch('http://127.0.0.1/index.php?page='+page) //здесь вызвать index.php, возвращает json массив event.
+//    fetch('https://zeroturtle.github.io/events.json') // получаем массив event из json-файла.
       .then(response => response.json())
       .then(json => {
-
          const template = document.getElementById('event_template');
          const rank_tmpl = document.getElementById("rank_template")
          for (item in json) {
@@ -245,12 +244,12 @@ function deleteCookie(name) {
 <div class="container-fluid">
         <!-- template для построения списка event --> 
         <template  id="event_template">
-          <tr class="d-flex flex-row">
-            <td class=""><img class="img-fluid mx-2" id="event_logo1" src="" alt="Logo1" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="d-none d-sm-block"><img class="img-fluid mx-2" id="event_logo2" src="" alt="Logo2" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></td>
-            <td class="w-100">
-              <div class="row">
-                <div class="col d-block text-uppercase">
+          <tr class="">
+            <td class="w-auto align-top"><img class="mx-2" id="event_logo1" src="" alt="Logo1" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></td>
+            <td class="w-auto align-top"><div class="d-none d-sm-block"><img class=" mx-2" id="event_logo2" src="" alt="Logo2" onerror="imageError(this)" style="max-height: 80px; max-width: 80px;"></div></td>
+            <td class="w-75">
+              <div class="">
+                <div class="text-uppercase">
                   <a class="text-decoration-none" id="event_link" href="">
                   <span class="fw-bold" id="event_name"></span>
                   <br>
@@ -259,20 +258,20 @@ function deleteCookie(name) {
                   <span class="text-secondary" id="event_location"></span>
                   </a>
                 </div>
-                <div class="col d-none d-md-block" id="event_ranks">
+                <div class="d-none d-lg-block" id="event_ranks">
                 </div>
               </div>
             </td>
           </tr>
         </template>
         <template  id="rank_template">
-                  <span class="border-start border-2 px-2" style="display:inline-block;float:right;">
-                     <a class="text-decoration-none" id="rank_link" href=""></a> 
+                  <span class="border-start border-2 px-2" style="float:right;">
+                     <a class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover" id="rank_link" href=""></a> 
                   </span>
         </template>
 
     <div class="table-responsive">
-      <table class="table table-striped table-hover align-middle">
+      <table class="table table-striped table-hover">
       <style scoped>
         table td:nth-child(-n+2) {
           width: 100px;
