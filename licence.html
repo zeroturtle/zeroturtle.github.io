@@ -19,12 +19,6 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script>
-       function toggleBuyNow() {
-         const div = document.getElementById('disciplines')
-         const checkboxes = div.querySelectorAll('input[type="checkbox"]')
-         return !Array.from(checkboxes).some((cb) => cb.checked == true)
-       }
-
        function Single() {
          //найти все checkbox в блоке disciplines
          const div = document.getElementById('disciplines')
@@ -44,7 +38,6 @@
          const div = document.getElementById('disciplines')
          const checkboxes = div.querySelectorAll('input[type="checkbox"]');
          checkboxes.forEach( checkbox => {
-           //checkbox.checked = !(checkbox.checked)
            checkbox.checked = false
            checkbox.disabled = false
          })
@@ -56,6 +49,9 @@
        function submitData(e) {
          e.preventDefault();
          const form = document.forms["myForm"]
+         //запрос через GET, непонятно как взять параметры в subscribe?
+         //let params = new URLSearchParams(new FormData(form)).toString();
+         //fetch(`http://127.0.0.1/price.php?${params}`)
          const formData = new FormData(form)
          fetch('http://127.0.0.1/price.php', {
              method: "POST",
@@ -69,7 +65,11 @@
             // Handle error
            console.log("error ", error);
          });
-         document.getElementById('buyNow').disabled = toggleBuyNow()
+
+         // отключить кнопку если нег галок
+         const div = document.getElementById('disciplines')
+         const checkboxes = div.querySelectorAll('input[type="checkbox"]')
+         document.getElementById('buyNow').disabled = !(Array.from(checkboxes).some((cb) => cb.checked == true))
        }
 
         window.addEventListener("load", (event) => {
@@ -105,121 +105,122 @@
 
 
 <section id="price">
-<form id="myForm" action="subscribe.html" method="post">
   <h2 class="display-3">Pricing options</h2>
-  <div class="row">
-    <div class="col-sm-6 d-grid gap-3">
-      <input type="hidden" name="years" value=1>
-      <!--div>
-        <h5 class="text-uppercase">Extend support & upgrade period</h5>
-          <div>
-            <input type="radio" class="" name="years" id="year1" value="1">
-            <label class="" for="year1">1 year</label>
-            <input type="radio" class="" name="years" id="year2" value="2">
-            <label class="" for="year2">2 years</label>
-            <input type="radio" class="" name="years" id="year3" value="3">
-            <label class="" for="year3">3 years</label>
-          </div>
-        <p>One year support and upgrades is included by default. You can extend this period for up to three years with a significant discount.</p>
-      </div-->
-
-      <div>  
-        <h5 class="text-uppercase">Choose the product subscription that best suit your needs</h5> 
-          <div>
-            <input type="radio" class="btn-check" name="licence" id="option2" value="1">
-            <label class="btn btn-outline-primary " for="option2"onclick="Site();">Site</label>
-            <input type="radio" class="btn-check" name="licence" id="option1" value="0" checked>
-            <label class="btn btn-outline-primary" for="option1" onclick="Single();">Single</label>
-          </div>
-        <div id="single"><b>Single License</b> is for individual use only. One judge console. All disciplines available for free you can select any of them.</div>
-        <div id="site" style="display:none"><b>Site License</b> is for an unlimited number of computers within a single company. It includes: web publishing features, up to 5 judge consoles. Regular Price &euro;200 per discipline.</div>
-      </div>
-
-      <div>  
-        <h5 class="text-uppercase">Disciplines</h5>
-        <div id="disciplines" class="border p-2 d-grid gap-2">
-          <!-- outdoor -->
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="types[]" value="FS" checked>
-            <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="types[]" value="SF" checked>
-            <label class="form-check-label" for="inlineCheckbox2">Speed Formation Skydiving</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="types[]" value="AE" checked>
-            <label class="form-check-label" for="inlineCheckbox3">Artistic Events</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="types[]" value="CF" checked>
-            <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="types[]" value="WS" checked>
-            <label class="form-check-label" for="inlineCheckbox5">Wingsuit Flying Perfomance</label>
-          </div>
-          <!-- 
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" name="types[]" value="WA" disabled>
-            <label class="form-check-label" for="inlineCheckbox6">Wingsuit Flying Acrobatic</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox7" name="types[]" value="CP" disabled>
-            <label class="form-check-label" for="inlineCheckbox7">Canopy Piloting</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox8" name="types[]" value="SP" disabled>
-            <label class="form-check-label" for="inlineCheckbox8">Speed Skydiving</label>
-          </div>
-indoor
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox9" name="types[]" value="IF" disabled>
-            <label class="form-check-label" for="inlineCheckbox9">Indoor Formation Skydiving</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox10" name="types[]" value="IS" disabled>
-            <label class="form-check-label" for="inlineCheckbox10">Indoor Solo Freestyle</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox11" name="types[]" value="DS" disabled>
-            <label class="form-check-label" for="inlineCheckbox11">Dynamic Solo Speed</label>
-          </div>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox12" name="types[]" value="DY" disabled>
-            <label class="form-check-label" for="inlineCheckbox12">Dynamic Flying</label>
-          </div>
-          -->    
-        </div>
-        <!--p>Select disciplines you need</p-->
-      </div>
+  <form id="myForm" action="subscribe.html" method="post">
+    <div class="row">
+      <div class="col-sm-6 d-grid gap-3">
+        <input type="hidden" name="years" value=1>
+        <!--div>
+          <h5 class="text-uppercase">Extend support & upgrade period</h5>
+            <div>
+              <input type="radio" class="" name="years" id="year1" value="1">
+              <label class="" for="year1">1 year</label>
+              <input type="radio" class="" name="years" id="year2" value="2">
+              <label class="" for="year2">2 years</label>
+              <input type="radio" class="" name="years" id="year3" value="3">
+              <label class="" for="year3">3 years</label>
+            </div>
+          <p>One year support and upgrades is included by default. You can extend this period for up to three years with a significant discount.</p>
+        </div-->
   
-      <!--div>
-        <h5 class="text-uppercase">Cloud video storage</h5>
-        <p><input class="form-check-input" type="checkbox" id="" name="cloud">
-           Premium видео выгружаются на cloud (вся стоимость аренды cloud + 15% за обслуживание).</p>
-      </div-->
-
-    </div>
-    <div class="col-sm-6 bg-secondary-subtle">
-      <div class="text-center p-2">
-        <div><span id="total" class="fs-2">&euro;0</span></div>
-        <div><small>Price does not include taxes </small></div><br>
-        <div><button id="buyNow" type="submit" class="btn btn-success btn-lg btn-block" href="subscribe.html">&nbsp; Buy OPTIMUS &nbsp;</button></div>
+        <div>  
+          <h5 class="text-uppercase">Choose the product subscription that best suit your needs</h5> 
+            <div>
+              <input type="radio" class="btn-check" name="licence" id="option2" value="1">
+              <label class="btn btn-outline-primary " for="option2"onclick="Site();">Site</label>
+              <input type="radio" class="btn-check" name="licence" id="option1" value="0" checked>
+              <label class="btn btn-outline-primary" for="option1" onclick="Single();">Single</label>
+            </div>
+          <div id="single"><b>Single License</b> is for individual users only. One judge console. All disciplines available <span class="text-danger">for free</span> you can choose any of them.</div>
+          <div id="site" style="display:none"><b>Site License</b> is for an unlimited number of computers within a single company. It includes: web publishing features, up to 5 judge consoles. Regular Price <span class="text-danger">&euro;200 per each</span> discipline.</div>
+        </div>
+  
+        <div>  
+          <h5 class="text-uppercase">Disciplines</h5>
+          <div id="disciplines" class="border p-2 d-grid gap-2">
+            <!-- outdoor -->
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="types[]" value="FS" checked>
+              <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="types[]" value="SF" checked>
+              <label class="form-check-label" for="inlineCheckbox2">Speed Formation Skydiving</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="types[]" value="AE" checked>
+              <label class="form-check-label" for="inlineCheckbox3">Artistic Events</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="types[]" value="CF" checked>
+              <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="types[]" value="WS" checked>
+              <label class="form-check-label" for="inlineCheckbox5">Wingsuit Flying Perfomance</label>
+            </div>
+            <!-- 
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox6" name="types[]" value="WA" disabled>
+              <label class="form-check-label" for="inlineCheckbox6">Wingsuit Flying Acrobatic</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox7" name="types[]" value="CP" disabled>
+              <label class="form-check-label" for="inlineCheckbox7">Canopy Piloting</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox8" name="types[]" value="SP" disabled>
+              <label class="form-check-label" for="inlineCheckbox8">Speed Skydiving</label>
+            </div>
+indoor
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox9" name="types[]" value="IF" disabled>
+              <label class="form-check-label" for="inlineCheckbox9">Indoor Formation Skydiving</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox10" name="types[]" value="IS" disabled>
+              <label class="form-check-label" for="inlineCheckbox10">Indoor Solo Freestyle</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox11" name="types[]" value="DS" disabled>
+              <label class="form-check-label" for="inlineCheckbox11">Dynamic Solo Speed</label>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox12" name="types[]" value="DY" disabled>
+              <label class="form-check-label" for="inlineCheckbox12">Dynamic Flying</label>
+            </div>
+            -->    
+          </div>
+          <!--p>Select disciplines you need</p-->
+        </div>
+    
+        <!--div>
+          <h5 class="text-uppercase">Cloud video storage</h5>
+          <p><input class="form-check-input" type="checkbox" id="" name="cloud">
+             Premium видео выгружаются на cloud (вся стоимость аренды cloud + 15% за обслуживание).</p>
+        </div-->
+  
       </div>
-      <p>Registered product includes:
-         <ul>
-           <li>All features avalable</li>
-           <li>No advertising or nag-window</li>
-           <li>Evaluate products with Free Single License</li>
-         </ul>
-      </p>
-      <p class="text-center p-2">
-        <br>
-        <strong>Looking to upgrade?</strong> Contact <a href="contact.html" class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Our team</a> to move to a more flexible license type.
-      </p>
+      <div class="col-sm-6 bg-secondary-subtle">
+        <div class="text-center p-2">
+          <div><span id="total" class="fs-2">&euro;0</span></div>
+          <div><small>Price does not include taxes </small></div><br>
+          <!--button id="buyNow" type="submit" class="btn btn-lg btn-success">&nbsp; Subscribe now &nbsp;</button-->
+          <a href="subscribe.html" class="btn btn-success btn-lg" tabindex="-1" role="button" aria-disabled="true">Primary link</a>
+        </div>
+        <p>Registered product includes:
+           <ul>
+             <li>All features avalable</li>
+             <li>No advertising or nag-window</li>
+             <li>Evaluate products with Free Single License</li>
+           </ul>
+        </p>
+        <p class="text-center p-2">
+          <br>
+          <strong>Looking to upgrade?</strong> Contact <a href="contact.html" class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Our team</a> to move to a more flexible license type.
+        </p>
+      </div>
     </div>
-  </div>
   </form>
 </section>
 
