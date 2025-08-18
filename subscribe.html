@@ -1,3 +1,10 @@
+<?php
+  if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != $_SERVER['HTTP_ORIGIN'].'/licence.html')  header("Location: licence.html");
+  require __DIR__ . '/auth/src/bootstrap.php';
+
+  inactivity_time();
+  require_login();
+?>
 
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
@@ -87,7 +94,8 @@
       <p>Online orders are processed automatically 24/7.</p>
       <p><b>WARNING!</b> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.<br>
         Once you have submitted your request, you will recieve a detailed product licensing information and OPTIMUS licence file in attachment.</p>
-      <p><b>WARNING!</b> Your <b>payment is <span class="text-danger">Non-transferrable.</span></b>, and your service will continue until the end of your contracted term. </p>
+      <p><b>WARNING!</b> Your <b>payment is <span class="text-danger">Non-transferrable.</span></b>, and your service will continue until the end of your contracted term. <br>
+         We recommend you check the software with Single license before purchasing Site license as we distribute our products as try-before-you-buy products.</p>
       </small>
     </div>
     <p class="text-warning"><?php echo (!empty($err) ? $err : ''); ?></p>
@@ -101,6 +109,10 @@
   <h2 class="display-3">Renewal policy</h2>
   <p>Following your renewal, you will receive software updates and version upgrades with new features and personalised technical support.
         Keeping your license up-to-date guaranteed you always will be on board and have access to the best features and rule changes.</p>
+    <div>
+       You can upgrade <strong>Site-license</strong> within an active subscription to the license with a 20% discount. Contact our <a href="mailto:support@optimus.dp.ua">support team</a>. We will provide you with a quote. <br>
+       If you lost your license file we can provide it on request.
+    </div>
     <div>
 	<h3>How to renew <strong>Personal Subscribers</strong></h3>
 	<p>If your license has expired, you can easily get a new license by following these steps:</p>
