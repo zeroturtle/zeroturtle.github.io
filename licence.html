@@ -51,9 +51,9 @@
          const form = document.forms["myForm"]
          //запрос через GET, непонятно как взять параметры в subscribe?
          //let params = new URLSearchParams(new FormData(form)).toString();
-         //fetch(`http://127.0.0.1/price.php?${params}`)
+         //fetch(`http://localhost/price.php?${params}`)
          const formData = new FormData(form)
-         fetch('http://127.0.0.1/price.php', {
+         fetch('http://localhost/price.php', {
              method: "POST",
              body: formData,
          })
@@ -105,7 +105,7 @@
 
 
 <section id="price">
-  <h2 class="display-3">Pricing options</h2>
+  <p class="display-4">Pricing options</p>
   <form id="myForm" action="subscribe.html" method="post">
     <div class="row">
       <div class="col-sm-6 d-grid gap-3">
@@ -205,8 +205,8 @@ indoor
         <div class="text-center p-2">
           <div><span id="total" class="fs-2">&euro;0</span></div>
           <div><small>Price does not include taxes </small></div><br>
-          <button id="buyNow" type="submit" class="btn btn-lg btn-success">&nbsp; Subscribe now &nbsp;</button>
-          <!--a href="subscribe.html" class="btn btn-success btn-lg" tabindex="-1" role="button" aria-disabled="true">Primary link</a-->
+          <!--button id="buyNow" type="submit" class="btn btn-lg btn-success">&nbsp; Subscribe now &nbsp;</button-->
+          <a href="subscribe.html" class="btn btn-success btn-lg" tabindex="-1" role="button" aria-disabled="true">Primary link</a>
         </div>
         <p>Registered product includes:
            <ul>
@@ -236,12 +236,12 @@ indoor
 
 
 <section id="subscription" class="border my-5">
-  <h2 class="display-3">Purchasing benefits</h2>
+  <p class="display-4">Purchasing benefits</p>
 	<p>Initial purchase includes annual subscription. One year period means 365 days from subscription's date. <br>
            Technical support provides for customers with active subscription. No reinstallation or reconfigurations required if you purchase.</p>
 	<p>The subscription-based model provides the following advantages:</p>
 	<ul>
-		<li>free upgrades including new releases, updates and hotfixes;</li>
+		<li>free upgrades including new releases, updates and hotfixes even if it is a major version upgrade;</li> 
 		<li>Online check version, also you will get an E-Mail when a new OPTIMUS version is available;</li>
 		<li>fast free technical support via e-mail;</li>
 		<li>30 days before a subscription expires, OPTIMUS will send an email notification to alert you to the fact that a new subscription will need to be purchased. 
@@ -256,8 +256,7 @@ indoor
 
 
 <section class="border-bottom pb-5 bg-primary-subtle">
-    <div class="text-center"><h1>Priority Support </h1><small>(*for discussion)</small></div>
-    <div>    </div>
+  <p class="display-4">Priority Support <small>(*for discussion)</small></p>
     <div class="row m-3">
       <div class="col-sm d-flex align-items-stretch">
          <p><i class="bi bi-chat-left-text h1"></i>  <strong>Unlimited number of standard support requests </strong></p>

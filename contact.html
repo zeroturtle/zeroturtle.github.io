@@ -24,7 +24,7 @@
         function submitData(e) {
             e.preventDefault();
             const formData = new FormData(e.target)
-            fetch('http://127.0.0.1/contact.php', {
+            fetch('http://localhost/contact.php', {
                 method: "POST",
                 body: formData,
             })

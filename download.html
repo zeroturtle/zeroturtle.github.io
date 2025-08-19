@@ -76,8 +76,8 @@ function line($Num) {
 
 
 <!-- отправка новая лицензия -->
-<h2 class="display-3">OPTIMUS <span class="text-success">download page</span></h2>
-<p><b>Current build 5.2.1.0 </b></p>
+<p class="display-4">OPTIMUS <span class="text-success">download page</span></p>
+<p><strong>Current build 5.2.1.0 </strong></p>
 
 <section class="border-bottom py-3">
     <span>
@@ -150,6 +150,7 @@ function line($Num) {
         </ul>
       </div>
     </div>
+<p>There is no Macintosh version planned. </p>
 </section>
 
 <!--section class="border-bottom pb-5">
@@ -157,10 +158,10 @@ function line($Num) {
 </section-->
 
 <section class="border-bottom py-3">
-  <h2 class="display-3">Update to the latest build</h2>
+  <p class="display-4">Update to the latest build</p>
   Warning! Technical support provides for customers with an active subscription.
   <p>Compare your maintenance term to the release date of the latest build.  License terms you can check in About window.</p>
-  <div class="m-3 p-3 text-center bg-success-subtle">
+  <div class="m-3 p-3 text-center bg-primary-subtle">
     <h5>Contact us</h5>
     If you have any questions or issues, please contact our <br><a href="contact.html" class="link-danger link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">support team</a>. We are always ready to assist you.
   </div>
@@ -169,7 +170,7 @@ function line($Num) {
 
 
 <section class="border-bottom py-3 bg-secondary-subtle" >
-  <h2 class="display-3">How you can contribute…</h2>
+  <p class="display-4">How you can contribute…</p>
   <ul>
     <li>Translate content <br>
 	Help us translate Optimus products into your local language.</li>
@@ -184,8 +185,9 @@ function line($Num) {
 
 
 <section class="border-bottom py-3">
-  <h2 class="display-3">OPTIMUS evolution</h2>
-   <div id="fileContent" class="mx-3 border bg-info-subtle"><a href="#" id="history">Read more...</a></div>
+  <p class="display-4">OPTIMUS evolution</p>
+   <p>We will be constantly updating</p>
+   <div id="fileContent" class="mx-3 border bg-info-subtle"><a href="#" id="history">Read version info...</a></div>
    <script>
      async function loadFile(filePath) {
        try {
@@ -200,7 +202,7 @@ function line($Num) {
      const fileInput = document.getElementById('history');
      fileInput.addEventListener('click', (event) => {
        event.preventDefault();
-       //const fileContent = loadFile("https://127.0.0.1/whatsnew");
+       //const fileContent = loadFile("https://localhost/whatsnew");
        loadFile("https://zeroturtle.github.io/whatsnew").then(fileContent => {
           if (fileContent) {
             let divElement = document.getElementById("fileContent");

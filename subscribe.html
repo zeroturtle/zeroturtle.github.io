@@ -47,10 +47,12 @@
 <section id="constructor" class="p-3">
   <h2 class="display-3">Licence <span class="text-danger">Details</span></h2>
   <form action="licence.php" method="post">
-    <div style="background:#CCC">                                 
-      <div>Вы выбрали: <b><?= $_POST['licence']; ?></b></div>
-      <div>Дисциплины: <b><?= implode(', ', $_POST['types']); ?> <!--Formation Skydiving | Speed Formation | Artistic Events | Canopy Formation | Wingsuit Flying Perfomance--></b></div>
-      <div>Price: <b>&euro;<?php require("price.php"); ?></b></div>
+    <div class="bg-secondary-subtle mb-4">
+      <div><strong>License Type: </strong><?= $_POST['licence'] == 1 ? "Site" :"Single";  ?></div>
+      <div><strong>List of Disciplines: </strong>
+         <?= implode(', ', array_intersect_key(["FS"=>'Formation Skydiving',"SF"=>'Speed Formation Skydiving',"AE"=>'Artistic Events',"CF"=>'Canopy Formation',"WS"=>'Wingsuit Flying Perfomance'], array_fill_keys($_POST['types'],''))); ?> 
+      </div>
+      <div><strong>Price: </strong>&euro;<?php require("price.php"); ?></div>
     </div>
     <fieldset>
       <div class="d-grid gap-3">
@@ -90,16 +92,24 @@
         </div>
       </div>
     </fieldset>
-    <div class="p-3"><small>
-      <p>Online orders are processed automatically 24/7.</p>
-      <p><b>WARNING!</b> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.<br>
-        Once you have submitted your request, you will recieve a detailed product licensing information and OPTIMUS licence file in attachment.</p>
-      <p><b>WARNING!</b> Your <b>payment is <span class="text-danger">Non-transferrable.</span></b>, and your service will continue until the end of your contracted term. <br>
-         We recommend you check the software with Single license before purchasing Site license as we distribute our products as try-before-you-buy products.</p>
+    <div class="p-3">
+      <small>
+        <p>Online orders are processed automatically 24/7.</p>
+        <p><b>WARNING!</b> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.<br>
+          Once you have submitted your request, you will recieve a detailed product licensing information and OPTIMUS licence file in attachment.</p>
+        <p><b>WARNING!</b> Your <b>payment is <span class="text-danger">Non-transferrable.</span></b>, and your service will continue until the end of your contracted term. <br>
+           We recommend you check the software with Single license before purchasing Site license as we distribute our products as try-before-you-buy products.</p>
       </small>
     </div>
+    <div class="bg-success-subtle">
+       <h5>Order Processing</h5>
+       <p>Your orders are processed by our e-commerce partner, 2Checkout, through a secure SSL connection. 
+          Your personal and financial information is kept secure and will not be transferred by 2Checkout to other parties.
+          Following your order you will receive your License Key by email, as soon as the payment is received.
+       </p>
+    </div>
     <p class="text-warning"><?php echo (!empty($err) ? $err : ''); ?></p>
-    <button type="submit" class="btn btn-lg btn-primary">Check Out</button>
+    <p class="text-center"><button type="submit" class="btn btn-lg btn-danger">Check Out</button></p>
   </form>
 </section>
 
@@ -107,33 +117,31 @@
 
 <section id="renew" style="background:#EEE">
   <h2 class="display-3">Renewal policy</h2>
-  <p>Following your renewal, you will receive software updates and version upgrades with new features and personalised technical support.
-        Keeping your license up-to-date guaranteed you always will be on board and have access to the best features and rule changes.</p>
+  <div class="d-grid gap-3">
     <div>
-       You can upgrade <strong>Site-license</strong> within an active subscription to the license with a 20% discount. Contact our <a href="mailto:support@optimus.dp.ua">support team</a>. We will provide you with a quote. <br>
-       If you lost your license file we can provide it on request.
-    </div>
-    <div>
-	<h3>How to renew <strong>Personal Subscribers</strong></h3>
+	<h5>How to renew <strong>Personal Subscribers</strong></h5>
 	<p>If your license has expired, you can easily get a new license by following these steps:</p>
 	<ol>
-	<li>Visit our <a href="licence.html#free">subsciption page</a>.</li>
+	<li>Visit our <a href="licence.html">subsciption page</a>.</li>
 	<li>Select "Single Subscription" license.</li>
 	<li>Fill in the details and complete your checkout.</li>
 	<li>Check your email for your license file.</li>
 	<li>You can now continue using OPTIMUS with the same settings and setup just replace a licence parameter.</li>
 	</ol>
-	<p>If you have other questions and renewal-related inquiries, feel free to contact our renewals team.</p>
+	<p>If you have other questions and renewal-related inquiries, feel free to contact our <a href="contact.html">renewals team</a>.</p>
     </div>
-
-<div>
-	<h3>Why renew your license?</h3>
+    <div>
+	<h5>Why renew your license?</h5>
 	<ul>
-	<li>The OPTIMUS <strong>Renewal Program</strong> Renewal price for next year is at an upgrade price equal to 25% of the list price (<u>before your subscription expires</u>).</li>
-	<li>After your regular software subscription expires, you have 12 months <strong>to renew your subscription at the old price</strong> before the price increases.</li>
+          <li>Following your renewal, you will receive software updates and version upgrades with new features and personalised technical support.
+              Keeping your license up-to-date guaranteed you always will be on board and have access to the best features and rule changes.</li>
+          <li>You can upgrade <strong>Site-license</strong> within an active subscription to the license with a 20% discount. Contact our <a href="mailto:support@optimus.dp.ua">support team</a>. We will provide you with a quote. <br>
+              If you lost your license file we can provide it on request.</li>
+          <li>After your regular software subscription expires, you have to order new subscription.</li>
 	</ul>
 	<p>Contact <a href="contact.html">Our team</a> to learn more. </p>
-</div>
+    </div>
+  </div>
 </section>
 
 
