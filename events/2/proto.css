@@ -1,20 +1,18 @@
-table {
+#scoreSummary table {
   width: 100%;
 }
-td {
+#scoreSummary td {
   text-align: Center; vertical-align: Middle; font-style: normal;
-}
-td {
   padding: 6px 5px 5px 5px;
   min-width: 20px;	
   font-family: Arial;
   font-size: 13px;
 }
 /* thead */
-tr:nth-child(1) td {
-  display: none;
+#scoreSummary tr:nth-child(2) td {
+  white-space:nowrap;
 }
-tr:nth-child(-n+3) td {
+#scoreSummary tr:nth-child(-n+2) td {
 /*
 Bootstrap theme colors
 --bs-primary: #0d6efd;
@@ -44,20 +42,37 @@ blue:   #0d6efd;
   border-bottom-color:#FFFFFF; border-bottom-style: solid; border-bottom-width: 1px;
 }
 /* tbody */
-tr:nth-of-type(-n+8) { 
+#scoreSummary tr:nth-of-type(-n+8) { 
   font-weight: bold; 
 }
-tr:nth-child(n+3) td { 
+#scoreSummary tr:nth-child(n+3) td { 
   border-bottom-color:#C0C0C0; border-bottom-style: solid; border-bottom-width: 1px;
 }
-tr:nth-child(n+3) td:nth-child(3) { /* FIO column */
+#scoreSummary tr:nth-child(n+3) td:nth-child(3) { /* FIO column */
   white-space: nowrap !important;
   text-align: Left; vertical-align: Middle;
 }
 /* footer*/
-tr:nth-last-child(-n+2) td {
+#scoreSummary tr:nth-last-child(-n+2) td {
   border-bottom-style: none;
 }
-tr:nth-last-child(1) td {
+#scoreSummary tr:nth-last-child(1) td {
  text-align: Right; vertical-align: Middle;
 }
+
+
+/* show draw */
+span.draw-img img { 
+	width: 100px !important;
+	vertical-align: top;
+	margin: 5px;
+	max-width: none !important;
+}
+span.draw-img {
+	max-width: 700px;
+	background: #555;
+	position: absolute;
+	left: 30%;
+	padding: 5px;
+}
+
