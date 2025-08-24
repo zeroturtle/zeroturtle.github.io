@@ -12,20 +12,20 @@ function human_filesize($bytes, $decimals = 2) {
 }
 function line($Num) {
   $files = [
-    ['optimus-5.2.0.19-full-ru.zip','Русский','zip'],
-    ['optimus-5.2.0.19-full-en.zip','English','zip'],
-    ['optimus-5.2.0.19-core-ru.zip','Русский','zip'],
-    ['optimus-5.2.0.19-core-en.zip','English','zip'],
+    ['optimus-5.2.0.19-full-ru.zip','Optimus v5.3 "Pegasus" full pack, Русский','zip'],
+    ['optimus-5.2.0.19-full-en.zip','Optimus v5.3 "Pegasus" full pack, English','zip'],
+    ['optimus-5.2.0.19-core-ru.zip','Optimus v5.3 "Pegasus" core files, Русский','zip'],
+    ['optimus-5.2.0.19-core-en.zip','Optimus v5.3 "Pegasus" core files, English','zip'],
     ['Reports_ru.zip','Русский','zip'],
     ['Reports_ua.zip','Українська','zip'],
     ['Reports_en.zip','English','zip'],
-    ['Firebird-5.0.2.1613-0-windows-x86.zip','ZIP','zip'],
-    ['Firebird-5.0.2.1613-0-windows-x86.exe','EXE','binary'],
-    ['operation_manual_ru.doc','Русский','word'],
-    ['operation_manual_ru.pdf','Русский','pdf'],
-    ['training_fs_ru.doc','Русский','word'],
-    ['training_fs_ua.doc','Українська','word'],
-    ['training_gs_ru.doc','Русский','word'],
+    ['Firebird-5.0.2.1613-0-windows-x86.zip','Firebird-5.0.2.1613-0-windows-x86.zip','zip'],
+    ['Firebird-5.0.2.1613-0-windows-x86.exe','Firebird-5.0.2.1613-0-windows-x86.exe','binary'],
+    ['operation_manual_ru.doc','Руководство пользователя DOC, Русский','word'],
+    ['operation_manual_ru.pdf','Руководство пользователя PDF, Русский','pdf'],
+    ['training_fs_ru.doc','Методичка FS, Русский','word'],
+    ['training_fs_ua.doc','Методичка FS, Українська','word'],
+    ['training_gs_ru.doc','Методичка организация соревнований, Русский','word'],
     ['','',''],
   ];
   $filename = './downloads/'.$files[$Num][0];
@@ -79,14 +79,14 @@ function line($Num) {
 <p class="display-4">OPTIMUS <span class="text-success">download page</span></p>
 <p><strong>Current build 5.2.1.0 </strong></p>
 
+<p>Optimus runs on Windows 7 or later. No additional software installation required. </p>
+
 <section class="border-bottom py-3">
-    <span>
-      <span class="h3 text-center">Full packages: </span>
-              <ul>
-                <li><?php line(0); ?> </li>
-                <li><?php line(1); ?> </li>
-              </ul>
-    </span>
+  <span class="h3 text-center">Full packages: </span>
+  <ul>
+    <li><?php line(0); ?> </li>
+    <li><?php line(1); ?> </li>
+  </ul>
 </section>
 
 <section class="border-bottom py-3 bg-secondary-subtle">
@@ -150,7 +150,7 @@ function line($Num) {
         </ul>
       </div>
     </div>
-<p>There is no Macintosh version planned. </p>
+<p>There is no Macintosh nor Linux version planned. </p>
 </section>
 
 <!--section class="border-bottom pb-5">
@@ -217,7 +217,7 @@ function line($Num) {
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
     <div class="d-flex p-2 align-items-center flex-fill" style="background-image: radial-gradient(circle at top right,#08088A,#58A2FA 50%);">
       <span class="mb-3 mb-md-0 text-body-secondary"> 
-        &copy 2025  <a href="mailto:support@optimus.dp.ua">Optimus Team</a><br>
+        &copy Zeroturtle, 2008-2025
       </span>
     </div>
   </footer>
