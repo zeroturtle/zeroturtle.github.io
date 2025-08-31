@@ -114,8 +114,8 @@ function deleteCookie(name) {
     if (isLoading) { return; }
     isLoading = true;
     // получаем из сервера json со списком event
-//    fetch('http://localhost/index.php?page='+page) //здесь вызвать index.php, возвращает json массив event.
-    fetch('https://zeroturtle.github.io/events.json') // получаем массив event из json-файла.
+    fetch('http://localhost/index.php?page='+page) //здесь вызвать index.php, возвращает json массив event.
+//    fetch('https://zeroturtle.github.io/events.json') // получаем массив event из json-файла.
       .then(response => response.json())
       .then(json => {
          const template = document.getElementById('event_template');
