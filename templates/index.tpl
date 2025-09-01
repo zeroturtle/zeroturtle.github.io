@@ -48,19 +48,14 @@
   </div>
 <hr>
 
-<ul class="nav nav-tabs">
-  {foreach from=$RANK item=rank name=foo}
-    <li class="nav-item"><a class="nav-link active" aria-current="page" href="?r={$rank->event_id}">{$rank->name}</a></li>
-    <!--li class="nav-item"><a class="nav-link active" aria-current="page" href="?r={$smarty.foreach.foo.index}">{$rank->name}</a></li-->
-  {/foreach}
-</ul>
+<script> const eventList = {$RANK} </script>
 {literal}
   <dialog modal-mode="mega">
     <header>  <h3></h3>  <div onclick="this.closest('dialog').close()" style="max-width: 1em;cursor: pointer;">X</div>  </header>
     <div id="scoreDetails">
       <iframe src="about:blank" onload='javascript:(function(o){o.style.height=o.contentDocument.body.scrollHeight+45+"px";}(this));' style="min-height:40vh;width:80vw;min-width:300px;border:none;overflow:hidden;"></iframe>
     </div>
-    <footer> <button autofocus type="reset" style="margin-left: auto; display: block;" onclick="this.closest('dialog').close('close')">Close</button> </footer>
+    <footer> <button autofocus type="reset" style="margin-left: auto; display: block; width: 100px" onclick="this.closest('dialog').close('close')">Close</button> </footer>
   </dialog>
   <div id="scoreSummary" class="table-responsive p-0 w-100"> <script src="result.js"></script> </div>
 {/literal}
@@ -70,7 +65,7 @@
 
   <div class="my-3 bg-primary-subtle" id="footer">
     <div class="text-center">
-      &copy 2025  <a href="#feedback">Команда Optimus</a>
+      &copy 2025  <a href="../../contact.html">Команда Optimus</a>
       <a href="#privacy">Privacy Policy</a>
     </div>
   </div>
