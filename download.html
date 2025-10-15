@@ -75,32 +75,33 @@ function line($Num) {
 
 
 <!-- отправка новая лицензия -->
-<p class="display-4">OPTIMUS <span class="text-success">download page</span></p>
-<p><strong>Current build 5.3.0.3 </strong></p>
+<p class="display-4">OPTIMUS <span class="text-success">Support Center</span></p>
+<p>The all-in-one judging software for skydiving competitions — ready to use after quick sign-in and license activation.</p>
 
-<p>Optimus runs on Windows 7 or later. No additional software installation required. </p>
-
-<section class="border-bottom py-3">
-  <span class="h3 text-center">Full packages: </span>
-  <ul>
-    <li><?php line(0); ?> </li>
-  </ul>
-</section>
-
-<section class="border-bottom py-3 bg-secondary-subtle">
+<section id="download" class="border-bottom py-3 bg-secondary-subtle">
     <div class="row">
       <div class="col-sm-6">
-        <span class="h3 text-center">Components: </span>
+        <p><strong>Current build 5.3.0.3 </strong></p>
+        <span class="h3 text-center">Download Full package: </span>
+        <ul>
+          <li><?php line(0); ?> <br> <small><a href="#whatsnew">Read release notes</a> </small> </li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-6">
+        <span class="h3 text-center">Download Components: </span>
         <ul>
           <li>
-            <span>OPTIMUS core files <small>(exe & dll, fdb)</small>:  
+            <span>Core files <small>(exe & dll, fdb)</small>:  
               <ul>
                 <li><?php line(2); ?> </li>
               </ul>
             </span>
           </li>
           <li>
-            <span>Print report templates:
+            <span>Print templates:
               <ul>
                 <li><?php line(4); ?> </li>
                 <li><?php line(5); ?> </li>
@@ -147,45 +148,66 @@ function line($Num) {
         </ul>
       </div>
     </div>
-<p>There is no Macintosh nor Linux version planned. </p>
+  <hr>
+  <p><small>
+   Runs on Windows 7 or later.  There are no macOS or Linux version planned. <br>
+   No admin rights required.  No installation or external software dependencies. 
+   </small></p>
 </section>
 
-<!--section class="border-bottom pb-5">
-  Explore <a href="whatsnew">what’s great</a> about the latest release the <strong>OPTIMUS Artemis </strong> available since June 2025.
-</section-->
+<!--
+<section id="support" class="border-bottom py-3">
+  <p class="h3">Support Notes</p>
+</section>
+-->
 
-<section class="border-bottom py-3">
-  <p class="display-4">Update to the latest build</p>
-  Warning! 
-     Technical support provides for customers with active subscription. No reinstallation or reconfigurations required if you purchase.
-  <p>Compare your maintenance term to the release date of the latest build.  License terms you can check in About window.</p>
+<section id="support" class="border-bottom py-3">
+  <p class="display-4">Activation Guide</p>
+<ul type="none">
+  <li><i class="bi bi-1-circle"></i></span>  Download the installer.</li>
+  <li><i class="bi bi-2-circle"></i></span>  Sign in with your OPTIMUS account and <a href="licence.html"> Activate your license</a>.</li>
+  <li><i class="bi bi-3-circle"></i></span>  Enter your license key into startup parameters and start judging instantly.</li>
+</ul>
+
   <div class="m-3 p-3 text-center bg-primary-subtle">
-    <h5>Contact us</h5>
-    If you have any questions or issues, please contact our <br><a href="contact.html" class="link-danger link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">support team</a>. We are always ready to assist you.
+    <h5>Support & Help</h5>
+    If you have any questions or issues, please contact us via  <a href="mailto:support@optimus.dp.ua">email</a> or submit your question via <a href="contact.html">Web form</a>.
+    We are always ready to assist you.
   </div>
-  <p class="text-center"><a href="licence.html" class="btn btn-lg btn-primary rounded-pill"> Subscribe </a> </p>
 </section>
 
 
 <section class="border-bottom py-3 bg-secondary-subtle" >
-  <p class="display-4">How you can contribute…</p>
-  <ul>
-    <li>Translate content <br>
-	Help us translate Optimus products into your local language.</li>
-    <li>Contribute to the Optimus codebase<br>
-	Actively improve Optimus by contributing to a variety of development opportunities.</li>
-    <li>Join the community<br>
-	Want to get more involved in the Optimus community? Check out all the volunteer opportunities in our Community Portal.</li>
-  </ul>
-       <p>Have a questions?  Please contact us via  <a href="mailto:support@optimus.dp.ua">email</a> or submit your question via <a href="contact.html">Web form</a>.</p>
+  <div class="row m-3">
+    <div class="d-flex align-items-center">
+      <div class="col-sm-8">
+        <p class="display-4">How you can <span class="text-danger">contribute…</span></p>
+        <p>OPTIMUS keeps growing with help from judges, developers, and competition organizers worldwide.  Your feedback shapes new features and improvements.</p>
+        <ul>
+          <li>Share Your Experience<br>
+            Want to get more involved in the Optimus community? Send your feedback, ideas, and feature requests. Help us make judging more efficient for everyone.</li>
+          <li>Collaborate<br>
+            Are you a developer or national federation representative?  Partner with us to extend OPTIMUS’ reach.</li>
+          <li>Become a Beta Tester<br>
+            Get early access to new judging tools and help validate workflows before release. (No coding required)</li>
+          <li>Translate content <br>
+            Help us translate Optimus products into your local language.</li>
+        </ul>
+      </div>
+      <div class="col-sm-4 text-center">
+        <img src="images/OPTIMUS3.svg" style="max-width: 100%;" alt="subscibe">
+      </div>
+    </div>
+  </div>
 </section>
 
 
 
-<section class="border-bottom py-3">
-  <p class="display-4">OPTIMUS evolution</p>
-   <p>We will be constantly updating</p>
-   <div id="fileContent" class="mx-3 border bg-info-subtle"><a href="#" id="history">Read version info...</a></div>
+<section id="whatsnew" class="border-bottom py-3">
+  <p class="display-4"><span class="text-danger">OPTIMUS</span> evolution</p>
+  <p>Interested in the full development history?  
+  Download the complete changelog covering all updates, fixes, and feature milestones.</p>
+   <div id="fileContent" class="mx-3 border bg-info-subtle"><a href="#" id="history">📄 Download Release Notes Archive</a></div>
    <script>
      async function loadFile(filePath) {
        try {
@@ -231,7 +253,7 @@ function line($Num) {
       <div class="col-sm m-4">
         <h4 class="text-white-50">Quick Links</h4>
         <ul class="list-unstyled">
-          <li class="mb-2"><a href="about.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Home</a></li>
+          <li class="mb-2"><a href="about.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">About</a></li>
           <li class="mb-2"><a href="download.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Download</a></li>
           <li class="mb-2"><a href="licence.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Service</a></li>
           <li class="mb-2"><a href="contact.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Contact</a></li>

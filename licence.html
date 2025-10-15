@@ -19,39 +19,35 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <script>
-       function Single() {
-         //найти все checkbox в блоке disciplines
-         const div = document.getElementById('disciplines')
-         const checkboxes = div.querySelectorAll('input[type="checkbox"]');
-         checkboxes.forEach( checkbox => {
-           checkbox.checked = true
-//           checkbox.disabled = true
-         })
-         document.getElementById('buyNow').disabled = false
-         document.getElementById("total").innerHTML = '&euro;0'
-         single.style.display = 'block'
-         site.style.display = 'none'
-       }
+      function updatePrice() {         
+        const disciplines = document.getElementById('disciplines')
+        const checkboxes = disciplines.querySelectorAll('input[type="checkbox"]')  //найти все checkbox в блоке disciplines
+        const actionButton = document.getElementById('actionButton')
+        const planLabel = document.getElementById('planLabel');
 
-       function Site() {
-         //найти все checkbox в блоке disciplines
-         const div = document.getElementById('disciplines')
-         const checkboxes = div.querySelectorAll('input[type="checkbox"]');
-         checkboxes.forEach( checkbox => {
-           checkbox.checked = false
-           checkbox.disabled = false
-         })
-         document.getElementById('buyNow').disabled = true
-         single.style.display = 'none'
-         site.style.display = 'block'
-       }
-
-       function submitData(e) {
-         e.preventDefault();
+         const plan = document.querySelector('input[name="plan"]:checked').value;
+         if (plan === 'free') { //free
+           planLabel.textContent = 'Free plan';
+           actionButton.textContent = 'Start for free';
+           checkboxes.forEach(cb => {
+             cb.disabled = true
+             cb.checked = true
+           });
+           single.style.display = 'block'
+           site.style.display = 'none'
+         } else { //custom
+           checkboxes.forEach(cb => cb.disabled = false);
+           planLabel.textContent = 'Custom plan';
+           actionButton.textContent = 'Subscribe now';
+           single.style.display = 'none'
+           site.style.display = 'block'
+         }
+         actionButton.disabled = !(Array.from(checkboxes).some((cb) => cb.checked == true))
+         // подсчитать стоимость 
          const form = document.forms["myForm"]
-         //запрос через GET, непонятно как взять параметры в subscribe?
-         //let params = new URLSearchParams(new FormData(form)).toString();
-         //fetch(`http://localhost/price.php?${params}`)
+         /*правильно делать запрос через GET, непонятно как взять параметры в subscribe?
+         let params = new URLSearchParams(new FormData(form)).toString();
+         fetch(`http://localhost/price.php?${params}`)*/
          const formData = new FormData(form)
          fetch('http://localhost/price.php', {
              method: "POST",
@@ -59,32 +55,61 @@
          })
          .then(response => response.text())
          .then(data => {
-             document.getElementById("total").innerHTML = `&euro;${Math.trunc(data)}<sub>${String(data % 1).substr(1,3)}</sub>`
+             document.getElementById("totalPrice").innerHTML = `${Math.trunc(data)}<sub>${String(data % 1).substr(1,3)}</sub>`
          })
          .catch((error) => {
             // Handle error
            console.log("error ", error);
          });
-
-         // отключить кнопку если нег галок
-         const div = document.getElementById('disciplines')
-         const checkboxes = div.querySelectorAll('input[type="checkbox"]')
-         document.getElementById('buyNow').disabled = !(Array.from(checkboxes).some((cb) => cb.checked == true))
        }
 
         window.addEventListener("load", (event) => {
-          const div = document.getElementById('disciplines')
-          const checkboxes = div.querySelectorAll('input[type="checkbox"]');
-          checkboxes.forEach( checkbox => {
-            checkbox.addEventListener("change", submitData)
-          })
+          const disciplines = document.getElementById('disciplines')
+          const checkboxes = disciplines.querySelectorAll('input[type="checkbox"]')  //найти все checkbox в блоке disciplines
+          const planTogler = document.querySelectorAll('input[name="plan"]')
+
+          checkboxes.forEach( cb => cb.addEventListener("change", updatePrice))
+          planTogler.forEach(r => r.addEventListener('change', updatePrice))
+          updatePrice();
         })
+
     </script>
+    <style>
+      .configurator {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 480px;
+        margin: 0 auto;
+        text-align: left;
+        background: #fff;
+        border: 1px solid rgba(26,42,108,0.1);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(26,42,108,0.08);
+     }
+     .pricing {
+        background: linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%);
+        text-align: center;
+        padding: 100px 20px 60px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+     }
+     .checkmark-list {
+        list-style: none; /* Remove default bullets */
+        padding-left: 0; /* Remove default padding */
+     }
+      
+     .checkmark-list li::before {
+        content: "\2713";  /* Unicode checkmark character */
+        color: green;      /* Color of the checkmark */
+        margin-right: 8px; /* Spacing */
+     }    
+  </style>
   </head>
   <body lang="en">
-
-<div class="container">
-   <!-- page header -->
+    
+    <div class="container">
+       <!-- page header -->
   <header class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
   <!--div style="background: linear-gradient(#b35900 55%, white);"-->
       <div class="row align-items-center">
@@ -103,11 +128,25 @@
   </header>
 
 
-<section id="price">
-  <p class="display-4">Pricing options</p>
+<section id="price" class="pricing">
+  <p class="display-4">Build your plan</p>
   <form id="myForm" action="subscribe.html" method="post">
     <div class="row">
-      <div class="col-sm-6 d-grid gap-3">
+      <div class="py-2 text-center">  
+          <h5 class="text-uppercase">Try the system for free — then customize your perfect judging toolkit</h5> 
+            <div>
+              <input type="radio" class="btn-check" name="plan" id="option1" value="free" checked>
+              <label class="btn btn-outline-primary" for="option1">Free plan</label>
+              <input type="radio" class="btn-check" name="plan" id="option2" value="custom">
+              <label class="btn btn-outline-primary" for="option2">Custom plan</label>
+            </div>
+        <p class="text-center p-2">
+           Contact <a href="contact.html" class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Our team</a> to move to a more flexible license type.
+        </p>
+      </div>
+    </div>
+    <div  class="configurator">
+      <div class="d-grid gap-3">
         <input type="hidden" name="years" value=1>
         <!--div>
           <h5 class="text-uppercase">Extend support & upgrade period</h5>
@@ -121,41 +160,26 @@
             </div>
           <p>One year support and upgrades is included by default. You can extend this period for up to three years with a significant discount.</p>
         </div-->
-  
-        <div>  
-          <h5 class="text-uppercase">Choose the product subscription that best suit your needs</h5> 
-            <div>
-              <input type="radio" class="btn-check" name="licence" id="option2" value="1">
-              <label class="btn btn-outline-primary " for="option2"onclick="Site();">Site</label>
-              <input type="radio" class="btn-check" name="licence" id="option1" value="0" checked>
-              <label class="btn btn-outline-primary" for="option1" onclick="Single();">Single</label>
-            </div>
-          <div id="single"><b>Single License</b> recommended for individual users (one judge console). All disciplines available <span class="text-danger">for free</span> you can choose any of them.<br> It suited to evaluate software. </div>
-          <div id="site" style="display:none"><b>Site License</b> is for an unlimited number of computers within a single company. It includes: up to 5 judge consoles, web publishing features. Regular Price <span class="text-danger">&euro;200 per each</span> discipline.</div>
-        </div>
-  
-        <div>  
-          <h5 class="text-uppercase">Disciplines</h5>
-          <div id="disciplines" class="border p-2 d-grid gap-2">
+          <div id="disciplines" class="p-2 d-grid gap-2 text-nowrap">
             <!-- outdoor -->
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="types[]" value="FS" checked>
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="types[]" value="FS">
               <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
             </div>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="types[]" value="SF" checked>
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="types[]" value="SF">
               <label class="form-check-label" for="inlineCheckbox2">Speed Formation Skydiving</label>
             </div>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="types[]" value="AE" checked>
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="types[]" value="AE">
               <label class="form-check-label" for="inlineCheckbox3">Artistic Events</label>
             </div>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="types[]" value="CF" checked>
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="types[]" value="CF">
               <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
             </div>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="types[]" value="WS" checked>
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="types[]" value="WS">
               <label class="form-check-label" for="inlineCheckbox5">Wingsuit Flying Perfomance</label>
             </div>
             <!-- 
@@ -189,9 +213,7 @@ indoor
               <label class="form-check-label" for="inlineCheckbox12">Dynamic Flying</label>
             </div>
             -->    
-          </div>
-          <!--p>Select disciplines you need</p-->
-        </div>
+          </div> <!-- disciplines -->
     
         <!--div>
           <h5 class="text-uppercase">Cloud video storage</h5>
@@ -199,24 +221,15 @@ indoor
              Premium видео выгружаются на cloud (вся стоимость аренды cloud + 15% за обслуживание).</p>
         </div-->
       </div>
-      <div class="col-sm-6 bg-secondary-subtle">
-        <div class="text-center p-2">
-          <div><span id="total" class="fs-2">&euro;0</span></div>
-          <div><small>Price does not include taxes </small></div><br>
-          <!--button id="buyNow" type="submit" class="btn btn-lg btn-success">&nbsp; Order &nbsp;</button-->
-          <a href="subscribe.html" class="btn btn-success btn-lg" tabindex="-1" role="button" aria-disabled="true">License details</a>
+      <div class="border-top text-center">
+        <h3 id="planLabel"></h3>
+        <div >
+          <div id="single" style="display:block"><p class="">Intended to be used individual users for education and training purposes and are for non-commercial use.</p></div>
+          <div id="site" style="display:none"><p class="">For an unlimited number of computers within a single company, up to 5 judge consoles.</p> </div>
         </div>
-        <p>Registered product includes:
-           <ul>
-             <li>All features avalable</li>
-             <li>No advertising or nag-window</li>
-             <li>Evaluate products with Free Single License</li>
-           </ul>
-        </p>
-        <p class="text-center p-2">
-          <br>
-          <strong>Looking to upgrade?</strong> Contact <a href="contact.html" class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Our team</a> to move to a more flexible license type.
-        </p>
+        <div class="fs-2">Total:  &euro;<span id="totalPrice"></span> / year</div>
+        <div><small>Price does not include taxes </small></div><br>
+        <button id="actionButton" type="submit" class="btn btn-lg btn-success">&nbsp; Start for free &nbsp;</button>
       </div>
     </div>
   </form>
@@ -224,46 +237,77 @@ indoor
 
 
 
-<section id="download" class="my-5 bg-warning">
-  <p class="text-center p-2">
-    We recommend testing our software before purchasing to make sure it meets your requirements.<br>
-    If you don't have OPTIMUS yet, visit a <a href="download.html" class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">download page</a>.
-  </p>
-  <p>&nbsp;</p>
-</section>
-
-
-<section id="subscription" class="border my-5">
+<section id="subscription" class="my-5">
   <p class="display-4">Purchasing benefits</p>
 	<p>Initial purchase includes annual subscription. One year period means 365 days from subscription's date.</p>
 	<p>The subscription-based model provides the following advantages:</p>
-	<ul>
-		<li>free upgrades including new releases, updates and hotfixes even if it is a major version upgrade;</li> 
-		<li>Online check version, also you will get an E-Mail when a new OPTIMUS version is available;</li>
-		<li>Unlimited number of standard support requests</li>
-		<li>fast free technical support via e-mail; Guaranteed response time</li>
+	<ul class="checkmark-list">
+		<li>No reinstallation or reconfigurations required if you purchase.</li>
+		<li>Neither advertising nor nag-window</li>
+		<li>All core modules avalable + advanced options</li>
+		<li>One year of free software upgrades including new releases, updates and hotfixes even if it is a major version upgrade;</li>
+		<li>You will get an E-Mail when a new version available;</li>
 		<li>30 days before a subscription expires, OPTIMUS will send an email notification to alert you to the fact that a new subscription will need to be purchased. 
 		An email notification will then again be sent 14 days before a subscription expires. </li>
 		<!--li>Significant discounts on multi-year subscriptions.</li-->
-		<li>New features by request (for Site-licensed users only). It will be included in following release and accesible for all Optimus users.</li>
+		<li>New features by request (except Free-licensed users) will be included in following release and accessible for all OPTIMUS users.</li>
 	</ul>
 </section>
 
 
-<section class="border-bottom pb-5 bg-primary-subtle">
-  <p class="display-4">Priority Support</p>
-  <p><i class="bi bi-exclamation-triangle"></i>If you have a problem with OPTMIUS send your request, including a detailed description of the problem you are seeing, making sure you include your license number in the subject line of your message. 
-     If you do not include your license number in the subject line, you may not get any kind of reply because of filtering processes we have had to implement in order to control access to the resource.</p>
-  <p><i class="bi bi-exclamation-triangle"></i> After the subscription has expired, you will be required to purchase a new 1-year subscription in order to continue having access to any new minor releases and online product support.</p>
-  <p><i class="bi bi-exclamation-octagon"></i> When you use corupted license file a <strong>Free license</strong> will apply (nag window will appears, you won't get new versions or updates, any modules won't work).
-	In these cases please contact with our tech support service.</p>
+
+<section class="support-policy my-5 bg-warning">
+  <p class="display-4">Support Agreement</p>
+  <p>
+    We provide unlimited email support to all users — including Free tier.
+    Requests are handled according to priority and complexity.
+  </p>
+  <ul>
+    <li>💬 <b>Contact Channels:</b> Use <a href="contact.html">Web form</a> or email <a href="mailto:support@yourdomain.com">support@yourdomain.com</a></li>
+    <li>🕐 <b>Response time:</b> within 24 hours on business days</li>
+    <li>📋 <b>Request Format:</b> To help us assist you faster, please include:
+      <ul>
+        <li>Event or competition ID</li>
+        <li>Short description of the issue</li>
+        <li>Screenshots or video if applicable</li>
+      </ul>
+    </li>
+    <li>🌍 <b>Languages:</b> English, French, Russian</li>
+  </ul>
+  <p class="small-text">
+    Please include LicenseID and short description of your issue to speed up resolution.   Warning!  Technical support provides for customers with active subscription. 
+  </p>
+  <p>Compare your maintenance term to the release date of the latest build.  License terms you can check in About window.</p>
+  <a href="mailto:support@judgesuite.com" class="cta-main">Contact Support</a>
+  <p>&nbsp;</p>
 </section>
+
 
 
 <section id="faq" class="border my-5">
 <div class="m-3">
   <p class="display-4"><strong>Frequently Asked <span class="text-danger">Questions</span></strong></p>
+  <p>Real scenarios where the judging system helps judges and organizers work faster and easier.</p>
   <div class="accordion accordion-flush" id="accordionFlushExample">
+<!-- CIRCLE 1F7E0 - 1F7E4 (ORANGE YELLOW GREEN PURPLE BROWN  -->
+  <div class="faq-category">
+    <h3>&#x1F7EA;General </h3>
+  </div>
+  <div class="faq-category">
+    <h3>&#x1F7E5;Getting Started</h3>
+  </div>
+  <div class="faq-category">
+    <h3>&#x1F7E6;Configuration & Rules</h3>
+  </div>
+  <div class="faq-category">
+    <h3>&#x1F7E7;Results & Publishing</h3>
+  </div>
+  <div class="faq-category">
+    <h3>&#x1F7E8;Account & Licensing</h3>
+  </div>
+  <div class="faq-category">
+    <h3>&#x1F7E9;Support & Troubleshooting</h3>
+  </div>
 
     <div class="accordion-item">
       <h2 class="accordion-header">
@@ -324,11 +368,11 @@ indoor
 
     <div class="accordion-item">
       <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
            <strong><i class="bi bi-question-circle"></i> OPTIMUS advantages</strong>
         </button>
       </h2>
-      <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
           <ol>
             <li>Based on SQL DB engine: SQL-server Native support for all major operating systems, including Windows, Linux and MacOS; Portable (Embedded mode) and standalone installation</li>
@@ -366,6 +410,8 @@ indoor
       </div>
     </div-->
 
+  <p><i class="bi bi-exclamation-octagon"></i> When you use corupted license file a <strong>Free license</strong> will apply (nag window will appears, you won't get new versions or updates, any modules won't work).
+	In these cases please contact with our tech support service.
 
 
   </div>
@@ -385,14 +431,14 @@ indoor
             <li class="list-inline-item"><i class="bi bi-facebook"></i></li>
             <li class="list-inline-item"><i class="bi bi-instagram"></i></li>
             <li class="list-inline-item"><i class="bi bi-twitter-x"></i></li>
-            <li class="list-inline-item"><i class="bi bi-linkedin"></i></li>
+            <li class="list-inline-item"><i class="bi bi-telegram"></i></li>
           </ul>
         </div>
       </div>
       <div class="col-sm m-4">
         <h4 class="text-white-50">Quick Links</h4>
         <ul class="list-unstyled">
-          <li class="mb-2"><a href="about.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Home</a></li>
+          <li class="mb-2"><a href="about.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">About</a></li>
           <li class="mb-2"><a href="download.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Download</a></li>
           <li class="mb-2"><a href="licence.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Service</a></li>
           <li class="mb-2"><a href="contact.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Contact</a></li>
