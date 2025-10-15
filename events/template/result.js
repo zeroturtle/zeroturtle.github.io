@@ -2,13 +2,26 @@
 // çàãðóæàåì ïðîòîêîë
 function loadEvent(event) {
 	event.preventDefault()
+	loadEventNav(eventList);
 	fetch(`${baseURL}${Rank}/proto.html`)
-	.then(response => response.text())
+	.then(async(response) => {
+		if (!response.ok) {
+			const p = document.createElement('p')
+			p.className = "text-center"
+			p.innerHTML = '&#60;No result found&#62;'
+			scoreSummary.append(p)
+			throw new Error(response.status + " Failed Fetch ");
+		}
+		else {
+			return response.text()
+		}
+		})
 	.then((html) => {
 		let doc = new DOMParser().parseFromString(html, "text/html")
 		//document.head.insertAdjacentHTML('beforeend',`<link type="text/css" rel="stylesheet" href="proto.css">`)
 		let resultTable = doc.querySelector('table')
 		resultTable.setAttribute('id','resultTable')
+		if ('bsTheme' in document.querySelector('html').dataset) { resultTable.classList.add('table','table-'+document.querySelector('html').dataset.bsTheme); }
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
 		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0)) { 
 			let f = lnk.href.toLowerCase()
@@ -19,7 +32,7 @@ function loadEvent(event) {
 				lnk.addEventListener("click", displayRoundVideo)
 			}
 			else {  // this is a score details
-				if (Number.isFinite(lnk))
+				if (isFinite(f.split('/').pop())) 
 					lnk.addEventListener("click", displayRoundDetails)
 			}
 		}
@@ -38,14 +51,14 @@ function loadEvent(event) {
 			});
 			c.onmouseover = function(event) {
 				if (event.target.querySelector('span')) {
-					const span = event.target.querySelector('span')
-					span.style.display = 'block'
-					const rect = span.getBoundingClientRect();
 					// Getting the available viewport width
 					const vw = window.innerWidth && document.documentElement.clientWidth ? 
 						Math.min(window.innerWidth, document.documentElement.clientWidth) : 
 						window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-					let newX = (rect.right < vw) ? event.clientX : (( rect.width > vw) ? 0 : vw - rect.width)
+					const span = event.target.querySelector('span')
+					span.style.display = 'block'
+					const rect = span.getBoundingClientRect();
+					let newX = (event.clientX+rect.width < vw) ? event.clientX : (( rect.width > vw) ? 0 : vw - rect.width)
 					span.style.left = newX + 'px';
 				}
 			};
@@ -70,6 +83,9 @@ function loadEvent(event) {
 
 		scoreSummary.append(resultTable)
 	})
+	.catch((error) => {
+		console.log(error)
+	});
 }
 
 // video of perfomance
@@ -106,7 +122,6 @@ function displayRoundDetails() {
 			let doc = new DOMParser().parseFromString(html, "text/html")
 			doc.head.insertAdjacentHTML('beforeend',`<link type="text/css" rel="stylesheet" href="${baseURL}detail.css">`)
 			doc.head.insertAdjacentHTML('beforeend', `<script src="${baseURL}detail.js"></script>`)
-			//<a target="parent"> will open links in a new tab/window ... <a target="_parent"> will open links in the parent/current window.
 			for(a of doc.querySelectorAll('a')) a.setAttribute('target','parent')
 			frame.srcdoc = doc.documentElement.outerHTML
 			modal.showModal()
@@ -121,8 +136,7 @@ const modal = document.querySelector('dialog')
 const frame = modal.querySelector('iframe')
 
 const urlParams = new URLSearchParams(window.location.search)
-Rank = (urlParams.get("r")==null) ? document.getElementsByClassName("nav-link")[0].getAttribute('href').slice(3) : urlParams.get("r") // default параметр r
-
+Rank = (urlParams.get("r")==null) ? eventList[0].event_id : urlParams.get("r") // default параметр r
 
 function windowOnClick(event) {
 	if (event.target === modal) {
@@ -131,7 +145,25 @@ function windowOnClick(event) {
 	}
 }
 
+// построить закладки для зачетов
+function loadEventNav(list) {
+  const U = document.createElement('ul')
+  U.classList.add('nav', 'nav-tabs')
+  list.forEach((item) => {
+    const L = document.createElement('li')
+    L.className = "nav-item"
+    const A = document.createElement('a')
+    A.href = `?r=${item.event_id}`
+    A.text = item.name
+    A.classList.add('nav-link')
+    if (item.event_id == Rank) A.classList.add('active')
+    L.appendChild(A)
+    U.appendChild(L);
+  });
+  document.getElementById('scoreSummary').before(U);
+}
+
 window.addEventListener("load", loadEvent)
 window.addEventListener("click", windowOnClick)
-document.getElementById('scoreSummary').insertAdjacentHTML('afterend', '<small>Powered by OPTIMUS Artemis</small>')
+document.getElementById('scoreSummary').insertAdjacentHTML('afterend', '<small>Powered by <a href="${baseURL}/about.html"><strong>OPTIMUS</strong> <i>Pegasus</i></a></small>')
 
