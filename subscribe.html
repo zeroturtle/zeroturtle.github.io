@@ -1,11 +1,3 @@
-<?php
-  if (!isset($_SERVER['HTTP_REFERER']) || $_SERVER['HTTP_REFERER'] != $_SERVER['HTTP_ORIGIN'].'/licence.html')  header("Location: licence.html");
-  require __DIR__ . '/auth/src/bootstrap.php';
-
-  inactivity_time();
-  require_login();
-?>
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
   <head>
@@ -47,7 +39,7 @@
   <h2 class="display-3">Licence <span class="text-danger">Details</span></h2>
   <form action="licence.php" method="post">
     <div class="bg-secondary-subtle mb-4">
-      <div><strong>License Type: </strong><?= $_POST['licence'] == 1 ? "Site" :"Single";  ?></div>
+      <div><strong>License Type: </strong><?= $_POST['plan'] == 1 ? "Site" :"Single";  ?></div>
       <div><strong>List of Disciplines: </strong>
          <?= implode(', ', array_intersect_key(["FS"=>'Formation Skydiving',"SF"=>'Speed Formation Skydiving',"AE"=>'Artistic Events',"CF"=>'Canopy Formation',"WS"=>'Wingsuit Flying Perfomance'], array_fill_keys($_POST['types'],''))); ?> 
       </div>
@@ -55,7 +47,7 @@
     </div>
     <fieldset>
       <div class="d-grid gap-3">
-        <input type="hidden" name="licence" value="<?php echo $_POST['licence']; ?>" required>
+        <input type="hidden" name="licence" value="<?php echo $_POST['plan']; ?>" required>
         <input type="hidden" name="types" value="<?php echo implode(',',$_POST['types']); ?>" required>
         <div class="row">
           <div class="col-sm-6">
