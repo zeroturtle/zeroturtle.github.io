@@ -63,12 +63,13 @@
   <div title="EN"><small>All results are unofficial until signed by the chief judge.</small></div> 
 
 
-  <div class="my-3 bg-primary-subtle" id="footer">
-    <div class="text-center">
-      &copy 2025  <a href="../../contact.html">Команда Optimus</a>
-      <a href="#privacy">Privacy Policy</a>
+  <footer class="sticky-bottom py-3 my-4" style="background-image: radial-gradient(circle at top right,#08088A,#58A2FA 50%);">
+    <div class="d-flex justify-content-between">
+      <div class="mx-3">   &copy   2008-2025 &nbsp; <span class="text-white fw-bold h4" nowrap>  Zeroturtle</span>  </div>
+      <div class="mx-3"> <a href="../../contact.html">Команда Optimus</a>  |  <a href="../../privacy.html">Privacy Policy</a> </div>
     </div>
-  </div>
+  </footer>  
+
 
 </div>  <!-- container -->
 
