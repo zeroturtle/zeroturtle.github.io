@@ -19,6 +19,40 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <style> 
+footer.light-energy {
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 80%, #dee2e6 100%);
+  color: #212529;
+  padding: 2.5rem 1rem;
+
+  border-top: 1px solid #dee2e6;
+  box-shadow: 0 -2px 10px rgba(13, 110, 253, 0.05);
+}
+.footer-nav a {
+  margin: 0 0.9rem;
+  text-decoration: none;
+  color: #495057;
+  font-weight: 500;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.footer-nav a:hover {
+  color: #0d6efd;
+  text-shadow: 0 0 6px rgba(13, 110, 253, 0.3);
+}
+.footer-social {
+  margin: 1rem 0;
+}
+
+.footer-social a {
+  font-size: 2.0rem;
+  color: #6c757d;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #0d6efd;
+  transform: scale(1.1);
+}
     </style>
   </head>
   <body lang="en">
@@ -47,49 +81,49 @@
 <div class="d-flex justify-content-center">
   <div>
     <p class="h1 text-center">Dear, <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES)?></p>
-    <p>Thanks for choosen cutting edge judging and scoring system <span class="text-danger fw-bold">OPTIMUS</span></p>
+    <p>Thanks for choosen cutting edge judging and scoring system - "<span class="text-danger fw-bold">OPTIMUS</span>"</p>
 
     <p>We are appreciate your business and welcome you to our community.</p>
-    <p>Check your email to get your licence file.</p>
-    <p>If you haven't download yet OPTIMUS? please visit a <a href="download.html">download page</a></p>
+    <p>Check your email to get licence file.</p>
+    <p class="border border-3 border-warning-subtle rounded-4 p-3 m-2">If you haven't download yet OPTIMUS? please visit a <a href="download.html">download page</a></p>
     Useful links to help you to get started:
     <ul>
       <li>Download an <a href="./downloads/operation_manual_ru.pdf"> Optimus operational manual</a></li>
-      <li>Read <a href="about.html#faq"> FAQ </a> section</li>
+      <li>Read <a href="licence.html#faq"> FAQ </a> section</li>
       <li>Haven't found answer yet? Please, contact with our support team by <a href="mailto:support@optimus.dp.ua">email</a> or <a href="contact.html">Web form</a>.</li>
   </ul>
   </div>
 </div>
 
 
-
-  <footer class="py-3 my-4" style="background-image: radial-gradient(circle at top right,#08088A,#58A2FA 50%);">
-    <div class="row text-white-50">
-      <div class="col-sm m-4">
-        <div>
-          <img src="images/turtleZ_color.png" style="height:2rem; float:left; margin: 5px;">
-          <p class=""> &copy  2008-2025 &nbsp;<span class="text-white fw-bold h4" nowrap>  Zeroturtle</span></p>
-        </div>
-        <div class="align-bottom py-3 h4">
-          <ul class="list-inline">
-            <li class="list-inline-item"><i class="bi bi-facebook"></i></li>
-            <li class="list-inline-item"><i class="bi bi-instagram"></i></li>
-            <li class="list-inline-item"><i class="bi bi-twitter-x"></i></li>
-            <li class="list-inline-item"><i class="bi bi-telegram"></i></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm m-4">
-        <h4 class="text-white-50">Quick Links</h4>
-        <ul class="list-unstyled">
-          <li class="mb-2"><a href="about.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">About</a></li>
-          <li class="mb-2"><a href="download.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Download</a></li>
-          <li class="mb-2"><a href="licence.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Service</a></li>
-          <li class="mb-2"><a href="contact.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Contact</a></li>
+<footer class="py-3 my-4 light-energy">
+  <div class="row">
+    <div class="col-sm m-4">
+      <div> <img src="images/turtleZ-bw.svg" style="height:2.2rem; float:left;">  &copy  2008-2025 &nbsp;<span class="h4 fw-bold"> Zeroturtle</span></div>
+      <div class="align-bottom h4 footer-social">
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="https://www.facebook.com/groups/399304463592210"><i class="bi bi-facebook"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="bi bi-instagram"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="bi bi-twitter-x"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="bi bi-telegram"></i></a></li>
         </ul>
       </div>
+      <div class="align-bottom footer-nav">
+         <a data-bs-toggle="modal" data-bs-target="#privatPolicy" href="#">Privacy</a>|<a href="#">Terms of use</a>|<a href="#">Cookie</a>
+      </div>
     </div>
-  </footer>
+    <div class="col-sm m-4 footer-nav">
+      <h4 class="">Quick Links</h4>
+      <ul class="list-unstyled">
+        <li class="mb-2"><a href="about.html">About</a> <!--span>— Learn what OPTIMUS can do</span--></li>
+        <li class="mb-2"><a href="download.html">Download</a> <!--span>— Try the demo version</span--></li>
+        <li class="mb-2"><a href="licence.html">Service</a> <!--span>— Choose your plan</span--></li>
+        <li class="mb-2"><a href="contact.html">Contact</a> <!--span>— Get in touch</span--></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
 
 </div> <!--container-->
 

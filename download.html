@@ -51,6 +51,71 @@ function line($Num) {
 
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<style>
+.contribute {
+  /* 🌈 Энергичный фон */
+  background: radial-gradient(circle at 25% 50%, #c3f0ff 0%, #ffffff 45%, #f0fbff 100%);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0, 180, 216, 0.18),
+              0 0 60px rgba(0, 180, 216, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+.contribute-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.contribute-list li {
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0.7rem 0;
+  color: #212529; /* стандартный Bootstrap-текст */
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+.contribute-list i {
+  font-size: 1.5rem;  /* Иконки чуть крупнее текста */
+  color: #0d6efd; /* Bootstrap primary */
+  transition: color 0.3s ease, transform 0.25s ease;
+}
+footer.light-energy {
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 80%, #dee2e6 100%);
+  color: #212529;
+  padding: 2.5rem 1rem;
+
+  border-top: 1px solid #dee2e6;
+  box-shadow: 0 -2px 10px rgba(13, 110, 253, 0.05);
+}
+.footer-nav a {
+  margin: 0 0.9rem;
+  text-decoration: none;
+  color: #495057;
+  font-weight: 500;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.footer-nav a:hover {
+  color: #0d6efd;
+  text-shadow: 0 0 6px rgba(13, 110, 253, 0.3);
+}
+.footer-social {
+  margin: 1rem 0;
+}
+
+.footer-social a {
+  font-size: 2.0rem;
+  color: #6c757d;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #0d6efd;
+  transform: scale(1.1);
+}
+
+</style>
   </head>
   <body lang="en">
 
@@ -161,40 +226,47 @@ function line($Num) {
 </section>
 -->
 
-<section id="support" class="border-bottom py-3">
+<section id="support" class="py-3">
   <p class="display-4">Activation Guide</p>
 <ul type="none">
-  <li><i class="bi bi-1-circle"></i></span>  Download the installer.</li>
-  <li><i class="bi bi-2-circle"></i></span>  Sign in with your OPTIMUS account and <a href="licence.html"> Activate your license</a>.</li>
-  <li><i class="bi bi-3-circle"></i></span>  Enter your license key into startup parameters and start judging instantly.</li>
+  in 3 easy steps
+  <li><span><i class="bi bi-1-circle"></i></span>  Download the installer and unzip.</li>
+  <li><span><i class="bi bi-2-circle"></i></span>  Sign in with your OPTIMUS account and <a href="licence.html"> Activate your license</a>.</li>
+  <li><span><i class="bi bi-3-circle"></i></span>  Enter your license key and start scoring instantly. <br>
+      Publish results to web or DZTV in one click.</li>
 </ul>
 
-  <div class="m-3 p-3 text-center bg-primary-subtle">
-    <h5>Support & Help</h5>
-    If you have any questions or issues, please contact us via  <a href="mailto:support@optimus.dp.ua">email</a> or submit your question via <a href="contact.html">Web form</a>.
-    We are always ready to assist you.
+  <div>
+    <div class="w-75 border border-3 m-3 p-2">
+      <div class="text-center">
+        <h5>Support & Help</h5>
+        If you have any questions or issues, please contact us via  <a href="mailto:support@optimus.dp.ua">email</a> or submit your question via <a href="contact.html">Web form</a>.
+        We are always ready to assist you.
+      </div>
+    </div>
   </div>
 </section>
 
 
-<section class="border-bottom py-3 bg-secondary-subtle" >
+
+<section class="py-3 contribute">
   <div class="row m-3">
-    <div class="d-flex align-items-center">
-      <div class="col-sm-8">
+    <div class="d-flex align-items-center flex-column-reverse flex-md-row">
+      <div class="col-sm-8 m-3 text-md-start">
         <p class="display-4">How you can <span class="text-danger">contribute…</span></p>
         <p>OPTIMUS keeps growing with help from judges, developers, and competition organizers worldwide.  Your feedback shapes new features and improvements.</p>
-        <ul>
-          <li>Share Your Experience<br>
+        <ul class="contribute-list">
+          <li><i class="bi bi-chat-dots"></i>Share Your Experience<br>
             Want to get more involved in the Optimus community? Send your feedback, ideas, and feature requests. Help us make judging more efficient for everyone.</li>
-          <li>Collaborate<br>
+          <li><i class="bi bi-people"></i>Collaborate<br>
             Are you a developer or national federation representative?  Partner with us to extend OPTIMUS’ reach.</li>
-          <li>Become a Beta Tester<br>
+          <li><i class="bi bi-puzzle"></i>Become a Beta Tester<br>
             Get early access to new judging tools and help validate workflows before release. (No coding required)</li>
-          <li>Translate content <br>
+          <li><i class="bi bi-translate"></i>Translate content <br>
             Help us translate Optimus products into your local language.</li>
         </ul>
       </div>
-      <div class="col-sm-4 text-center">
+      <div class="col-sm-4 mt-md-0">
         <img src="images/OPTIMUS3.svg" style="max-width: 100%;" alt="subscibe">
       </div>
     </div>
@@ -206,8 +278,8 @@ function line($Num) {
 <section id="whatsnew" class="border-bottom py-3">
   <p class="display-4"><span class="text-danger">OPTIMUS</span> evolution</p>
   <p>Interested in the full development history?  
-  Download the complete changelog covering all updates, fixes, and feature milestones.</p>
-   <div id="fileContent" class="mx-3 border bg-info-subtle"><a href="#" id="history">📄 Download Release Notes Archive</a></div>
+     Read the complete changelog covering all updates, fixes, and feature milestones.</p>
+  <div id="fileContent" class="mx-3 border bg-info-subtle"><a href="#" id="history">📄 View Release Notes</a></div>
    <script>
      async function loadFile(filePath) {
        try {
@@ -234,33 +306,34 @@ function line($Num) {
 </section>
 
 
-  <footer class="py-3 my-4" style="background-image: radial-gradient(circle at top right,#08088A,#58A2FA 50%);">
-    <div class="row text-white-50">
-      <div class="col-sm m-4">
-        <div>
-          <img src="images/turtleZ_color.png" style="height:2rem; float:left; margin: 5px;">
-          <p class=""> &copy  2008-2025 &nbsp;<span class="text-white fw-bold h4" nowrap>  Zeroturtle</span></p>
-        </div>
-        <div class="align-bottom py-3 h4">
-          <ul class="list-inline">
-            <li class="list-inline-item"><i class="bi bi-facebook"></i></li>
-            <li class="list-inline-item"><i class="bi bi-instagram"></i></li>
-            <li class="list-inline-item"><i class="bi bi-twitter-x"></i></li>
-            <li class="list-inline-item"><i class="bi bi-telegram"></i></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm m-4">
-        <h4 class="text-white-50">Quick Links</h4>
-        <ul class="list-unstyled">
-          <li class="mb-2"><a href="about.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">About</a></li>
-          <li class="mb-2"><a href="download.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Download</a></li>
-          <li class="mb-2"><a href="licence.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Service</a></li>
-          <li class="mb-2"><a href="contact.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Contact</a></li>
+<footer class="py-3 my-4 light-energy">
+  <div class="row">
+    <div class="col-sm m-4">
+      <div> <img src="images/turtleZ-bw.svg" style="height:2.2rem; float:left;">  &copy  2008-2025 &nbsp;<span class="h4 fw-bold"> Zeroturtle</span></div>
+      <div class="align-bottom h4 footer-social">
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="https://www.facebook.com/groups/399304463592210"><i class="bi bi-facebook"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="bi bi-instagram"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="bi bi-twitter-x"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="bi bi-telegram"></i></a></li>
         </ul>
       </div>
+      <div class="align-bottom footer-nav">
+         <a data-bs-toggle="modal" data-bs-target="#privatPolicy" href="#">Privacy</a>|<a href="#">Terms of use</a>|<a href="#">Cookie</a>
+      </div>
     </div>
-  </footer>
+    <div class="col-sm m-4 footer-nav">
+      <h4 class="">Quick Links</h4>
+      <ul class="list-unstyled">
+        <li class="mb-2"><a href="about.html">About</a> <!--span>— Learn what OPTIMUS can do</span--></li>
+        <li class="mb-2"><a href="download.html">Download</a> <!--span>— Try the demo version</span--></li>
+        <li class="mb-2"><a href="licence.html">Service</a> <!--span>— Choose your plan</span--></li>
+        <li class="mb-2"><a href="contact.html">Contact</a> <!--span>— Get in touch</span--></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
 
 </div> <!--container-->
 

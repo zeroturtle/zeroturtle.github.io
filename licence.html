@@ -30,7 +30,7 @@
            planLabel.textContent = 'Free plan';
            actionButton.textContent = 'Start for free';
            checkboxes.forEach(cb => {
-             cb.disabled = true
+             //cb.disabled = true
              cb.checked = true
            });
            single.style.display = 'block'
@@ -81,6 +81,7 @@
         gap: 20px;
         max-width: 480px;
         margin: 0 auto;
+        margin-bottom: 1rem;
         text-align: left;
         background: #fff;
         border: 1px solid rgba(26,42,108,0.1);
@@ -91,19 +92,52 @@
      .pricing {
         background: linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%);
         text-align: center;
-        padding: 100px 20px 60px;
+        /*padding: 100px 20px 60px;*/
         border-bottom: 1px solid rgba(0,0,0,0.05);
      }
+
      .checkmark-list {
         list-style: none; /* Remove default bullets */
         padding-left: 0; /* Remove default padding */
      }
-      
      .checkmark-list li::before {
         content: "\2713";  /* Unicode checkmark character */
         color: green;      /* Color of the checkmark */
         margin-right: 8px; /* Spacing */
      }    
+footer.light-energy {
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 80%, #dee2e6 100%);
+  color: #212529;
+  padding: 2.5rem 1rem;
+
+  border-top: 1px solid #dee2e6;
+  box-shadow: 0 -2px 10px rgba(13, 110, 253, 0.05);
+}
+.footer-nav a {
+  margin: 0 0.9rem;
+  text-decoration: none;
+  color: #495057;
+  font-weight: 500;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.footer-nav a:hover {
+  color: #0d6efd;
+  text-shadow: 0 0 6px rgba(13, 110, 253, 0.3);
+}
+.footer-social {
+  margin: 1rem 0;
+}
+.footer-social a {
+  font-size: 2.0rem;
+  color: #6c757d;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #0d6efd;
+  transform: scale(1.1);
+}
   </style>
   </head>
   <body lang="en">
@@ -127,13 +161,13 @@
        </div>
   </header>
 
+<p class="display-4">Build your plan</p>
 
 <section id="price" class="pricing">
-  <p class="display-4">Build your plan</p>
   <form id="myForm" action="subscribe.html" method="post">
     <div class="row">
       <div class="py-2 text-center">  
-          <h5 class="text-uppercase">Try the system for free — then customize your perfect judging toolkit</h5> 
+          <h5 class="text-uppercase">Try for free - customize your own judging toolkit</h5> 
             <div>
               <input type="radio" class="btn-check" name="plan" id="option1" value="free" checked>
               <label class="btn btn-outline-primary" for="option1">Free plan</label>
@@ -238,7 +272,10 @@ indoor
 
 
 <section id="subscription" class="my-5">
-  <p class="display-4">Purchasing benefits</p>
+  <div class="row m-3">
+    <div class="d-flex align-items-center flex-column flex-md-row">
+      <div class="col order-2 m-3 col-sm-8 md-0">
+        <p class="display-4">Purchasing <strong>benefits</strong></p>
 	<p>Initial purchase includes annual subscription. One year period means 365 days from subscription's date.</p>
 	<p>The subscription-based model provides the following advantages:</p>
 	<ul class="checkmark-list">
@@ -246,45 +283,53 @@ indoor
 		<li>Neither advertising nor nag-window</li>
 		<li>All core modules avalable + advanced options</li>
 		<li>One year of free software upgrades including new releases, updates and hotfixes even if it is a major version upgrade;</li>
-		<li>You will get an E-Mail when a new version available;</li>
 		<li>30 days before a subscription expires, OPTIMUS will send an email notification to alert you to the fact that a new subscription will need to be purchased. 
 		An email notification will then again be sent 14 days before a subscription expires. </li>
 		<!--li>Significant discounts on multi-year subscriptions.</li-->
 		<li>New features by request (except Free-licensed users) will be included in following release and accessible for all OPTIMUS users.</li>
 	</ul>
+      </div>
+      <div class="col order-1 col-sm-4 md-0">
+        <img src="images/OPTIMUS3.svg" style="max-width: 100%;" alt="subscibe">
+      </div>
+    </div>
+  </div>
 </section>
 
 
 
-<section class="support-policy my-5 bg-warning">
-  <p class="display-4">Support Agreement</p>
-  <p>
-    We provide unlimited email support to all users — including Free tier.
-    Requests are handled according to priority and complexity.
-  </p>
-  <ul>
-    <li>💬 <b>Contact Channels:</b> Use <a href="contact.html">Web form</a> or email <a href="mailto:support@yourdomain.com">support@yourdomain.com</a></li>
-    <li>🕐 <b>Response time:</b> within 24 hours on business days</li>
-    <li>📋 <b>Request Format:</b> To help us assist you faster, please include:
-      <ul>
-        <li>Event or competition ID</li>
-        <li>Short description of the issue</li>
-        <li>Screenshots or video if applicable</li>
-      </ul>
-    </li>
-    <li>🌍 <b>Languages:</b> English, French, Russian</li>
-  </ul>
-  <p class="small-text">
-    Please include LicenseID and short description of your issue to speed up resolution.   Warning!  Technical support provides for customers with active subscription. 
-  </p>
-  <p>Compare your maintenance term to the release date of the latest build.  License terms you can check in About window.</p>
-  <a href="mailto:support@judgesuite.com" class="cta-main">Contact Support</a>
-  <p>&nbsp;</p>
+<section class="bg-secondary text-light my-5">
+  <div class="m-3">
+    <p class="display-4">Support <strong>Agreement</strong></p>
+    <p>
+      We provide unlimited email support to all users — including Free tier.
+      Requests are handled according to priority and complexity.
+    </p>
+    <ul type="none">
+      <li><i class="bi bi-envelope-at text-white-50 fs-4 me-2"></i> <b>Contact Channels:</b> Use <a href="contact.html" class="link-light">Web form</a> or email <a href="mailto:support@yourdomain.com" class="link-light">support@yourdomain.com</a></li>
+      <li><i class="bi bi-clock-history text-white-50 fs-4 me-2"></i> <b>Response time:</b> within 24 hours on business days</li>
+      <li><i class="bi bi-ui-checks text-white-50 fs-4 me-2"></i> <b>Request Format:</b> To help us assist you faster, please include:
+        <ul>
+          <li>Event or competition ID</li>
+          <li>LicenseID and Short description of the issue</li>
+          <li>Screenshots or video if applicable</li>
+        </ul>
+      </li>
+      <li><i class="bi bi-translate text-white-50 fs-4 me-2"></i> <b>Languages:</b> English, French, Russian</li>
+    </ul>
+    <p class="p-3">
+      <span class="p-3 border border-3">Warning!  Technical support provides for customers with active subscription.</span> 
+    </p>
+    <p>Compare your maintenance term to the release date of the latest build.  Terms of License you can check in About window.</p>
+  
+    <a href="contact.html"  class="link-warning fw-semibold">Contact Support</a>
+    <p>&nbsp;</p>
+  </div>
 </section>
 
 
 
-<section id="faq" class="border my-5">
+<section id="faq" class="my-5">
 <div class="m-3">
   <p class="display-4"><strong>Frequently Asked <span class="text-danger">Questions</span></strong></p>
   <p>Real scenarios where the judging system helps judges and organizers work faster and easier.</p>
@@ -292,21 +337,117 @@ indoor
 <!-- CIRCLE 1F7E0 - 1F7E4 (ORANGE YELLOW GREEN PURPLE BROWN  -->
   <div class="faq-category">
     <h3>&#x1F7EA;General </h3>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_1-1" aria-expanded="false" aria-controls="faq_1-1">
+           <strong><i class="bi bi-question-circle"></i> Can we use it for national competitions?</strong>
+        </button>
+      </h2>
+      <div id="faq_1-1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>Yes. The system supports multiple judging panels, synchronized scoring, and real-time result publishing.  
+             It’s already used by federations for national and regional events.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_1-2" aria-expanded="false" aria-controls="faq_1-2">
+           <strong><i class="bi bi-question-circle"></i> Can I use it for training or practice sessions?</strong>
+        </button>
+      </h2>
+      <div id="faq_1-2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>  Yes. The free plan is perfect for small teams to practice judging with video uploads, scoring, and replay analysis.  </p>
+        </div>
+      </div>
+    </div>
+<!-- Can judges evaluate performances remotely?
+          <p> Absolutely. Videos can be uploaded and scored online — perfect for training, remote judging, or qualification rounds. </p-->
   </div>
   <div class="faq-category">
     <h3>&#x1F7E5;Getting Started</h3>
+- How to start a demo event?
+    <p>
+      You can create a demo event directly from your dashboard — no setup or license required.  
+      Upload a training video, assign judges, and try the full scoring process in minutes.  
+      Results can be viewed, shared, or published just like in real competitions.
+    </p>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_2-1" aria-expanded="false" aria-controls="faq_2-1">
+           <strong><i class="bi bi-question-circle"></i> Do I need to install anything?</strong>
+        </button>
+      </h2>
+      <div id="faq_2-1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>We implemet Zero-administration approach: No installation (plug-and-play) - allow users easy move from one computer to another;
+             You can use DB server in Embedded mode for local installations, and standalone SQL-server installation on a cmpetition; </p>
+        </div>
+      </div>
+    </div>
+
+- How to invite judges?
+        <p>Simply send them a unique event link. Judges can log in and score from anywhere.</p>
   </div>
   <div class="faq-category">
     <h3>&#x1F7E6;Configuration & Rules</h3>
+- How to customize scoring rules?
+        <p>Default templates match official federation standards, but you can edit criteria, weights, or upload your own rulesets.</p>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_3-1" aria-expanded="false" aria-controls="faq_3-1">
+           <strong><i class="bi bi-question-circle"></i> Is it compatible with different federations?</strong>
+        </button>
+      </h2>
+      <div id="faq_3-1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>Yes — the system already includes over 30 official divepools images from FAI, USPA, ФПСУ, DFV, AXIS.  You can also add custom ones and manage your own divepool sets. </p>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="faq-category">
     <h3>&#x1F7E7;Results & Publishing</h3>
+- How to publish results online?
+        <p>Publish your event results instantly on a personalized web page or embed them into your own site. 
+        Integration with DZTV and live ranking is built-in.</p>
+-  What is DZTV integration?
+        <p>DZTV integration allows live display of rankings and results during the competition on dropzone screens.</p>
   </div>
   <div class="faq-category">
     <h3>&#x1F7E8;Account & Licensing</h3>
+- How does Pay-as-you-go pricing work?
+        <p>You only pay for the features and users you actually need. Start with the free plan and upgrade anytime.</p>
+- What happens when I upgrade my plan?
+        <p>Your active data and configurations are preserved. New features unlock immediately after payment.</p>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+           <strong><i class="bi bi-question-circle"></i> What is the difference between the main types of licensing?</strong>
+        </button>
+      </h2>
+      <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>Basically, our products have two types of licensing: Single License for one seat (for one judge console). Site License – an unlimited number of seats registered at the same geographical address.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="faq-category">
     <h3>&#x1F7E9;Support & Troubleshooting</h3>
+- How to report an issue?
+- What details should I include in my request?
+- Can I request new features or integrations?
+         <p>We operate with the low touch model that means we focus on improving the technology to make the customer experience better.</p>
   </div>
 
     <div class="accordion-item">
@@ -320,10 +461,8 @@ indoor
           <p>При выборе судейской системы важно оценить кроме требуемого функционала общие затраты на использование системы. Основные стататьи расходов: 
             <ul>
               <li> стоимость лицензии на ПО: оформляется под личный план спорт.мероприятий. Лицензия на выбранные дисциплины;</li>
-              <li> какое оборудование потребуется для использовния системы: любые конфигурации; </li>
-              <li> установка: ; plug-and-play</li>
-              <li> настройка: We implemet zero-configuration approuch, easy deployment with Portable (Embedded mode) and standalone SQL-server installation;</li>
-              <li> обучение: detail documentation; </li>
+              <li> какое оборудование потребуется для использовния системы: любые конфигурации; 
+                   No specialised equipment required, use existing investments in hardware. </li>
             </ul>
           </p>
         </div>
@@ -352,22 +491,6 @@ indoor
 
     <div class="accordion-item">
       <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-           <strong><i class="bi bi-question-circle"></i> What makes OPTIMUS stand out? </strong>
-        </button>
-      </h2>
-      <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-        <div class="accordion-body">
-          <ol>
-            <li>Zero-administration approach: No installation (plug-and-play) - allow users easy move from one computer to another;  No specialised equipment required, use existing investments in hardware. Detailed documentation</li>
-            <li>We operate with the low touch model that means we focus on improving the technology to make the customer experience better.</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
            <strong><i class="bi bi-question-circle"></i> OPTIMUS advantages</strong>
         </button>
@@ -380,19 +503,6 @@ indoor
             <li>Versatility player: Used modern FFMPEG library to play multiple video format (.MP4;.MPEG;.AVI;.MKV;...)</li>
             <li>Built-in editor: Настраивай шаблоны документов с помощью встроенного редактора печатных форм. Predefined set of documents на рус/eng/укр, включая формы для web-документов. Export to multiple formats (PDF, DOC, HTML, JPEG, BMP)</li>
           </ol>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-           <strong><i class="bi bi-question-circle"></i> What is the difference between the main types of licensing?</strong>
-        </button>
-      </h2>
-      <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-        <div class="accordion-body">
-          <p>Basically, our products have two types of licensing: Single License for one seat (for one judge console). Site License – an unlimited number of seats registered at the same geographical address.</p>
         </div>
       </div>
     </div>
@@ -419,33 +529,34 @@ indoor
 </section>
 
 
-  <footer class="py-3 my-4" style="background-image: radial-gradient(circle at top right,#08088A,#58A2FA 50%);">
-    <div class="row text-white-50">
-      <div class="col-sm m-4">
-        <div>
-          <img src="images/turtleZ_color.png" style="height:2rem; float:left; margin: 5px;">
-          <p class=""> &copy  2008-2025 &nbsp;<span class="text-white fw-bold h4" nowrap>  Zeroturtle</span></p>
-        </div>
-        <div class="align-bottom py-3 h4">
-          <ul class="list-inline">
-            <li class="list-inline-item"><i class="bi bi-facebook"></i></li>
-            <li class="list-inline-item"><i class="bi bi-instagram"></i></li>
-            <li class="list-inline-item"><i class="bi bi-twitter-x"></i></li>
-            <li class="list-inline-item"><i class="bi bi-telegram"></i></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm m-4">
-        <h4 class="text-white-50">Quick Links</h4>
-        <ul class="list-unstyled">
-          <li class="mb-2"><a href="about.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">About</a></li>
-          <li class="mb-2"><a href="download.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Download</a></li>
-          <li class="mb-2"><a href="licence.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Service</a></li>
-          <li class="mb-2"><a href="contact.html" class="link-light link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Contact</a></li>
+<footer class="py-3 my-4 light-energy">
+  <div class="row">
+    <div class="col-sm m-4">
+      <div> <img src="images/turtleZ-bw.svg" style="height:2.2rem; float:left;">  &copy  2008-2025 &nbsp;<span class="h4 fw-bold"> Zeroturtle</span></div>
+      <div class="align-bottom h4 footer-social">
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="https://www.facebook.com/groups/399304463592210"><i class="bi bi-facebook"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="bi bi-instagram"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="bi bi-twitter-x"></i></a></li>
+          <li class="list-inline-item"><a href="#"><i class="bi bi-telegram"></i></a></li>
         </ul>
       </div>
+      <div class="align-bottom footer-nav">
+         <a data-bs-toggle="modal" data-bs-target="#privatPolicy" href="#">Privacy</a>|<a href="#">Terms of use</a>|<a href="#">Cookie</a>
+      </div>
     </div>
-  </footer>
+    <div class="col-sm m-4 footer-nav">
+      <h4 class="">Quick Links</h4>
+      <ul class="list-unstyled">
+        <li class="mb-2"><a href="about.html">About</a> <!--span>— Learn what OPTIMUS can do</span--></li>
+        <li class="mb-2"><a href="download.html">Download</a> <!--span>— Try the demo version</span--></li>
+        <li class="mb-2"><a href="licence.html">Service</a> <!--span>— Choose your plan</span--></li>
+        <li class="mb-2"><a href="contact.html">Contact</a> <!--span>— Get in touch</span--></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
 
 </div> <!--container-->
 
