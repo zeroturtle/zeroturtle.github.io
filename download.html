@@ -12,9 +12,9 @@ function human_filesize($bytes, $decimals = 2) {
 }
 function line($Num) {
   $files = [
-    ['optimus-5.3.0.5-full.zip','Optimus v5.3 "Pegasus" full pack, Русский/English','zip'],
+    ['optimus-5.3.0.15-full.zip','Optimus v5.3 "Pegasus" full pack, Русский/English','zip'],
     ['','','x'],
-    ['optimus-5.3.0.5-core.zip','Optimus v5.3 "Pegasus" core files, Русский/English','zip'],
+    ['optimus-5.3.0.15-core.zip','Optimus v5.3 "Pegasus" core files, Русский/English','zip'],
     ['','','x'],
     ['Reports_ru.zip','Русский','zip'],
     ['Reports_ua.zip','Українська','zip'],
@@ -61,24 +61,10 @@ function line($Num) {
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.4s ease;
 }
-.contribute-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.contribute-list li {
-  display: flex;
-  align-items: top;
-  justify-content: center;
-  gap: 0.75rem;
-  margin: 0.7rem 0;
-  color: #212529; /* стандартный Bootstrap-текст */
-  transition: transform 0.2s ease, color 0.3s ease;
-}
-.contribute-list i {
+.contribute ul i {
+  margin: 0.7rem 1.0rem;
   font-size: 1.5rem;  /* Иконки чуть крупнее текста */
   color: #0d6efd; /* Bootstrap primary */
-  transition: color 0.3s ease, transform 0.25s ease;
 }
 footer.light-energy {
   background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 80%, #dee2e6 100%);
@@ -139,14 +125,15 @@ footer.light-energy {
     </header>
 
 
-<!-- отправка новая лицензия -->
+
 <p class="display-4">OPTIMUS <span class="text-success">Support Center</span></p>
 <p>The all-in-one judging software for skydiving competitions — ready to use after quick sign-in and license activation.</p>
 
 <section id="download" class="border-bottom py-3 bg-secondary-subtle">
+  <div class="mx-3">
     <div class="row">
       <div class="col-sm-6">
-        <p><strong>Current build 5.3.0.3 </strong></p>
+        <p><strong>Current build 5.3.0.15 </strong></p>
         <span class="h3 text-center">Download Full package: </span>
         <ul>
           <li><?php line(0); ?> <br> <small><a href="#whatsnew">Read release notes</a> </small> </li>
@@ -213,11 +200,13 @@ footer.light-energy {
         </ul>
       </div>
     </div>
-  <hr>
-  <p><small>
-   Runs on Windows 7 or later.  There are no macOS or Linux version planned. <br>
-   No admin rights required.  No installation or external software dependencies. 
-   </small></p>
+    <hr>
+    <p><small>
+      Runs on Windows 7 or later.  There are no macOS or Linux version planned. <br>
+      No admin rights required.  No installation or external software dependencies. 
+     </small>
+    </p>
+  </div>
 </section>
 
 <!--
@@ -255,14 +244,14 @@ footer.light-energy {
       <div class="col-sm-8 m-3 text-md-start">
         <p class="display-4">How you can <span class="text-danger">contribute…</span></p>
         <p>OPTIMUS keeps growing with help from judges, developers, and competition organizers worldwide.  Your feedback shapes new features and improvements.</p>
-        <ul class="contribute-list">
-          <li><i class="bi bi-chat-dots"></i>Share Your Experience<br>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-chat-dots"></i><strong>Share Your Experience</strong><br>
             Want to get more involved in the Optimus community? Send your feedback, ideas, and feature requests. Help us make judging more efficient for everyone.</li>
-          <li><i class="bi bi-people"></i>Collaborate<br>
+          <li><i class="bi bi-people"></i><strong>Collaborate</strong><br>
             Are you a developer or national federation representative?  Partner with us to extend OPTIMUS’ reach.</li>
-          <li><i class="bi bi-puzzle"></i>Become a Beta Tester<br>
+          <li><i class="bi bi-puzzle"></i><strong>Become a Beta Tester</strong><br>
             Get early access to new judging tools and help validate workflows before release. (No coding required)</li>
-          <li><i class="bi bi-translate"></i>Translate content <br>
+          <li><i class="bi bi-translate"></i><strong>Translate content</strong> <br>
             Help us translate Optimus products into your local language.</li>
         </ul>
       </div>
@@ -279,7 +268,7 @@ footer.light-energy {
   <p class="display-4"><span class="text-danger">OPTIMUS</span> evolution</p>
   <p>Interested in the full development history?  
      Read the complete changelog covering all updates, fixes, and feature milestones.</p>
-  <div id="fileContent" class="mx-3 border bg-info-subtle"><a href="#" id="history">📄 View Release Notes</a></div>
+  <div id="fileContent" class="mx-3 border bg-info-subtle"><a href="#" id="history"><i class="bi bi-journal-richtext fs-4"></i> Release Notes</a></div>
    <script>
      async function loadFile(filePath) {
        try {

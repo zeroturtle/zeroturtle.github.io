@@ -162,7 +162,7 @@ footer.light-energy {
   </header>
 
 <p class="display-4">Build your plan</p>
-
+  <h2 class="display-3">Licence <span class="text-danger">Details</span></h2>
 <section id="price" class="pricing">
   <form id="myForm" action="subscribe.html" method="post">
     <div class="row">
@@ -305,7 +305,7 @@ indoor
       We provide unlimited email support to all users — including Free tier.
       Requests are handled according to priority and complexity.
     </p>
-    <ul type="none">
+    <ul class="list-unstyled">
       <li><i class="bi bi-envelope-at text-white-50 fs-4 me-2"></i> <b>Contact Channels:</b> Use <a href="contact.html" class="link-light">Web form</a> or email <a href="mailto:support@yourdomain.com" class="link-light">support@yourdomain.com</a></li>
       <li><i class="bi bi-clock-history text-white-50 fs-4 me-2"></i> <b>Response time:</b> within 24 hours on business days</li>
       <li><i class="bi bi-ui-checks text-white-50 fs-4 me-2"></i> <b>Request Format:</b> To help us assist you faster, please include:
@@ -315,14 +315,14 @@ indoor
           <li>Screenshots or video if applicable</li>
         </ul>
       </li>
-      <li><i class="bi bi-translate text-white-50 fs-4 me-2"></i> <b>Languages:</b> English, French, Russian</li>
+      <li><i class="bi bi-globe text-white-50 fs-4 me-2"></i> <b>Languages:</b> English, French, Russian</li>
     </ul>
-    <p class="p-3">
-      <span class="p-3 border border-3">Warning!  Technical support provides for customers with active subscription.</span> 
-    </p>
-    <p>Compare your maintenance term to the release date of the latest build.  Terms of License you can check in About window.</p>
-  
-    <a href="contact.html"  class="link-warning fw-semibold">Contact Support</a>
+    <div class="p-3 border border-3">
+      <p>Warning!  Technical support provides for customers with active subscription.</p>
+      <p><i class="bi bi-exclamation-triangle"></i>If you have a problem with OPTMIUS send your request, including a detailed description of the problem you are seeing, making sure you include your license number in the subject line of your message. 
+         If you do not include your license number in the subject line, you may not get any kind of reply because of filtering processes we have had to implement in order to control access to the resource.</p>
+    </div> 
+    <p class="p-2"><a href="contact.html"  class="link-warning fw-semibold">Contact Support</a></p>
     <p>&nbsp;</p>
   </div>
 </section>
@@ -370,12 +370,6 @@ indoor
   </div>
   <div class="faq-category">
     <h3>&#x1F7E5;Getting Started</h3>
-- How to start a demo event?
-    <p>
-      You can create a demo event directly from your dashboard — no setup or license required.  
-      Upload a training video, assign judges, and try the full scoring process in minutes.  
-      Results can be viewed, shared, or published just like in real competitions.
-    </p>
 
     <div class="accordion-item">
       <h2 class="accordion-header">
@@ -391,6 +385,12 @@ indoor
       </div>
     </div>
 
+- How to start a demo event?
+    <p>
+      You can create a demo event directly from your dashboard — no setup or license required.  
+      Upload a training video, assign judges, and try the full scoring process in minutes.  
+      Results can be viewed, shared, or published just like in real competitions.
+    </p>
 - How to invite judges?
         <p>Simply send them a unique event link. Judges can log in and score from anywhere.</p>
   </div>
@@ -423,20 +423,69 @@ indoor
   </div>
   <div class="faq-category">
     <h3>&#x1F7E8;Account & Licensing</h3>
-- How does Pay-as-you-go pricing work?
-        <p>You only pay for the features and users you actually need. Start with the free plan and upgrade anytime.</p>
-- What happens when I upgrade my plan?
-        <p>Your active data and configurations are preserved. New features unlock immediately after payment.</p>
 
     <div class="accordion-item">
       <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic1" aria-expanded="false" aria-controls="faq_lic1">
+           <strong><i class="bi bi-question-circle"></i> How does Pay-as-you-go pricing work?</strong>
+        </button>
+      </h2>
+      <div id="faq_lic1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>You only pay for the features and users you actually need. Start with the free plan and upgrade anytime.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic2" aria-expanded="false" aria-controls="faq_lic2">
            <strong><i class="bi bi-question-circle"></i> What is the difference between the main types of licensing?</strong>
         </button>
       </h2>
-      <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div id="faq_lic2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
           <p>Basically, our products have two types of licensing: Single License for one seat (for one judge console). Site License – an unlimited number of seats registered at the same geographical address.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic4" aria-expanded="false" aria-controls="faq_lic4">
+           <strong><i class="bi bi-question-circle"></i> What should you do in case corupted license file?</strong>
+        </button>
+      </h2>
+      <div id="faq_lic4" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+         <p><i class="bi bi-exclamation-octagon"></i>The system will apply  a <strong>Free license</strong>. In this case a nag window will appears, you won't get new versions or updates, any modules won't work.
+            Please contact with our <a href="mailto:support@optimus.dp.ua">tech support</a> to get valid license file.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic3" aria-expanded="false" aria-controls="faq_lic3">
+           <strong><i class="bi bi-question-circle"></i> What happens when I upgrade my plan?</strong>
+        </button>
+      </h2>
+      <div id="faq_lic3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>Your active data and configurations are preserved. New features unlock immediately after payment.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic5" aria-expanded="false" aria-controls="faq_lic5">
+           <strong><i class="bi bi-question-circle"></i> If you lost your license file</strong>
+        </button>
+      </h2>
+      <div id="faq_lic5" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>we can provide it on request.</p>
         </div>
       </div>
     </div>
@@ -449,6 +498,56 @@ indoor
 - Can I request new features or integrations?
          <p>We operate with the low touch model that means we focus on improving the technology to make the customer experience better.</p>
   </div>
+
+  <div class="faq-category">
+    <h3>&#x1F7EA;Technical details</h3>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_tech1" aria-expanded="false" aria-controls="faq_tech1">
+           <strong><i class="bi bi-question-circle"></i>Which advantages has the OPTIMUS?</strong>
+        </button>
+      </h2>
+      <div id="faq_tech1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>
+            We use Delphi to develop OPTIMUS. This is a 
+            <ol>
+              <li>Based on SQL DB engine: SQL-server Native support for all major operating systems, including Windows, Linux and MacOS; Portable (Embedded mode) and standalone installation</li>
+              <li>Multilingual architecture: Modern English/Rusian user interface in Windows 10 style, rus/eng/ukr language document templates</li>
+              <li>Built-in editor: Настраивай шаблоны документов с помощью встроенного редактора печатных форм. Predefined set of documents на рус/eng/укр, включая формы для web-документов. Export to multiple formats (PDF, DOC, HTML, JPEG, BMP)</li>
+              <li>Versatility player: Used modern FFMPEG library to play multiple video format (.MP4;.MPEG;.AVI;.MKV;...)</li>
+            </ol>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_tech2" aria-expanded="false" aria-controls="faq_tech2">
+           <strong><i class="bi bi-question-circle"></i> What does a version number mean?</strong>
+        </button>
+      </h2>
+      <div id="faq_tech2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>The OPTIMUS version consists of four numbers: major.minor.patch.build. They differ in several ways:
+            <ul>
+              <li>build - compilation number during development;</li>
+              <li>patch - incremental release number is made fixes or improvements;</li>
+              <li>minor - released new functionality that does not affect the old one;</li>
+              <li>major - a release is issued that changes the way old functionality is used.</li>
+            </ul>
+            The version number can be checked in the exefile properties on the Details tab or in application menu About.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- tech-->
+
+
+
 
     <div class="accordion-item">
       <h2 class="accordion-header">
@@ -469,44 +568,6 @@ indoor
       </div>
     </div>
 
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-           <strong><i class="bi bi-question-circle"></i> Why do you have to update app?</strong>
-        </button>
-      </h2>
-      <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-        <div class="accordion-body">
-          <p> гарантирует соответствие правилам; получаете исправления и доступ к новому функционалу; Мы предоставляем техническую поддержку для текущей версии системы (в рамках X.Y версии). 
-            В OPTIMUS семантическая версия состоит из четырёх номеров: major, minor, patch, build. Они различаются следующими вещами:
-    <ul><li>build-версия компиляции кода в процессе разработки;</li>
-    <li>patch-версия инкрементируется при выпуске релиза, закрывающего баги;</li>
-    <li>minor-версия инкрементируется при выпуске релиза с новым функционалом, не затрагивающем старый;</li>
-    <li>major-версия инкрементируется при выпуске релиза, которые меняют способ использования старого функционала.</li></ul>
-            Номер версии можно проверить в свойствах exe-файла на закладке Подробно.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-           <strong><i class="bi bi-question-circle"></i> OPTIMUS advantages</strong>
-        </button>
-      </h2>
-      <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-        <div class="accordion-body">
-          <ol>
-            <li>Based on SQL DB engine: SQL-server Native support for all major operating systems, including Windows, Linux and MacOS; Portable (Embedded mode) and standalone installation</li>
-            <li>Multilingual architecture: Modern English/Rusian user interface in Windows 10 style, rus/eng/ukr language document templates</li>
-            <li>Versatility player: Used modern FFMPEG library to play multiple video format (.MP4;.MPEG;.AVI;.MKV;...)</li>
-            <li>Built-in editor: Настраивай шаблоны документов с помощью встроенного редактора печатных форм. Predefined set of documents на рус/eng/укр, включая формы для web-документов. Export to multiple formats (PDF, DOC, HTML, JPEG, BMP)</li>
-          </ol>
-        </div>
-      </div>
-    </div>
-
     <!--div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
@@ -520,13 +581,11 @@ indoor
       </div>
     </div-->
 
-  <p><i class="bi bi-exclamation-octagon"></i> When you use corupted license file a <strong>Free license</strong> will apply (nag window will appears, you won't get new versions or updates, any modules won't work).
-	In these cases please contact with our tech support service.
-
-
   </div>
 </div>
 </section>
+
+
 
 
 <footer class="py-3 my-4 light-energy">
