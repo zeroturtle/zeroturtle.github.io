@@ -293,35 +293,258 @@ footer.light-energy {
 </section>
 
 
+<section id="faq" class="my-5">
+<div class="m-3">
+  <p class="display-4"><strong>Frequently Asked <span class="text-danger">Questions</span></strong></p>
+  <p><i class="bi bi-exclamation-triangle"></i> We recommend testing our software before purchasing to make sure it meets your requirements.</p>
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+<!-- CIRCLE 1F7E0 - 1F7E4 (ORANGE YELLOW GREEN PURPLE BROWN  -->
+  <div class="faq-category">
+    <h3>&#x1F7EA;General </h3>
 
-<section id="whatsnew" class="border-bottom py-3">
-  <p class="display-4"><span class="text-danger">OPTIMUS</span> evolution</p>
-  <p>Interested in the full development history?  
-     Read the complete changelog covering all updates, fixes, and feature milestones.</p>
-  <div id="fileContent" class="mx-3 border bg-info-subtle"><a href="#" id="history"><i class="bi bi-journal-richtext fs-4"></i> Release Notes</a></div>
-   <script>
-     async function loadFile(filePath) {
-       try {
-         const response = await fetch(filePath);
-         const fileContent = await response.text();
-         return fileContent;
-       } catch (error) {
-         console.error("Ошибка загрузки файла:", error);
-         return null;
-       }
-     }
-     const fileInput = document.getElementById('history');
-     fileInput.addEventListener('click', (event) => {
-       event.preventDefault();
-       //const fileContent = loadFile("https://localhost/whatsnew");
-       loadFile("https://zeroturtle.github.io/whatsnew").then(fileContent => {
-          if (fileContent) {
-            let divElement = document.getElementById("fileContent");
-            divElement.innerHTML = `<pre>${fileContent}</pre>`;
-          }
-       })
-     });
-   </script>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_1-1" aria-expanded="false" aria-controls="faq_1-1">
+           <strong><i class="bi bi-question-circle"></i> Can we use it for national competitions?</strong>
+        </button>
+      </h2>
+      <div id="faq_1-1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>Yes. The system supports multiple judging panels, synchronized scoring, and real-time result publishing.  
+             It’s already used by federations for national and regional events.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_1-2" aria-expanded="false" aria-controls="faq_1-2">
+           <strong><i class="bi bi-question-circle"></i> Can I use it for training or practice sessions?</strong>
+        </button>
+      </h2>
+      <div id="faq_1-2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>  Yes. The free plan is perfect for small teams to practice judging with video uploads, scoring, and replay analysis.  </p>
+        </div>
+      </div>
+    </div>
+<!-- Can judges evaluate performances remotely?
+          <p> Absolutely. Videos can be uploaded and scored online — perfect for training, remote judging, or qualification rounds. </p-->
+  </div>
+  <div class="faq-category">
+    <h3>&#x1F7E5;Getting Started</h3>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_2-1" aria-expanded="false" aria-controls="faq_2-1">
+           <strong><i class="bi bi-question-circle"></i> Do I need to install anything?</strong>
+        </button>
+      </h2>
+      <div id="faq_2-1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>We implemet Zero-administration approach: No installation (plug-and-play) - allow users easy move from one computer to another;
+             You can use DB server in Embedded mode for local installations, and standalone SQL-server installation on a cmpetition; </p>
+        </div>
+      </div>
+    </div>
+
+- How to start a demo event?
+    <p>
+      You can create a demo event directly from your dashboard — no setup or license required.  
+      Upload a training video, assign judges, and try the full scoring process in minutes.  
+      Results can be viewed, shared, or published just like in real competitions.
+    </p>
+- How to invite judges?
+        <p>Simply send them a unique event link. Judges can log in and score from anywhere.</p>
+  </div>
+  <div class="faq-category">
+    <h3>&#x1F7E6;Configuration & Rules</h3>
+- How to customize scoring rules?
+        <p>Default templates match official federation standards, but you can edit criteria, weights, or upload your own rulesets.</p>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_3-1" aria-expanded="false" aria-controls="faq_3-1">
+           <strong><i class="bi bi-question-circle"></i> Is it compatible with different federations?</strong>
+        </button>
+      </h2>
+      <div id="faq_3-1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>Yes — the system already includes over 30 official divepools images from FAI, USPA, ФПСУ, DFV, AXIS.  You can also add custom ones and manage your own divepool sets. </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="faq-category">
+    <h3>&#x1F7E7;Results & Publishing</h3>
+- How to publish results online?
+        <p>Publish your event results instantly on a personalized web page or embed them into your own site. 
+        Integration with DZTV and live ranking is built-in.</p>
+-  What is DZTV integration?
+        <p>DZTV integration allows live display of rankings and results during the competition on dropzone screens.</p>
+  </div>
+  <div class="faq-category">
+    <h3>&#x1F7E8;Account & Licensing</h3>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic1" aria-expanded="false" aria-controls="faq_lic1">
+           <strong><i class="bi bi-question-circle"></i> How does Pay-as-you-go pricing work?</strong>
+        </button>
+      </h2>
+      <div id="faq_lic1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>You only pay for the features and users you actually need. Start with the free plan and upgrade anytime.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic2" aria-expanded="false" aria-controls="faq_lic2">
+           <strong><i class="bi bi-question-circle"></i> What is the difference between the main types of licensing?</strong>
+        </button>
+      </h2>
+      <div id="faq_lic2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>Basically, our products have two types of licensing: Single License for one seat (for one judge console). Site License – an unlimited number of seats registered at the same geographical address.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic4" aria-expanded="false" aria-controls="faq_lic4">
+           <strong><i class="bi bi-question-circle"></i> What should you do in case corupted license file?</strong>
+        </button>
+      </h2>
+      <div id="faq_lic4" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+         <p><i class="bi bi-exclamation-octagon"></i>The system will apply  a <strong>Free license</strong>. In this case a nag window will appears, you won't get new versions or updates, any modules won't work.
+            Please contact with our <a href="mailto:support@optimus.dp.ua">tech support</a> to get valid license file.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic3" aria-expanded="false" aria-controls="faq_lic3">
+           <strong><i class="bi bi-question-circle"></i> What happens when I upgrade my plan?</strong>
+        </button>
+      </h2>
+      <div id="faq_lic3" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>Your active data and configurations are preserved. New features unlock immediately after payment.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic5" aria-expanded="false" aria-controls="faq_lic5">
+           <strong><i class="bi bi-question-circle"></i> If you lost your license file</strong>
+        </button>
+      </h2>
+      <div id="faq_lic5" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>we can provide it on request.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="faq-category">
+    <h3>&#x1F7E9;Support & Troubleshooting</h3>
+- How to report an issue?
+- What details should I include in my request?
+- Can I request new features or integrations?
+         <p>We operate with the low touch model that means we focus on improving the technology to make the customer experience better.</p>
+  </div>
+
+  <div class="faq-category">
+    <h3>&#x1F7EB;Others</h3>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_tech1" aria-expanded="false" aria-controls="faq_tech1">
+           <strong><i class="bi bi-question-circle"></i>Which advantages has the OPTIMUS?</strong>
+        </button>
+      </h2>
+      <div id="faq_tech1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>
+            We use Delphi to develop OPTIMUS. This is a 
+            <ol>
+              <li>Based on SQL DB engine: SQL-server Native support for all major operating systems, including Windows, Linux and MacOS; Portable (Embedded mode) and standalone installation</li>
+              <li>Multilingual architecture: Modern English/Rusian user interface in Windows 10 style, rus/eng/ukr language document templates</li>
+              <li>Built-in editor: Настраивай шаблоны документов с помощью встроенного редактора печатных форм. Predefined set of documents на рус/eng/укр, включая формы для web-документов. Export to multiple formats (PDF, DOC, HTML, JPEG, BMP)</li>
+              <li>Versatility player: Used modern FFMPEG library to play multiple video format (.MP4;.MPEG;.AVI;.MKV;...)</li>
+            </ol>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_tech2" aria-expanded="false" aria-controls="faq_tech2">
+           <strong><i class="bi bi-question-circle"></i> What does a version number mean?</strong>
+        </button>
+      </h2>
+      <div id="faq_tech2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>The OPTIMUS version consists of four numbers: major.minor.patch.build. They differ in several ways:
+            <ul>
+              <li>build - compilation number during development;</li>
+              <li>patch - incremental release number is made fixes or improvements;</li>
+              <li>minor - released new functionality that does not affect the old one;</li>
+              <li>major - a release is issued that changes the way old functionality is used.</li>
+            </ul>
+            The version number can be checked in the exefile properties on the Details tab or in application menu About.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- tech-->
+
+
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+           <strong><i class="bi bi-question-circle"></i> OPTIMUS TCO (Total cost of ownership)</strong>
+        </button>
+      </h2>
+      <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>При выборе судейской системы важно оценить кроме требуемого функционала общие затраты на использование системы. Основные стататьи расходов: 
+            <ul>
+              <li> стоимость лицензии на ПО: оформляется под личный план спорт.мероприятий. Лицензия на выбранные дисциплины;</li>
+              <li> какое оборудование потребуется для использовния системы: любые конфигурации; 
+                   No specialised equipment required, use existing investments in hardware. </li>
+            </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!--div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+           <strong><i class="bi bi-question-circle"></i> Q?</strong>
+        </button>
+      </h2>
+      <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+        <div class="accordion-body">
+          <p>A</p>
+        </div>
+      </div>
+    </div-->
+
+  </div>
+</div>
 </section>
 
 
