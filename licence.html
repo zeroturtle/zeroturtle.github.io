@@ -1,9 +1,9 @@
 <?php
-  require_once __DIR__ . '/auth/src/libs/helpers.php';
-  require_once __DIR__ . '/auth/src/inc/auth.php';
+  require __DIR__ . '/auth/src/bootstrap.php';
 
-  if ( !session_id() ) @session_start();
   inactivity_time();
+  require_login();
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@
         const actionButton = document.getElementById('actionButton')
         const planLabel = document.getElementById('planLabel');
 
-         const plan = document.querySelector('input[name="plan"]:checked').value;
+         const plan = document.querySelector('input[name="plan_type"]:checked').value;
          if (plan === 'free') { //free
            planLabel.textContent = 'Free plan';
            actionButton.textContent = 'Start for free';
@@ -66,7 +66,7 @@
         window.addEventListener("load", (event) => {
           const disciplines = document.getElementById('disciplines')
           const checkboxes = disciplines.querySelectorAll('input[type="checkbox"]')  //найти все checkbox в блоке disciplines
-          const planTogler = document.querySelectorAll('input[name="plan"]')
+          const planTogler = document.querySelectorAll('input[name="plan_type"]')
 
           checkboxes.forEach( cb => cb.addEventListener("change", updatePrice))
           planTogler.forEach(r => r.addEventListener('change', updatePrice))
@@ -161,114 +161,165 @@ footer.light-energy {
        </div>
   </header>
 
-<p class="display-4 text-center">Build your <span class="text-danger">plan</span></p>
-<section id="price" class="pricing">
-  <form id="myForm" action="subscribe.html" method="post">
-    <div class="row">
-      <div class="py-2 text-center">  
-          <h5 class="text-uppercase">Try for free - customize your own judging toolkit</h5> 
-            <div>
-              <input type="radio" class="btn-check" name="plan" id="option1" value="free" checked>
-              <label class="btn btn-outline-primary" for="option1">Free plan</label>
-              <input type="radio" class="btn-check" name="plan" id="option2" value="custom">
-              <label class="btn btn-outline-primary" for="option2">Custom plan</label>
-            </div>
-        <p class="text-center p-2">
-           Contact <a href="contact.html" class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Our team</a> to move to a more flexible license type.
-        </p>
-      </div>
-    </div>
-    <div  class="configurator">
-      <div class="d-grid gap-3">
-        <input type="hidden" name="years" value=1>
-        <!--div>
-          <h5 class="text-uppercase">Extend support & upgrade period</h5>
-            <div>
-              <input type="radio" class="" name="years" id="year1" value="1">
-              <label class="" for="year1">1 year</label>
-              <input type="radio" class="" name="years" id="year2" value="2">
-              <label class="" for="year2">2 years</label>
-              <input type="radio" class="" name="years" id="year3" value="3">
-              <label class="" for="year3">3 years</label>
-            </div>
-          <p>One year support and upgrades is included by default. You can extend this period for up to three years with a significant discount.</p>
-        </div-->
-          <div id="disciplines" class="p-2 d-grid gap-2 text-nowrap">
-            <!-- outdoor -->
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="types[]" value="FS">
-              <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="types[]" value="SF">
-              <label class="form-check-label" for="inlineCheckbox2">Speed Formation Skydiving</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="types[]" value="AE">
-              <label class="form-check-label" for="inlineCheckbox3">Artistic Events</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="types[]" value="CF">
-              <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="types[]" value="WS">
-              <label class="form-check-label" for="inlineCheckbox5">Wingsuit Flying Perfomance</label>
-            </div>
-            <!-- 
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox6" name="types[]" value="WA" disabled>
-              <label class="form-check-label" for="inlineCheckbox6">Wingsuit Flying Acrobatic</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox7" name="types[]" value="CP" disabled>
-              <label class="form-check-label" for="inlineCheckbox7">Canopy Piloting</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox8" name="types[]" value="SP" disabled>
-              <label class="form-check-label" for="inlineCheckbox8">Speed Skydiving</label>
-            </div>
-indoor
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox9" name="types[]" value="IF" disabled>
-              <label class="form-check-label" for="inlineCheckbox9">Indoor Formation Skydiving</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox10" name="types[]" value="IS" disabled>
-              <label class="form-check-label" for="inlineCheckbox10">Indoor Solo Freestyle</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox11" name="types[]" value="DS" disabled>
-              <label class="form-check-label" for="inlineCheckbox11">Dynamic Solo Speed</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox12" name="types[]" value="DY" disabled>
-              <label class="form-check-label" for="inlineCheckbox12">Dynamic Flying</label>
-            </div>
-            -->    
-          </div> <!-- disciplines -->
-    
-        <!--div>
-          <h5 class="text-uppercase">Cloud video storage</h5>
-          <p><input class="form-check-input" type="checkbox" id="" name="cloud">
-             Premium видео выгружаются на cloud (вся стоимость аренды cloud + 15% за обслуживание).</p>
-        </div-->
-      </div>
-      <div class="border-top text-center">
-        <h3 id="planLabel"></h3>
-        <div >
-          <div id="single" style="display:block"><p class="">Intended to be used individual users for education and training purposes and are for non-commercial use.</p></div>
-          <div id="site" style="display:none"><p class="">For an unlimited number of computers within a single company, up to 5 judge consoles.</p> </div>
+<p class="display-4">Licence <span class="text-danger">Configurator</span></p>
+<section id="licence" class="border pricing">
+  <form id="myForm" action="licence.php" method="post">
+  <div class="row">
+    <div class="col-lg-6">
+        <p class="display-6 text-center">Build your plan</p>
+        <div class="py-2 text-center">  
+            <input type="radio" class="btn-check" name="plan_type" id="option1" value="free" checked>
+            <label class="btn btn-outline-primary" for="option1">Free plan</label>
+            <input type="radio" class="btn-check" name="plan_type" id="option2" value="custom">
+            <label class="btn btn-outline-primary" for="option2">Custom plan</label>
         </div>
-        <div class="fs-2">Total:  &euro;<span id="totalPrice"></span> / year</div>
-        <div><small>Price does not include taxes </small></div><br>
-        <button id="actionButton" type="submit" class="btn btn-lg btn-success">&nbsp; Start for free &nbsp;</button>
+        <div class="configurator">
+          <div class="d-grid gap-3">
+            <input type="hidden" name="years" value=1>
+            <!--div>
+              <h5 class="text-uppercase">Extend support & upgrade period</h5>
+                <div>
+                  <input type="radio" class="" name="years" id="year1" value="1">
+                  <label class="" for="year1">1 year</label>
+                  <input type="radio" class="" name="years" id="year2" value="2">
+                  <label class="" for="year2">2 years</label>
+                  <input type="radio" class="" name="years" id="year3" value="3">
+                  <label class="" for="year3">3 years</label>
+                </div>
+              <p>One year support and upgrades is included by default. You can extend this period for up to three years with a significant discount.</p>
+            </div-->
+              <div id="disciplines" class="p-2 d-grid gap-2 text-nowrap">
+                <p class="mb-0">Disciplines*: </p>
+                <!-- outdoor -->
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="types[]" value="FS">
+                  <label class="form-check-label" for="inlineCheckbox1">Formation Skydiving</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="types[]" value="SF">
+                  <label class="form-check-label" for="inlineCheckbox2">Speed Formation Skydiving</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="types[]" value="AE">
+                  <label class="form-check-label" for="inlineCheckbox3">Artistic Events</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox4" name="types[]" value="CF">
+                  <label class="form-check-label" for="inlineCheckbox4">Canopy Formation</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="types[]" value="WS">
+                  <label class="form-check-label" for="inlineCheckbox5">Wingsuit Flying Perfomance</label>
+                </div>
+                <!-- 
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" name="types[]" value="WA" disabled>
+                  <label class="form-check-label" for="inlineCheckbox6">Wingsuit Flying Acrobatic</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox7" name="types[]" value="CP" disabled>
+                  <label class="form-check-label" for="inlineCheckbox7">Canopy Piloting</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox8" name="types[]" value="SP" disabled>
+                  <label class="form-check-label" for="inlineCheckbox8">Speed Skydiving</label>
+                </div>
+indoor
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox9" name="types[]" value="IF" disabled>
+                  <label class="form-check-label" for="inlineCheckbox9">Indoor Formation Skydiving</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox10" name="types[]" value="IS" disabled>
+                  <label class="form-check-label" for="inlineCheckbox10">Indoor Solo Freestyle</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox11" name="types[]" value="DS" disabled>
+                  <label class="form-check-label" for="inlineCheckbox11">Dynamic Solo Speed</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox12" name="types[]" value="DY" disabled>
+                  <label class="form-check-label" for="inlineCheckbox12">Dynamic Flying</label>
+                </div>
+                -->    
+              </div> <!-- disciplines -->
+        
+            <!--div>
+              <h5 class="text-uppercase">Cloud video storage</h5>
+              <p><input class="form-check-input" type="checkbox" id="" name="cloud">
+                 Premium видео выгружаются на cloud (вся стоимость аренды cloud + 15% за обслуживание).</p>
+            </div-->
+          </div> 
+          <div class="border-top text-center">
+            <h5 id="planLabel"></h5>
+            <div >
+              <div id="single" style="display:block"><p class="">Intended to be used individual users for education and training purposes and are for non-commercial use.</p></div>
+              <div id="site" style="display:none"><p class="">For an unlimited number of computers within a single company, up to 5 judge consoles.</p> </div>
+            </div>
+            <div class="fs-3">Total:  &euro;<span id="totalPrice"></span> / year</div>
+            <div><small>Price does not include taxes </small></div><br>
+          </div>
+        </div> <!-- plan -->
+    </div>
+    <div class="col-lg-6">
+        <div class="">
+          <p class="display-6 text-center">Details</p>
+          <p>&nbsp;</p>
+          <div class="configurator">
+            <fieldset>
+              <div class="d-grid gap-3">
+                <div>
+                    <label for="first_name" class="form-label">First Name*: </label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" required placeholder="First Name">
+                </div>
+                <div>
+                    <label for="last_name" class="form-label">Last Name*: </label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" required placeholder="Last Name">
+                </div>
+                <div>
+                    <label for="email" class="form-label">Email*: </label>
+                    <input type="email" class="form-control" id="email" name="email" required placeholder="Email address">
+                </div>
+                <div>
+                    <label for="company" class="form-label">Company: </label>
+                    <input type="text" class="form-control" id="company" name="company" placeholder="Company Name">
+                </div>
+                <div>
+                    <label for="jobtitle" class="form-label">Job Title: </label>
+                    <input type="text" class="form-control" id="jobtitle" name="jobtitle" placeholder="Type your current job title">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div> <!-- detail -->
+    </div>
+  </div> <!-- row -->
+    <div class="">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="" value="" required>
+        <label class="form-check-label" for="inlineCheckbox1">By filling and submitting this form you understand and agree that the use of OPTIMUS' website is subject to the General Website Terms of Use. I confirm that I will be the only authorized user of the license.</label>
       </div>
     </div>
+    <p class="text-warning"><?php echo (!empty($err) ? $err : ''); ?></p>
+    <button id="actionButton" type="submit" class="btn btn-lg btn-success">&nbsp; Start for free &nbsp;</button>
   </form>
+  <p class="text-center p-2">Contact <a href="contact.html" class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Our team</a> to move to a more flexible license type.</p>
 </section>
 
-
+<section id="order" class="my-5">
+  <div class="bg-warning p-3">
+    <small>
+      <p>Licence emailed/sent by e-mail after payment. Secure payments via 2Checkout (SSL).</p>
+      <p>Online orders are processed automatically 24/7.</p>
+      <p><b>WARNING!</b> Please use a valid email to receive the confidential information. We'll never share your email with anyone else.<br>
+          Once you have submitted your request, you will recieve a detailed product licensing information and licence file in attachment.</p>
+      <p><b>WARNING!</b> Your <b>payment is <span class="text-danger">Non-transferrable.</span></b>, and your service will continue until the end of your contracted term. <br>
+         We recommend you check the software with Single license before purchasing Site license as we distribute our products as try-before-you-buy products.</p>
+      <p>Licenses are valid for 1 year and a new license can be purchased after the term has expired.</p>
+      <p>The subleases, transfer, or commercial resale of the software to third parties is prohibited.</p>
+    </small>
+  </div>
+</section>
 
 <section id="subscription" class="my-5">
   <div class="row m-3">
@@ -334,52 +385,19 @@ indoor
 
 
 
-<section id="guide" class="border rounded-4 text-center my-5">
-  <div class="container text-center">
-    <style scoped>
-      .step-card {
-        background-color: var(--bs-light);
-        border: 1px solid var(--bs-border-color);
-        border-radius: 1rem;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-    </style>
-    <p class="display-4"><span class="text-danger">Activation</span> guide</p>
-    <p>What next?</p>
-
-    <div class="row justify-content-center g-4 text-start text-md-center">
-      <div class="col-12 col-md-4">
-        <div class="step-card p-4 h-100">
-          <div><i class="bi bi-1-circle fs-1 text-primary"></i></div>
-          <h5 class="mt-3 fw-semibold">Download the System</h5>
-          <p class="text-secondary small mb-0">
-            Get the latest Windows build from the <a href="download.html" class="link-primary">Download page</a>.
-            No installation required — just unpack and run.
-          </p>
-        </div>
-      </div>
-  
-      <div class="col-12 col-md-4">
-        <div class="step-card p-4 h-100">
-          <div><i class="bi bi-2-circle-fill fs-1 text-primary"></i></div>
-          <h5 class="mt-3 fw-semibold">Generate Your License</h5>
-          <p class="text-secondary small mb-0">
-            Use the <a href="licence.html" class="link-primary pe-none">License Constructor</a> to configure your plan.
-            Choose options, generate key, and download your license file.
-          </p>
-        </div>
-      </div>
-  
-      <div class="col-12 col-md-4">
-        <div class="step-card p-4 h-100">
-          <div><i class="bi bi-3-circle fs-1 text-primary"></i></div>
-          <h5 class="mt-3 fw-semibold">Activate and Start</h5>
-          <p class="text-secondary small mb-0">
-            Launch the app and activate your license file.  
-            You’re ready to judge, manage events, and share results instantly.
-          </p>
-        </div>
-      </div>
+<section id="renew" class="py-3" style="background: linear-gradient(180deg, #f8f9fa 0%, #e9f3ff 100%);">
+  <h2 class="display-3">Reasons to <span class="text-danger">renew</span> your license</h2>
+  <div class="d-grid gap-3">
+    <div>
+      <p> Keep your judging system running smoothly with software updates and priority assistance.
+      </p>
+	<ul class="list-unstyled px-3">
+          <li><i class="bi bi-box-fill fs-4 me-2"></i>Following your renewal, It ensures full compatibility with updated competition rules.</li>
+          <li><i class="bi bi-cash-coin fs-4 me-2"></i> You can upgrade <strong>Site-license</strong> within an active subscription to the license with a 20% discount. Contact our <a href="mailto:support@optimus.dp.ua">support team</a>. We will provide you with a quote.</li>
+          <li><i class="bi bi-exclamation-triangle fs-4 me-2"></i> After the subscription has expired, you will be required to purchase a new 1-year subscription in order to continue having access to any new minor releases and online product support.</li>
+          <li><i class="bi bi-award fs-4 me-2"></i> Customers who haven't renewed their subscription and wish to update their version of the system within one year can upgrade for $95 (a license is purchased separately).</li>
+	</ul>
+        <p class="ms-5"><small><i class="bi bi-asterisk"></i>Compare your maintenance term to the release date of the latest build.  Terms of License you can check in About window.</small></p>
     </div>
   </div>
 </section>
@@ -388,7 +406,7 @@ indoor
 <section id="faq" class="my-5">
 <div class="m-3">
   <p class="display-4"><strong>Frequently Asked <span class="text-danger">Questions</span></strong></p>
-  <p>Real scenarios where the judging system helps judges and organizers work faster and easier.</p>
+  <p><i class="bi bi-exclamation-triangle"></i> We recommend testing our software before purchasing to make sure it meets your requirements.</p>
   <div class="accordion accordion-flush" id="accordionFlushExample">
 <!-- CIRCLE 1F7E0 - 1F7E4 (ORANGE YELLOW GREEN PURPLE BROWN  -->
   <div class="faq-category">
@@ -556,7 +574,7 @@ indoor
   </div>
 
   <div class="faq-category">
-    <h3>&#x1F7EA;Technical details</h3>
+    <h3>&#x1F7EB;Others</h3>
 
     <div class="accordion-item">
       <h2 class="accordion-header">
@@ -681,7 +699,7 @@ indoor
       <ul class="list-unstyled">
         <li class="mb-2"><a href="about.html">About</a> <!--span>— Learn what OPTIMUS can do</span--></li>
         <li class="mb-2"><a href="download.html">Download</a> <!--span>— Try the demo version</span--></li>
-        <li class="mb-2"><a href="licence.html">Service</a> <!--span>— Choose your plan</span--></li>
+        <li class="mb-2"><a href="licence.html">License</a> <!--span>— Choose your plan</span--></li>
         <li class="mb-2"><a href="contact.html">Contact</a> <!--span>— Get in touch</span--></li>
       </ul>
     </div>
