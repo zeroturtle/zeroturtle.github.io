@@ -280,14 +280,36 @@ footer.light-energy {
       </p>
       <div id="fileContent" class="mx-3 border bg-info-subtle"></div>
        <script>
-         const notes = document.getElementById('notes')
-         notes.addEventListener('click', (event) => {
+/*       //другой вариант
+         async function loadFile(fileUrl, targetElementId) {
+           await fetch(fileUrl)
+             .then(response => {
+               if (!response.ok) {
+                 throw new Error(`HTTP error! status: ${response.status}`);
+               }
+               return response.text();
+             })
+             .then(text => {
+               document.getElementById(targetElementId).innerHTML = `<pre>${text}</pre>`;
+             }) 
+             .catch (error =>{
+               console.error("Ошибка загрузки файла:", error);
+               document.getElementById(targetElementId).textContent = 'Ошибка при загрузке файла.';
+             });
+         }
+         document.getElementById('notes').addEventListener('click', (event) => {
+           event.preventDefault();
+           //document.getElementById('fileContent').innerHTML = 
+           loadFile("https://zeroturtle.github.io/whatsnew", 'fileContent');
+         });
+*/
+         const fileInput = document.getElementById('notes').addEventListener('click', (event) => {
            event.preventDefault();
            loadFile("https://zeroturtle.github.io/whatsnew").then(fileContent => {
-             if (fileContent) {
-               let divElement = document.getElementById("fileContent");
-               divElement.innerHTML = `<pre>${fileContent}</pre>`;
-             }
+              if (fileContent) {
+                let divElement = document.getElementById("fileContent");
+                divElement.innerHTML = `<pre>${fileContent}</pre>`;
+              }
            })
          });
          async function loadFile(filePath) {
@@ -450,7 +472,29 @@ footer.light-energy {
       </div>
     </div>
   </div>
-    
+  <script>  
+// Получите ссылку на модальное окно
+var myModal = document.getElementById('privatPolicy');
+
+// Создайте обработчик события `show.bs.modal`
+myModal.addEventListener('show.bs.modal', function (event) {
+  // Получите элемент, в который нужно вставить текст
+  var modalBody = this.querySelector('.modal-body');
+/*
+  // Задайте текст, который вы хотите загрузить
+  var textToLoad = 'Этот текст был загружен в модальное окно с помощью JavaScript!';
+  // Вставьте текст в тело модального окна
+  modalBody.innerHTML = textToLoad;
+*/
+  loadFile("https://zeroturtle.github.io/privacy_policy").then(fileContent => {
+    if (fileContent) {
+      modalBody.innerHTML = `<pre>${fileContent}</pre>`;
+    }
+  })
+});
+       </script>
+
+  
   </body>
 </html>
   
