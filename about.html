@@ -85,8 +85,8 @@ footer.light-energy {
       <p class="display-1"><span class="text-danger">OPTIMUS</span></p>
       <p class="h2 text-light">Digital judgement and scoring system</p>
       <div class="p-2 text-center">
-        <a href="download.html" class="btn btn-lg btn-warning">&nbsp; Download Free &nbsp;</a>
-        <a href="licence.html" class="btn btn-lg btn-outline-warning">&nbsp; Get Licence &nbsp;</a>
+        <div class="d-inline-block p-1"><a href="download.html" class="btn btn-lg btn-warning">&nbsp; Download Free &nbsp;</a></div>
+        <div class="d-inline-block p-1"><a href="licence.html" class="btn btn-lg btn-outline-warning">&nbsp; Get Licence &nbsp;</a></div>
       </div>
     </div>
     <div class="col">
@@ -276,10 +276,20 @@ footer.light-energy {
 
     <div>
       <p>Interested in the full development history?  
-         Read <a href="#" id="history">Release Notes</a> - the complete changelog covering all updates, fixes, and feature milestones.
+         <span id="notes">Read <a href="#">Release Notes</a> - the complete changelog covering all updates, fixes, and feature milestones.</span>
       </p>
       <div id="fileContent" class="mx-3 border bg-info-subtle"></div>
        <script>
+         const notes = document.getElementById('notes')
+         notes.addEventListener('click', (event) => {
+           event.preventDefault();
+           loadFile("https://zeroturtle.github.io/whatsnew").then(fileContent => {
+             if (fileContent) {
+               let divElement = document.getElementById("fileContent");
+               divElement.innerHTML = `<pre>${fileContent}</pre>`;
+             }
+           })
+         });
          async function loadFile(filePath) {
            try {
              const response = await fetch(filePath);
@@ -290,17 +300,6 @@ footer.light-energy {
              return null;
            }
          }
-         const fileInput = document.getElementById('history');
-         fileInput.addEventListener('click', (event) => {
-           event.preventDefault();
-           //const fileContent = loadFile("https://localhost/whatsnew");
-           loadFile("https://zeroturtle.github.io/whatsnew").then(fileContent => {
-              if (fileContent) {
-                let divElement = document.getElementById("fileContent");
-                divElement.innerHTML = `<pre>${fileContent}</pre>`;
-              }
-           })
-         });
        </script>
      </div>
 
@@ -404,6 +403,8 @@ footer.light-energy {
   box-shadow: 0 0 25px rgba(0, 123, 255, 0.8);
 }
 </style>
+
+
 
 <footer class="py-3 my-4 light-energy">
   <div class="row">
