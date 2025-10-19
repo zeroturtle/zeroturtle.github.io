@@ -77,45 +77,5 @@
 
 </div>  <!-- container -->
 
-
-  <div class="modal fade" id="privatPolicy" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-md-down">
-      <div class="modal-content">
-        <div class="modal-header bg-info">
-          <h5 class="modal-title" id="myModalLabel">Privacy Policy</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">          
-          <p> The privacy policy here. </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script>  
-    // Получите ссылку на модальное окно
-    var myModal = document.getElementById('privatPolicy');
-    // Создайте обработчик события `show.bs.modal`
-    myModal.addEventListener('show.bs.modal', function (event) {
-      // Получите элемент, в который нужно вставить текст
-      var modalBody = this.querySelector('.modal-body');
-      // Задайте текст, который вы хотите загрузить
-      //var textToLoad = 'Этот текст был загружен в модальное окно с помощью JavaScript!';
-      // Вставьте текст в тело модального окна
-      //modalBody.innerHTML = textToLoad;
-      loadFile('https://zeroturtle.github.io/privacy_policy', modalBody);
-    });
-    // Загрузить текст, который вы хотите показать
-    async function loadFile(fileURL, element) {
-      await fetch(fileURL)
-        .then(response => response.text())
-        .then(html => {
-          element.innerHTML = `<pre>${html}</pre>`;
-        })
-        .catch (error => {
-          console.error("Ошибка загрузки файла:", error);
-        });
-    }
-  </script>
-
 </body>
 </html>
