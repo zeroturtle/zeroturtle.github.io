@@ -103,8 +103,19 @@
       //var textToLoad = 'Этот текст был загружен в модальное окно с помощью JavaScript!';
       // Вставьте текст в тело модального окна
       //modalBody.innerHTML = textToLoad;
-      loadFile('https://zeroturtle.github.io/privacy_policy', modalBody);
+      loadFile('http://localhost/privacy_policy', modalBody);
     });
+    // Загрузить текст, который вы хотите показать
+    async function loadFile(fileURL, element) {
+      await fetch(fileURL)
+        .then(response => response.text())
+        .then(html => {
+          element.innerHTML = `<pre>${html}</pre>`;
+        })
+        .catch (error => {
+          console.error("Ошибка загрузки файла:", error);
+        });
+    }
   </script>
 
 </body>
