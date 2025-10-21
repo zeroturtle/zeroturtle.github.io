@@ -165,5 +165,5 @@ function loadEventNav(list) {
 
 window.addEventListener("load", loadEvent)
 window.addEventListener("click", windowOnClick)
-document.getElementById('scoreSummary').insertAdjacentHTML('afterend', '<small>Powered by <a href="${baseURL}/about.html"><strong>OPTIMUS</strong> <i>Pegasus</i></a></small>')
+document.getElementById('scoreSummary').insertAdjacentHTML('afterend', `<small>Powered by <strong>OPTIMUS</strong> <i>Pegasus</i></small>`)
 
