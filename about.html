@@ -6,6 +6,30 @@
   inactivity_time();
 ?>
 
+<!--
+1. Создайте файлы HTML: создайте отдельные HTML-файлы для header.html и footer.html
+2. Вставьте код на каждой странице: на каждой странице, где вам нужен header и footer
+<header id="site-header"></header>
+<script>
+  fetch('header.html')
+    .then(response => response.text())
+    .then(html => {
+      document.getElementById('site-header').innerHTML = html;
+    })
+    .catch (error => {
+      console.error("Ошибка загрузки файла:", error);
+    });
+
+  // или с нашей функцией
+  let header = document.getElementById('site-header')
+  loadFile('header.html', header);
+</script>
+-->
+
+<!-- 
+  include_path=".:/includes";
+  include "header.html";
+-->
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
   <head>
@@ -18,45 +42,21 @@
 
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <style> 
-footer {
-  /*background: linear-gradient(135deg, #0d6efd 0%, #375a7f 100%);*/
-}
-footer.light-energy {
-  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 80%, #dee2e6 100%);
-  color: #212529;
-  padding: 2.5rem 1rem;
-
-  border-top: 1px solid #dee2e6;
-  box-shadow: 0 -2px 10px rgba(13, 110, 253, 0.05);
-}
-.footer-nav a {
-  margin: 0 0.9rem;
-  text-decoration: none;
-  color: #495057;
-  font-weight: 500;
-  transition: color 0.25s ease, text-shadow 0.25s ease;
-}
-
-.footer-nav a:hover {
-  color: #0d6efd;
-  text-shadow: 0 0 6px rgba(13, 110, 253, 0.3);
-}
-.footer-social {
-  margin: 1rem 0;
-}
-
-.footer-social a {
-  font-size: 2.0rem;
-  color: #6c757d;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.footer-social a:hover {
-  color: #0d6efd;
-  transform: scale(1.1);
-}
+    <style>
     </style>
+    <script>
+      // Загрузить текст, который вы хотите показать
+      async function loadFile(fileURL, element) {
+        await fetch(fileURL)
+          .then(response => response.text())
+          .then(html => {
+            element.innerHTML = `<pre>${html}</pre>`;
+          })
+          .catch (error => {
+            console.error("Ошибка загрузки файла:", error);
+          });
+      }
+    </script>
   </head>
   <body lang="en">
 
@@ -78,6 +78,7 @@ footer.light-energy {
          </div>
        </div>
   </header>
+<!--header-->
 
 <section id="hero" class="border-bottom" >
   <div class="row row-cols-1 row-cols-sm-2 mx-0 d-flex align-items-center" style="background-image: radial-gradient(circle at center, YellowGreen, Green);">
@@ -86,7 +87,7 @@ footer.light-energy {
       <p class="h2 text-light">Digital judgement and scoring system</p>
       <div class="p-2 text-center">
         <div class="d-inline-block p-1"><a href="download.html" class="btn btn-lg btn-warning">&nbsp; Download Free &nbsp;</a></div>
-        <div class="d-inline-block p-1"><a href="licence.html" class="btn btn-lg btn-outline-warning">&nbsp; Get Licence &nbsp;</a></div>
+        <div class="d-inline-block p-1"><a href="license.html" class="btn btn-lg btn-outline-warning">&nbsp; Get License &nbsp;</a></div>
       </div>
     </div>
     <div class="col">
@@ -103,7 +104,7 @@ footer.light-energy {
      <p class="h4" style="color: #065187;">All-in-one software suite developed for judging Formation Skydiving, Artistic Events, Canopy Formation and scoring for Wingsuit Flying Performance.</p>
      <div class="row">
         <div class="col-sm-4"><h4 class="fw-bold"><i class="bi bi-boxes"></i>&nbsp;Suitable for any size</h4><p>Can be scaled as you like — from small events to international championships.</p></div>
-        <div class="col-sm-4"><h4 class="fw-bold"><i class="bi bi-coin"></i>&nbsp;Priced Right for You</h4><p>Avoid unnecessary expenses with our online licence constructor — pay only for what you use.</p></div>
+        <div class="col-sm-4"><h4 class="fw-bold"><i class="bi bi-coin"></i>&nbsp;Priced Right for You</h4><p>Avoid unnecessary expenses with our online license constructor — pay only for what you use.</p></div>
         <div class="col-sm-4"><h4 class="fw-bold"><i class="bi bi-cup-hot "></i>&nbsp;Share results instantly</h4><p>Personalized pages, customizable colors, and DZTV broadcasts — all in one system for judging skydiving competitions.  </p></div>
      </div>
   </div>
@@ -175,7 +176,7 @@ footer.light-energy {
         <img src="images/1.png" style="max-width: 100%;" alt="subscibe">
       </div>
     </div>
-    <div class="p-2 text-center"> <a href="licence.html" class="btn btn-lg btn-primary text-nowrap btn-block">&nbsp;&nbsp; Get Licence &nbsp;&nbsp;</a> </div>
+    <div class="p-2 text-center"> <a href="license.html" class="btn btn-lg btn-primary text-nowrap btn-block">&nbsp;&nbsp; Get License &nbsp;&nbsp;</a> </div>
   </div>
 </section>
 
@@ -187,7 +188,7 @@ footer.light-energy {
     <div class="row justify-content-center">
       <div class="col-sm d-flex align-items-stretch">
       <div class="card w-100">
-        <div class="card-body" style="display: flex; flex-wrap: wrap; flex-direction: column;">
+        <div style="display: flex; flex-wrap: wrap; flex-direction: column;">
           <div>
             <h3><img src="images/3a.png" height="100px" style="float:left; margin: 5px;"><strong> Simplicity</strong></h3>
           </div>
@@ -199,7 +200,7 @@ footer.light-energy {
       </div>
       <div class="col-sm d-flex align-items-stretch">
       <div class="card w-100">
-        <div class="card-body" style="display: flex; flex-wrap: wrap; flex-direction: column;">
+        <div style="display: flex; flex-wrap: wrap; flex-direction: column;">
           <div>
             <h3><img src="images/3b.png" height="100px" style="float:left; margin: 5px;"><strong> Innovation </strong></h3>
           </div>
@@ -211,7 +212,7 @@ footer.light-energy {
       </div>
       <div class="col-sm d-flex align-items-stretch">
       <div class="card w-100">
-        <div class="card-body" style="display: flex; flex-wrap: wrap; flex-direction: column;">
+        <div style="display: flex; flex-wrap: wrap; flex-direction: column;">
           <div>
             <h3><img src="images/3c1.png" height="100px" style="float:left; margin: 5px;"><strong> Collaboration</strong></h3>
           </div>
@@ -276,52 +277,15 @@ footer.light-energy {
 
     <div>
       <p>Interested in the full development history?  
-         <span id="notes">Read <a href="#">Release Notes</a> - the complete changelog covering all updates, fixes, and feature milestones.</span>
+         <span id="whatsnew">Read <a href="#">Release Notes</a> - the complete changelog covering all updates, fixes, and feature milestones.</span>
       </p>
       <div id="fileContent" class="mx-3 border bg-info-subtle"></div>
        <script>
-/*       //другой вариант
-         async function loadFile(fileUrl, targetElementId) {
-           await fetch(fileUrl)
-             .then(response => {
-               if (!response.ok) {
-                 throw new Error(`HTTP error! status: ${response.status}`);
-               }
-               return response.text();
-             })
-             .then(text => {
-               document.getElementById(targetElementId).innerHTML = `<pre>${text}</pre>`;
-             }) 
-             .catch (error =>{
-               console.error("Ошибка загрузки файла:", error);
-               document.getElementById(targetElementId).textContent = 'Ошибка при загрузке файла.';
-             });
-         }
-         document.getElementById('notes').addEventListener('click', (event) => {
+         const fileInput = document.getElementById('whatsnew').addEventListener('click', (event) => {
            event.preventDefault();
-           //document.getElementById('fileContent').innerHTML = 
-           loadFile("https://zeroturtle.github.io/whatsnew", 'fileContent');
+           let divElement = document.getElementById("fileContent");
+           loadFile('https://zeroturtle.github.io/whatsnew', divElement);
          });
-*/
-         const fileInput = document.getElementById('notes').addEventListener('click', (event) => {
-           event.preventDefault();
-           loadFile("https://zeroturtle.github.io/whatsnew").then(fileContent => {
-              if (fileContent) {
-                let divElement = document.getElementById("fileContent");
-                divElement.innerHTML = `<pre>${fileContent}</pre>`;
-              }
-           })
-         });
-         async function loadFile(filePath) {
-           try {
-             const response = await fetch(filePath);
-             const fileContent = await response.text();
-             return fileContent;
-           } catch (error) {
-             console.error("Ошибка загрузки файла:", error);
-             return null;
-           }
-         }
        </script>
      </div>
 
@@ -361,7 +325,7 @@ footer.light-energy {
           <div><i class="bi bi-2-circle fs-1 text-primary"></i></div>
           <h5 class="mt-3 fw-semibold"><i class="bi bi-key me-1 align-middle"></i> Generate Your License</h5>
           <p class="text-secondary small mb-0">
-            Use the <a href="licence.html" class="link-primary">License Constructor</a> to configure your plan.
+            Use the <a href="license.html" class="link-primary">License Constructor</a> to configure your plan.
             Choose options, generate key, and download your license file.
           </p>
         </div>
@@ -427,8 +391,8 @@ footer.light-energy {
 </style>
 
 
-
-<footer class="py-3 my-4 light-energy">
+<!--include "footer.html"-->
+<footer class="py-3 my-4">
   <div class="row">
     <div class="col-sm m-4">
       <div> <img src="images/turtleZ-bw.svg" style="height:2.2rem; float:left;">  &copy  2008-2025 &nbsp;<span class="h4 fw-bold"> Zeroturtle</span></div>
@@ -441,61 +405,91 @@ footer.light-energy {
         </ul>
       </div>
       <div class="align-bottom footer-nav">
-         <a data-bs-toggle="modal" data-bs-target="#privatPolicy" href="#">Privacy</a>|<a href="#">Terms of use</a>|<a href="#">Cookie</a>
+         <a data-bs-toggle="modal" data-bs-target="#privatPolicy" href="#">Privacy Policy</a>
       </div>
     </div>
     <div class="col-sm m-4 footer-nav">
       <h4 class="">Quick Links</h4>
       <ul class="list-unstyled">
-        <li class="mb-2"><a href="about.html">About</a> <!--span>— Learn what OPTIMUS can do</span--></li>
-        <li class="mb-2"><a href="download.html">Download</a> <!--span>— Try the demo version</span--></li>
-        <li class="mb-2"><a href="licence.html">License</a> <!--span>— Choose your plan</span--></li>
-        <li class="mb-2"><a href="contact.html">Contact</a> <!--span>— Get in touch</span--></li>
+        <li class="mb-2"><a href="about.html">About</a> </li>
+        <li class="mb-2"><a href="download.html">Download</a> </li>
+        <li class="mb-2"><a href="license.html">License</a> </li>
+        <li class="mb-2"><a href="contact.html">Contact</a> </li>
       </ul>
     </div>
   </div>
 </footer>
+<style> 
+footer {
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 80%, #dee2e6 100%);
+  color: #212529;
+  padding: 2.5rem 1rem;
+
+  border-top: 1px solid #dee2e6;
+  box-shadow: 0 -2px 10px rgba(13, 110, 253, 0.05);
+}
+.footer-nav a {
+  margin: 0 0.9rem;
+  text-decoration: none;
+  color: #495057;
+  font-weight: 500;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.footer-nav a:hover {
+  color: #0d6efd;
+  text-shadow: 0 0 6px rgba(13, 110, 253, 0.3);
+}
+.footer-social {
+  margin: 1rem 0;
+}
+
+.footer-social a {
+  font-size: 2.0rem;
+  color: #6c757d;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #0d6efd;
+  transform: scale(1.1);
+}
+</style>
 
 
 </div> <!--container-->
 
+
   <div class="modal fade" id="privatPolicy" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-md-down">
       <div class="modal-content">
         <div class="modal-header bg-info">
           <h5 class="modal-title" id="myModalLabel">Privacy Policy</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">          
-          <p> Insert the policy here. </p>
+          <p> The privacy policy here. </p>
         </div>
       </div>
     </div>
   </div>
   <script>  
-// Получите ссылку на модальное окно
-var myModal = document.getElementById('privatPolicy');
-
-// Создайте обработчик события `show.bs.modal`
-myModal.addEventListener('show.bs.modal', function (event) {
-  // Получите элемент, в который нужно вставить текст
-  var modalBody = this.querySelector('.modal-body');
-/*
-  // Задайте текст, который вы хотите загрузить
-  var textToLoad = 'Этот текст был загружен в модальное окно с помощью JavaScript!';
-  // Вставьте текст в тело модального окна
-  modalBody.innerHTML = textToLoad;
-*/
-  loadFile("https://zeroturtle.github.io/privacy_policy").then(fileContent => {
-    if (fileContent) {
-      modalBody.innerHTML = `<pre>${fileContent}</pre>`;
-    }
-  })
-});
-       </script>
+    // Получите ссылку на модальное окно
+    var myModal = document.getElementById('privatPolicy');
+    // Создайте обработчик события `show.bs.modal`
+    myModal.addEventListener('show.bs.modal', function (event) {
+      // Получите элемент, в который нужно вставить текст
+      var modalBody = this.querySelector('.modal-body');
+      // Задайте текст, который вы хотите загрузить
+      //var textToLoad = 'Этот текст был загружен в модальное окно с помощью JavaScript!';
+      // Вставьте текст в тело модального окна
+      //modalBody.innerHTML = textToLoad;
+      loadFile('https://zeroturtle.github.io/privacy_policy', modalBody);
+    });
+  </script>
 
   
   </body>
 </html>
-  
+<!--footer-->  
   

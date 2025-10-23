@@ -51,62 +51,12 @@ function line($Num) {
 
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-<style>
-.contribute {
-  /* 🌈 Энергичный фон */
-  background: radial-gradient(circle at 25% 50%, #c3f0ff 0%, #ffffff 45%, #f0fbff 100%);
-  border-radius: 16px;
-  box-shadow: 0 0 25px rgba(0, 180, 216, 0.18),
-              0 0 60px rgba(0, 180, 216, 0.08);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.4s ease;
-}
-.contribute ul i {
-  margin: 0.7rem 1.0rem;
-  font-size: 1.5rem;  /* Иконки чуть крупнее текста */
-  color: #0d6efd; /* Bootstrap primary */
-}
-footer.light-energy {
-  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 80%, #dee2e6 100%);
-  color: #212529;
-  padding: 2.5rem 1rem;
-
-  border-top: 1px solid #dee2e6;
-  box-shadow: 0 -2px 10px rgba(13, 110, 253, 0.05);
-}
-.footer-nav a {
-  margin: 0 0.9rem;
-  text-decoration: none;
-  color: #495057;
-  font-weight: 500;
-  transition: color 0.25s ease, text-shadow 0.25s ease;
-}
-
-.footer-nav a:hover {
-  color: #0d6efd;
-  text-shadow: 0 0 6px rgba(13, 110, 253, 0.3);
-}
-.footer-social {
-  margin: 1rem 0;
-}
-
-.footer-social a {
-  font-size: 2.0rem;
-  color: #6c757d;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.footer-social a:hover {
-  color: #0d6efd;
-  transform: scale(1.1);
-}
-
-</style>
   </head>
   <body lang="en">
 
 <div class="container">
-     <!-- page header -->
+ 
+    <!-- page header -->
     <header class="" style="background-image: url(images/Title.jpg); background-size: 100% auto;">
     <!--div style="background: linear-gradient(#b35900 55%, white);"-->
         <div class="row align-items-center">
@@ -131,10 +81,19 @@ footer.light-energy {
   <div class="mx-3">
     <div class="row">
       <div class="col-sm-6">
-        <p><strong>Current build 5.3.0.15 </strong></p>
+        <span class="h3 text-center">The latest build:</span>
+        <ul class="list-unstyled">
+          <li>Build "Pegasus"</li>
+          <li>Release date 2025.10.30</li>
+          <li>Current version 5.3.0.15 </li>
+          <li><span class="text-uppercase" style="font-size: 10px;">SHA256  dbd847e9cdd453ff22d588b1044aeedc1a751ca4cada7efc90b4e50c29d4a6ce</span> </li>
+          <li><a href="about.html#whatsnew">Release notes</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-6">
         <span class="h3 text-center">Download Full package: </span>
-        <ul>
-          <li><?php line(0); ?> <br> <small><a href="#whatsnew">Read release notes</a> </small> </li>
+        <ul class="list-unstyled">
+          <li><?php line(0); ?> <br> </li>
         </ul>
       </div>
     </div>
@@ -142,7 +101,7 @@ footer.light-energy {
     <div class="row">
       <div class="col-sm-6">
         <span class="h3 text-center">Components: </span>
-        <ul>
+        <ul class="list-unstyled">
           <li>
             <span>Core files <small>(exe & dll, fdb)</small>:  
               <ul>
@@ -172,7 +131,7 @@ footer.light-energy {
       </div>
       <div class="col-sm-6">
         <span class="h3 text-center">Documentation:</span><br>
-        <ul>
+        <ul class="list-unstyled">
           <li>
             <span> OPTIMUS operational manual:   
               <ul>
@@ -213,9 +172,9 @@ footer.light-energy {
     <div class="border d-inline-block px-4 py-3 rounded-4 shadow-sm bg-white">
       <p class="fs-5 mb-0">
         <span class="text-secondary">Got the software?</span>
-        <a href="licence.html" class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover ms-2 fw-semibold text-nowrap">
+        <a href="license.html" class="link-underline link-underline-opacity-0 link-underline-opacity-100-hover ms-2 fw-semibold text-nowrap">
           <i class="bi bi-key me-1 align-middle"></i>
-          Activate your licence <i class="bi bi-arrow-right ms-1 align-middle"></i>
+          Activate your license <i class="bi bi-arrow-right ms-1 align-middle"></i>
         </a>
       </p>
       <p class="mt-3 mb-0 small">
@@ -252,6 +211,23 @@ footer.light-energy {
     </div>
   </div>
 </section>
+<style>
+.contribute {
+  /* 🌈 Энергичный фон */
+  background: radial-gradient(circle at 25% 50%, #c3f0ff 0%, #ffffff 45%, #f0fbff 100%);
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(0, 180, 216, 0.18),
+              0 0 60px rgba(0, 180, 216, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+.contribute ul i {
+  margin: 0.7rem 1.0rem;
+  font-size: 1.5rem;  /* Иконки чуть крупнее текста */
+  color: #0d6efd; /* Bootstrap primary */
+}
+</style>
+
 
 
 <section id="faq" class="my-5">
@@ -259,8 +235,9 @@ footer.light-energy {
   <p class="display-4"><strong>Frequently Asked <span class="text-danger">Questions</span></strong></p>
   <p><i class="bi bi-exclamation-triangle"></i> We recommend testing our software before purchasing to make sure it meets your requirements.</p>
   <div class="accordion accordion-flush" id="accordionFlushExample">
-<!-- CIRCLE 1F7E0 - 1F7E4 (ORANGE YELLOW GREEN PURPLE BROWN  -->
-  <div class="faq-category">
+
+
+  <div class="mt-5">
     <h3>&#x1F7EA;General </h3>
 
     <div class="accordion-item">
@@ -293,7 +270,9 @@ footer.light-energy {
 <!-- Can judges evaluate performances remotely?
           <p> Absolutely. Videos can be uploaded and scored online — perfect for training, remote judging, or qualification rounds. </p-->
   </div>
-  <div class="faq-category">
+
+
+  <div class="mt-5">
     <h3>&#x1F7E5;Getting Started</h3>
 
     <div class="accordion-item">
@@ -319,7 +298,9 @@ footer.light-energy {
 - How to invite judges?
         <p>Simply send them a unique event link. Judges can log in and score from anywhere.</p>
   </div>
-  <div class="faq-category">
+
+
+  <div class="mt-5">
     <h3>&#x1F7E6;Configuration & Rules</h3>
 - How to customize scoring rules?
         <p>Default templates match official federation standards, but you can edit criteria, weights, or upload your own rulesets.</p>
@@ -338,7 +319,7 @@ footer.light-energy {
     </div>
 
   </div>
-  <div class="faq-category">
+  <div class="mt-5">
     <h3>&#x1F7E7;Results & Publishing</h3>
 - How to publish results online?
         <p>Publish your event results instantly on a personalized web page or embed them into your own site. 
@@ -346,7 +327,9 @@ footer.light-energy {
 -  What is DZTV integration?
         <p>DZTV integration allows live display of rankings and results during the competition on dropzone screens.</p>
   </div>
-  <div class="faq-category">
+
+
+  <div class="mt-5">
     <h3>&#x1F7E8;Account & Licensing</h3>
 
     <div class="accordion-item">
@@ -378,7 +361,7 @@ footer.light-energy {
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic4" aria-expanded="false" aria-controls="faq_lic4">
-           <strong><i class="bi bi-question-circle"></i> What should you do in case corupted license file?</strong>
+           <strong><i class="bi bi-question-circle"></i> What should you do in case lost or corupted license file?</strong>
         </button>
       </h2>
       <div id="faq_lic4" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -405,32 +388,31 @@ footer.light-energy {
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_lic5" aria-expanded="false" aria-controls="faq_lic5">
-           <strong><i class="bi bi-question-circle"></i> If you lost your license file</strong>
+           <strong><i class="bi bi-question-circle"></i> </strong>
         </button>
       </h2>
       <div id="faq_lic5" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
-          <p>we can provide it on request.</p>
         </div>
       </div>
     </div>
 
   </div>
-  <div class="faq-category">
+
+
+  <div class="mt-5">
     <h3>&#x1F7E9;Support & Troubleshooting</h3>
-- How to report an issue?
-- What details should I include in my request?
-- Can I request new features or integrations?
-         <p>We operate with the low touch model that means we focus on improving the technology to make the customer experience better.</p>
+
   </div>
 
-  <div class="faq-category">
+
+  <div class="mt-5">
     <h3>&#x1F7EB;Others</h3>
 
     <div class="accordion-item">
       <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq_tech1" aria-expanded="false" aria-controls="faq_tech1">
-           <strong><i class="bi bi-question-circle"></i>Which advantages has the OPTIMUS?</strong>
+           <strong><i class="bi bi-question-circle"></i>Which advantages stands the OPTIMUS out?</strong>
         </button>
       </h2>
       <div id="faq_tech1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -522,7 +504,7 @@ footer.light-energy {
         </ul>
       </div>
       <div class="align-bottom footer-nav">
-         <a data-bs-toggle="modal" data-bs-target="#privatPolicy" href="#">Privacy</a>|<a href="#">Terms of use</a>|<a href="#">Cookie</a>
+         <a data-bs-toggle="modal" data-bs-target="#privatPolicy" href="#">Privacy Policy</a>
       </div>
     </div>
     <div class="col-sm m-4 footer-nav">
@@ -530,12 +512,48 @@ footer.light-energy {
       <ul class="list-unstyled">
         <li class="mb-2"><a href="about.html">About</a> <!--span>— Learn what OPTIMUS can do</span--></li>
         <li class="mb-2"><a href="download.html">Download</a> <!--span>— Try the demo version</span--></li>
-        <li class="mb-2"><a href="licence.html">License</a> <!--span>— Choose your plan</span--></li>
+        <li class="mb-2"><a href="license.html">License</a> <!--span>— Choose your plan</span--></li>
         <li class="mb-2"><a href="contact.html">Contact</a> <!--span>— Get in touch</span--></li>
       </ul>
     </div>
   </div>
 </footer>
+<style>
+footer.light-energy {
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 80%, #dee2e6 100%);
+  color: #212529;
+  padding: 2.5rem 1rem;
+
+  border-top: 1px solid #dee2e6;
+  box-shadow: 0 -2px 10px rgba(13, 110, 253, 0.05);
+}
+.footer-nav a {
+  margin: 0 0.9rem;
+  text-decoration: none;
+  color: #495057;
+  font-weight: 500;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.footer-nav a:hover {
+  color: #0d6efd;
+  text-shadow: 0 0 6px rgba(13, 110, 253, 0.3);
+}
+.footer-social {
+  margin: 1rem 0;
+}
+
+.footer-social a {
+  font-size: 2.0rem;
+  color: #6c757d;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #0d6efd;
+  transform: scale(1.1);
+}
+</style>
 
 
 </div> <!--container-->
