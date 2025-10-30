@@ -3,5 +3,5 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="x-apple-disable-message-reformatting">
-  <title>Рассылка optimus.dp.ua</title>
+  <title>Optimus support message</title>
 </head>

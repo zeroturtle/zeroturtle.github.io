@@ -1,8 +1,13 @@
 {include file='header.tpl'}
 
-Уважаемый <b>{$name}</b>
-Ваша подписка OPTIMUS закончилась. Лицензия {$number} деактивирована. 
-В течении 1 года после даты окончания подписки ({$dateend}) продление доступно с скидкой -20%. 
-Продление подписки здесь: <a href="https://optimus.dp.ua/subscribe/">https://optimus.dp.ua/subscribe/</a>
+
+<p>Dear {$USERNAME}</p>
+<p>Your OPTIMUS subscription has expired. </p>
+<p>If you’ve been planning to purchase or upgrade our products  please visit a <a href="{$URL}"> page</a> to order new subscription. </p>
+
+
+<p>Thanks,</p>
+<p>OPTIMUS Team</p>
+
 
 {include file='footer.tpl'}

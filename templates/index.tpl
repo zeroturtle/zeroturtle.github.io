@@ -24,7 +24,7 @@
   <!-- $PAGE_LOGO_BASE64CODE should be less 64k -->
   <!--div class="sticky-top" style="background-image: url(data:image/{$PAGE_LOGO_MIME};base64, {$PAGE_LOGO_BASE64CODE}), url('Title.jpg'); background-size: contain; height: 100px; background-color: rgba(255,0,0,.1);"></div-->
   {/literal}
-  <div class="sticky-top" style="background-image: url({$PAGE_LOGO}), url('Title.jpg'); background-size: contain; height: 100px;"></div>
+  <div class="sticky-top" style="background-image: url('{$PAGE_LOGO}'), url('Title.jpg'); background-size: contain; height: 100px;"></div>
 
   <!-- Event detail -->
   <div class="container-fluid h-100">
