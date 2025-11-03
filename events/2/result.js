@@ -56,7 +56,7 @@ function loadEvent(event) {
 						const file = json[hrefValue];
 						// создаём новую ссылку
 						const newLink  = document.createElement('a');
-						newLink.href = `${baseURL}${Rank}./video/${file.name}`;   // путь к файлу
+						newLink.href = `${baseURL}${Rank}/video/${file.name}`;   // путь к файлу
 						newLink.target = "_blank";                            // открывать в новой вкладке
 						newLink.className = 'link link-play';
 						link.parentElement.appendChild(newLink )                   // Добавляем ссылку к существующему содержимому  
