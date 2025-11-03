@@ -1,7 +1,24 @@
-﻿
-// çàãðóæàåì ïðîòîêîë
+
+let json = {}; // объявляем заранее
+async function LoadJSONVideo() {
+  // Загружаем JSON-файл с сервера
+  fetch(`${baseURL}${Rank}/video/video.json`)   // путь к файлу на сервере
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Ошибка HTTP: ${response.status}`);
+      }
+      return response.json(); // парсим тело ответа как JSON
+    })
+    .then(data => {
+      // Теперь у нас есть объект json, можно использовать
+      json = data;
+    })
+    .catch(error => {
+      console.error('Ошибка при загрузке JSON:', error);
+    });
+}
 function loadEvent(event) {
-	event.preventDefault()
+	//event.preventDefault()
 	loadEventNav(eventList);
 	fetch(`${baseURL}${Rank}/proto.html`)
 	.then(async(response) => {
@@ -22,20 +39,31 @@ function loadEvent(event) {
 		let resultTable = doc.querySelector('table')
 		resultTable.setAttribute('id','resultTable')
 		if ('bsTheme' in document.querySelector('html').dataset) { resultTable.classList.add('table','table-'+document.querySelector('html').dataset.bsTheme); }
+
 		// äëÿ êàæäîé ññûëêå íå "0" äîáàâëÿåì âûçîâ detail
-		for (lnk of [].filter.call(resultTable.getElementsByTagName('a'), item =>(item.pathname.split('/').slice(-1))[0] !=0)) { 
-			let f = lnk.href.toLowerCase()
-			if (f.endsWith('_team')) {
-				lnk.addEventListener("click", displayTeamDetails)
-			}
-			else if (f.endsWith('mp4')) {
-				lnk.addEventListener("click", displayRoundVideo)
+                //const links = Array.from(resultTable.querySelectorAll('a')).filter(link => link.getAttribute('href') !== '0');
+                const links = resultTable.querySelectorAll('a[href]:not([href="0"])')
+		links.forEach(link => { 
+			const hrefValue = link.getAttribute('href')
+			if (hrefValue.toLowerCase().endsWith('_team')) {
+				link.addEventListener("click", displayTeamDetails)
 			}
 			else {  // this is a score details
-				if (isFinite(f.split('/').pop())) 
-					lnk.addEventListener("click", displayRoundDetails)
+				if (isFinite(hrefValue)) {
+					link.addEventListener("click", displayRoundDetails)
+					// Проверяем, есть ли такой ключ в JSON
+					if (json[hrefValue]) {
+						const file = json[hrefValue];
+						// создаём новую ссылку
+						const newLink  = document.createElement('a');
+						newLink.href = `${baseURL}${Rank}./video/${file.name}`;   // путь к файлу
+						newLink.target = "_blank";                            // открывать в новой вкладке
+						newLink.className = 'link link-play';
+						link.parentElement.appendChild(newLink )                   // Добавляем ссылку к существующему содержимому  
+					}
+				}
 			}
-		}
+		})
 
 	// show draw
 		const rowDraw = 1
@@ -99,7 +127,7 @@ function displayTeamDetails() {
 	event.preventDefault()
 	let doc = document.implementation.createHTMLDocument('Team Photo')
 	// найти картинку по записи в 
-	fetch( new URL(`${baseURL}${Rank}/team/`+String(this).split('/').pop()+'.html') )
+	fetch( new URL(`${baseURL}${Rank}/team/`+this.getAttribute('href')+'.html') )
 		.then(response => response.text())
 		.then((html) => {
 			// Convert the HTML string into a document object
@@ -115,7 +143,7 @@ function displayTeamDetails() {
 function displayRoundDetails() {
 	event.preventDefault()
 	// çàãðóæàåì ñóäåéñêóþ çàïèñêó	
-	fetch( new URL(`${baseURL}${Rank}/detail/`+String(this).split('/').pop()+'.html') )
+	fetch( new URL(`${baseURL}${Rank}/detail/`+this.getAttribute('href')+'.html') )
 		.then(response => response.text())
 		.then((html) => {
 			// Convert the HTML string into a document object
@@ -163,7 +191,10 @@ function loadEventNav(list) {
   document.getElementById('scoreSummary').before(U);
 }
 
-window.addEventListener("load", loadEvent)
+window.addEventListener("load", ()=>{
+	LoadJSONVideo()           //сначала загрузить файл со списком видео
+	.then(() => loadEvent())  // теперь загружаем протокол
+	.catch(console.error);
+});
 window.addEventListener("click", windowOnClick)
-document.getElementById('scoreSummary').insertAdjacentHTML('afterend', `<small>Powered by <a href="${baseURL}/about.html"><strong>OPTIMUS</strong> <i>Pegasus</i></a></small>`)
-
+document.getElementById('scoreSummary').insertAdjacentHTML('afterend', `<small>Powered by <strong>OPTIMUS</strong> <i>Pegasus</i></small>`)
