@@ -1,5 +1,6 @@
 <?php
   require_once __DIR__ . '/auth/src/inc/auth.php';
+  if ( !session_id() ) @session_start();
   inactivity_time();
 ?>
 
@@ -15,11 +16,19 @@
 
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+  /* свечение для .btn-dark */
+  .btn-outline-dark.glow {
+    box-shadow:
+      0 0 10px rgba(138,43,226,0.8),
+      0 0 20px rgba(0, 180, 255, 0.6);
+  }
+    </style>
     <script>
         function submitData(e) {
             e.preventDefault();
             const formData = new FormData(e.target)
-            fetch('http://localhost/contact.php', {
+            fetch(location.origin + '/contact.php', {
                 method: "POST",
                 body: formData,
             })
@@ -52,7 +61,7 @@
            </div>
            <div class="col m-3 text-end">
 		<?php if(!is_user_logged_in()) { ?>
-			<a href="auth/login.php" class="btn btn-outline-dark pull-right text-nowrap" role="button">Sign In</a>
+			<a href="auth/login.php" class="btn btn-outline-dark pull-right glow text-nowrap" role="button">Sign In</a>
 		<?php } else { ?>
 	                <a href="auth/logout.php" class="btn btn-outline-dark pull-right text-nowrap" >Logout, <?php echo htmlspecialchars($_SESSION['username'], ENT_QUOTES)?></a>
 		<?php } ?>
