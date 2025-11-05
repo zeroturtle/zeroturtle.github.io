@@ -413,7 +413,7 @@
         </ul>
       </div>
       <div class="align-bottom footer-nav">
-         <a data-bs-toggle="modal" data-bs-target="#privatPolicy" href="#">Privacy Policy</a>
+         <a data-bs-toggle="modal" data-bs-target="#privatPolicy" href="#">Privacy Policy</a> | <span class="text-nowrap"><small>Last update: <span id="lastUpdate"></span></small></span>
       </div>
     </div>
     <div class="col-sm m-4 footer-nav">
@@ -427,6 +427,16 @@
     </div>
   </div>
 </footer>
+  </script>
+    // Последняя дата обновления страницы
+      const lastMod = new Date(document.lastModified);
+      const formatted = lastMod.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      });
+      document.getElementById("lastUpdate").textContent = formatted;
+  </script>
 <style> 
 footer {
   background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 80%, #dee2e6 100%);
