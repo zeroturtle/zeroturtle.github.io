@@ -1,42 +1,4 @@
-﻿<?php
-  require __DIR__ . '/auth/src/bootstrap.php';
-  inactivity_time();
-
-function human_filesize($bytes, $decimals = 2) {
-    $factor = floor((strlen($bytes) - 1) / 3);
-    if ($factor > 0) $sz = 'KMGT';
-    return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor - 1] . 'B';
-}
-function line($Num) {
-  $files = [
-    ['optimus-5.3.0.15-full.zip','Optimus v5.3 "Pegasus" full pack, Русский/English','zip'],
-    ['','','x'],
-    ['optimus-5.3.0.15-core.zip','Optimus v5.3 "Pegasus" core files, Русский/English','zip'],
-    ['','','x'],
-    ['Reports_ru.zip','Русский','zip'],
-    ['Reports_ua.zip','Українська','zip'],
-    ['Reports_en.zip','English','zip'],
-    ['Firebird-5.0.2.1613-0-windows-x86.zip','Firebird-5.0.2.1613-0-windows-x86.zip','zip'],
-    ['Firebird-5.0.2.1613-0-windows-x86.exe','Firebird-5.0.2.1613-0-windows-x86.exe','binary'],
-    ['operation_manual_ru.doc','Руководство пользователя DOC, Русский','word'],
-    ['operation_manual_ru.pdf','Руководство пользователя PDF, Русский','pdf'],
-    ['training_fs_ru.doc','Методичка FS, Русский','word'],
-    ['training_fs_ua.doc','Методичка FS, Українська','word'],
-    ['training_gs_ru.doc','Методичка организация соревнований, Русский','word'],
-    ['','',''],
-  ];
-  $filename = './downloads/'.$files[$Num][0];
-  if (file_exists($filename)) {
-    echo '<i class="bi bi-file-'.$files[$Num][2].'"></i> '.
-       '<a href="'.$filename.'">'.$files[$Num][1].'</a>  <span class="text-secondary text-nowrap m-3"><small>'.
-         date ("j-M-Y", filectime($filename)).' - '.human_filesize(filesize($filename),2).'</small></span>';
-  } else {
-    echo "<i class='text-danger'>file $filename doesn't exists</i>";
-  }
-}
-?>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
   <head>
     <title>OPTIMUS Client Assistant</title>
@@ -92,13 +54,13 @@ function line($Num) {
           <li>Release date 2025.10.30</li>
           <li>Current version 5.3.0.15 </li>
           <li><span class="text-uppercase" style="font-size: 10px;">SHA256  dbd847e9cdd453ff22d588b1044aeedc1a751ca4cada7efc90b4e50c29d4a6ce</span> </li>
-          <li><a href="about.html#whatsnew">Release notes</a></li>
+          <li><a href="/about?#whatsnew">Release notes</a></li>
         </ul>
       </div>
       <div class="col-sm-6">
         <span class="h3 text-center">Download Full package: </span>
         <ul class="list-unstyled">
-          <li><?php line(0); ?> <br> </li>
+          <li><i class='text-danger'>file ./downloads/optimus-5.3.0.15-full.zip doesn't exists</i> <br> </li>
         </ul>
       </div>
     </div>
@@ -110,16 +72,16 @@ function line($Num) {
           <li>
             <span>Core files <small>(exe & dll, fdb)</small>:  
               <ul>
-                <li><?php line(2); ?> </li>
+                <li><i class='text-danger'>file ./downloads/optimus-5.3.0.15-core.zip doesn't exists</i> </li>
               </ul>
             </span>
           </li>
           <li>
             <span>Print templates:
               <ul>
-                <li><?php line(4); ?> </li>
-                <li><?php line(5); ?> </li>
-                <li><?php line(6); ?> </li>
+                <li><i class="bi bi-file-zip"></i> <a href="./downloads/Reports_ru.zip">Русский</a>  <span class="text-secondary text-nowrap m-3"><small>18-Jul-2025 - 309.89KB</small></span> </li>
+                <li><i class="bi bi-file-zip"></i> <a href="./downloads/Reports_ua.zip">Українська</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 308.97KB</small></span> </li>
+                <li><i class="bi bi-file-zip"></i> <a href="./downloads/Reports_en.zip">English</a>  <span class="text-secondary text-nowrap m-3"><small>18-Jul-2025 - 308.83KB</small></span> </li>
               </ul>
             </span>
           </li>
@@ -127,8 +89,8 @@ function line($Num) {
             <span>Firebird SQL server x86 v5.0.2:<br>  
               <small>(You can download it from the official website <a href="https://www.firebirdsql.org/en/firebird-5-0" class="text-decoration-none"> The Firebird Project</a>)</small> 
               <ul>
-                <li><?php line(7); ?> </li>
-                <li><?php line(8); ?> </li>
+                <li><i class="bi bi-file-zip"></i> <a href="./downloads/Firebird-5.0.2.1613-0-windows-x86.zip">Firebird-5.0.2.1613-0-windows-x86.zip</a>  <span class="text-secondary text-nowrap m-3"><small>18-Jul-2025 - 21.36MB</small></span> </li>
+                <li><i class="bi bi-file-binary"></i> <a href="./downloads/Firebird-5.0.2.1613-0-windows-x86.exe">Firebird-5.0.2.1613-0-windows-x86.exe</a>  <span class="text-secondary text-nowrap m-3"><small>18-Jul-2025 - 14.53MB</small></span> </li>
               </ul>
             </span>
           </li>
@@ -140,22 +102,22 @@ function line($Num) {
           <li>
             <span> OPTIMUS operational manual:   
               <ul>
-                <li><?php line(9); ?> </li>
-                <li><?php line(10); ?> </li>
+                <li><i class="bi bi-file-word"></i> <a href="./downloads/operation_manual_ru.doc">Руководство пользователя DOC, Русский</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 5.49MB</small></span> </li>
+                <li><i class="bi bi-file-pdf"></i> <a href="./downloads/operation_manual_ru.pdf">Руководство пользователя PDF, Русский</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 2.66MB</small></span> </li>
               </ul>
           </li>
           <li>
             <span> Formation Skydiving guide: 
               <ul>
-                <li><?php line(11); ?> </li>
-                <li><?php line(12); ?> </li>
+                <li><i class="bi bi-file-word"></i> <a href="./downloads/training_fs_ru.doc">Методичка FS, Русский</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 2.93MB</small></span> </li>
+                <li><i class="bi bi-file-word"></i> <a href="./downloads/training_fs_ua.doc">Методичка FS, Українська</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 1.83MB</small></span> </li>
               </ul>
             </span>
           </li>
           <li>
             <span> Organizing competition guide:  
               <ul>
-                <li><?php line(13); ?> </li>
+                <li><i class="bi bi-file-word"></i> <a href="./downloads/training_gs_ru.doc">Методичка организация соревнований, Русский</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 187.00KB</small></span> </li>
               </ul>
             </span>
           </li>
@@ -170,7 +132,6 @@ function line($Num) {
     </p>
   </div>
 </section>
-
 
 <section class="my-5 py-5" style="background: linear-gradient(135deg, #f0f2f5 0%, #ffffff 100%);">
   <div class="container text-center">
