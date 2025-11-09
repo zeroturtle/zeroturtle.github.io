@@ -1,0 +1,4 @@
+{
+" 2":{"id":"xx2","name":"Чемпіонат України 2025","location": "аеродром Хрцинно, Насельск, Польща","date_start": "2025-09-13","date_end":"2022-09-20","type_id":10,"events":[{"event_id":33,"name":"Open FS-4way"}]},
+" 1":{"id":"xx1","name":"Чемпіонат України 2024","location": "аеродром Хрцинно, Насельск, Польща","date_start":"2024-08-20","date_end":"2024-08-25","type_id":1,"events":[{"event_id":23,"name":"Open FS-4way"}]}
+}
