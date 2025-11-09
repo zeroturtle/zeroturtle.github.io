@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <title>About OPTIMUS </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+  /* свечение для .btn-dark */
+  .btn-outline-dark.glow {
+    box-shadow:
+      0 0 10px rgba(138,43,226,0.8),
+      0 0 20px rgba(0, 180, 255, 0.6);
+  }
+
+  ul i {
+    margin: 0.7rem 1.0rem;
+    font-size: 1.5rem;  /* Иконки чуть крупнее текста */
+    color: #0d6efd; /* Bootstrap primary */
+  }
+
+      /* радужная надпись OPTIMUS */
+      .rainbow-wave {
+        --speed: 15s;            /* базовая скорость волны */
+        --dir: normal;          /* можно: normal | reverse | alternate | alternate-reverse */
+        display: inline-block;  /* фиксирует ширину и позиционирование */
+        background: linear-gradient(
+          90deg,
+          rgba(255, 0, 77, 0) 0%,
+          rgba(255, 0, 77, 0.9) 15%,
+          rgba(255, 255, 0, 0.9) 30%,
+          rgba(0, 200, 83, 0.9) 45%,
+          rgba(0, 160, 255, 0.9) 60%,
+          rgba(122, 0, 255, 0.9) 75%,
+          rgba(255, 0, 77, 0) 100%
+        );
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: rainbowWave var(--speed, 5s) ease-in-out infinite;
+        animation-direction: var(--dir, normal);
+      }
+      @keyframes rainbowWave {
+        0%   { background-position: -150% 0; }
+        50%  { background-position: 0% 0; }
+        100% { background-position: 150% 0; }
+      }
+    </style>
+    <script>
+      // Загрузить текст, который вы хотите показать
+      async function loadFile(fileURL, element) {
+        await fetch(fileURL)
+          .then(response => response.text())
+          .then(html => {
+            element.innerHTML = `<pre>${html}</pre>`;
+          })
+          .catch (error => {
+            console.error("Ошибка загрузки файла:", error);
+          });
+      }
+    </script>
+  </head>
+  <body lang="en">
+
+<div class="container">
+
+  <header class="" style="background-image: url(images/Title.jpg); background-size: 100% auto; background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 80%, #dee2e6 100%);">
+  <!--div style="background: linear-gradient(#b35900 55%, white);"-->
+      <div class="row mx-0 align-items-center bg-body-secondary border-bottom">
+         <div class="col">
+		<a href="/"><img src="images/OPTIMUS3.svg" alt="LOGO" class="float-start m-3" height="100px"></a>
+              <div class="mx-3"><span class="fs-1 fw-bold rainbow-wave">OPTIMUS</span> <br>
+               <span class="h5" style="color: #212529;">Digital judgement and scoring system</span></div>
+         </div>
+         <div class="col m-3 text-end">
+         </div>
+       </div>
+  </header>
+
+
+<section id="Overview" >
+  <div class="row m-3 d-flex align-items-center" style="min-height:300px;">
+     <p class="display-4 text-danger"><strong>About</strong></p>
+     <p>Судейская система OPTIMUS developed для повышения прозрачности, точности и объективности оценки Formation Skydiving, Artistic Events, Canopy Formation and scoring for Wingsuit Flying Performance. Её цель — сделать судейство понятным для спортсменов и надёжным инструментом для организаторов.</p>
+     <ul class="list-group list-group-flush d-flex gap-3">
+       <li class="list-group-item border-bottom">
+         <strong>Для судей:</strong><br> OPTIMUS — это способ упростить работу, способствует совершенствованию судейской практики, что создает основу для обмена опытом и роста профессионального уровня судей.<br>
+         <strong>Streamline scoring, reduce errors, and focus on what really matters — the performance.</strong><br>
+         <a href="" class="btn btn-primary"> Join the judging community </a>
+       </li>
+       <li class="list-group-item border-bottom">
+         <strong>Для организаторов:</strong><br> система обеспечивает стабильную работу и универсальность при любых форматах соревнований.
+         Легкая интеграция с существующей инфраструктурой, автоматическая публикация результатов.<br>
+         <strong>All-in-one toolkit for running competitions — reliable and cost-efficient.</strong><br>
+         <a href="" class="btn btn-primary"> Contact us to integrate OPTIMUS at your events  </a>
+       </li>
+       <li class="list-group-item border-bottom">
+         <strong>Для спортивных федераций:</strong><br> OPTIMUS предлагает единый стандарт оценки и накопление достоверных данных о выступлениях.<br>
+         <strong>The easiest way to share information between judges, organizers, and audiences.</strong><br>
+         <a href="" class="btn btn-primary">  Request access </a>
+       </li>
+     </ul>
+     <p class="my-3 border-bottom">Система развивается вместе с судьями, работающими в разных дисциплинах и федерациях. Каждая новая версия учитывает опыт соревнований и предложения пользователей. Это живой инструмент, который помогает всему сообществу двигаться вперёд.<br>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-chat-dots"></i><strong>Share Your Experience</strong><br>
+            Want to get more involved in the Optimus community? Send your feedback, ideas, and feature requests. Help us make judging more efficient for everyone.</li>
+          <li><i class="bi bi-people"></i><strong>Collaborate</strong><br>
+            Are you a developer or national federation representative?  Partner with us to extend OPTIMUS’ reach.</li>
+          <li><i class="bi bi-patch-check"></i><strong>Practice-anywhere</strong><br>
+            Train your judging skills anytime.</li>
+        </ul>
+     </p>
+
+     <p><strong>OPTIMUS — это не просто программа. Это инфраструктура точного и прозрачного судейства.</strong><br>OPTIMUS — the infrastructure of modern judging<br>
+        Объединяя опыт и технологии мы создаем культуру честного и современного спорта.<br>
+         <a href="" class="btn btn-primary"> Try OPTIMUS </a>
+     </p>
+
+    <div></div>
+  </div>
+</section>
+
+
+
+<section id="download" class="border-bottom py-3 bg-secondary-subtle bg-gradient" style="min-height:500px;">
+  <div class="mx-3">
+    <p class="display-4"><strong>Download</strong></p>
+    <div class="row">
+      <div class="col-sm-6">
+        <span class="h3 text-center">The latest build:</span>
+        <ul class="list-unstyled">
+          <li>
+            Full version:
+            <ul>
+              <li><i class="bi bi-file-zip"></i> <a href="./downloads/optimus-5.3.1.15-ru.zip">"Pegasus" v.5.3.1.14 Русский</a>  <span class="text-secondary text-nowrap m-3"><small>12-Nov-2025 - 78.93MB</small></span> </li>
+              <li><i class="bi bi-file-zip"></i> <a href="./downloads/optimus-5.3.1.15-en.zip">"Pegasus" v.5.3.1.14 Enaglish</a>  <span class="text-secondary text-nowrap m-3"><small>12-Nov-2025 - 78.89MB</small></span> </li>
+            </ul>
+          </li>
+          <li>
+            What's new:
+            <ul>
+              <li><a href="/whatsnew">Release notes</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <span class="h3 text-center">Documentation:</span><br>
+        <ul class="list-unstyled">
+          <li>
+            <span> OPTIMUS operational manual:   
+              <ul>
+                <li><i class="bi bi-file-word"></i> <a href="./downloads/operation_manual_ru.doc">Руководство пользователя DOC, Русский</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 5.49MB</small></span> </li>
+                <li><i class="bi bi-file-pdf"></i> <a href="./downloads/operation_manual_ru.pdf">Руководство пользователя PDF, Русский</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 2.66MB</small></span> </li>
+              </ul>
+          </li>
+          <li>
+            <span> Formation Skydiving guide: 
+              <ul>
+                <li><i class="bi bi-file-word"></i> <a href="./downloads/training_fs_ru.doc">Методичка FS, Русский</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 2.93MB</small></span> </li>
+                <li><i class="bi bi-file-word"></i> <a href="./downloads/training_fs_ua.doc">Методичка FS, Українська</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 1.83MB</small></span> </li>
+              </ul>
+            </span>
+          </li>
+          <li>
+            <span> Organizing competition guide:  
+              <ul>
+                <li><i class="bi bi-file-word"></i> <a href="./downloads/training_gs_ru.doc">Методичка организация соревнований, Русский</a>  <span class="text-secondary text-nowrap m-3"><small>16-Oct-2025 - 187.00KB</small></span> </li>
+              </ul>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+        <span class="h3 text-center">How you can <span class="text-danger">contribute…</span></span><br>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-puzzle"></i><strong>Become a Beta Tester</strong><br>
+            Get early access to new judging tools and help validate workflows before release. (No coding required)</li>
+          <li><i class="bi bi-translate"></i><strong>Translate content</strong> <br>
+            Help us translate Optimus products into your local language.</li>
+        </ul>
+
+  </div>
+</section>
+
+
+
+  <footer class="py-3 my-4 border-top">
+      <style scoped>
+        footer {
+          background: linear-gradient(to top, #2a2d32, #3e444c, #525963);
+          color: #e5e7eb;            /* светло-серый текст */
+          text-align: center;
+          padding: 24px 12px;
+          font-size: 14px;
+          border-top: 1px solid #1f2937;
+          box-shadow:
+            0 -4px 14px rgba(0, 0, 0, 0.4),
+            0 -1px 12px rgba(120, 160, 255, 0.1); /* лёгкое синеватое свечение */
+          overflow: hidden;
+        }
+        footer a {
+          color: #93c5fd;
+          text-decoration: none;
+        }
+        footer a:hover {
+          text-decoration: underline;
+        }
+      </style>
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="mx-3"> <img src="images/turtleZ-bw.svg" style="height:2.2rem; float:left; margin-right:5px;"> &copy 2008-2025 &nbsp;  <span class="text-white fw-bold h4" nowrap>  Zeroturtle</span>   | <span class="text-nowrap"><small>Last update: <span id="lastUpdate"></span></small></span> </div>
+      <div class="mx-3"> 
+        <div class="list-group-item"><strong>Email :</strong>
+          <i class="bi bi-envelope"></i> <a href="mailto:info@optimus.dp.ua" data-bs-original-title="" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">info[@]optimus.dp.ua</a>
+        </div>
+        <div class="list-group-item"><strong>Facebook : </strong> <i class="bi bi-facebook"></i>
+          <a href="https://www.facebook.com/groups/399304463592210" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">&nbsp;Друзья OPTIMUS &nbsp;</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Последняя дата обновления страницы
+      const lastMod = new Date(document.lastModified);
+      const formatted = lastMod.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      });
+      document.getElementById("lastUpdate").textContent = formatted;
+    </script>
+  </footer>  
+
+</div> <!--container-->
+  
+  </body>
+</html>
+<!--footer-->  
+  
