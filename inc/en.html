@@ -82,8 +82,8 @@
 
 
 <section id="history">
-    <p>Interested in the full development history? <a id="historyLink" href="#" class="history-toggle">Click to read Release Notes. <span class="arrow">▼</span> </a> </p>
-    <div id="historyContent" class="mx-3 border bg-info-subtle"></div>
+    <p>Interested in the full development history? <a id="historyLink" href="whatsnew" class="history-toggle">Read Release Notes. <span class="arrow">▼</span> </a> </p>
+    <div id="historyContent" class="mx-3 border bg-info-subtle" style="display:none;"></div>
     <style>
       .history-toggle {
         color: inherit;
@@ -101,25 +101,46 @@
       }
     </style>
     <script>
-       document.addEventListener('load', (event) => {
-       const historyLink = document.getElementById('historyLink')
-         historyLink.addEventListener("click", (event) => {
-           event.preventDefault(); // не переходим по ссылке
-  
-           const historyContent = document.getElementById("historyContent");
-           const arrow = historyLink.querySelector('.arrow');
-           loadFile('whatsnew', historyContent);  // файл с текстом истории
-          // Переключаем видимость
-           if (historyContent.style.display === 'none') {
-             historyContent.style.display = 'block';
-             arrow.classList.add('open');
-             historyLink.textContent = 'Hide development history';
-           } else {
-             historyContent.style.display = 'none';
-             arrow.classList.remove('open');
-             historyLink.textContent = 'Click to read Release Notes.';
-           }
-         });
-       });
+      function loadFile(url) {
+        return fetch(url)
+          .then(response => {
+          if (!response.ok) throw new Error("Failed to load history file");
+          return response.text();
+        });
+
+      document.addEventListener('load', () => {
+        const historyLink = document.getElementById('historyLink')
+        const historyContent = document.getElementById("historyContent");
+        let isLoaded = false;
+
+        historyLink.addEventListener("click", (event) => {
+          event.preventDefault(); // не переходим по ссылке
+
+          if (isLoaded) {
+            toggleContent();
+            return;
+          }
+      
+          loadHistory(link.href)
+            .then(text => {
+              content.textContent = text;
+              content.style.display = "block";
+              isLoaded = true;
+            })
+            .catch(err => {
+              content.textContent = "Error loading release notes.";
+              content.style.display = "block";
+              console.error(err);
+            });
+        });
+        function toggleContent() {
+          content.style.display = content.style.display === "none" ? "block" : "none";
+          if (historyContent.style.display === 'none') {
+            arrow.classList.add('open');
+          } else {
+            arrow.classList.remove('open');
+          }
+        }
+      })
    </script>
 </section>

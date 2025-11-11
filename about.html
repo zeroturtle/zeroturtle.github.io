@@ -51,21 +51,6 @@
         100% { background-position: 150% 0; }
       }
     </style>
-    <script>
-      // Загрузить текст, который вы хотите показать
-      async function loadFile(fileURL, element) {
-        await fetch(fileURL)
-          .then(response => response.text())
-          .then(html => {
-            element.innerHTML = `<pre>${html}</pre>`;
-            element.dataset.loaded = 'true';
-          })
-          .catch (error => {
-            element.innerHTML = `<p>Error loading file.</p>`;
-            console.error("Ошибка загрузки файла:", error);
-          });
-      }
-    </script>
   </head>
   <body lang="en">
 
