@@ -80,47 +80,41 @@
   </div>
 </section>
 
-      <p>Interested in the full development history? <span id="historyLink" class="history-toggle">Click to read Release Notes. <span class="arrow">▼</span> </span> </p>
-      <div id="historyContent" class="mx-3 border bg-info-subtle"></div>
-       <style>
-.history-toggle {
-  font-size: 0.9em;
-  color: #555;
-  cursor: pointer;
-  user-select: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
 
-.history-toggle:hover {
-  color: #007bff; /* подсветка при наведении */
-}
-
-.arrow {
-  font-size: 0.8em;
-  transition: transform 0.3s;
-}
-
-.arrow.open {
-  transform: rotate(180deg); /* стрелка вверх при открытии */
-}
-</style>
-       <script>
-         const fileInput = document.getElementById('historyLink').addEventListener('click', (event) => {
-           const divElement = document.getElementById("historyContent");
-           const arrow = historyLink.querySelector('.arrow');
-           loadFile('whatsnew', divElement);  // файл с текстом истории
-          // Переключаем видимость
-           if (historyContent.style.display === 'none') {
-             historyContent.style.display = 'block';
-             arrow.classList.add('open');
-             historyLink.textContent = 'Hide development history';
-           } else {
-             historyContent.style.display = 'none';
-             arrow.classList.remove('open');
-             historyLink.textContent = 'Click to read Release Notes.';
-           }
-         });
-       </script>
-     </div>
+<section id="history">
+    <p>Interested in the full development history? <a id="historyLink" href="#" class="history-toggle">Click to read Release Notes. <span class="arrow">▼</span> </a> </p>
+    <div id="historyContent" class="mx-3 border bg-info-subtle"></div>
+    <style>
+      .history-toggle {
+        color: inherit;
+        text-decoration: none;
+      }
+      .history-toggle:hover {
+        text-decoration: underline;
+      }
+      .arrow {
+        font-size: 0.8em;
+        transition: transform 0.3s;
+      }
+      .arrow.open {
+        transform: rotate(180deg); /* стрелка вверх при открытии */
+      }
+    </style>
+    <script>
+         const historyLink = document.getElementById('historyLink').addEventListener('click', (event) => {
+       const historyContent = document.getElementById("historyContent");
+       const arrow = historyLink.querySelector('.arrow');
+       loadFile('whatsnew', historyContent);  // файл с текстом истории
+      // Переключаем видимость
+       if (historyContent.style.display === 'none') {
+         historyContent.style.display = 'block';
+         arrow.classList.add('open');
+         historyLink.textContent = 'Hide development history';
+       } else {
+         historyContent.style.display = 'none';
+         arrow.classList.remove('open');
+         historyLink.textContent = 'Click to read Release Notes.';
+       }
+     });
+   </script>
+</section>
