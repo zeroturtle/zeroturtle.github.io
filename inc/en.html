@@ -121,7 +121,7 @@
             return;
           }
       
-          loadHistory(link.href)
+          loadFile(link.href)
             .then(text => {
               content.textContent = text;
               content.style.display = "block";
