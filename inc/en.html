@@ -85,7 +85,7 @@
        <script>
          const fileInput = document.getElementById('historyLink').addEventListener('click', (event) => {
            let divElement = document.getElementById("historyContent");
-           loadFile('/whatsnew', divElement);
+           loadFile('whatsnew', divElement);  // файл с текстом истории
           // Переключаем видимость
            if (historyContent.style.display === 'none') {
              historyContent.style.display = 'block';
