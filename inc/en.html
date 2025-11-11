@@ -109,31 +109,22 @@
         historyLink.addEventListener("click", (event) => {
           event.preventDefault(); // не переходим по ссылке
 
-          if (isLoaded) {
-            toggleContent();
-            return;
-          }
-      
-          loadFile(link.href)
-            .then(text => {
+          // Первая загрузка
+          if (!isLoaded) {
+            try {
+              const text = await loadFile(link.href);
               historyContent.textContent = text;
-              historyContent.style.display = "block";
               isLoaded = true;
-            })
-            .catch(err => {
+            } catch (err) {
               historyContent.textContent = "Error loading release notes.";
-              historyContent.style.display = "block";
               console.error(err);
-            });
+            }
+          }      
+          // Toggle видимости и класса
+          const isVisible = historyContent.style.display !== "none";
+          historyContent.style.display = isVisible ? "none" : "block";
+          arrow.classList.toggle("open", !isVisible);
         });
-        function toggleContent() {
-          historyContent.style.display = historyContent.style.display === "none" ? "block" : "none";
-          if (historyContent.style.display === 'none') {
-            arrow.classList.add('open');
-          } else {
-            arrow.classList.remove('open');
-          }
-        }
       });
       function loadFile(url) {
         return fetch(url)
