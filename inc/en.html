@@ -82,7 +82,7 @@
 
 
 <section id="history">
-    <p>Interested in the full development history? <a id="historyLink" href="whatsnew" class="history-toggle">Read Release Notes. <span class="arrow">▼</span> </a> </p>
+    <p>Interested in the full development history? <a id="historyLink" href="whatsnew" class="history-toggle">Read Release Notes. <span class="historyArrow">▼</span> </a> </p>
     <div id="historyContent" class="mx-3 border bg-info-subtle" style="display:none;"></div>
     <style>
       .history-toggle {
@@ -101,36 +101,40 @@
       }
     </style>
     <script>
-      document.addEventListener('load', () => {
-        const historyLink = document.getElementById('historyLink')
-        const historyContent = document.getElementById("historyContent");
-        let isLoaded = false;
-
-        historyLink.addEventListener("click", (event) => {
-          event.preventDefault(); // не переходим по ссылке
-
-          // Первая загрузка
-          if (!isLoaded) {
-            try {
-              const text = await loadFile(link.href);
-              historyContent.textContent = text;
-              isLoaded = true;
-            } catch (err) {
-              historyContent.textContent = "Error loading release notes.";
-              console.error(err);
-            }
-          }      
-          // Toggle видимости и класса
-          const isVisible = historyContent.style.display !== "none";
-          historyContent.style.display = isVisible ? "none" : "block";
-          arrow.classList.toggle("open", !isVisible);
-        });
+    document.addEventListener("DOMContentLoaded", () => {
+      const link = document.getElementById("historyLink");
+      const content = document.getElementById("historyContent");
+      const arrow = document.getElementById("historyArrow");
+      let isLoaded = false;
+    
+      link.addEventListener("click", async (event) => {
+        event.preventDefault();
+    
+        // Подгружаем текст только один раз
+        if (!isLoaded) {
+          try {
+            const text = await loadHistory(link.href);
+            content.innerHTML = text;
+            isLoaded = true;
+          } catch (err) {
+          content.textContent = "Error loading history.";
+          console.error(err);
+          }
+        }
+    
+        // Переключаем видимость и класс стрелки
+        const isVisible = content.style.display !== "none";
+        content.style.display = isVisible ? "none" : "block";
+        arrow.classList.toggle("open", !isVisible);
       });
-      function loadFile(url) {
-        return fetch(url)
-          .then(response => {
-          if (!response.ok) throw new Error("Failed to load file");
+    });
+    
+    function loadHistory(url) {
+      return fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error("Failed to load history file");
           return response.text();
         });
+    }
    </script>
 </section>
