@@ -80,7 +80,20 @@
   </div>
 </section>
 
-
-      <p>Interested in the full development history?  
-         <span id="whatsnew">Read <a href="#">Release Notes</a> - the complete changelog covering all updates, fixes, and feature milestones.</span>
-      </p>
+      <p>Interested in the full development history? <span id="historyLink">Click to read Release Notes. </span> </p>
+      <div id="historyContent" class="mx-3 border bg-info-subtle"></div>
+       <script>
+         const fileInput = document.getElementById('historyLink').addEventListener('click', (event) => {
+           let divElement = document.getElementById("historyContent");
+           loadFile('/whatsnew', divElement);
+          // Переключаем видимость
+           if (historyContent.style.display === 'none') {
+             historyContent.style.display = 'block';
+             historyLink.textContent = 'Hide development history';
+           } else {
+             historyContent.style.display = 'none';
+             historyLink.textContent = 'Click to read Release Notes.';
+           }
+         });
+       </script>
+     </div>
