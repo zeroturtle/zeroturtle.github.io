@@ -81,9 +81,8 @@
 </section>
 
 <section id="history">
-      <p>Вас интересует полная история развития? <span id="historyLink" class="history-toggle">Нажмите, чтобы прочитать примечания к выпуску. <span class="arrow">▼</span> </span> </span> </p>
-      <div id="historyContent" class="mx-3 border bg-info-subtle"></div>
-       <style>
+    <p>Вас интересует полная история развития? <a id="historyLink" class="history-toggle">Нажмите, чтобы прочитать примечания к выпуску. <span id="historyArrow" class="arrow">▼</span> </a> </p>
+    <div id="historyContent" class="mx-3 border bg-info-subtle" style="display:none;"></div>
     <style>
       .history-toggle {
         color: inherit;
@@ -100,21 +99,41 @@
         transform: rotate(180deg); /* стрелка вверх при открытии */
       }
     </style>
-    <script>
-       const historyLink = document.getElementById('historyLink').addEventListener('click', (event) => {
-         const historyContent = document.getElementById("historyContent");
-         const arrow = historyLink.querySelector('.arrow');
-         loadFile('whatsnew', historyContent);  // файл с текстом истории
-        // Переключаем видимость
-         if (historyContent.style.display === 'none') {
-           historyContent.style.display = 'block';
-           arrow.classList.add('open');
-           historyLink.textContent = 'Скрыть историю разработки';
-         } else {
-           historyContent.style.display = 'none';
-           arrow.classList.remove('open');
-           historyLink.textContent = 'Нажмите, чтобы прочитать примечания к выпуску.';
-         }
-       });
-     </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const link = document.getElementById("historyLink");
+      const content = document.getElementById("historyContent");
+      const arrow = document.getElementById("historyArrow");
+      let isLoaded = false;
+    
+      link.addEventListener("click", async (event) => {
+        event.preventDefault();
+    
+        // Подгружаем текст только один раз
+        if (!isLoaded) {
+          try {
+            const text = await loadHistory(link.href);
+            content.innerHTML = text;
+            isLoaded = true;
+          } catch (err) {
+          content.textContent = "Ошибка загрузки истории.";
+          console.error(err);
+          }
+        }
+    
+        // Переключаем видимость и класс стрелки
+        const isVisible = content.style.display !== "none";
+        content.style.display = isVisible ? "none" : "block";
+        arrow.classList.toggle("open", !isVisible);
+      });
+    });
+    
+    function loadHistory(url) {
+      return fetch(url)
+        .then(response => {
+          if (!response.ok) throw new Error("Ошибка загрузки файла");
+          return response.text();
+        });
+    }
+  </script>
 </section>
