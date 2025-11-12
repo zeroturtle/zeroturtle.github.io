@@ -18,10 +18,43 @@ async function loadContent(lang) {
     const html = await response.text();
     contentDiv.innerHTML = html;
     document.getElementById('language-selector').value = lang;
+    attachHistoryListener();
   } catch (err) {
     contentDiv.innerHTML = `<p>Ошибка загрузки контента.</p>`;
     console.error(err);
   }
+}
+
+function attachHistoryListener() {
+  const link = document.getElementById("historyLink");
+  let isLoaded = false;
+
+  link.addEventListener("click", async (event) => {
+    event.preventDefault();
+    const content = document.getElementById("historyContent");
+    const arrow = document.getElementById("historyArrow");
+
+    // Подгружаем текст только один раз
+    if (!isLoaded) {
+      try {
+        const text = await loadHistory(link.href);
+        content.innerHTML = text;
+        isLoaded = true;
+      } catch (err) {
+      content.textContent = "Error loading history.";
+      console.error(err);
+      }
+    }
+
+    // Переключаем видимость и класс стрелки
+    const isVisible = content.style.display !== "none";
+    content.style.display = isVisible ? "none" : "block";
+    arrow.classList.toggle("open", !isVisible);
+  });
+}
+
+function loadHistory(url) {
+  return fetch(url).then(res => res.ok ? res.text() : Promise.reject("Failed"));
 }
 
 // Инициализация языка
