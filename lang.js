@@ -69,3 +69,17 @@ document.getElementById('language-selector').addEventListener('change', e => {
   setCookie('siteLang', selectedLang, 365);
   loadContent(selectedLang);
 });
+
+
+const backToTop = document.querySelector('.back-to-top');
+
+// Плавный скролл при клике
+backToTop.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Появление кнопки при прокрутке
+window.addEventListener('scroll', () => {
+  backToTop.style.display = window.scrollY > 200 ? 'flex' : 'none';
+});
