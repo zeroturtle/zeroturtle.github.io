@@ -27,19 +27,21 @@ async function loadContent(lang) {
 
 function attachHistoryListener() {
   const link = document.getElementById("historyLink");
-  let isLoaded = false;
 
   link.addEventListener("click", async (event) => {
+    const link = event.target.closest("#historyLink");
+    if (!link) return; // клик не по нужной ссылке
     event.preventDefault();
+
     const content = document.getElementById("historyContent");
     const arrow = document.getElementById("historyArrow");
 
     // Подгружаем текст только один раз
-    if (!isLoaded) {
+    if (!content.dataset.loaded) {
       try {
         const text = await loadHistory(link.href);
         content.innerHTML = text;
-        isLoaded = true;
+        content.dataset.loaded = "true";
       } catch (err) {
       content.textContent = "Error loading history.";
       console.error(err);
