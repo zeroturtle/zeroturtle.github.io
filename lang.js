@@ -81,5 +81,5 @@ backToTop.addEventListener('click', (e) => {
 
 // Появление кнопки при прокрутке
 window.addEventListener('scroll', () => {
-  backToTop.style.display = window.scrollY > 200 ? 'flex' : 'none';
+  backToTop.style.display = window.scrollY > 500 ? 'flex' : 'none';
 });
