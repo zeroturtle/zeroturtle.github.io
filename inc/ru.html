@@ -1,7 +1,7 @@
 ﻿
 <section id="Overview" class="py-5" >
   <div class="row d-flex align-items-center" style="min-height:300px;">
-     <p>Судейская система OPTIMUS developed для повышения прозрачности, точности и объективности оценки Formation Skydiving, Artistic Events, Canopy Formation and scoring for Wingsuit Flying Performance. Её цель — сделать судейство понятным для спортсменов и надёжным инструментом для организаторов.</p>
+     <p>Судейская система OPTIMUS разработана для повышения прозрачности, точности и объективности оценки Formation Skydiving, Artistic Events, Canopy Formation and scoring for Wingsuit Flying Performance. Её цель — сделать судейство понятным для спортсменов и надёжным инструментом для организаторов.</p>
      <ul class="list-group list-group-flush d-flex gap-5">
        <li class="list-group-item border-bottom">
          <p class="h3 text-center">Для судей:</p>
@@ -24,7 +24,7 @@
            <li><i class="bi bi-gear"></i><strong>Отсутствие административной нагрузки</strong><br>Не требует установки — просто распакуйте и запускайте.</li>
            <li><i class="bi bi-coin"></i><strong>Оплата по мере использования</strong><br>Выбирайте дисциплины, которые нужны, при покупке годовой подписки в соответствии со списком ваших мероприятий;  <span class="text-danger">бесплатно для индивидуального использования.</span></li>
          </ul>
-         <div class="text-center"> <a href="https://forms.gle/rWkRukrzxiY8HWHx6" class="btn btn-lg btn-primary d-block d-md-inline-block mt-2"> Оставить заявку </a>  </div>
+         <div class="text-center"> <a data-bs-toggle="modal" data-bs-target="#priceForm" href="#" class="btn btn-lg btn-primary d-block d-md-inline-block mt-2">Стоимость лицензий</a>  </div>
        </li>
        <li class="list-group-item">
          <p class="h3 text-center">Для спортивных федераций:</p>
@@ -149,7 +149,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">          
-           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd32iH9hSfLYR7HcCfXBCepbb3x_fumAmZtRMGhbW8eMQE9_g/viewform?embedded=true" width="100%" height="1600" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd32iH9hSfLYR7HcCfXBCepbb3x_fumAmZtRMGhbW8eMQE9_g/viewform?embedded=true" width="100%" height="1500" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
         </div>
       </div>
     </div>
@@ -169,4 +169,52 @@
       </div>
     </div>
   </div>
+
+
+
+  <!-- блока ценообразования -->
+  <div class="modal fade" id="priceForm" tabindex="-1" aria-labelledby="priceTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-md-down">
+      <div class="modal-content">
+        <div class="modal-header bg-info">
+          <h5 class="modal-title" id="priceTitle">Стоимость Лицензии Optimus (OPEX)</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">             
+    <table class="licensing-table">
+        <thead>
+            <tr>
+                <th>Тип лицензии</th>
+                <th>Назначение</th>
+                <th>Стоимость</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Индивидуальный судья</td>
+                <td>Для тренировки и оценки функционала</td>
+                <td class="highlight">Бесплатно</td>
+            </tr>
+            <tr>
+                <td>Клуб / Организатор</td>
+                <td>Плата за каждую используемую дисциплину</td>
+                <td>$200 за дисциплину</td>
+            </tr>
+            <tr>
+                <td>Пакетная скидка</td>
+                <td>При покупке **трех дисциплин**</td>
+                <td class="highlight">-15% на общую сумму</td>
+            </tr>
+            <tr>
+                <td>Национальная Федерация</td>
+                <td>Доступна долгосрочная подписка (до 3 лет) на пакеты All-Inclusive</td>
+                <td class="highlight">По запросу</td>
+            </tr>
+        </tbody>
+    </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
