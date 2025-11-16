@@ -44,7 +44,7 @@
 /* 2. Применяем анимацию к изображению */
 .rotating-image {
   animation-name: spin; /* Имя анимации */
-  animation-duration: 2s; /* Время одного оборота */
+  animation-duration: 30s; /* Время одного оборота */
   animation-timing-function: linear; /* Линейная скорость */
   animation-iteration-count: infinite; /* Бесконечное повторение */
 }
@@ -228,9 +228,8 @@ function deleteCookie(name) {
     <!--div style="background: linear-gradient(#b35900 55%, white);"-->
         <div class="row align-items-center">
            <div class="col">
-              <a href="#"><img src="images/turtleZ_color.png" alt="OPTIMUS LOGO" height="100px" class="rotating-image"></a>
-              <span class="fs-1"><strong>OPTIMUS</strong> <span class="text-danger">scoreboard</span></span>
-              <span> DEMO </span>
+              <a href="#"><img src="images/turtleZ_color.png" alt="OPTIMUS LOGO" height="100px" class="rotating-image m-2"></a>
+              <span class="fs-1"><strong>OPTIMUS</strong> <span class="text-danger">scoreboard</span><span> DEMO </span></span>
            </div>
            <div class="col m-3">
 		<a href="about.html" class="btn btn-outline-dark pull-right glow text-nowrap" role="button">About OPTIMUS</a>
@@ -244,20 +243,23 @@ function deleteCookie(name) {
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <div class="d-lg-none ms-auto small" id="navbar-selected-info"></div>     <!-- здесь будут показываться выбранные значения -->
+
     <div class="collapse navbar-collapse w-100" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a title="reset filters" class="nav-link link-warning text-truncate" aria-current="page" id="ALL" href="#" onclick="clearCookie();">Choose the season and type of competition to display.</a>
         </li>
         <li class="nav-item m-1">
-          <select class="form-select " title="Choose a season" id="Year" onchange="getComboA(this);">
+          <select class="form-selec my-select " title="Choose a season" id="Year" onchange="getComboA(this);">
             <option value="">All seasons</option>
             <option value="2025">2025</option>
             <option value="2024">2024</option>
           </select>
         </li>
         <li class="nav-item m-1">
-          <select class="form-select " title="Select a disciplines" id="Type" onchange="getComboA(this);">
+          <select class="form-select my-select" title="Select a disciplines" id="Type" onchange="getComboA(this);">
             <option value="">All disciplines</option>
             <option value="FS">Formation Skydiving</option>
             <!-- <option value="SF">Speed Formation Skydiving</option> -->
@@ -412,7 +414,24 @@ function deleteCookie(name) {
        }
      }
   </script>
+  <script>
+    function updateNavbarSummary() {
+      const selects = document.querySelectorAll(".my-select");
+      const info = document.getElementById("navbar-selected-info");
+      const values = [];
 
+      selects.forEach(s => values.push(s.options[s.selectedIndex].text));
+      info.textContent = values.join(" • ");
+    }
+
+    // при изменении select
+    document.querySelectorAll(".my-select").forEach(s => {
+      s.addEventListener("change", updateNavbarSummary);
+    });
+
+    // при загрузке
+    updateNavbarSummary();
+  </script>
 
   </body>
 </html>
