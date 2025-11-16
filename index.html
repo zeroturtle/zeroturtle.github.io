@@ -49,6 +49,7 @@
   animation-iteration-count: infinite; /* Бесконечное повторение */
 }
 </style>
+
 <script>
 /*here helpful func to work with cookie*/
 function getCookie(name, json=false) {
@@ -225,15 +226,15 @@ function deleteCookie(name) {
 
 <nav id="navigation" class="navbar navbar-dark navbar-expand-lg bg-dark">
   <div class="container-fluid">
-    <div class="d-lg-none ms-auto small text-secondary text-truncate" id="navbar-selected-info"></div>     <!-- здесь будут показываться выбранные значения -->
+    <div class="d-lg-none ms-2 flex-fill small text-secondary text-truncate text-nowrap" style="min-width:0" id="navbar-selected-info"></div>     <!-- здесь будут показываться выбранные значения -->
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse w-100" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!li class="nav-item">
+        <li class="nav-item">
           <a title="reset filters" class="nav-link link-warning text-truncate" aria-current="page" id="ALL" href="#" onclick="clearCookie();">Choose the season and type of competition to display.</a>
         </li>
         <li class="nav-item m-1">
