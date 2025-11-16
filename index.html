@@ -35,6 +35,19 @@
       animation: none;
     }
   }
+
+/* 1. Определяем ключевые кадры для анимации вращения */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+/* 2. Применяем анимацию к изображению */
+.rotating-image {
+  animation-name: spin; /* Имя анимации */
+  animation-duration: 2s; /* Время одного оборота */
+  animation-timing-function: linear; /* Линейная скорость */
+  animation-iteration-count: infinite; /* Бесконечное повторение */
+}
 </style>
 <script>
 /*here helpful func to work with cookie*/
@@ -215,8 +228,9 @@ function deleteCookie(name) {
     <!--div style="background: linear-gradient(#b35900 55%, white);"-->
         <div class="row align-items-center">
            <div class="col">
-              <a href="#"><img src="images/turtle_logo.png" alt="OPTIMUS LOGO" height="100px"></a>
+              <a href="#"><img src="images/turtleZ_color.png" alt="OPTIMUS LOGO" height="100px" class="rotating-image"></a>
               <span class="fs-1"><strong>OPTIMUS</strong> <span class="text-danger">scoreboard</span></span>
+              <span> DEMO </span>
            </div>
            <div class="col m-3">
 		<a href="about.html" class="btn btn-outline-dark pull-right glow text-nowrap" role="button">About OPTIMUS</a>
