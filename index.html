@@ -181,6 +181,7 @@ function deleteCookie(name) {
     ["Year","Type","Name"].forEach((elem)=>{
       document.getElementById(elem).value = (isset(getCookie(elem))) ? getCookie(elem) : ''
     })
+    updateNavbarSummary();
     // загружаем первую страницу
     loadDataContent()
     // фильтр по нажатию Enter
