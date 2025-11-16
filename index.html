@@ -130,23 +130,8 @@ function deleteCookie(name) {
 <script>
   var page = 0  //pagination endless/infinity list
   var isLoading = false
-
   var eventsDir = './events/'
-  function getComboA(selectObject) {
-    var value = selectObject.value;
-    if (value==0) deleteCookie(selectObject.id)
-    else setCookie(selectObject.id, value)
-    window.location.reload();
-  }
-  function clearCookie() {
-    deleteCookie('Year');
-    deleteCookie('Type');
-    deleteCookie('Name');
-    window.location.reload();
-  }
-</script>
 
-<script>
   /* endless list thanks to 
 	https://www.toolify.ai/gpts/how-to-implement-infinite-scroll-pagination-with-php-mysql-jquery-366007
 	https://sky.pro/media/kak-sozdat-sajt-s-dinamicheskoj-zagruzkoj-kontenta-pri-prokrutke/#title2
@@ -240,19 +225,19 @@ function deleteCookie(name) {
 
 <nav id="navigation" class="navbar navbar-dark navbar-expand-lg bg-dark">
   <div class="container-fluid">
+    <div class="d-lg-none ms-auto small text-secondary text-truncate" id="navbar-selected-info"></div>     <!-- здесь будут показываться выбранные значения -->
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="d-lg-none ms-auto small" id="navbar-selected-info"></div>     <!-- здесь будут показываться выбранные значения -->
-
     <div class="collapse navbar-collapse w-100" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <!li class="nav-item">
           <a title="reset filters" class="nav-link link-warning text-truncate" aria-current="page" id="ALL" href="#" onclick="clearCookie();">Choose the season and type of competition to display.</a>
         </li>
         <li class="nav-item m-1">
-          <select class="form-selec my-select " title="Choose a season" id="Year" onchange="getComboA(this);">
+          <select class="form-select my-select" title="Choose a season" id="Year" onchange="getComboA(this);">
             <option value="">All seasons</option>
             <option value="2025">2025</option>
             <option value="2024">2024</option>
@@ -283,6 +268,7 @@ function deleteCookie(name) {
     </div>
   </div>
 </nav>
+
 
 <!-- events list -->
 <div class="container-fluid">
@@ -414,6 +400,23 @@ function deleteCookie(name) {
        }
      }
   </script>
+
+<script>
+  function getComboA(selectObject) {
+    var value = selectObject.value;
+    if (value==0) deleteCookie(selectObject.id)
+    else setCookie(selectObject.id, value)
+    window.location.reload();
+  }
+  function clearCookie() {
+    deleteCookie('Year');
+    deleteCookie('Type');
+    deleteCookie('Name');
+    updateNavbarSummary();
+    window.location.reload();
+  }
+</script>
+
   <script>
     function updateNavbarSummary() {
       const selects = document.querySelectorAll(".my-select");
@@ -432,6 +435,8 @@ function deleteCookie(name) {
     // при загрузке
     updateNavbarSummary();
   </script>
+
+
 
   </body>
 </html>
