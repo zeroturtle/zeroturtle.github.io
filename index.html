@@ -226,7 +226,7 @@ function deleteCookie(name) {
 
 <nav id="navigation" class="navbar navbar-dark navbar-expand-lg bg-dark">
   <div class="container-fluid">
-    <div class="d-lg-none ms-2 flex-fill text-secondary text-truncate text-nowrap text-center text-uppercase small" style="min-width:0" id="navbar-selected-info" title=""></div>     <!-- здесь будут показываться выбранные значения -->
+    <div class="d-lg-none ms-2 flex-fill text-secondary text-truncate text-nowrap text-center text-uppercase small" style="min-width:0" id="navbar-selected-info"></div>     <!-- здесь будут показываться выбранные значения -->
 
     <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false">
       <span class="navbar-toggler-icon"></span>
@@ -422,15 +422,11 @@ function deleteCookie(name) {
     function updateNavbarSummary() {
       const selects = document.querySelectorAll(".my-select");
       const info = document.getElementById("navbar-selected-info");
-/*
-      const values = []
-      selects.forEach(s => values.push(s.options[s.selectedIndex].text));
-*/
-      const values = [...selects]
+
+      info.textContent = [...selects]
         .filter(s => s.selectedIndex > 0)        // оставляем только те select, где выбран не первый элемент
-        .map(s => s.options[s.selectedIndex].text);
-      info.textContent = values.join(" • ");
-      info.title = values;        // тултип с полным текстом
+        .map(s => s.options[s.selectedIndex].text)
+        .join(" • ");
     }
 
     // при изменении select
