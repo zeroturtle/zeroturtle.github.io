@@ -1,26 +1,8 @@
+What's new - the complete changelog covering all updates, fixes, and feature milestones.
 
 Version information
 ===============================================
-Version: Feature Release v6.0 "", XXth month. 2026
-
-Summary
-----------------
-
-New Features
-----------------
-
-Quality Improvements
-----------------
-
-Bug Fixes
-----------------
-
-
-===============================================
-
-
-===============================================
-Version: Release v5.3 "Pegasus", 6th November. 2025
+Version: Release v5.3 "Pegasus", 23th November. 2025
 
 Summary
 ----------------
@@ -34,10 +16,11 @@ New Features
 ----------------
 - фото команды хранится в БД, ВАЖНО! для фото использовать только JPEG-формат!
 *версия модуля проверяется на совместимость с БД по номеру версии. Версия БД возвращается функцией get_version(). Список версий БД совместимых с модулем хранится в поле db_version файла version.info.
+This database version is NOT compatible with previous OPTIMUS.
 
 Quality Improvements
 ----------------
-- В базе данных по умолчанию используется charset UTF8. This database version is NOT compatible with previous OPTIMUS.
+- В базе данных по умолчанию используется charset UTF8.
 - список изменений выводится на странице download из файла whatsnew (по запросу).
 - в окно about выводятся информация о программе для проверки совместимости
 - актуализация руководства пользователя
@@ -47,6 +30,10 @@ Quality Improvements
 - формировать на сервере video.json после выгрузки видео
 - добавлен параметр фиксированного битрейт выходного видео -b:v 9000k при загрузке видео в Vanguard 
 - при активации консолей в окне приглашения показывается ФИО судьи(ник)
+- можно менять css для страницы (рекомендуется выбирать из списка на основе https://bootswatch.com/, но они требуют доработки т.к. не все значения bootstrap переопределены)
+- в Zodiak добавлен редактор "Заставка" ("спонсор_лого", "Флаг-страна", "Фото команды", "Зачет-тур-draw") и "Записка" ("спонсор_лого") для видео через отчет Fastreport
+- построение протокола event2 из competition2 на основе результатов event1 из competition1. Для построения протокола нужно: 1) указать для event2 значение SOURCE_EVENT_ID event1 2) привязать команды к event1
+
 
 Bug Fixes
 ----------------
@@ -55,7 +42,7 @@ Bug Fixes
 - resourcestring добавлены в языковую DLL
 - Log-файл выводится в UTF-8 кодировке
 - minor improvements and some bug fixes
-- исправлена ошибка блокировки Canvas при отрисовке фона
+- исправлена ошибка блокировки Canvas при отрисовке фона на Z-видео
 
 
 ===============================================
