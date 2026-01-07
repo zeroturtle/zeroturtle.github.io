@@ -2,7 +2,7 @@ What's new - the complete changelog covering all updates, fixes, and feature mil
 
 Version information
 ===============================================
-Version: Feature Release v5.4 "Tau Ceti", 23th December. 2025
+Version: Release v5.4 PEGASUS Update 1 "Tau Ceti", 26th December. 2025
 
 Summary
 ----------------
@@ -11,7 +11,8 @@ Summary
 New Features
 ----------------
 - Журнал оценок: каждое изменение создает в Append-only таблице аудита отдельную версию;
-- Криптозащита судейских оценок (простой блокчейн).
+- Каждая версия судейских оценок подписываются ключом (hash), каждая новая запись включает предыдущей хэш.
+-
 
 Quality Improvements
 ----------------
@@ -19,18 +20,19 @@ Quality Improvements
 - вывод стартового листа по обратной сортировке протокола - избавился от хранения лишнего запроса ;)
 - блокировка изменения/удаления результатов при установленном "официальный". 
 - задавать логин/пароль для подключения к БД из ком.строки или через реестр (строковые параметры DatabaseUser и DatabasePassword). По умолчанию используются SYSDBA/masterkey
+- 
 
 Bug Fixes
 ----------------
 - исправлен расчет времени крайней зачетной формации (lasttime) в FS. 
 - список дисциплин ограничивается списком из лицензии
+-
+
+===============================================
 
 
 ===============================================
-
-
-===============================================
-Version: Release v5.3 "Pegasus", 23th November. 2025
+Version: Release v5.3 PEGASUS, 23th November. 2025
 
 Summary
 ----------------
@@ -77,7 +79,7 @@ Bug Fixes
 
 
 ===============================================
-Version: Release v5.2 ARTEMIS Update 3, 30th Oktober. 2025
+Version: Release v5.3 ARTEMIS Update 3, 30th Oktober. 2025
 
 Summary
 ----------------
@@ -117,7 +119,7 @@ Quality Improvements
 
 
 ===============================================
-Version: Release v5.2 ARTEMIS Update 2, 27th July. 2025
+Version: Release v5.2 ARTEMIS Update 2, 13th June. 2025
 
 Summary
 ----------------
@@ -162,7 +164,7 @@ Quality Improvements
 
 
 ===============================================
-Version: Release v5.1 ARTEMIS Update 1
+Version: Release v5.1 ARTEMIS Update 1, 29th May. 2025
 
 New Features
 ----------------
@@ -178,7 +180,11 @@ Bug Fixes
 
 
 ===============================================
-Version: Release v5.0 ARTEMIS
+Version: Release v5.0 ARTEMIS, 21th February. 2025
+
+Summary
+----------------
+первый релиз на FirebirdSQL.
 
 New Features
 ----------------
