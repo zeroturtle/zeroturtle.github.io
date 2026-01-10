@@ -101,7 +101,7 @@ function loadEvent(event) {
 		for (const cell of resultTable.querySelectorAll('td')) {
 			if (cell.cellIndex == 1 && code3.indexOf(cell.innerText) > 0) {
 				let img = doc.createElement("img");
-				img.setAttribute("src", `../../flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
+				img.setAttribute("src", `../../images/flags/${(code2[code3.indexOf(cell.innerText)]).toLowerCase()}.svg`)
 				img.setAttribute("alt", `${cell.innerText}`)
 				img.style.width = "36px";
 				cell.innerHTML = '';
@@ -198,3 +198,4 @@ window.addEventListener("load", ()=>{
 });
 window.addEventListener("click", windowOnClick)
 document.getElementById('scoreSummary').insertAdjacentHTML('afterend', `<small>Powered by <strong>OPTIMUS</strong> <i>Pegasus</i></small>`)
+
